@@ -1,0 +1,96 @@
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+</ul>
+<div class="header hero">
+    <div class="row columns spacer"></div>
+    <div class="row columns">
+        <h1>Se (re)mettre <b>au sport</b>,<br/>
+        n’a jamais été <b>aussi simple</b>.</h1>
+        <h2>Réservez des scéances de sport près de chez vous : <br/>
+        sans engagement, ni abonnement.</h2>
+    </div>
+    <div class="row mainsearch">
+        <div class="columns large-8 large-centered small-collapse">
+            <div class="small-4 medium-3 columns">
+                <input type="text" placeholder="Aïkido" data-open="joinUs" (click)="showJoinUs()" />
+            </div>
+            <div class="small-4 medium-3 columns">
+                <input type="text" placeholder="16.09.2016" data-open="joinUs" (click)="showJoinUs()" />
+            </div>
+            <div class="small-4 medium-3 columns">
+                <input type="text" placeholder="Nantes" data-open="joinUs" (click)="showJoinUs()" />
+            </div>
+            <div class="small-12 medium-3 columns spaced">
+                <input type="submit" class="button expanded" value="GO !" (click)="showJoinUs()"
+                        data-open="joinUs"
+                        data-ga-category="popupLaunch"
+                        data-ga-action="Nav click"
+                        data-ga-label="Search" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="suggestion">
+    <div class="row">
+        <h3 class="text-center">Par temps froids,<br/> rien de mieux que des scéances toutes en douceur !</h3>
+        <p class="subheader">Notre selection du mois de novembre :</p>
+    </div>
+    <div class="row suggestion__list row small-up-1 medium-up-3">
+        <div class="column" (click)="showJoinUs()" data-open="joinUs"
+                data-ga-category="popupLaunch"
+                data-ga-action="Nav click"
+                data-ga-label="Aquagym">
+                <img src="assets/img/aquagym.jpg" class="thumbnail" />
+                <p class="thumbnail-title">Aquagym</p>
+        </div>
+        <div class="column" (click)="showJoinUs()" data-open="joinUs"
+                data-ga-category="popupLaunch"
+                data-ga-action="Nav click"
+                data-ga-label="Pilates">
+                <img src="assets/img/pilates.jpg" class="thumbnail" />
+                <p class="thumbnail-title">Pilates</p>
+        </div>
+        <div class="column" (click)="showJoinUs()" data-open="joinUs"
+                data-ga-category="popupLaunch"
+                data-ga-action="Nav click"
+                data-ga-label="Yoga">
+                <img src="assets/img/yoga.jpg" class="thumbnail" />
+                <p class="thumbnail-title">Yoga</p>
+        </div>
+    </div>
+</div>
+
+<div class="reveal hollow" data-reveal id="subscribe_confirmation">
+    <h2><b>Pré-inscription validée :</b><br/>
+    on revient très vite vers vous !</h2>
+    <p class="trigger"><em>Juste le temps de faire un tour,<br/>
+    sur les réseaux sociaux :</em></p>
+    <div class="row small-collapse sociallinks">
+        <div class="large-4 columns">
+
+            <a href="https://www.facebook.com/Bemoove.fr/" data-ga-category="Outbound links" data-ga-action="After Subscribe" data-ga-label="Facebook" target="_blank" data-social="facebook" class="js-social-link"><img src="assets/img/facebook.png" alt="facebook" /></a>
+        </div>
+        <div class="large-4 columns text-center">
+            <a href="https://twitter.com/Bemoove" data-ga-category="Outbound links" data-ga-action="After Subscribe" data-ga-label="Twitter" target="_blank" data-social="twitter" class="js-social-link"><img src="assets/img/twitter.png" alt="twitter" /></a>
+        </div>
+        <div class="large-4 columns text-right">
+            <a href="https://www.instagram.com/bemoovefr/" data-ga-category="Outbound links" data-ga-action="After Subscribe" data-ga-label="Instagram" target="_blank" data-social="instagram" class="js-social-link"><img src="assets/img/instagram.png" alt="instagram" /></a>
+        </div>
+    </div>
+    <div class="row text-center">
+        <p class="seeyou">À bientôt !</p>
+        <img src="assets/img/bemoove-tiny-logo.png" class="tiny-logo" />
+    </div>
+</div>

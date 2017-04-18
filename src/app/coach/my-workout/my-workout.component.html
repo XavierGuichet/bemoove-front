@@ -1,0 +1,68 @@
+<div class="container">
+    <button md-raised-button color="warn" routerLink="/coach/add-workout">Ajouter Nouveau</button>
+    <div class="row">
+        <h2>Workout à venir</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Titre</th>
+                    <th>Sport</th>
+                    <th>Date</th>
+                    <th>Nb résa</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let workout of commingWorkouts" class="workout">
+                    <th scope="row">{{ workout.id }} {{ workout.title }}</th>
+                    <td>{{ workout.sport }}</td>
+                    <td>{{ workout.startdate | date }}<br/>{{ workout.startdate | date: 'HH:mm' }}</td>
+                    <td>{{ workout.nbTicketBooked}} / {{ workout.nbTicketAvaible }}</td>
+                    <td>
+                        <button md-raised-button color="primary"><md-icon class="md-18">edit</md-icon></button>
+                        <button md-raised-button color="accent" (click)="delete(workout); $event.stopPropagation()"><md-icon class="md-18">remove_red_eye</md-icon></button>
+                        <button md-raised-button color="warn" (click)="delete(workout); $event.stopPropagation()"><md-icon class="md-18">delete</md-icon></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <h2>Workout passés</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Sport</th>
+                    <th>Date</th>
+                    <th>Nb résa</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let workout of pastWorkouts" class="workout">
+                    <th scope="row">{{ workout.id }}</th>
+                    <td>{{ workout.title }}</td>
+                    <td>{{ workout.sport }}</td>
+                    <td>{{ workout.startdate | date }}</td>
+                    <td>{{ workout.nbTicketBooked}} / {{ workout.nbTicketAvaible }}</td>
+                    <td>
+                        <button md-raised-button color="primary">Voir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Préparation MMA</td>
+                    <td>MMA</td>
+                    <td>10/12/2016</td>
+                    <td>2/2</td>
+                    <td>
+                        <button md-raised-button color="primary">Voir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{{ diagnostic }}

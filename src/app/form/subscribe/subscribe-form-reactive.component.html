@@ -1,0 +1,74 @@
+<form [formGroup]="subscribeForm" *ngIf="active" (ngSubmit)="onSubmit()">
+    <div class="col-xs-12">
+        {{diagnostic}}
+    </div>
+    <div class="col-sm-8">
+        <div class="form-group row">
+            <label for="prenom" class="col-xs-2 col-form-label">Prénom</label>
+            <div class="col-xs-4">
+                <input type="texte" id="prenom" class="form-control" formControlName="prenom" required>
+                <div *ngIf="formErrors.prenom" class="alert alert-danger">
+                    {{ formErrors.prenom }}
+                </div>
+            </div>
+            <label for="nom" class="col-xs-2 col-form-label">Nom</label>
+            <div class="col-xs-4">
+                <input type="texte" id="nom" class="form-control" formControlName="nom" required>
+                <div *ngIf="formErrors.nom" class="alert alert-danger">
+                    {{ formErrors.nom }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="title" class="col-xs-2 col-form-label">Adresse mail</label>
+            <div class="col-xs-10">
+                <input type="email" id="email" class="form-control" formControlName="email" required>
+                <div *ngIf="formErrors.email" class="alert alert-danger">
+                    {{ formErrors.email }}
+                </div>
+            </div>
+        </div>
+        <div formGroupName="passwords" id="passwords">
+            <div class="form-group row">
+                <label for="title" class="col-xs-2 col-form-label">Mot de passe</label>
+                <div class="col-xs-10">
+                    <input type="text" id="password" class="form-control" formControlName="password" required>
+                    <div *ngIf="formErrors.password" class="alert alert-danger">
+                        {{ formErrors.password }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="title" class="col-xs-2 col-form-label">Repeter Mot de passe</label>
+                <div class="col-xs-10">
+                    <input type="text" id="repeat" class="form-control" formControlName="repeat" required>
+                    <div *ngIf="formErrors.repeat" class="alert alert-danger">
+                        {{ formErrors.repeat }}
+                    </div>
+                    <div *ngIf="formErrors.passwords" class="alert alert-danger">
+                        {{ formErrors.passwords }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="sports" class="col-xs-2 col-form-label">Quelles disciplines enseignez-vous ?</label>
+            <div class="col-xs-10">
+                <select class="form-control" id="sports" formControlName="sports" required>
+                  <option *ngFor="let sport of sports" value="{{sport}}">{{sport}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="cartepronum" class="col-xs-2 col-form-label">Numéro de carte professionnelle</label>
+            <div class="col-xs-10">
+                <input type="texte" id="cartepronum" class="form-control" formControlName="cartepronum" required>
+                <p><input type="checkbox" id="cartepronotneeded" formControlName="cartepronotneeded" (click)="toggleCartePro()"><label for="cartepronotneeded">Discipline ne necessitant pas de carte professionnelle</label></p>
+                <div *ngIf="formErrors.numcartepro" class="alert alert-danger">
+                    {{ formErrors.cartepronum }}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default" [disabled]="!subscribeForm.valid">S'inscrire</button>
+    </div>
+</form>

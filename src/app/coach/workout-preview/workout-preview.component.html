@@ -1,0 +1,49 @@
+<div *ngIf="workout" class="workout-detail">
+    <div>
+        <h3>{{ workout.startdate | date: 'd MMMM y' }}</h3>
+    </div>
+    <div class="sidebar">
+        <span class="date start">{{workout.startdate | date: 'HH'}}.<span class="date-minutes">{{workout.startdate | date: 'mm'}}</span></span>
+        <span class="date end">{{workout.enddate | date: 'HH'}}.<span class="date-minutes">{{workout.enddate | date: 'mm'}}</span></span>
+    </div>
+    <div class="content">
+        <div class="image-container">
+            <img src="{{ workout.photo.base64data }}" />
+            <div class="button-group">
+                <button><img src="assets/img/picto/partager.png" /></button>
+                <button>plus d'action</button>
+            </div>
+            <p class="coach">{{workout.coach}}</p>
+        </div>
+        <div class="informations">
+            <div class="capsule-1">
+                <p class="price">{{workout.price}} €</p>
+                <h2 class="sport-title">{{workout.sport.name}} <span *ngIf="workout.subsport">- {{workout.subsport | uppercase }}</span></h2>
+                <p class="coach">{{workout.coach}} {{workout.notation}}</p>
+                <!-- <p class="date">{{workout.startdate | date }}</p> -->
+                <button>RESERVER</button>
+                <ul class="picto">
+                    <li><img src="assets/img/picto/duree.png" /><br/>{{workout.duration}}</li>
+                    <li><img src="assets/img/picto/collectif.png" /><br/>{{workout.soloTraining}}</li>
+                    <li><img src="assets/img/picto/salle.png" /><br/>{{workout.placeType}}</li>
+                    <li><img src="assets/img/picto/intermediaire.png" /><br/>{{workout.difficulty}}</li>
+                </ul>
+                <p class="subinfo"><span class="city">{{workout.address.city}}</span></p>
+            </div>
+            <div class="capsule-2">
+                <p>{{workout.description}}</p>
+                <div *ngFor="let tag of workout.tags">
+                    <p><b>{{tag.name}}</b></p>
+                </div>
+                <hr/>
+                <p>Tenue: lorem ipsum</p>
+                <p>Accessoires: lorem ipsum</p>
+                <p>Remarques: lorem ipsum</p>
+                <hr/>
+                <p>En savoir plus</p>
+                <p>{{workout.description}}</p>
+                <p>Voir tout les autres cours disponibles</p>
+            </div>
+        </div>
+    </div>
+</div>

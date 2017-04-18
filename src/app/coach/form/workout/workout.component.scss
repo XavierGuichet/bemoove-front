@@ -1,0 +1,41 @@
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+div.radio-box {
+    box-sizing: border-box;
+    height: 90px;
+    width: 90px;
+    background: #424242;
+    color: #ffffff;
+    float: left;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 0 10px 10px 0;
+    padding: 5px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+    & span {
+        word-break: break-all;
+    }
+    &.active {
+        border: 2px solid #2fffcd;
+    }
+    &.radio-add {
+        color: rgba(255,255,255,.87);
+        background-color: #3f51b5;
+    }
+}
+
+.md-slider-horizontal .md-slider-track {
+    height: 6px;
+}
+.md-slider-horizontal .md-slider-track-fill {
+    height: 6px;
+}

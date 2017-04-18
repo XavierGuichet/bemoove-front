@@ -1,0 +1,49 @@
+<form name="addressform" (ngSubmit)="f.form.valid && addAddress()" #f="ngForm" novalidate>
+    <md-spinner *ngIf="loading"></md-spinner>
+    <md-card class="demo-card demo-basic" *ngIf="!loading">
+    <md-card-title color="primary">
+        <md-input class="demo-full-width"
+                #name
+                placeholder="Nom de l'adresse"
+                name="name"
+                [(ngModel)]="model.name">
+        </md-input>
+    </md-card-title>
+    <!-- <img md-card-image src="http://placehold.it/350x150"> -->
+    <md-card-content>
+            <p>
+                <md-textarea class="demo-full-width"
+                            placeholder="Address"
+                            name="firstline"
+                            [(ngModel)]="model.firstline"></md-textarea>
+                <md-textarea class="demo-full-width"
+                            placeholder="Address 2"
+                            name="secondline"
+                            [(ngModel)]="model.secondline"></md-textarea>
+            </p>
+            <table style="width: 100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <md-input class="demo-full-width"
+                            placeholder="Ville"
+                            name="city"
+                            [(ngModel)]="model.city"></md-input>
+                    </td>
+                    <td>
+                        <md-input class="demo-full-width"
+                                #postalCode
+                                maxlength="5"
+                                placeholder="Code postal"
+                                name="postalcode"
+                                [(ngModel)]="model.postalCode">
+                            <md-hint align="end">{{postalCode.characterCount}} / 5</md-hint>
+                        </md-input>
+                    </td>
+                </tr>
+            </table>
+    </md-card-content>
+    <md-card-actions align="end">
+        <button type="submit" md-raised-button color="primary">Enregistrer</button>
+    </md-card-actions>
+    </md-card>
+</form>

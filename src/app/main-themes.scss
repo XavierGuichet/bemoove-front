@@ -1,0 +1,133 @@
+@import '~@angular/material/core/theming/all-theme';
+// Plus imports for other components in your app.
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+// D9096D
+// ffd13b
+// 14B4CC
+// 36e96c
+
+
+$md-main-pink: (
+  50: #D9096D,
+  100: #D9096D,
+  200: #D9096D,
+  300: #D9096D,
+  400: #D9096D,
+  500: #D9096D,
+  600: #D9096D,
+  700: #D9096D,
+  800: #D9096D,
+  900: #D9096D,
+  A100: #D9096D,
+  A200: #D9096D,
+  A400: #D9096D,
+  A700: #D9096D,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: white,
+    400: white,
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$md-main-yellow: (
+  50: #DFCA1F,
+  100: #DFCA1F,
+  200: #DFCA1F,
+  300: #DFCA1F,
+  400: #DFCA1F,
+  500: #DFCA1F,
+  600: #DFCA1F,
+  700: #DFCA1F,
+  800: #DFCA1F,
+  900: #DFCA1F,
+  A100: #DFCA1F,
+  A200: #DFCA1F,
+  A400: #DFCA1F,
+  A700: #DFCA1F,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: white,
+    400: white,
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+// 394595
+
+// 14B4CC
+// 3dcad8
+
+$md-main-blue: (
+  50: #3dcad8,
+  100: #3dcad8,
+  200: #3dcad8,
+  300: #3dcad8,
+  400: #3dcad8,
+  500: #3dcad8,
+  600: #3dcad8,
+  700: #3dcad8,
+  800: #3dcad8,
+  900: #3dcad8,
+  A100: #3dcad8,
+  A200: #3dcad8,
+  A400: #3dcad8,
+  A700: #3dcad8,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: white,
+    400: white,
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+
+$app-primary: mat-palette($md-main-pink);
+$app-accent:  mat-palette($md-main-blue);
+
+// The warn palette is optional (defaults to red).
+$app-warn:    mat-palette($md-main-yellow);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);

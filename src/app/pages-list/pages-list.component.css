@@ -1,0 +1,76 @@
+.wrapper {
+    display: flex;
+}
+nav {
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 10px;
+}
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+nav a.routedarkgreen {
+    background: darkgreen;
+    color: #fff;
+    &:visited {
+        color: #fff;
+    }
+}
+nav a.routegreen {
+    background: green;
+    color: #fff;
+    &:visited {
+        color: #fff;
+    }
+}
+nav a.routelightgreen {
+    background: lightgreen;
+}
+nav a.routeorange {
+    background: orange;
+}
+nav a.routedarkblue {
+    background: darkblue;
+    color: #fff;
+    &:visited {
+        color: #fff;
+    }
+}
+nav a.routeblue {
+    background: blue;
+    color: #fff;
+    &:visited {
+        color: #fff;
+    }
+}
+nav a.routelightblue {
+    background: lightblue;
+}
+nav a.routeyellow {
+    background: yellow;
+}
+nav a.routered  {
+    background: red;
+    color: #fff;
+    &:visited {
+        color: #fff;
+    }
+}
+
+/*nav a:visited, a:link {
+  color: inherit;
+}
+nav a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+nav a.active {
+  color: #039be5;
+}*/

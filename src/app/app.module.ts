@@ -1,20 +1,14 @@
+import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {
-  NgModule,
-  ApplicationRef
-} from '@angular/core';
-import {
-  removeNgStyles,
-  createNewHosts,
-  createInputTransfer
-} from '@angularclass/hmr';
-import {
-  RouterModule,
-  PreloadAllModules
-} from '@angular/router';
+import { RouterModule, PreloadAllModules } from '@angular/router';
+import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
+import { NgbModule }        from '@ng-bootstrap/ng-bootstrap';
+import { MaterialModule } from '@angular/material';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import './rxjs-extensions';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -24,18 +18,50 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
 
-import '../styles/styles.scss';
-import '../styles/headings.css';
+// Angular2 POPUP https://github.com/shlomiassaf/angular2-modal
+import { ModalModule } from 'angular2-modal';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { SportySubscribeModalComponent  } from './modal/sporty-subscribe/sporty-subscribe-modal';
+import { LoginModalComponent  } from './modal/login/login-modal.component';
+import { RegisterModalComponent  } from './modal/register/register-modal.component';
 
+import { AlertComponent } from './_directives/index';
+import { AuthUserGuard, AuthCoachGuard } from './_guards/index';
+// import { AlertService, AuthenticationService, UserService } from './_services/index';
+// import { LoginComponent } from './login/index';
+// import { RegisterComponent } from './register/index';
+
+// Forms
+// import { SubscribeFormReactiveModule }  from './form/subscribe/subscribe-form-reactive.module';
+
+import { WelcomeCoachComponent }    from './welcome/coach/coach.component';
+import { WelcomeSearchComponent }   from './welcome/search/search.component';
+// import { PagesListComponent }       from './pages-list/pages-list.component';
+
+import { CoachRecruitBarComponent }       from './coach-recruit-bar/coach-recruit-bar.component';
+import { HeaderNavComponent }       from './header-nav/header-nav.component';
+import { FooterComponent }       from './footer/footer.component';
+
+// import { CoachModule }      from './coach/coach.module';
+
+// import { WorkoutService }          from './_services/workout.service';
+// import { TagService }          from './tag-service/tag.service';
+
+import { SpaceService } from './_services/space.service';
+
+import { TextChangerDirective } from './_directives/text-changer.attribute';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  // WorkoutService,
+  AuthUserGuard, AuthCoachGuard,
+  // AlertService,
+  // AuthenticationService,
+  // UserService,
+  SpaceService
 ];
 
 type StoreType = {
@@ -51,22 +77,47 @@ type StoreType = {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    AboutComponent,
-    HomeComponent,
     NoContentComponent,
-    XLargeDirective
+
+    CoachRecruitBarComponent,
+    HeaderNavComponent,
+    FooterComponent,
+
+    WelcomeCoachComponent,
+    WelcomeSearchComponent,
+
+    SportySubscribeModalComponent,
+    LoginModalComponent,
+    RegisterModalComponent,
+
+    // PagesListComponent,
+
+    AlertComponent,
+    // LoginComponent,
+    // RegisterComponent,
+
+    TextChangerDirective
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    NgbModule.forRoot(),
+    MaterialModule.forRoot(),
+    ModalModule.forRoot(),
+    BootstrapModalModule,
+    // SubscribeFormReactiveModule,
+    Angular2FontawesomeModule,
+    // CoachModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS
-  ]
+  ],
+  entryComponents: [ SportySubscribeModalComponent, LoginModalComponent, RegisterModalComponent ]
 })
+
 export class AppModule {
 
   constructor(

@@ -1,0 +1,10 @@
+.workout-detail {
+    width: 40vw;
+    max-width: 560px;
+}
+.workout-detail-closed {
+    width: 30px;
+    background: #ffdd00;
+    flex-shrink: 0;
+    flex-grow: 0;
+}

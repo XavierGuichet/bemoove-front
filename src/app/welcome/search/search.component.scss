@@ -1,0 +1,160 @@
+.jumbotron {
+    position: relative;
+    background: url('/assets/img/hero.jpg');
+    min-height: calc(100vh - 8rem);
+    z-index: 10;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 4em;
+
+    h1 {
+        font-size: 2.25em;
+        color: white;
+        margin-top: 3.5em;
+        text-align: center;
+        text-shadow: 1px 1px 2px #363636;
+    }
+    .form-control {
+        display: inline-block;
+        width: calc(100% - 12em);
+    }
+
+}
+
+.avantages {
+    margin-bottom: 4em;
+    h2 {
+        margin-bottom: 1em;
+    }
+    p {
+        margin-bottom: 0.5rem;
+        padding-top: 0.25rem;
+        border-top: 2px solid #394595;
+        color: #363636;
+    }
+}
+
+.avantages__item {
+    margin-bottom: 1em;
+}
+
+.avantages__item__header {
+    height: 12rem;
+    width: 100%;
+    transition: all .3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        opacity: 0.85;
+        h3 {
+            text-shadow: 0 0 2px #111111;
+        }
+    }
+
+    h3 {
+        // line-height: 12rem;
+        color: #ffffff;
+        text-align: center;
+        font-weight: 700;
+        text-shadow: 0 0 2px #363636;
+    }
+}
+
+.best-coachs {
+    background: url('/assets/img/avantages/best-coachs.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.with-friends {
+    background: url('/assets/img/avantages/with-friends.jpg');
+    background-size: cover;
+    background-position: top;
+}
+
+.with-people {
+    background: url('/assets/img/avantages/with-people.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.simplicity {
+    background: url('/assets/img/avantages/simplicity.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.once-or-more {
+    background: url('/assets/img/avantages/once-or-more.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.bloc-next {
+    background: #3dcad8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    & * {
+        font-size: 36px;
+        line-height: 1;
+        height: 36px;
+        width: 36px;
+    }
+}
+
+.workouts {
+    margin-bottom: 4em;
+}
+// ##### WORKOUT CARD #####
+.workout-card {
+    padding: 24px 12px;
+    margin-bottom: 24px;
+}
+
+.workout-image {
+    width: calc(100% + 24px);
+    margin: 0 -12px 16px;
+    // border-bottom: 20px solid #D9096D;
+    margin-bottom: 0;
+}
+
+.workout-coach-image {
+    background-image: url('http://placezombie.com/200x200');
+    background-size: cover;
+    margin-top: -20px;
+    z-index: 10;
+    position: absolute;
+    border: 2px solid #ffffff;
+}
+.workout-card-header {
+    display: flex;
+    flex-direction: row;
+    height: 20px;
+    margin: 0 -12px;
+    width: calc(100% + 24px);
+    padding: 0 12px;
+}
+.md-card-header-text {
+    height: 20px;
+    margin: 0 -12px;
+    width: calc(100% + 24px);
+    display: block;
+}
+.workout-title {
+    display: block;
+    width: calc(100% + 24px);
+    padding-left: 64px;
+    margin: 0 -12px;
+    height: 20px;
+    font-size: 18px;
+    line-height: 20px;
+    -webkit-transition: all 350ms; /* Safari */
+    transition: all 350ms;
+}
+.workout-card:hover .workout-title {
+    background: #D9096D;
+    color: #ffffff;
+}

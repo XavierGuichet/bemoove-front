@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Nouveau Cours</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <workout-form [model]="newWorkout"></workout-form>
+        </div>
+        <div class="col-xs-6">
+            <workout-preview [workout]="newWorkout" class="planning__detail"></workout-preview>
+        </div>
+    </div>
+</div>

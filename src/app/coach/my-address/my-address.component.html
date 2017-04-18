@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <md-card class="demo-card demo-basic">
+            <md-card-title color="primary">Ajouter un nouveau lieu</md-card-title>
+            <button md-fab>
+                <md-icon class="md-24">add</md-icon>
+            </button>
+            <span>Peut être privé ou public</span>
+        </md-card>
+    </div>
+    {{ diagnostic }}
+    <div class="col-sm-4" *ngFor="let address of addresses">
+        <md-card class="demo-card demo-basic">
+            <md-card-title color="primary">{{ address.name }} (public)</md-card-title>
+            <img md-card-image src="http://placehold.it/350x150">
+            <md-card-content>
+                <form>
+                    <p>
+                        <md-textarea class="demo-full-width" placeholder="Address" value="{{ address.firstline }}"></md-textarea>
+                        <md-textarea class="demo-full-width" placeholder="Address 2" value="{{ address.secondline }}"></md-textarea>
+                    </p>
+                    <table style="width: 100%" cellspacing="0">
+                        <tr>
+                            <td>
+                                <md-input class="demo-full-width" placeholder="City" value="{{ address.city.name }}"></md-input>
+                            </td>
+                            <td>
+                                <md-input #postalCode class="demo-full-width" maxlength="5" placeholder="Postal Code" value="{{ address.city.postalCode }}">
+                                    <md-hint align="end">{{postalCode.characterCount}} / 5</md-hint>
+                                </md-input>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </md-card-content>
+            <md-card-actions align="end">
+                <button md-raised-button color="accent" *ngIf="!address.editable">Enlever de mes adresses</button>
+                <button md-raised-button color="accent" *ngIf="address.editable">Supprimer</button>
+                <button md-raised-button color="primary" *ngIf="address.editable">Enregistrer</button>
+            </md-card-actions>
+        </md-card>
+    </div>
+  </div>
+</div>

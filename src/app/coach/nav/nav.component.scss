@@ -1,0 +1,40 @@
+.navbar {
+  padding: 0;
+  border-radius: 0;
+  background: #424242;
+}
+
+.top-menu {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    box-sizing: border-box;
+    display: inline-block;
+    & a {
+        display: inline-block;
+        line-height: 2.25em;
+        font-size: 1rem;
+        padding: 0 1em;
+        margin: 0 0.125em;
+        border-bottom: 2px solid #424242;
+        color: #ffffff;
+        &:visited, &:link {
+            color: #ffffff;
+        }
+        &:hover {
+            border-bottom: 2px solid #2fffcd;
+            color: #2fffcd;
+            text-decoration: none;
+        }
+    }
+  }
+}
+
+
+.top-menu li a, .top-menu li a:visited, .top-menu li a:link
+
+.top-menu li a:hover {
+}
