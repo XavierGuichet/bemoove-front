@@ -12,6 +12,8 @@ export class AuthCoachGuard implements CanActivate {
     ) { }
 
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        console.log(this.spaceService.getLogged());
+        console.log(this.spaceService.getZone());
         if (this.spaceService.getLogged()
             && this.spaceService.getZone() === 'ROLE_COACH') {
             // logged in so return true

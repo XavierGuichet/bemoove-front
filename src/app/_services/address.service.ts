@@ -7,39 +7,44 @@ import { Address } from '../models/address';
 
 @Injectable()
 export class AddressService {
-    private headers = new Headers({'Content-Type': 'application/json', 'Accept': 'application/json'});
-    private headers_search = new Headers({'Accept': 'application/json'});
+    private headers = new Headers({ 'Content-Type': 'application/json',
+                                    'Accept': 'application/json'});
+    private headersSearch = new Headers({Accept: 'application/json'});
     private AddressesUrl = 'http://api.bemoove.local/addresses';
 
     constructor(private http: Http) { }
 
-    getAll(): Promise<Address[]> {
+    public getAll(): Promise<Address[]> {
       return this.http.get(this.AddressesUrl, { headers: this.headers })
                  .toPromise()
-                 .then(response => response.json() as Address[]);
+                 .then((response) => response.json() as Address[]);
     }
 
-    getAddressesByCoachId(id: number): Promise<Address[]> {
-        return this.http.get(this.AddressesUrl + '?user.id='+id, this.jwt())
+    public getAddressesByCoachId(id: number): Promise<Address[]> {
+        return this.http.get(this.AddressesUrl + '?user.id=' + id, this.jwt())
             .toPromise()
-            .then(response => response.json() as Address[])
+            .then((response) => response.json() as Address[])
             .catch(this.handleError);
     }
 
-    getById(id: number) {
-        return this.http.get(this.AddressesUrl + '/' + id, this.jwt()).map((response: Response) => response.json());
+    public getById(id: number) {
+        return this.http.get(this.AddressesUrl + '/' + id, this.jwt())
+                        .map((response: Response) => response.json());
     }
 
-    create(address: Address) {
-        return this.http.post(this.AddressesUrl, address, this.jwt()).map((response: Response) => response.json());
+    public create(address: Address) {
+        return this.http.post(this.AddressesUrl, address, this.jwt())
+                        .map((response: Response) => response.json());
     }
 
-    update(address: Address) {
-        return this.http.put(this.AddressesUrl + '/' + address.id, address, this.jwt()).map((response: Response) => response.json());
+    public update(address: Address) {
+        return this.http.put(this.AddressesUrl + '/' + address.id, address, this.jwt())
+                        .map((response: Response) => response.json());
     }
 
-    delete(id: number) {
-        return this.http.delete(this.AddressesUrl + '/' + id, this.jwt()).map((response: Response) => response.json());
+    public delete(id: number) {
+        return this.http.delete(this.AddressesUrl + '/' + id, this.jwt())
+                        .map((response: Response) => response.json());
     }
 
     // private helper methods
@@ -48,8 +53,10 @@ export class AddressService {
         // create authorization header with jwt token
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
-            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token, 'Content-Type': 'application/json', 'Accept': 'application/json' });
-            return new RequestOptions({ headers: headers });
+            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token,
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json' });
+            return new RequestOptions({ headers });
         }
     }
 

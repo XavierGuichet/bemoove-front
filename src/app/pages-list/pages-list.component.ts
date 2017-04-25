@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router }   from '@angular/router';
 
+import { Overlay, overlayConfigFactory } from 'angular2-modal';
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { RegisterModalComponent  } from '../modal/register/register-modal.component';
 
 import { User } from '../models/user';
 import { UserService } from '../_services/index';
@@ -17,18 +20,29 @@ import { Day }          from '../models/day';
 })
 
 export class PagesListComponent implements OnInit {
-    users: User[] = [];
+    public users: User[] = [];
 
     constructor(
+        overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal,
         private router: Router,
         private userService: UserService
-    ) { }
+    ) {
+        overlay.defaultViewContainer = vcRef;
+    }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.loadAllUsers();
     }
 
+    public showJoinUs() {
+        return this.modal.open(RegisterModalComponent,
+                                overlayConfigFactory({
+                                    showClose: false,
+                                    isBlocking: false},
+                                BSModalContext));
+    }
+
     private loadAllUsers(): void {
-        this.userService.getAll().then(users => this.users = users);
+        this.userService.getAll().then((users) => this.users = users);
     }
 }

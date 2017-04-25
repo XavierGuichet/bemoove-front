@@ -4,29 +4,29 @@ import { Address } from './address';
 import { Image } from './image';
 
 export class Workout {
-    id: number;
-    startdate: Date;
-    enddate: Date;
-    duration: string;
-    placeType: string;
-    nbTicketAvailable: number;
-    nbTicketBooked: number;
-    soldOut: boolean;
-    price: number;
-    coach: number;
-    sport: any;
-    subsport: string;
-    soloTraining: boolean;
-    difficulty: string;
-    notation: number;
-    address: any;
-    description: string;
-    tags: any[];
-    addedExistingTags: Tag[];
-    addedNewTags: Tag[];
-    title: string;
-    photo: Image;
-    favorite: boolean;
+    public id: number;
+    public startdate: Date;
+    public enddate: Date;
+    public duration: string;
+    public placeType: string;
+    public nbTicketAvailable: number;
+    public nbTicketBooked: number;
+    public soldOut: boolean;
+    public price: number;
+    public coach: number;
+    public sport: any;
+    public soloTraining: boolean;
+    public subsport: string;
+    public difficulty: string;
+    public notation: number;
+    public address: any;
+    public description: string;
+    public tags: any[];
+    public addedExistingTags: Tag[];
+    public addedNewTags: Tag[];
+    public title: string;
+    public photo: Image;
+    public favorite: boolean;
 
     constructor(
     ) {

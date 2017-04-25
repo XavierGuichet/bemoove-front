@@ -1,15 +1,11 @@
 export class Address {
-    id: number;
-    name: string;
-    firstline: string;
-    secondline: string;
-    district: string;
-    city: string;
-    postalCode: string;
-    latitude: string;
-    longitude: string;
-
-    constructor(
-    ) {
-    }
+    public id: number;
+    public name: string;
+    public firstline: string;
+    public secondline: string;
+    public district: string;
+    public city: string;
+    public postalCode: string;
+    public latitude: string;
+    public longitude: string;
 }

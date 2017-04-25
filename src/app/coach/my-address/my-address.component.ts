@@ -8,11 +8,14 @@ import { SpaceService } from '../../_services/space.service';
 
 @Component({
     selector: 'coach-my-address',
-    templateUrl: 'my-address.component.html'
+    template: `
+    <h1>My Addresse componenet</h1>
+    `
+    // templateUrl: 'my-address.component.html'
 })
 
 export class CoachMyAddressComponent implements OnInit {
-    addresses: Address[];
+    public addresses: Address[];
 
     constructor(
         private router: Router,
@@ -20,13 +23,13 @@ export class CoachMyAddressComponent implements OnInit {
         private addressService: AddressService
     ) { }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.getAddressesByCoachId(this.spaceService.getUserId());
     }
 
-    getAddressesByCoachId(id: number) {
+    private getAddressesByCoachId(id: number) {
         this.addressService.getAddressesByCoachId(id)
-                   .then(addresses => this.addresses = addresses);
+                   .then((addresses) => this.addresses = addresses);
     }
 
     get diagnostic() { return JSON.stringify(this.addresses); }

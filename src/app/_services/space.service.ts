@@ -23,31 +23,32 @@ export class SpaceService {
         this.setTopBarEmitter = this.showTopBar.asObservable();
         this.toggleTopBar(true);
 
-        // this.refreshSpace();
+        this.refreshSpace();
     }
 
     public refreshSpace(): void {
-        // let token = localStorage.getItem('currentUser');
-        // if (token == null || this.jwtHelper.isTokenExpired(token)) {
-        //     if (token != null) {
-        //         localStorage.removeItem('currentUser');
-        //     }
-        //     console.log('token is expired or null');
-        //     this.setLogged(false);
-        //     this.setUserId(0);
-        //     this.setZone('default');
-        //     return;
-        // }
-        // let tokenpayload = this.jwtHelper.decodeToken(token);
-        // this.setUserId(tokenpayload.id);
-        // this.setLogged(true);
-        // if (tokenpayload.roles.filter( (r) => r.indexOf('ROLE_USER') !== -1).length > 0) {
-        //     this.setZone('ROLE_USER');
-        // }
-        // if (tokenpayload.roles.filter( (r) => r.indexOf('ROLE_COACH') !== -1).length > 0) {
-        //     this.setZone('ROLE_COACH');
-        // }
-        // this.setUserId(tokenpayload.id);
+        let token = localStorage.getItem('currentUser');
+        if (token == null || this.jwtHelper.isTokenExpired(token)) {
+            if (token != null) {
+                localStorage.removeItem('currentUser');
+            }
+            console.log('token is expired or null');
+            this.setLogged(false);
+            this.setUserId(0);
+            this.setZone('default');
+            return;
+        }
+        let tokenpayload = this.jwtHelper.decodeToken(token);
+        this.setUserId(tokenpayload.id);
+        this.setLogged(true);
+        this.toggleTopBar(false);
+        if (tokenpayload.roles.filter( (r) => r.indexOf('ROLE_USER') !== -1).length > 0) {
+            this.setZone('ROLE_USER');
+        }
+        if (tokenpayload.roles.filter( (r) => r.indexOf('ROLE_COACH') !== -1).length > 0) {
+            this.setZone('ROLE_COACH');
+        }
+        this.setUserId(tokenpayload.id);
     }
 
     public setLogged(logged: boolean) {

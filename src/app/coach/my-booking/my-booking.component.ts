@@ -11,9 +11,7 @@ export class CoachMyBookingComponent implements OnInit {
         private router: Router
     ) { }
 
-    ngOnInit(): void {
-
+    public ngOnInit(): void {
+        console.log('Coach My Booking on Init');
     }
-
-
 }

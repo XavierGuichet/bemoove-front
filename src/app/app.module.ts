@@ -29,25 +29,25 @@ import { RegisterModalComponent  } from './modal/register/register-modal.compone
 
 import { AlertComponent } from './_directives/index';
 import { AuthUserGuard, AuthCoachGuard } from './_guards/index';
-// import { AlertService, AuthenticationService, UserService } from './_services/index';
-// import { LoginComponent } from './login/index';
-// import { RegisterComponent } from './register/index';
+import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { LoginComponent } from './login/index';
+import { RegisterComponent } from './register/index';
 
 // Forms
-// import { SubscribeFormReactiveModule }  from './form/subscribe/subscribe-form-reactive.module';
+import { SubscribeFormReactiveModule }  from './form/subscribe/subscribe-form-reactive.module';
 
 import { WelcomeCoachComponent }    from './welcome/coach/coach.component';
 import { WelcomeSearchComponent }   from './welcome/search/search.component';
-// import { PagesListComponent }       from './pages-list/pages-list.component';
+import { PagesListComponent }       from './pages-list/pages-list.component';
 
 import { CoachRecruitBarComponent }       from './coach-recruit-bar/coach-recruit-bar.component';
 import { HeaderNavComponent }       from './header-nav/header-nav.component';
 import { FooterComponent }       from './footer/footer.component';
 
-// import { CoachModule }      from './coach/coach.module';
+import { CoachModule }      from './coach/coach.module';
 
-// import { WorkoutService }          from './_services/workout.service';
-// import { TagService }          from './tag-service/tag.service';
+import { WorkoutService }          from './_services/workout.service';
+import { TagService }          from './tag-service/tag.service';
 
 import { SpaceService } from './_services/space.service';
 
@@ -58,9 +58,9 @@ const APP_PROVIDERS = [
   AppState,
   // WorkoutService,
   AuthUserGuard, AuthCoachGuard,
-  // AlertService,
-  // AuthenticationService,
-  // UserService,
+  AlertService,
+  AuthenticationService,
+  UserService,
   SpaceService
 ];
 
@@ -90,11 +90,11 @@ type StoreType = {
     LoginModalComponent,
     RegisterModalComponent,
 
-    // PagesListComponent,
+    PagesListComponent,
 
     AlertComponent,
-    // LoginComponent,
-    // RegisterComponent,
+    LoginComponent,
+    RegisterComponent,
 
     TextChangerDirective
   ],
@@ -107,9 +107,9 @@ type StoreType = {
     MaterialModule.forRoot(),
     ModalModule.forRoot(),
     BootstrapModalModule,
-    // SubscribeFormReactiveModule,
+    SubscribeFormReactiveModule,
     Angular2FontawesomeModule,
-    // CoachModule
+    CoachModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

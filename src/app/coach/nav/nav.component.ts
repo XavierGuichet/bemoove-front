@@ -12,9 +12,7 @@ export class CoachNavComponent implements OnInit {
         private router: Router
     ) { }
 
-    ngOnInit(): void {
-
+    public ngOnInit(): void {
+        console.log('Coach nav On Init');
     }
-
-
 }

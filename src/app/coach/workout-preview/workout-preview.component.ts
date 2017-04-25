@@ -9,8 +9,6 @@ import { Workout }          from '../../models/workout';
 })
 
 export class WorkoutPreviewComponent {
-    constructor () {}
-
     @Input()
-    workout: Workout;
+    public workout: Workout;
 }

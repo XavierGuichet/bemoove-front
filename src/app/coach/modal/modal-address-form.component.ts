@@ -11,13 +11,17 @@ import { Router, ActivatedRoute } from '@angular/router';
     template: '<address-form [(model)]="model" (onSuccess)="onSuccess($event)"></address-form>'
 })
 
-export class ModalAddressForm implements CloseGuard, ModalComponent<BSModalContext> {
-    context: BSModalContext;
-    model: Address = new Address();
-    loading = false;
-    returnUrl: string;
-    @ViewChild('templateRef') public templateRef: TemplateRef<any>;
-    @Output() onCreation = new EventEmitter<Address>();
+export class ModalAddressFormComponent implements CloseGuard, ModalComponent<BSModalContext> {
+    public context: BSModalContext;
+    public model: Address = new Address();
+    public loading = false;
+    public returnUrl: string;
+
+    @ViewChild('templateRef')
+    public templateRef: TemplateRef<any>;
+
+    @Output()
+    public onCreation = new EventEmitter<Address>();
 
     constructor(public dialog: DialogRef<BSModalContext>,
                 private route: ActivatedRoute,
@@ -26,9 +30,7 @@ export class ModalAddressForm implements CloseGuard, ModalComponent<BSModalConte
         dialog.setCloseGuard(this);
     }
 
-    onSuccess(success: boolean) {
-        success ? this.dialog.close(this.model) : '';
+    public onSuccess(success: boolean) {
+        return success ? this.dialog.close(this.model) : '';
     }
-
-
 }

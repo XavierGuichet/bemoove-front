@@ -2,9 +2,11 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 
 @Directive({ selector: '[imageToBase64]' })
 export class ImageToBase64Directive {
+    public files: any[] = [];
+    @Output()
+    public complete: EventEmitter<any> = new EventEmitter();
+
     private fileReader = new FileReader();
-    files: any[] = [];
-    @Output() complete: EventEmitter<any> = new EventEmitter();
 
     constructor(private el: ElementRef) {
         this.fileReader.addEventListener('load', (event) => {
@@ -15,7 +17,8 @@ export class ImageToBase64Directive {
         });
     }
 
-    @HostListener('change') onChange() {
+    @HostListener('change')
+    public onChange() {
         console.log(this.el.nativeElement);
         let files =  Array.from(this.el.nativeElement.files);
         let file = files[0];

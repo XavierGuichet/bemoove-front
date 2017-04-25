@@ -9,9 +9,9 @@ import { AlertService, AuthenticationService } from '../_services/index';
 })
 
 export class LoginComponent implements OnInit {
-    model: any = {};
-    loading = false;
-    returnUrl: string;
+    public model: any = {};
+    public loading = false;
+    private returnUrl: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private alertService: AlertService) { }
 
-    ngOnInit() {
+    public ngOnInit() {
         // reset login status
         this.authenticationService.logout();
 
@@ -28,14 +28,16 @@ export class LoginComponent implements OnInit {
         console.log(this.returnUrl);
     }
 
-    login() {
+    public login() {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
-                data => {
+                (data) => {
+                    console.log('login success');
+                    console.log(this.returnUrl);
                     this.router.navigate([this.returnUrl]);
                 },
-                error => {
+                (error) => {
                     this.alertService.error(error);
                     this.loading = false;
                 });

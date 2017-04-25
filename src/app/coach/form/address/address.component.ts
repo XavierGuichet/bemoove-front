@@ -6,25 +6,29 @@ import { AddressService }   from '../../../_services/address.service';
 
 @Component({
   selector: 'address-form',
-  templateUrl: 'address.component.html'
+  template: `
+  <h1>Addresse componenet</h1>
+  `
+  // templateUrl: 'address.component.html'
 })
 
 export class AddressFormComponent {
     @Input()
-    model: Address;
-    @Output() onSuccess = new EventEmitter<boolean>();
-    loading: boolean = false;
+    public model: Address;
+    @Output()
+    public onSuccess = new EventEmitter<boolean>();
+    public loading: boolean = false;
 
     constructor(private addressService: AddressService) {}
 
-    addAddress() {
+    public addAddress() {
         this.loading = true;
         this.addressService.create(this.model).subscribe(
-            data => {
+            (data) => {
                 this.loading = false;
                 this.onSuccess.emit(true);
             },
-            error => {
+            (error) => {
                 this.loading = false;
             });
     }

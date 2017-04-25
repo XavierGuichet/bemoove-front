@@ -9,14 +9,12 @@ import { Workout }  from '../../models/workout';
 })
 
 export class CoachAddWorkoutComponent implements OnInit {
-    newWorkout = new Workout();
+    public newWorkout = new Workout();
     constructor(
         private router: Router
     ) { }
 
-    ngOnInit(): void {
-
+    public ngOnInit(): void {
+        console.log('Coach add Workout on Init');
     }
-
-
 }

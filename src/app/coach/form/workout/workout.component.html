@@ -61,7 +61,7 @@
                         <div class="radio-box" *ngFor="let address of addresses" (click)="selectAddress(address)" [class.active]="address.id == model.address.id">
                             <span>{{address.name}}</span>
                         </div>
-                        <div class="radio-box radio-add" (click)="showModalAddressForm()">
+                        <div class="radio-box radio-add" (click)="showModalAddressFormComponent()">
                             <md-icon class="md-24">add</md-icon>
                         </div>
                     </div>

@@ -5,7 +5,10 @@ import { SpaceService } from '../../_services/space.service';
 
 @Component({
     selector: 'coach-profile',
-    templateUrl: 'profile.component.html'
+    template: `
+    <h1>profile componenet</h1>
+    `
+    // templateUrl: 'profile.component.html'
 })
 
 export class CoachProfileComponent implements OnInit {
@@ -14,9 +17,7 @@ export class CoachProfileComponent implements OnInit {
         private spaceService: SpaceService
     ) { }
 
-    ngOnInit(): void {
-
+    public ngOnInit(): void {
+        console.log('Coach Profile On Init');
     }
-
-
 }

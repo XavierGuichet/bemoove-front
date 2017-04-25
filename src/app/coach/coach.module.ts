@@ -5,8 +5,8 @@ import { FormsModule }        from '@angular/forms';
 import { NgbModule }        from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '@angular/material';
 
-import { Ng2CompleterModule } from "ng2-completer";
-import { ImageUploadModule } from "angular2-image-upload";
+import { Ng2CompleterModule } from 'ng2-completer';
+import { ImageUploadModule } from 'angular2-image-upload';
 
 import { CoachComponent } from './coach.component';
 import { CoachRoutingModule } from './coach-routing.module';
@@ -24,7 +24,7 @@ import { WorkoutPreviewComponent }    from './workout-preview/workout-preview.co
 
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
-import { ModalAddressForm } from './modal/modal-address-form.component';
+import { ModalAddressFormComponent } from './modal/modal-address-form.component';
 
 import { SportService } from '../_services/sport.service';
 import { AddressService } from '../_services/address.service';
@@ -33,7 +33,6 @@ import { TagService } from '../_services/tag.service';
 import { SpaceService } from '../_services/space.service';
 
 import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute';
-
 
 @NgModule({
     bootstrap: [
@@ -62,11 +61,11 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
         WorkoutFormComponent,
         AddressFormComponent,
         WorkoutPreviewComponent,
-        ModalAddressForm,
+        ModalAddressFormComponent,
         ImageToBase64Directive
     ],
   exports:      [ CoachComponent ],
-  entryComponents: [ ModalAddressForm ],
+  entryComponents: [ ModalAddressFormComponent ],
   providers:    [
         SportService,
         AddressService,

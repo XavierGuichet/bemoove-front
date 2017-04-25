@@ -49,7 +49,10 @@ export class WelcomeCoachComponent implements OnInit {
 
     public callmeback() {
          this.http.post(this.callMeBackUrl,
-                        { name: this.name, mail: this.mail, phone: this.phone  }, this.headers).toPromise()
+                        {   name: this.name,
+                            mail: this.mail,
+                            phone: this.phone  },
+                        this.headers).toPromise()
                         .then((response: Response) => console.log(response))
                         .catch(this.handleError);
          this.success = true;

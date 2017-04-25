@@ -5,7 +5,7 @@ export function RegexpValidator(nameRe: RegExp): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} => {
     const name = control.value;
     const no = nameRe.test(name);
-    return no ? null : {'regexpvalidatorphrase': {name}};
+    return no ? null : {regexpvalidatorphrase: {name}};
   };
 }
 
@@ -15,10 +15,11 @@ export function RegexpValidator(nameRe: RegExp): ValidatorFn {
 })
 
 export class RegexpValidatorDirective implements Validator, OnChanges {
-  @Input() phrase: string;
+  @Input()
+  public phrase: string;
   private valFn = Validators.nullValidator;
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     const change = changes['phrase'];
     if (change) {
       const val: string | RegExp = change.currentValue;
@@ -29,15 +30,7 @@ export class RegexpValidatorDirective implements Validator, OnChanges {
     }
   }
 
-  validate(control: AbstractControl): {[key: string]: any} {
+  public validate(control: AbstractControl): {[key: string]: any} {
     return this.valFn(control);
   }
 }
-
-
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

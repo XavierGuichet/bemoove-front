@@ -5,20 +5,21 @@ import { Tag }    from '../models/tag';
 
 @Injectable()
 export class TagService {
-    private headers = new Headers({'Content-Type': 'application/json', 'Accept': 'application/json'});
-    private headers_search = new Headers({'Accept': 'application/json'});
+    private headers = new Headers({ 'Content-Type': 'application/json',
+                                    'Accept': 'application/json'});
+    private headersSearch = new Headers({Accept: 'application/json'});
     private tagsUrl = 'http://api.bemoove.local/tags';
 
     constructor(
             private http: Http) {}
 
-    search (term: string) {
-        console.log("tag service search");
-        return this.http.get(this.tagsUrl + '?name='+term)
-               .map(response => <string[]> response.json());
+    public search (term: string) {
+        console.log('tag service search');
+        return this.http.get(this.tagsUrl + '?name=' + term)
+               .map((response) => <string[]> response.json());
     }
 
-    searchExample (term: string) {
+    public searchExample (term: string) {
         return this.search(term);
     //   let wikiUrl = 'http://en.wikipedia.org/w/api.php';
     //   let params = new URLSearchParams();
@@ -32,16 +33,21 @@ export class TagService {
     //              .map(response => <string[]> response.json()[1]);
     }
 
-    create(tag: Tag) {
-        return this.http.post(this.tagsUrl, tag, this.jwt()).map((response: Response) => response.json());
+    public create(tag: Tag) {
+        return this.http.post(this.tagsUrl, tag, this.jwt()).map(
+                                        (response: Response) => response.json()
+                                    );
     }
 
     private jwt() {
         // create authorization header with jwt token
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
-            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token, 'Content-Type': 'application/json', 'Accept': 'application/json' });
-            return new RequestOptions({ headers: headers });
+            let headers = new Headers({
+                                'Authorization': 'Bearer ' + currentUser.token,
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json' });
+            return new RequestOptions({ headers });
         }
     }
 

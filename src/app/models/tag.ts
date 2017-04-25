@@ -1,5 +1,5 @@
 export class Tag {
-    id: number;
-    name: string;
-    category: string;
+    public id: number;
+    public name: string;
+    public category: string;
 }

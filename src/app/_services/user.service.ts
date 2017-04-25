@@ -9,7 +9,7 @@ import { User } from '../models/user';
 export class UserService {
     private headers = new Headers({'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
-    private UsersUrl = 'http://api.bemoove.local/users';
+    private UsersUrl = 'http://api.bemoove.local/app_dev.php/users';
 
     constructor(private http: Http) { }
 
@@ -44,6 +44,7 @@ export class UserService {
     private jwt() {
         // create authorization header with jwt token
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(currentUser);
         if (currentUser && currentUser.token) {
             let headers = new Headers({ Authorization: 'Bearer ' + currentUser.token });
             let options = new RequestOptions();
