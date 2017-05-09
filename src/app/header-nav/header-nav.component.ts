@@ -44,7 +44,6 @@ export class HeaderNavComponent implements OnInit {
             }
         });
         this.spaceService.setLoggedEmitter.subscribe(( mode ) => {
-            // console.log(mode);
             // mode will be null the first time it is created,
                 //  so you need to igonore it when null
             if (mode !== null) {
@@ -75,7 +74,6 @@ export class HeaderNavComponent implements OnInit {
 
     public ngOnInit(): void {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
-        console.log(this.route.snapshot.queryParams);
         if (this.returnUrl) {
             this.showLoginModal();
             this.router.navigate([this.returnUrl]);
@@ -89,16 +87,16 @@ export class HeaderNavComponent implements OnInit {
 
     public showLoginModal() {
         return this.modal.open(LoginModalComponent,
-            overlayConfigFactory({ showClose: false, isBlocking: false}, BSModalContext));
+            overlayConfigFactory({ showClose: true, isBlocking: false}, BSModalContext));
     }
 
     public showRegisterModal() {
         return this.modal.open(RegisterModalComponent,
-            overlayConfigFactory({ showClose: false, isBlocking: false}, BSModalContext));
+            overlayConfigFactory({ showClose: true, isBlocking: false}, BSModalContext));
     }
 
     public showJoinUs() {
         return this.modal.open(SportySubscribeModalComponent,
-            overlayConfigFactory({ showClose: false, isBlocking: false}, BSModalContext));
+            overlayConfigFactory({ showClose: true, isBlocking: false}, BSModalContext));
     }
 }

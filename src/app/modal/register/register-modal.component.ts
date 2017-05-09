@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { DialogRef, ModalComponent, CloseGuard } from 'angular2-modal';
-import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { DialogRef, ModalComponent, CloseGuard, overlayConfigFactory } from 'angular2-modal';
+import { BSModalContext, Modal } from 'angular2-modal/plugins/bootstrap';
+import { LoginModalComponent  } from '../login/login-modal.component';
 
 import { AlertService, UserService } from '../../_services/index';
 
@@ -10,7 +11,7 @@ import { AlertService, UserService } from '../../_services/index';
     // moduleId: module.id,
     selector: 'register-modal',
     templateUrl: 'register-modal.component.html',
-    styleUrls: ['register-modal.component.css']
+    styleUrls: ['../modal.component.scss']
 })
 export class RegisterModalComponent implements CloseGuard, ModalComponent<BSModalContext> {
     public loading = false;
@@ -19,6 +20,7 @@ export class RegisterModalComponent implements CloseGuard, ModalComponent<BSModa
 
     constructor(public dialog: DialogRef<BSModalContext>,
                 private router: Router,
+                public modal: Modal,
                 private userService: UserService,
                 private alertService: AlertService) {
                 this.context = dialog.context;
@@ -40,6 +42,10 @@ export class RegisterModalComponent implements CloseGuard, ModalComponent<BSModa
                 });
     }
 
+    public showLoginModal() {
+        return this.modal.open(LoginModalComponent,
+            overlayConfigFactory({ showClose: true, isBlocking: false}, BSModalContext));
+    }
     // onKeyUp(value) {
     //     console.log("keyup");
     //     this.dialog.close();
