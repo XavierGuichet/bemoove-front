@@ -4,21 +4,21 @@ import { Router }   from '@angular/router';
 import { Overlay, overlayConfigFactory } from 'angular2-modal';
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { SportySubscribeModalComponent  }
-                from '../../modal/sporty-subscribe/sporty-subscribe-modal';
+                from '../modal/sporty-subscribe/sporty-subscribe-modal';
 
-import { SpaceService } from '../../_services/space.service';
+import { SpaceService } from '../_services/space.service';
 
 // import { Workout }          from '../../models/workout';
 // import { Day }          from '../../models/day';
 
 @Component({
-    selector: 'welcome-search',
+    selector: 'home',
     providers: [Modal],
-    templateUrl: 'search.component.html',
-    styleUrls: ['search.component.scss']
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.component.scss']
 })
 
-export class WelcomeSearchComponent implements OnInit {
+export class HomeComponent implements OnInit {
     constructor(
         overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal,
         private router: Router,

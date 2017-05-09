@@ -82,7 +82,7 @@ export class HeaderNavComponent implements OnInit {
 
     public logout(): void {
         this.authenticationService.logout();
-        this.router.navigate(['/search']);
+        this.router.navigate(['']);
     }
 
     public showLoginModal() {

@@ -35,8 +35,7 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { SubscribeFormReactiveModule }  from './form/subscribe/subscribe-form-reactive.module';
 
 import { WelcomeCoachComponent }    from './welcome/coach/coach.component';
-import { WelcomeSearchComponent }   from './welcome/search/search.component';
-import { PagesListComponent }       from './pages-list/pages-list.component';
+import { HomeComponent }   from './home/home.component';
 
 import { TopBarCoachRecruitComponent }       from './topbar/coach-recruit/coach-recruit.component';
 import { HeaderNavComponent }       from './header-nav/header-nav.component';
@@ -82,13 +81,11 @@ type StoreType = {
     FooterComponent,
 
     WelcomeCoachComponent,
-    WelcomeSearchComponent,
+    HomeComponent,
 
     SportySubscribeModalComponent,
     LoginModalComponent,
     RegisterModalComponent,
-
-    PagesListComponent,
 
     AlertComponent,
 
