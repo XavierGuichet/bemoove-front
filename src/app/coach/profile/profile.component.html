@@ -10,10 +10,14 @@
                           <table style="width: 100%" cellspacing="0">
                               <tr>
                                   <td>
-                                      <md-input placeholder="Prénom" style="width: 100%"></md-input>
+                                      <md-input-container class="demo-full-width col-xs-12">
+                                        <textarea mdInput placeholder="Prénom"></textarea>
+                                      </md-input-container>
                                   </td>
                                   <td>
-                                      <md-input placeholder="Nom" style="width: 100%"></md-input>
+                                      <md-input-container class="demo-full-width col-xs-12">
+                                        <textarea mdInput placeholder="Nom"></textarea>
+                                      </md-input-container>
                                   </td>
                               </tr>
                           </table>
@@ -57,21 +61,34 @@
                   <md-card-content>
                       <form>
                           <p>
-                              <md-textarea class="demo-full-width" placeholder="Address" value="1600 Amphitheatre Pkway"></md-textarea>
-                              <md-textarea class="demo-full-width" placeholder="Address 2"></md-textarea>
+                              <md-input-container class="demo-full-width col-xs-12">
+                                <textarea mdInput placeholder="Address" name="firstline"></textarea>
+                              </md-input-container>
+                              <md-input-container class="demo-full-width col-xs-12">
+                                <textarea mdInput placeholder="Address 2" name="secondline"></textarea>
+                              </md-input-container>
                           </p>
                           <table style="width: 100%" cellspacing="0">
                               <tr>
                                   <td>
-                                      <md-input class="demo-full-width" placeholder="City"></md-input>
+                                      <md-input-container class="demo-full-width col-xs-12">
+                                          <input mdInput
+                                          placeholder="City">
+                                      </md-input-container>
                                   </td>
                                   <td>
-                                      <md-input class="demo-full-width" placeholder="State"></md-input>
+                                      <md-input-container class="demo-full-width col-xs-12">
+                                          <input mdInput
+                                          placeholder="State">
+                                      </md-input-container>
                                   </td>
                                   <td>
-                                      <md-input #postalCode class="demo-full-width" maxlength="5" placeholder="Postal Code" value="94043">
-                                          <md-hint align="end">{{postalCode.characterCount}} / 5</md-hint>
-                                      </md-input>
+                                      <md-input-container class="demo-full-width col-xs-12">
+                                          <input mdInput #postalCode
+                                          placeholder="Postal Code"
+                                          maxlength="5">
+                                        <md-hint align="end">{{postalCode.characterCount}} / 5</md-hint>
+                                      </md-input-container>
                                   </td>
                               </tr>
                           </table>
@@ -87,10 +104,14 @@
                   <md-card-title color="primary">Coordonnées de contact</md-card-title>
                   <md-card-content>
                       <form>
-                          <md-input class="demo-full-width" placeholder="Téléphone Fixe" value="01 23 45 67 89">
-                          </md-input>
-                          <md-input class="demo-full-width" placeholder="Téléphone Mobile" value="06 66 77 88 99">
-                          </md-input>
+                          <md-input-container class="demo-full-width col-xs-12">
+                              <input mdInput
+                              placeholder="Téléphone Fixe">
+                          </md-input-container>
+                          <md-input-container class="demo-full-width col-xs-12">
+                              <input mdInput
+                              placeholder="Téléphone Mobile">
+                          </md-input-container>
                       </form>
                   </md-card-content>
                   <md-card-actions align="end">
@@ -103,15 +124,23 @@
                   <md-card-title>Mon compte</md-card-title>
                   <md-card-content>
                       <md-card-subtitle>Changer d'adresse mail</md-card-subtitle>
-                      <md-input class="demo-full-width" placeholder="Mail" value="monmail@coach.fr">
-                      </md-input>
-                      <md-input class="demo-full-width" placeholder="Mot de passe" value="">
-                      </md-input>
+                      <md-input-container class="demo-full-width col-xs-12">
+                          <input mdInput
+                          placeholder="Mail" value="monmail@coach.fr">
+                      </md-input-container>
+                      <md-input-container class="demo-full-width col-xs-12">
+                          <input mdInput
+                          placeholder="Mot de passe" value="">
+                      </md-input-container>
                       <md-card-subtitle>Changer de mot de passe</md-card-subtitle>
-                      <md-input class="demo-full-width" placeholder="Mot de passe" value="">
-                      </md-input>
-                      <md-input class="demo-full-width" placeholder="Mot de passe" value="">
-                      </md-input>
+                      <md-input-container class="demo-full-width col-xs-12">
+                          <input mdInput
+                          placeholder="Mot de passe" value="">
+                      </md-input-container>
+                      <md-input-container class="demo-full-width col-xs-12">
+                          <input mdInput
+                          placeholder="Mot de passe" value="">
+                      </md-input-container>
                       <md-card-subtitle>Activer la connexion rapide</md-card-subtitle>
                       <button md-raised-button color="primary">Avec Google +</button>
                       <button md-raised-button color="primary">Avec Facebook</button>
@@ -129,7 +158,9 @@
                         <md-card-subtitle>Xavier Guichet</md-card-subtitle>
                  </md-card-title-group>
                   <md-card-content>
-                      <md-textarea class="demo-full-width" placeholder="Description publique" value=""></md-textarea>
+                      <md-input-container class="demo-full-width col-xs-12">
+                        <textarea mdInput placeholder="Description publique"></textarea>
+                      </md-input-container>
                       <h6>Photo</h6>
                       <label class="custom-file">
                         <input type="file" id="file" class="custom-file-input">

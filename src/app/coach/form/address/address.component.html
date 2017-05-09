@@ -2,42 +2,41 @@
     <md-spinner *ngIf="loading"></md-spinner>
     <md-card class="demo-card demo-basic" *ngIf="!loading">
     <md-card-title color="primary">
-        <md-input class="demo-full-width"
-                #name
-                placeholder="Nom de l'adresse"
-                name="name"
-                [(ngModel)]="model.name">
-        </md-input>
+        <md-input-container class="demo-full-width">
+            <input mdInput #name
+            placeholder="Nom de l'adresse"
+            name="name"
+            [(ngModel)]="model.name" />
+        </md-input-container>
     </md-card-title>
     <!-- <img md-card-image src="http://placehold.it/350x150"> -->
     <md-card-content>
             <p>
-                <md-textarea class="demo-full-width"
-                            placeholder="Address"
-                            name="firstline"
-                            [(ngModel)]="model.firstline"></md-textarea>
-                <md-textarea class="demo-full-width"
-                            placeholder="Address 2"
-                            name="secondline"
-                            [(ngModel)]="model.secondline"></md-textarea>
+                <md-input-container class="demo-full-width col-xs-12">
+                  <textarea mdInput placeholder="Address" [(ngModel)]="model.firstline" name="firstline"></textarea>
+                </md-input-container>
+                <md-input-container class="demo-full-width col-xs-12">
+                  <textarea mdInput placeholder="Address 2" [(ngModel)]="model.secondline" name="secondline"></textarea>
+                </md-input-container>
             </p>
             <table style="width: 100%" cellspacing="0">
                 <tr>
                     <td>
-                        <md-input class="demo-full-width"
+                        <md-input-container class="demo-full-width">
+                            <input mdInput #name
                             placeholder="Ville"
                             name="city"
-                            [(ngModel)]="model.city"></md-input>
+                            [(ngModel)]="model.city">
+                        </md-input-container>
                     </td>
                     <td>
-                        <md-input class="demo-full-width"
-                                #postalCode
-                                maxlength="5"
-                                placeholder="Code postal"
-                                name="postalcode"
-                                [(ngModel)]="model.postalCode">
-                            <md-hint align="end">{{postalCode.characterCount}} / 5</md-hint>
-                        </md-input>
+                        <md-input-container class="demo-full-width">
+                            <input mdInput #postalCode
+                            maxlength="5"
+                            placeholder="Code postal"
+                            name="postalcode"
+                            [(ngModel)]="model.postalCode">
+                        </md-input-container>
                     </td>
                 </tr>
             </table>

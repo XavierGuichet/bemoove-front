@@ -19,18 +19,18 @@
       <a class="navbar-brand" *ngIf="isWhite" routerLink="/"><img src="assets/img/bemoove-logo-grey.png" /></a>
       <ul class="nav navbar-nav float-xs-right">
         <li *ngIf="!logged" class="nav-item"><button type="button" md-button >Inscription</button></li>
-        <li *ngIf="!logged" class="nav-item"><button type="button" md-button class="button-hollow-primary" ><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
-        <li *ngIf="logged" class="nav-item"><button type="button" md-button  routerLink="/user">My account</button></li>
-        <li *ngIf="logged" class="nav-item"><button type="button" md-button  >Déconnexion</button></li>
+        <li *ngIf="!logged" class="nav-item"><button type="button" md-button class="button-primary" ><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
+        <li *ngIf="logged" class="nav-item"><button type="button" md-button routerLink="/user">My account</button></li>
+        <li *ngIf="logged" class="nav-item"><button type="button" md-button >Déconnexion</button></li>
       </ul>
     </div>
   </nav>
   <nav class="navbar navbar-light"  *ngSwitchDefault [class.bg-faded]="isWhite">
     <div id="navbarResponsive">
       <a class="navbar-brand" *ngIf="!isWhite" routerLink="/"><img src="assets/img/bemoove-logo.png" /></a>
-      <a class="navbar-brand" *ngIf="isWhite" routerLink="/"><img src="assets/img/bemoove-logo-grey.png" /></a>
+      <a class="navbar-brand" *ngIf="!isWhite" routerLink="/"><img src="assets/img/bemoove-logo-grey.png" /></a>
       <ul class="nav navbar-nav float-xs-right">
-        <li *ngIf="displayConnexion" class="nav-item"><button type="button" md-button class="button-hollow-primary" (click)="showLoginModal()"><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
+        <li *ngIf="displayConnexion" class="nav-item"><button type="button" md-button class="button-primary" (click)="showLoginModal()"><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
       </ul>
     </div>
   </nav>

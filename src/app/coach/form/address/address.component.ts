@@ -6,10 +6,7 @@ import { AddressService }   from '../../../_services/address.service';
 
 @Component({
   selector: 'address-form',
-  template: `
-  <h1>Addresse componenet</h1>
-  `
-  // templateUrl: 'address.component.html'
+  templateUrl: 'address.component.html'
 })
 
 export class AddressFormComponent {

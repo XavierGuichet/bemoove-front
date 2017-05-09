@@ -24,10 +24,7 @@ import { WorkoutService }       from '../../../_services/workout.service';
 @Component({
   selector: 'workout-form',
   providers: [Modal],
-  template: `
-  <h1>Workout componenet</h1>
-  `,
-  // templateUrl: 'workout.component.html',
+  templateUrl: 'workout.component.html',
   styleUrls: ['workout.component.scss']
 })
 

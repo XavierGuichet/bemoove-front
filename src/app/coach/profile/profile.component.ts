@@ -5,10 +5,7 @@ import { SpaceService } from '../../_services/space.service';
 
 @Component({
     selector: 'coach-profile',
-    template: `
-    <h1>profile componenet</h1>
-    `
-    // templateUrl: 'profile.component.html'
+    templateUrl: 'profile.component.html'
 })
 
 export class CoachProfileComponent implements OnInit {
