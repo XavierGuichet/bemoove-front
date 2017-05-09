@@ -24,6 +24,7 @@ export class HeaderNavComponent implements OnInit {
     public fixed: boolean = false;
     public logged: boolean = false;
     public displayConnexion: boolean = true;
+    public withToolBarAbove: boolean = false;
 
     private returnUrl: string;
 
@@ -40,19 +41,19 @@ export class HeaderNavComponent implements OnInit {
         overlay.defaultViewContainer = vcRef;
         this.spaceService.setTopBarEmitter.subscribe( ( mode ) => {
             if (mode !== null) {
-              this.displayConnexion = mode;
+              this.withToolBarAbove = mode;
             }
         });
         this.spaceService.setLoggedEmitter.subscribe(( mode ) => {
             // mode will be null the first time it is created,
-                //  so you need to igonore it when null
+                //  so you need to ignore it when null
             if (mode !== null) {
               this.logged = mode;
             }
         });
         this.spaceService.setZoneEmitter.subscribe(( zone ) => {
             // mode will be null the first time it is created,
-                //  so you need to igonore it when null
+                //  so you need to ignore it when null
             if (zone !== null) {
               this.headerType = zone;
             }

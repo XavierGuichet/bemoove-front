@@ -18,8 +18,8 @@ import { SpaceService } from './_services/space.service';
     <top-bar-coach-recruit  *ngIf="showTopBar"
                         (showbar)="hideTopBar($event)"
                         class="toptoolbar"></top-bar-coach-recruit>
+    <header-nav></header-nav>
     <main [ngClass]="{'withToolBarAbove':showTopBar}">
-        <header-nav></header-nav>
         <router-outlet></router-outlet>
     </main>
     <footer></footer>

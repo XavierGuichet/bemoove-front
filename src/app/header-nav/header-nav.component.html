@@ -1,38 +1,41 @@
-<div [ngSwitch]="headerType" [class.fixed]="navbar-fixed" [class.bg-faded]="isWhite">
-  <nav class="navbar navbar-light" *ngSwitchCase="'ROLE_COACH'">
-      <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
-   <div class="collapse navbar-toggleable-md" id="navbarResponsive">
-     <a class="navbar-brand" *ngIf="isWhite" routerLink="/"><img src="assets/img/bemoove-logo.png" /></a>
-     <a class="navbar-brand" *ngIf="!isWhite" routerLink="/"><img src="assets/img/bemoove-logo-grey.png" /></a>
-     <ul class="nav navbar-nav float-xs-right">
-           <li *ngIf="!logged" class="nav-item"><button type="button" md-button >Inscription</button></li>
-           <li *ngIf="!logged" class="nav-item"><button type="button" md-button ><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
-           <li *ngIf="logged" class="nav-item"><button type="button" md-button routerLink="/coach">My account</button></li>
-           <li *ngIf="logged" class="nav-item"><button type="button" md-button (click)="logout()" ><md-icon class="md-18">power_settings_new</md-icon> Déconnexion</button></li>
-     </ul>
-   </div>
- </nav>
-  <nav class="navbar navbar-light"  *ngSwitchCase="'ROLE_USER'" [class.bg-faded]="isWhite">
-    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
-    <div class="collapse navbar-toggleable-md" id="navbarResponsive">
-      <a class="navbar-brand" *ngIf="isWhite" routerLink="/"><img src="assets/img/bemoove-logo.png" /></a>
-      <a class="navbar-brand" *ngIf="!isWhite" routerLink="/"><img src="assets/img/bemoove-logo-grey.png" /></a>
-      <ul class="nav navbar-nav float-xs-right">
-        <li *ngIf="!logged" class="nav-item"><button type="button" md-button >Inscription</button></li>
-        <li *ngIf="!logged" class="nav-item"><button type="button" md-button class="button-primary" ><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
-        <li *ngIf="logged" class="nav-item"><button type="button" md-button routerLink="/user">My account</button></li>
-        <li *ngIf="logged" class="nav-item"><button type="button" md-button >Déconnexion</button></li>
-      </ul>
-    </div>
-  </nav>
-  <nav class="navbar navbar-light"  *ngSwitchDefault [class.bg-faded]="isWhite">
-    <div id="navbarResponsive">
-      <a class="navbar-brand" *ngIf="isWhite" routerLink="/"><img src="assets/img/bemoove-logo.png" /></a>
-      <a class="navbar-brand" *ngIf="!isWhite" routerLink="/"><img src="assets/img/bemoove-logo-grey.png" /></a>
-      <a class="navbar-brand" *ngIf="!isWhite" routerLink="/"><img src="assets/img/bemoove-logo.svg" /></a>
-      <ul class="nav navbar-nav float-xs-right">
-        <li *ngIf="displayConnexion" class="nav-item"><button type="button" md-button class="button-primary" (click)="showLoginModal()"><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
-      </ul>
-    </div>
-  </nav>
+<div class="navbar-wrapper" [class.white]="isWhite" [class.withToolBarAbove]="withToolBarAbove">
+    <div class="navbar-container" [ngSwitch]="headerType" >
+      <nav class="navbar navbar-light" *ngSwitchCase="'ROLE_COACH'">
+          <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
+       <div class="collapse navbar-toggleable-md" id="navbarResponsive">
+         <a class="navbar-brand" *ngIf="isWhite" routerLink="/"><img src="assets/img/bemoove-logo.png" /></a>
+         <a class="navbar-brand" *ngIf="!isWhite" routerLink="/"><img src="assets/img/bemoove-logo-grey.png" /></a>
+         <ul class="nav navbar-nav float-xs-right">
+               <li *ngIf="!logged" class="nav-item"><button type="button" md-button >Inscription</button></li>
+               <li *ngIf="!logged" class="nav-item"><button type="button" md-button ><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
+               <li *ngIf="logged" class="nav-item"><button type="button" md-button routerLink="/coach">My account</button></li>
+               <li *ngIf="logged" class="nav-item"><button type="button" md-button (click)="logout()" ><md-icon class="md-18">power_settings_new</md-icon> Déconnexion</button></li>
+         </ul>
+       </div>
+     </nav>
+      <nav class="navbar navbar-light"  *ngSwitchCase="'ROLE_USER'">
+        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-toggleable-md" id="navbarResponsive">
+          <a class="navbar-brand" *ngIf="isWhite" routerLink="/"><img src="assets/img/bemoove-logo.png" /></a>
+          <a class="navbar-brand" *ngIf="!isWhite" routerLink="/"><img src="assets/img/bemoove-logo-grey.png" /></a>
+          <ul class="nav navbar-nav float-xs-right">
+            <li *ngIf="!logged" class="nav-item"><button type="button" md-button >Inscription</button></li>
+            <li *ngIf="!logged" class="nav-item"><button type="button" md-button class="button-primary" ><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
+            <li *ngIf="logged" class="nav-item"><button type="button" md-button routerLink="/user">My account</button></li>
+            <li *ngIf="logged" class="nav-item"><button type="button" md-button >Déconnexion</button></li>
+          </ul>
+        </div>
+      </nav>
+      <nav class="navbar navbar-light"  *ngSwitchDefault>
+        <div id="navbarResponsive">
+          <a class="navbar-brand" routerLink="/">
+              <img *ngIf="!isWhite" src="assets/img/bemoove-logo.png" />
+              <img *ngIf="isWhite" src="assets/img/bemoove-logo-grey.png" />
+          </a>
+          <ul class="nav navbar-nav float-xs-right">
+            <li *ngIf="displayConnexion" class="nav-item"><button type="button" md-button class="button-primary" (click)="showLoginModal()"><md-icon class="md-18">account_circle</md-icon> Connexion</button></li>
+          </ul>
+        </div>
+      </nav>
+  </div>
 </div>
