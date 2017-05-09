@@ -8,7 +8,7 @@ import { RegexpValidator } from '../../shared/regexp.directive';
     // moduleId: module.id,
     selector: 'subscribe-form-reactive',
     templateUrl: 'subscribe-form-reactive.component.html',
-    styleUrls: ['subscribe-form-reactive.component.css']
+    styleUrls: ['subscribe-form-reactive.component.scss']
 })
 export class SubscribeFormReactiveComponent implements OnInit {
     public user = new User();

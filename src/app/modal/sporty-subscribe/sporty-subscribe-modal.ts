@@ -10,7 +10,7 @@ import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
     // moduleId: module.id,
     selector: 'modal-content',
     templateUrl: 'sporty-subscribe-modal.component.html',
-    styleUrls: ['sporty-subscribe-modal.component.css']
+    styleUrls: ['sporty-subscribe-modal.component.scss']
 })
 export class SportySubscribeModalComponent implements CloseGuard, ModalComponent<BSModalContext> {
     public mailsubscriber: string;

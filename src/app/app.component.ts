@@ -11,7 +11,7 @@ import { SpaceService } from './_services/space.service';
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    './app.component.css',
+    './app.component.scss',
     './main-themes.scss'
   ],
   template: `
