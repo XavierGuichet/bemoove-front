@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'coach-recruit-bar',
-    templateUrl: 'coach-recruit-bar.component.html',
-    styleUrls: ['coach-recruit-bar.component.scss']
+    selector: 'top-bar-coach-recruit',
+    templateUrl: 'coach-recruit.component.html',
+    styleUrls: ['coach-recruit.component.scss']
 })
 
-export class CoachRecruitBarComponent {
+export class TopBarCoachRecruitComponent {
     @Output()
     private showbar: EventEmitter<boolean> = new EventEmitter<boolean>();
 

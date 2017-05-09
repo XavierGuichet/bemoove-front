@@ -31,7 +31,6 @@ export class RegisterModalComponent implements CloseGuard, ModalComponent<BSModa
             .subscribe(
                 (data) => {
                     this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
                 },
                 (error) => {
                     console.log('(error) on registering');

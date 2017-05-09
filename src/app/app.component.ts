@@ -15,9 +15,9 @@ import { SpaceService } from './_services/space.service';
     './main-themes.scss'
   ],
   template: `
-    <coach-recruit-bar  *ngIf="showTopBar"
+    <top-bar-coach-recruit  *ngIf="showTopBar"
                         (showbar)="hideTopBar($event)"
-                        class="toptoolbar"></coach-recruit-bar>
+                        class="toptoolbar"></top-bar-coach-recruit>
     <main [ngClass]="{'withToolBarAbove':showTopBar}">
         <header-nav></header-nav>
         <router-outlet></router-outlet>

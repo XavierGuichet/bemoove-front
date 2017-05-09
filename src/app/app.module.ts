@@ -30,8 +30,6 @@ import { RegisterModalComponent  } from './modal/register/register-modal.compone
 import { AlertComponent } from './_directives/index';
 import { AuthUserGuard, AuthCoachGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService } from './_services/index';
-import { LoginComponent } from './login/index';
-import { RegisterComponent } from './register/index';
 
 // Forms
 import { SubscribeFormReactiveModule }  from './form/subscribe/subscribe-form-reactive.module';
@@ -40,7 +38,7 @@ import { WelcomeCoachComponent }    from './welcome/coach/coach.component';
 import { WelcomeSearchComponent }   from './welcome/search/search.component';
 import { PagesListComponent }       from './pages-list/pages-list.component';
 
-import { CoachRecruitBarComponent }       from './coach-recruit-bar/coach-recruit-bar.component';
+import { TopBarCoachRecruitComponent }       from './topbar/coach-recruit/coach-recruit.component';
 import { HeaderNavComponent }       from './header-nav/header-nav.component';
 import { FooterComponent }       from './footer/footer.component';
 
@@ -79,7 +77,7 @@ type StoreType = {
     AppComponent,
     NoContentComponent,
 
-    CoachRecruitBarComponent,
+    TopBarCoachRecruitComponent,
     HeaderNavComponent,
     FooterComponent,
 
@@ -93,8 +91,6 @@ type StoreType = {
     PagesListComponent,
 
     AlertComponent,
-    LoginComponent,
-    RegisterComponent,
 
     TextChangerDirective
   ],
