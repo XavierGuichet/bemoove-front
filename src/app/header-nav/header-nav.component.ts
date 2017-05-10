@@ -51,10 +51,9 @@ export class HeaderNavComponent implements OnInit {
         this.spaceService.setZoneEmitter.subscribe(( zone ) => {
             if (zone !== null) {
               this.headerType = zone;
-              if(this.headerType != 'home') {
+              if (this.headerType !== 'home') {
                   this.transparent = false;
-              }
-              else {
+              } else {
                   this.transparent = true;
               }
             }
@@ -63,7 +62,7 @@ export class HeaderNavComponent implements OnInit {
 
     @HostListener('window:scroll', [])
       public onWindowScroll() {
-        if(this.headerType != 'home') { return; }
+        if (this.headerType !== 'home') { return; }
         let scrollPos = window.pageYOffset
                      || this.document.documentElement.scrollTop
                      || this.document.body.scrollTop
