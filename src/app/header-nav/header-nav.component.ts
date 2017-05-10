@@ -19,9 +19,8 @@ import { SpaceService } from '../_services/space.service';
 })
 
 export class HeaderNavComponent implements OnInit {
-    public isWhite: boolean = false;
+    public transparent: boolean = true;
     public headerType: string = 'default';
-    public fixed: boolean = false;
     public logged: boolean = false;
     public displayConnexion: boolean = true;
     public withToolBarAbove: boolean = false;
@@ -45,31 +44,34 @@ export class HeaderNavComponent implements OnInit {
             }
         });
         this.spaceService.setLoggedEmitter.subscribe(( mode ) => {
-            // mode will be null the first time it is created,
-                //  so you need to ignore it when null
             if (mode !== null) {
               this.logged = mode;
             }
         });
         this.spaceService.setZoneEmitter.subscribe(( zone ) => {
-            // mode will be null the first time it is created,
-                //  so you need to ignore it when null
             if (zone !== null) {
               this.headerType = zone;
+              if(this.headerType != 'home') {
+                  this.transparent = false;
+              }
+              else {
+                  this.transparent = true;
+              }
             }
         });
     }
 
     @HostListener('window:scroll', [])
       public onWindowScroll() {
+        if(this.headerType != 'home') { return; }
         let scrollPos = window.pageYOffset
                      || this.document.documentElement.scrollTop
                      || this.document.body.scrollTop
                      || 0;
         if (scrollPos > 100) {
-          this.isWhite = true;
-        } else if (this.isWhite && scrollPos < 10) {
-          this.isWhite = false;
+          this.transparent = false;
+        } else if (this.transparent && scrollPos < 10) {
+          this.transparent = true;
         }
       }
 

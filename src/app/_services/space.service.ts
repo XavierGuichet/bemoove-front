@@ -32,7 +32,6 @@ export class SpaceService {
             if (token != null) {
                 localStorage.removeItem('currentUser');
             }
-            console.log('token is expired or null');
             this.setLogged(false);
             this.setUserId(0);
             this.setZone('default');

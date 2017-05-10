@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
 
     public ngOnInit(): void {
         this.spaceService.toggleTopBar(true);
+        this.spaceService.setZone('home');
     }
 
     public showJoinUs() {
