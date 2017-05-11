@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { DialogRef, ModalComponent, CloseGuard, overlayConfigFactory } from 'angular2-modal';
-import { BSModalContext, Modal } from 'angular2-modal/plugins/bootstrap';
 import { LoginModalComponent  } from '../login/login-modal.component';
 
 import { AlertService, UserService } from '../../_services/index';
@@ -13,21 +12,19 @@ import { AlertService, UserService } from '../../_services/index';
     templateUrl: 'register-modal.component.html',
     styleUrls: ['../modal.component.scss']
 })
-export class RegisterModalComponent implements CloseGuard, ModalComponent<BSModalContext> {
+export class RegisterModalComponent {
     public loading = false;
     public model: any = {};
-    private context: BSModalContext;
 
-    constructor(public dialog: DialogRef<BSModalContext>,
-                private router: Router,
-                public modal: Modal,
-                private userService: UserService,
-                private alertService: AlertService) {
-                this.context = dialog.context;
+    constructor(
+        public dialog: MdDialog,
+        public dialogRef: MdDialogRef<LoginModalComponent>,
+        private router: Router,
+        private userService: UserService,
+        private alertService: AlertService) {
     }
 
     public register() {
-        console.log('resiter launched : #obvious');
         this.loading = true;
         this.userService.create(this.model)
             .subscribe(
@@ -35,30 +32,15 @@ export class RegisterModalComponent implements CloseGuard, ModalComponent<BSModa
                     this.alertService.success('Registration successful', true);
                 },
                 (error) => {
-                    console.log('(error) on registering');
-                    console.log(error);
                     this.alertService.error(error);
                     this.loading = false;
                 });
     }
 
     public showLoginModal() {
-        return this.modal.open(LoginModalComponent,
-            overlayConfigFactory({ showClose: true, isBlocking: false}, BSModalContext));
+        let dialogRef = this.dialog.open(LoginModalComponent);
+        dialogRef.afterClosed().subscribe((result) => {
+          //   this.selectedOption = result;
+        });
     }
-    // onKeyUp(value) {
-    //     console.log("keyup");
-    //     this.dialog.close();
-    // }
-    //
-    //
-    // beforeDismiss(): boolean {
-    //     console.log("beforeDismiss");
-    //     return true;
-    // }
-    //
-    // beforeClose(): boolean {
-    //     console.log("beforeClose");
-    //     return true;
-    // }
 }

@@ -48,6 +48,7 @@ h3 {
 
 main {
     margin-top: 0px;
+    min-height: calc(100vh - 154px);
 }
 main.withToolBarAbove {
     margin-top: 64px;

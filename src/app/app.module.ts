@@ -5,8 +5,9 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
-import { NgbModule }        from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomMaterialModule } from './custom-material.module';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import './rxjs-extensions';
 /*
@@ -32,19 +33,19 @@ import { AuthUserGuard, AuthCoachGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService } from './_services/index';
 
 // Forms
-import { SubscribeFormReactiveModule }  from './form/subscribe/subscribe-form-reactive.module';
+import { SubscribeFormReactiveModule } from './form/subscribe/subscribe-form-reactive.module';
 
-import { WelcomeCoachComponent }    from './welcome/coach/coach.component';
-import { HomeComponent }   from './home/home.component';
+import { WelcomeCoachComponent } from './welcome/coach/coach.component';
+import { HomeComponent } from './home/home.component';
 
-import { TopBarCoachRecruitComponent }       from './topbar/coach-recruit/coach-recruit.component';
-import { HeaderNavComponent }       from './header-nav/header-nav.component';
-import { FooterComponent }       from './footer/footer.component';
+import { TopBarCoachRecruitComponent } from './topbar/coach-recruit/coach-recruit.component';
+import { HeaderNavComponent } from './header-nav/header-nav.component';
+import { FooterComponent } from './footer/footer.component';
 
-import { CoachModule }      from './coach/coach.module';
+import { CoachModule } from './coach/coach.module';
 
-import { WorkoutService }          from './_services/workout.service';
-import { TagService }          from './tag-service/tag.service';
+import { WorkoutService } from './_services/workout.service';
+import { TagService } from './tag-service/tag.service';
 
 import { SpaceService } from './_services/space.service';
 
@@ -93,11 +94,12 @@ type StoreType = {
   ],
   imports: [ // import Angular's modules
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
     NgbModule.forRoot(),
-    MaterialModule.forRoot(),
+    CustomMaterialModule,
     ModalModule.forRoot(),
     BootstrapModalModule,
     SubscribeFormReactiveModule,

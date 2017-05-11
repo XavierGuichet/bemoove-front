@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DialogRef, ModalComponent, CloseGuard, overlayConfigFactory } from 'angular2-modal';
-import { BSModalContext, Modal } from 'angular2-modal/plugins/bootstrap';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterModalComponent  } from '../register/register-modal.component';
@@ -14,21 +13,19 @@ import { SpaceService } from '../../_services/space.service';
     templateUrl: 'login-modal.component.html',
     styleUrls: ['../modal.component.scss']
 })
-export class LoginModalComponent implements CloseGuard, ModalComponent<BSModalContext> {
+export class LoginModalComponent {
     public model: any = {};
     public loading = false;
-    private context: BSModalContext;
     private returnUrl: string;
 
-    constructor(public dialog: DialogRef<BSModalContext>,
-                private route: ActivatedRoute,
-                private router: Router,
-                public modal: Modal,
-                private authenticationService: AuthenticationService,
-                private alertService: AlertService,
-                private spaceService: SpaceService) {
-        this.context = dialog.context;
-        // dialog.setCloseGuard(this);
+    constructor(
+        public dialog: MdDialog,
+        public dialogRef: MdDialogRef<LoginModalComponent>,
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private alertService: AlertService,
+        private spaceService: SpaceService) {
     }
 
     public login() {
@@ -36,7 +33,7 @@ export class LoginModalComponent implements CloseGuard, ModalComponent<BSModalCo
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
                 (data) => {
-                    this.dialog.close();
+                    this.dialogRef.close();
                     let zone = this.spaceService.getZone();
                     if (zone === 'ROLE_COACH') {
                         this.router.navigate(['/coach']);
@@ -55,8 +52,10 @@ export class LoginModalComponent implements CloseGuard, ModalComponent<BSModalCo
     }
 
     public showRegisterModal() {
-        return this.modal.open(RegisterModalComponent,
-            overlayConfigFactory({ showClose: true, isBlocking: false}, BSModalContext));
+        let dialogRef = this.dialog.open(RegisterModalComponent);
+        dialogRef.afterClosed().subscribe((result) => {
+          //   this.selectedOption = result;
+        });
     }
     // onKeyUp(value) {
     //     console.log("keyup");
