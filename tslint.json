@@ -22,6 +22,7 @@
     "no-input-rename": true,
     "no-output-rename": true,
     "pipe-naming": [true, "camelCase", "my"],
+    "prefer-const": false,
     "templates-use-public": true,
     "use-host-property-decorator": true,
     "use-input-property-decorator": true,
@@ -29,13 +30,14 @@
     "use-output-property-decorator": true,
     "use-pipe-transform-interface": true,
     // General
+    "align": [false],
     "no-console": [true,
       "time",
       "timeEnd",
       "trace"
     ],
     "max-line-length": [
-      true,
+      false,
       100
     ],
     "no-string-literal": false,
