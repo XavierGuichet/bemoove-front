@@ -2,6 +2,7 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import 'hammerjs';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
@@ -21,9 +22,6 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { NoContentComponent } from './no-content';
 
-// Angular2 POPUP https://github.com/shlomiassaf/angular2-modal
-import { ModalModule } from 'angular2-modal';
-import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { SportySubscribeModalComponent  } from './modal/sporty-subscribe/sporty-subscribe-modal';
 import { LoginModalComponent  } from './modal/login/login-modal.component';
 import { RegisterModalComponent  } from './modal/register/register-modal.component';
@@ -100,8 +98,6 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
     NgbModule.forRoot(),
     CustomMaterialModule,
-    ModalModule.forRoot(),
-    BootstrapModalModule,
     SubscribeFormReactiveModule,
     Angular2FontawesomeModule,
     CoachModule
