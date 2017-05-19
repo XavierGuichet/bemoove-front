@@ -34,20 +34,4 @@ export class SportySubscribeModalComponent {
       console.error('An error occurred', error); // for demo purposes only
       return Promise.reject(error.message || error);
     }
-
-    // onKeyUp(value) {
-    //     console.log("keyup");
-    //     this.dialog.close();
-    // }
-    //
-    //
-    // beforeDismiss(): boolean {
-    //     console.log("beforeDismiss");
-    //     return true;
-    // }
-    //
-    // beforeClose(): boolean {
-    //     console.log("beforeClose");
-    //     return true;
-    // }
 }

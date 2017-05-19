@@ -29,6 +29,7 @@
     "use-life-cycle-interface": true,
     "use-output-property-decorator": true,
     "use-pipe-transform-interface": true,
+    "interface-over-type-literal": false,
     // General
     "align": [false],
     "no-console": [true,

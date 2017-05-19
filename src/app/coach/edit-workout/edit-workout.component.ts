@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router }   from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'coach-edit-workout',
@@ -12,6 +12,6 @@ export class CoachEditWorkoutComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        console.log('Coach edit Workout on Init');
+        // TODO
     }
 }

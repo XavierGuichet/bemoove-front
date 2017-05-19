@@ -11,15 +11,15 @@ import { SpaceService } from './_services/space.service';
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    './app.component.scss',
-    './main-themes.scss'
+      './main-themes.scss',
+    './app.component.scss'
   ],
   template: `
     <top-bar-coach-recruit  *ngIf="showTopBar"
                         (showbar)="hideTopBar($event)"
                         class="toptoolbar"></top-bar-coach-recruit>
     <header-nav></header-nav>
-    <main [ngClass]="{'withToolBarAbove':showTopBar}">
+    <main [ngClass]="{'withToolBarAbove':showTopBar,'withHeaderAbove':withHeaderAbove}">
         <router-outlet></router-outlet>
     </main>
     <footer></footer>
@@ -27,6 +27,7 @@ import { SpaceService } from './_services/space.service';
 })
 export class AppComponent {
     public showTopBar: boolean = true;
+    public withHeaderAbove: boolean = true;
 
     constructor(
         public appState: AppState,
@@ -35,6 +36,11 @@ export class AppComponent {
         this.spaceService.setTopBarEmitter.subscribe( (mode) => {
             if (mode !== null) {
               this.showTopBar = mode;
+            }
+        });
+        this.spaceService.setHeaderAboveEmitter.subscribe( (value) => {
+            if (value !== null) {
+              this.withHeaderAbove = value;
             }
         });
     }

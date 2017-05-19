@@ -1,8 +1,7 @@
-import { Component, Injectable, Input, Output, EventEmitter }
-                                from '@angular/core';
+import { Component, Injectable, Input, Output, EventEmitter } from '@angular/core';
 
-import { BehaviorSubject }  from 'rxjs/BehaviorSubject';
-import { Observable }       from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
@@ -10,17 +9,20 @@ export class SpaceService {
     public setLoggedEmitter: Observable<boolean>;
     public setZoneEmitter: Observable<string>;
     public setTopBarEmitter: Observable<boolean>;
+    public setHeaderAboveEmitter: Observable<boolean>;
 
     private jwtHelper: JwtHelper = new JwtHelper();
     private logged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
     private showTopBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     private zone: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     private userId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+    private headerAbove: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor() {
         this.setLoggedEmitter = this.logged.asObservable();
         this.setZoneEmitter = this.zone.asObservable();
         this.setTopBarEmitter = this.showTopBar.asObservable();
+        this.setHeaderAboveEmitter = this.headerAbove.asObservable();
         this.toggleTopBar(true);
 
         this.refreshSpace();
@@ -38,6 +40,7 @@ export class SpaceService {
             return;
         }
         let tokenpayload = this.jwtHelper.decodeToken(token);
+        console.log(tokenpayload);
         this.setUserId(tokenpayload.id);
         this.setLogged(true);
         this.toggleTopBar(false);
@@ -76,5 +79,13 @@ export class SpaceService {
 
     public getZone(): string {
         return this.zone.getValue();
+    }
+
+    public setHeaderAbove(val: boolean) {
+        this.headerAbove.next(val);
+    }
+
+    public getHeaderAbove(): boolean {
+        return this.headerAbove.getValue();
     }
 }

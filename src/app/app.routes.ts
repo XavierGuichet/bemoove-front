@@ -3,7 +3,7 @@ import { NoContentComponent } from './no-content';
 
 import { DataResolver } from './app.resolver';
 
-import { WelcomeCoachComponent }    from './welcome/coach/coach.component';
+import { WelcomeCoachComponent } from './welcome/coach/coach.component';
 import { HomeComponent } from './home/home.component';
 import { PagesListComponent } from './pages-list/pages-list.component';
 

@@ -1,6 +1,6 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import 'hammerjs';
 import { RouterModule, PreloadAllModules } from '@angular/router';
@@ -22,16 +22,15 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { NoContentComponent } from './no-content';
 
-import { SportySubscribeModalComponent  } from './modal/sporty-subscribe/sporty-subscribe-modal';
-import { LoginModalComponent  } from './modal/login/login-modal.component';
-import { RegisterModalComponent  } from './modal/register/register-modal.component';
+// import { SportySubscribeModalComponent  } from './modal/sporty-subscribe/sporty-subscribe-modal';
 
 import { AlertComponent } from './_directives/index';
 import { AuthUserGuard, AuthCoachGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService } from './_services/index';
 
 // Forms
-import { SubscribeFormReactiveModule } from './form/subscribe/subscribe-form-reactive.module';
+// import { SubscribeFormReactiveModule } from './form/subscribe/subscribe-form-reactive.module';
+import { UserManagerModule } from './user-manager/user-manager.module';
 
 import { WelcomeCoachComponent } from './welcome/coach/coach.component';
 import { HomeComponent } from './home/home.component';
@@ -82,9 +81,7 @@ type StoreType = {
     WelcomeCoachComponent,
     HomeComponent,
 
-    SportySubscribeModalComponent,
-    LoginModalComponent,
-    RegisterModalComponent,
+    // SportySubscribeModalComponent,
 
     AlertComponent,
 
@@ -94,11 +91,12 @@ type StoreType = {
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
     NgbModule.forRoot(),
     CustomMaterialModule,
-    SubscribeFormReactiveModule,
+    UserManagerModule,
     Angular2FontawesomeModule,
     CoachModule
   ],
@@ -106,7 +104,8 @@ type StoreType = {
     ENV_PROVIDERS,
     APP_PROVIDERS
   ],
-  entryComponents: [ SportySubscribeModalComponent, LoginModalComponent, RegisterModalComponent ]
+  entryComponents: [ ]
+  // entryComponents: [ SportySubscribeModalComponent ]
 })
 
 export class AppModule {

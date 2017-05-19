@@ -5,4 +5,5 @@ export class User {
     public roles: string;
     public password: string;
     public username: string;
+    public society: number;
 }

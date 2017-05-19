@@ -1,4 +1,4 @@
-import { Injectable }   from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
@@ -21,6 +21,9 @@ export class WorkoutService {
         }
         if ( workout.address.id ) {
             workout.address = '/addresses/' + workout.address.id;
+        }
+        if ( workout.photo.id ) {
+            workout.photo = '/images/' + workout.photo.id;
         }
         workout.tags = new Array();
         for ( let addedExistingTag of workout.addedExistingTags ) {

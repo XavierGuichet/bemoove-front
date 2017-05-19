@@ -1,29 +1,28 @@
-import { Component, OnInit, Input, ViewContainerRef }    from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { Headers } from '@angular/http';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { Observable }   from 'rxjs/Observable';
-import { Subject }      from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
-import { Overlay, overlayConfigFactory } from 'angular2-modal';
-import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { ModalAddressFormComponent  } from '../../modal/modal-address-form.component';
 import { CompleterService, RemoteData, CompleterData } from 'ng2-completer';
 
-import { Workout }  from '../../../models/workout';
-import { Sport }    from '../../../models/sport';
-import { Address }  from '../../../models/address';
-import { Tag }      from '../../../models/tag';
-import { Image }      from '../../../models/image';
+import { Workout } from '../../../models/workout';
+import { Sport } from '../../../models/sport';
+import { Address } from '../../../models/address';
+import { Tag } from '../../../models/tag';
+import { Image } from '../../../models/image';
 
-import { SpaceService }     from '../../../_services/space.service';
-import { SportService }     from '../../../_services/sport.service';
-import { AddressService }   from '../../../_services/address.service';
-import { TagService }       from '../../../_services/tag.service';
-import { WorkoutService }       from '../../../_services/workout.service';
+import { SpaceService } from '../../../_services/space.service';
+import { SportService } from '../../../_services/sport.service';
+import { ImageService } from '../../../_services/image.service';
+import { AddressService } from '../../../_services/address.service';
+import { TagService } from '../../../_services/tag.service';
+import { WorkoutService } from '../../../_services/workout.service';
 
 @Component({
   selector: 'workout-form',
-  providers: [Modal],
   templateUrl: 'workout.component.html',
   styleUrls: ['workout.component.scss']
 })
@@ -53,13 +52,10 @@ export class WorkoutFormComponent implements OnInit {
                 private spaceService: SpaceService,
                 private sportService: SportService,
                 private addressService: AddressService,
+                private imageService: ImageService,
                 private tagService: TagService,
                 private completerService: CompleterService,
-                overlay: Overlay,
-                vcRef: ViewContainerRef,
-                public modal: Modal) {
-                    overlay.defaultViewContainer = vcRef;
-
+                public dialog: MdDialog) {
                     this.sportDataService = completerService.remote(
                                                 this.SportsUrl + '?name=',
                                                 'name',
@@ -131,16 +127,13 @@ export class WorkoutFormComponent implements OnInit {
     }
 
     public showModalAddressFormComponent() {
-        return this.modal.open(ModalAddressFormComponent,
-            overlayConfigFactory(
-                                { showClose: false, isBlocking: false},
-                                BSModalContext))
-            .then((resultPromise) => {
-              return resultPromise.result.then((result) => {
-                this.addresses.push(result);
-                this.model.address = result;
-            }, () => { console.log('Rejected!'); });
-            });
+        let dialogRef = this.dialog.open(ModalAddressFormComponent);
+        dialogRef.afterClosed().subscribe((resultPromise) => {
+          return resultPromise.result.then((result) => {
+            this.addresses.push(result);
+            this.model.address = result;
+        }, () => { console.log('Rejected!'); });
+        });
     }
 
     public recalcMainModelDates() {
@@ -157,12 +150,10 @@ export class WorkoutFormComponent implements OnInit {
         this.workoutService.create(this.model)
                     .subscribe(
                         (data) => {
-                            console.log(data);
                             this.loading = false;
                             this.model = data;
                         },
                         (error) => {
-                            console.log(error);
                             this.loading = false;
                             this.model = modelSave;
                         });
@@ -171,6 +162,17 @@ export class WorkoutFormComponent implements OnInit {
     public refreshImage(data): void {
         this.model.photo = new Image();
         this.model.photo.base64data = 'data:image/jpeg;base64,' + data;
+        this.imageService.create(this.model.photo)
+                    .subscribe(
+                        (data) => {
+                            console.log(data);
+                            this.loading = false;
+                            // this.model = data;
+                        },
+                        (error) => {
+                            this.loading = false;
+                            // this.model = modelSave;
+                        });
       }
 
     public onSubmit() { this.submitted = true; }
@@ -187,11 +189,6 @@ export class WorkoutFormComponent implements OnInit {
         } else {
             return '00:00:00';
         }
-        // return time ?
-        // `${this.isNumber(time.hour) ? this.padNumber(time.hour) : '00'}:
-        // ${this.isNumber(time.minute) ? this.padNumber(time.minute) : '00'}:
-        // ${this.isNumber(time.seconde) ? this.padNumber(time.seconde) : '00'}` :
-        // '00:00:00';
     }
 
     private formatDate(date): string {

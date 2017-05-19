@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response, Jsonp, URLSearchParams } from '@angular/http';
 
-import { Tag }    from '../models/tag';
+import { Tag } from '../models/tag';
 
 @Injectable()
 export class TagService {
@@ -13,13 +13,12 @@ export class TagService {
     constructor(
             private http: Http) {}
 
-    public search (term: string) {
-        console.log('tag service search');
+    public search(term: string) {
         return this.http.get(this.tagsUrl + '?name=' + term)
-               .map((response) => <string[]> response.json());
+               .map( (response) => response.json() as string[] );
     }
 
-    public searchExample (term: string) {
+    public searchExample(term: string) {
         return this.search(term);
     //   let wikiUrl = 'http://en.wikipedia.org/w/api.php';
     //   let params = new URLSearchParams();

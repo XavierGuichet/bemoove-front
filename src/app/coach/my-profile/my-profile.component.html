@@ -1,0 +1,211 @@
+<div class="container">
+  <h1>Mon compte</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <md-tab-group>
+        <md-tab label="Coordonées">
+          <div class="tab-container row">
+            <div class="col-xs-12 col-md-4">
+              <md-card class="form-card">
+                <form>
+                  <md-card-title color="primary" class="form-card__title">Coordonnées de votre entreprise</md-card-title>
+                  <md-card-content>
+                    <div class="form-group">
+                      <label for="price">Nom de votre entreprise</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="price">N° d'immatriculation (SIRET)</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="price">N° de TVA</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </md-card-content>
+                  <md-card-actions align="end">
+                    <button md-raised-button color="accent">Enregistrer</button>
+                  </md-card-actions>
+                </form>
+              </md-card>
+            </div>
+            <div class="col-xs-12 col-md-4">
+              <md-card class="form-card">
+                <form>
+                  <md-card-title color="primary" class="form-card__title">Réprésentant légal</md-card-title>
+                  <md-card-content>
+                    <form>
+                      <div class="form-group">
+                        <label for="price">Prénom</label>
+                        <input type="text" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="price">Nom</label>
+                        <input type="text" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="price">Adresse mail</label>
+                        <input type="text" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="price">Date de naissance</label>
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                          <div class="input-group-addon" (click)="d.toggle()">
+                            <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </md-card-content>
+                  <md-card-actions align="end">
+                    <button md-raised-button color="accent">Enregistrer</button>
+                  </md-card-actions>
+                </form>
+              </md-card>
+            </div>
+            <div class="col-xs-12 col-md-4">
+              <md-card class="form-card">
+                <form>
+                  <md-card-title color="primary" class="form-card__title">Adresse de facturation</md-card-title>
+                  <md-card-content>
+                    <div class="form-group">
+                      <label for="price">Adresse</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="price">Complément d'adresse</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-4">
+                        <label for="price">Code Postal</label>
+                        <input type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-xs-8">
+                        <label for="price">Ville</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                  </md-card-content>
+                  <md-card-actions align="end">
+                    <button md-raised-button color="accent">Enregistrer</button>
+                  </md-card-actions>
+                </form>
+              </md-card>
+            </div>
+          </div>
+        </md-tab>
+        <md-tab label="Coordonnées bancaires">
+          <div class="tab-container">
+            <div class="col-xs-12 col-md-6">
+              <md-card class="form-card">
+                <form>
+                  <md-card-title color="primary" class="form-card__title">Coordonnées bancaires</md-card-title>
+                  <md-card-content>
+                    <div class="form-group">
+                      <label for="price">Nom et Prénom (ou raison sociale)</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="price">Adresse du titulaire</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="price">Code Postal</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="price">Ville</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="price">Pays</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="price">IBAN</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </md-card-content>
+                  <md-card-actions align="end">
+                    <button md-raised-button color="accent">Enregistrer</button>
+                  </md-card-actions>
+                </form>
+              </md-card>
+            </div>
+          </div>
+        </md-tab>
+        <!-- <md-tab label="Contact">
+          <md-card class="demo-card demo-basic">
+            <md-card-title color="primary">Coordonnées de contact</md-card-title>
+            <md-card-content>
+              <form>
+                <md-input-container class="demo-full-width col-xs-12">
+                  <input mdInput placeholder="Téléphone Fixe">
+                </md-input-container>
+                <md-input-container class="demo-full-width col-xs-12">
+                  <input mdInput placeholder="Téléphone Mobile">
+                </md-input-container>
+              </form>
+            </md-card-content>
+            <md-card-actions align="end">
+              <button md-raised-button color="primary">Enregistrer</button>
+            </md-card-actions>
+          </md-card>
+        </md-tab> -->
+        <!-- <md-tab label="Mon Compte">
+          <md-card class="demo-card demo-basic">
+            <md-card-title>Mon compte</md-card-title>
+            <md-card-content>
+              <md-card-subtitle>Changer d'adresse mail</md-card-subtitle>
+              <md-input-container class="demo-full-width col-xs-12">
+                <input mdInput placeholder="Mail" value="monmail@coach.fr">
+              </md-input-container>
+              <md-input-container class="demo-full-width col-xs-12">
+                <input mdInput placeholder="Mot de passe" value="">
+              </md-input-container>
+              <md-card-subtitle>Changer de mot de passe</md-card-subtitle>
+              <md-input-container class="demo-full-width col-xs-12">
+                <input mdInput placeholder="Mot de passe" value="">
+              </md-input-container>
+              <md-input-container class="demo-full-width col-xs-12">
+                <input mdInput placeholder="Mot de passe" value="">
+              </md-input-container>
+              <md-card-subtitle>Activer la connexion rapide</md-card-subtitle>
+              <button md-raised-button color="primary">Avec Google +</button>
+              <button md-raised-button color="primary">Avec Facebook</button>
+            </md-card-content>
+            <md-card-actions align="end">
+              <button md-raised-button color="primary">Enregistrer</button>
+            </md-card-actions>
+          </md-card>
+        </md-tab> -->
+        <!-- <md-tab label="Profil public">
+          <md-card class="demo-card demo-basic">
+            <md-card-title-group>
+              <img md-card-sm-image src="path/to/img.png">
+              <md-card-title>Mon profil public</md-card-title>
+              <md-card-subtitle>Xavier Guichet</md-card-subtitle>
+            </md-card-title-group>
+            <md-card-content>
+              <md-input-container class="demo-full-width col-xs-12">
+                <textarea mdInput placeholder="Description publique"></textarea>
+              </md-input-container>
+              <h6>Photo</h6>
+              <label class="custom-file">
+                        <input type="file" id="file" class="custom-file-input">
+                        <span class="custom-file-control"></span>
+                      </label>
+              <h6>Carte Pro</h6>
+              <h6>Mes diplomes</h6>
+            </md-card-content>
+            <md-card-actions align="end">
+              <button md-raised-button color="primary">Enregistrer</button>
+            </md-card-actions>
+          </md-card>
+        </md-tab> -->
+      </md-tab-group>
+    </div>
+  </div>
+</div>

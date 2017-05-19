@@ -33,9 +33,6 @@
                         <input type="number" class="form-control" id="nbTicketAvailable" [(ngModel)]="model.nbTicketAvailable" name="nbTicketAvailable" required #nbTicketAvailable="ngModel" >
                     </div>
                 </div>
-                <div class="pull-right">
-                    <button md-raised-button color="primary" (click)="acc.toggle('2')">Suivant</button>
-                </div>
             </template>
         </ngb-panel>
         <ngb-panel id="2">
@@ -66,7 +63,6 @@
                         </div>
                     </div>
                 </div>
-                <button md-raised-button color="primary" (click)="acc.toggle('3')">Suivant</button>
             </template>
         </ngb-panel>
         <ngb-panel id="3" title="3 - Descriptif & informations complementaire">
@@ -80,7 +76,9 @@
                 <div class="form-group row">
                     <label for="example-text-input" class="col-xs-2 col-form-label">Description</label>
                     <div class="col-xs-10">
-                        <md-textarea class="demo-full-width col-xs-12" placeholder="Address 2" [(ngModel)]="model.description" name="description"></md-textarea>
+                        <md-input-container class="demo-full-width col-xs-12">
+                          <textarea mdInput placeholder="Description" [(ngModel)]="model.description" name="description">1600 Amphitheatre Pkwy</textarea>
+                        </md-input-container>
                     </div>
                 </div>
                 <div class="form-group row">

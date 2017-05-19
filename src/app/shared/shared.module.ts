@@ -1,11 +1,11 @@
-import { NgModule }     from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // import { ForbiddenValidatorDirective } from './forbidden-name.directive';
 // import { SubmittedComponent }          from './submitted.component';
 
 @NgModule({
-  imports:      [ CommonModule],
+  imports:      [ CommonModule ],
   declarations: [  ],
   exports:      [ CommonModule ]
 })

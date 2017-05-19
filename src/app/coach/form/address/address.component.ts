@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter }    from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Address }  from '../../../models/address';
+import { Address } from '../../../models/address';
 
-import { AddressService }   from '../../../_services/address.service';
+import { AddressService } from '../../../_services/address.service';
 
 @Component({
   selector: 'address-form',

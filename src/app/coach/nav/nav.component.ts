@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router }   from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'coach-nav',
@@ -9,10 +9,11 @@ import { Router }   from '@angular/router';
 
 export class CoachNavComponent implements OnInit {
     constructor(
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) { }
 
     public ngOnInit(): void {
-        console.log('Coach nav On Init');
+        // TODO
     }
 }

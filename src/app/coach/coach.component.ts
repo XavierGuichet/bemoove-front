@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { SpaceService } from '../_services/space.service';
 
@@ -11,7 +11,12 @@ import { SpaceService } from '../_services/space.service';
     <router-outlet></router-outlet>
   `
 })
-export class CoachComponent {
+export class CoachComponent implements OnInit {
     constructor(private spaceService: SpaceService) {
+    }
+
+    public ngOnInit(): void {
+        this.spaceService.toggleTopBar(false);
+        this.spaceService.setHeaderAbove(false);
     }
 }

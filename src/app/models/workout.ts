@@ -25,7 +25,7 @@ export class Workout {
     public addedExistingTags: Tag[];
     public addedNewTags: Tag[];
     public title: string;
-    public photo: Image;
+    public photo: any;
     public favorite: boolean;
 
     constructor(

@@ -4,7 +4,7 @@ import { MdSnackBar, MdButton } from '@angular/material';
 
 import { User } from '../../../models/user';
 import { SocietyType } from '../../../models/society-type';
-import { RegexpValidator } from '../../../shared/regexp.directive';
+import { RegexpValidator } from '../../../_directives/regexp.directive';
 
 import { AlertService, UserService } from '../../../_services/index';
 

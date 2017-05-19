@@ -6,14 +6,16 @@ export class ImageToBase64Directive {
     @Output()
     public complete: EventEmitter<any> = new EventEmitter();
 
-    private fileReader = new FileReader();
+    private fileReader: any;
 
     constructor(private el: ElementRef) {
+        this.fileReader =  new FileReader();
         this.fileReader.addEventListener('load', (event) => {
-            // var dataUrl = event.target.result;
-            // console.log(dataUrl);
-            // var base64Data = dataUrl.substr(dataUrl.indexOf('base64,') + 'base64,'.length);
-            // this.complete.next(base64Data);
+            let dataUrl = event.target.result;
+            console.log('dataURL');
+            console.log(event.target);
+            let base64Data = dataUrl.substr(dataUrl.indexOf('base64,') + 'base64,'.length);
+            this.complete.next(base64Data);
         });
     }
 
@@ -23,6 +25,6 @@ export class ImageToBase64Directive {
         let files =  Array.from(this.el.nativeElement.files);
         let file = files[0];
 
-        // this.fileReader.readAsDataURL(file);
+        this.fileReader.readAsDataURL(file);
     }
 }
