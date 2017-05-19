@@ -1,0 +1,21 @@
+<md-spinner *ngIf="loading" class="block-center" color="accent"></md-spinner>
+<form [formGroup]="LoginForm" *ngIf="active" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Identifiant</label>
+    <input type="text" class="form-control" formControlName="username" required  />
+    <div *ngIf="formErrors.username" class="alert alert-danger">
+        {{ formErrors.username }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Mot de passe</label>
+    <input type="password" class="form-control" class="form-control" formControlName="password" required />
+    <div *ngIf="formErrors.password" class="alert alert-danger">
+        {{ formErrors.password }}
+    </div>
+    <p class="forgottenpwd"><a>Mot de passe oublié ?</a></p>
+  </div>
+  <div class="form-group">
+    <button [disabled]="loading" class="btn-full-width" md-raised-button color="accent">Se connecter</button>
+  </div>
+</form>

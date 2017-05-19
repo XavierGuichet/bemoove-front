@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 import 'rxjs/add/operator/toPromise';
-
-import { DialogRef, ModalComponent, CloseGuard } from 'angular2-modal';
-import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
 
 @Component({
     // moduleId: module.id,
@@ -12,18 +10,16 @@ import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
     templateUrl: 'sporty-subscribe-modal.component.html',
     styleUrls: ['sporty-subscribe-modal.component.scss']
 })
-export class SportySubscribeModalComponent implements CloseGuard, ModalComponent<BSModalContext> {
+export class SportySubscribeModalComponent {
     public mailsubscriber: string;
-    private context: BSModalContext;
     private headers = new Headers({'Content-Type': 'application/json'});
     private nlSubscribeUrl = 'https://www.bemoove.fr/subscribe.php';
 
     constructor(
         private http: Http,
-        public dialog: DialogRef<BSModalContext>
+        public dialog: MdDialog,
+        public dialogRef: MdDialogRef<SportySubscribeModalComponent>,
     ) {
-        this.context = dialog.context;
-        // dialog.setCloseGuard(this);
     }
 
     public subscribe() {
@@ -31,7 +27,7 @@ export class SportySubscribeModalComponent implements CloseGuard, ModalComponent
                         { mail: this.mailsubscriber }, this.headers).toPromise()
                         .then((response: Response) => console.log(response))
          .catch(this.handleError);
-         this.dialog.close();
+         this.dialogRef.close();
     }
 
     private handleError(error: any): Promise<any> {
