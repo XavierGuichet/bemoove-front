@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '@angular/material';
 
+import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { ImageUploadModule } from 'angular2-image-upload';
 
@@ -12,13 +13,14 @@ import { CoachComponent } from './coach.component';
 import { CoachRoutingModule } from './coach-routing.module';
 import { PlanningModule } from './planning/planning.module';
 
-import { CoachAddWorkoutComponent } from './add-workout/add-workout.component';
-import { CoachEditWorkoutComponent } from './edit-workout/edit-workout.component';
+import { CoachWorkoutAddComponent } from './workout/add/workout-add.component';
+import { CoachWorkoutEditComponent } from './workout/edit/workout-edit.component';
+import { WorkoutPreviewComponent } from './workout/preview/workout-preview.component';
+
 import { CoachMyProfileComponent } from './my-profile/my-profile.component';
 import { CoachNavComponent } from './nav/nav.component';
-import { WorkoutFormComponent } from './form/workout/workout.component';
+import { WorkoutFormComponent } from './workout/form/workout-form.component';
 import { AddressFormComponent } from './form/address/address.component';
-import { WorkoutPreviewComponent } from './workout-preview/workout-preview.component';
 
 import { ModalAddressFormComponent } from './modal/modal-address-form.component';
 
@@ -49,15 +51,16 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
     ],
   declarations: [
         CoachComponent,
-        CoachAddWorkoutComponent,
-        CoachEditWorkoutComponent,
+        CoachWorkoutAddComponent,
+        CoachWorkoutEditComponent,
+        WorkoutPreviewComponent,
         CoachMyProfileComponent,
         CoachNavComponent,
         WorkoutFormComponent,
         AddressFormComponent,
-        WorkoutPreviewComponent,
         ModalAddressFormComponent,
-        ImageToBase64Directive
+        ImageToBase64Directive,
+        ImageCropperComponent
     ],
   exports:      [ CoachComponent ],
   entryComponents: [ ModalAddressFormComponent ],

@@ -1,0 +1,225 @@
+<form name="form" (ngSubmit)="f.form.valid && addWorkout()" #f="ngForm" novalidate>
+  <md-tab-group>
+    <md-tab label="1 - Date">
+      <div class="tab-container">
+        <div class="form-card">
+          <div class="form-card-title">
+            <h4>Date</h4>
+          </div>
+          <div class="form-card-content">
+            <div class="form-group">
+              <label for="example-text-input">Date</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="startdate" [(ngModel)]="selectedStartDate" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-addon" (click)="d.toggle()">
+                  <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input">Heure de début</label>
+              <ngb-timepicker [spinners]="false" [(ngModel)]="selectedStartTime" name="starttime" (ngModelChange)="recalcMainModelDates()"></ngb-timepicker>
+              <!-- <ngb-datepicker #dp [(ngModel)]="selectedStartDate" name="startdate" (ngModelChange)="recalcMainModelDates()"></ngb-datepicker> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-tab>
+    <md-tab label="2 - Votre séance">
+      <div class="tab-container">
+        <div class="form-card">
+          <div class="form-card-title">
+            <h4>Votre séance</h4>
+          </div>
+          <div class="form-card-content">
+            <div class="form-group">
+              <label for="sport">Titre de la séance</label>
+              <input type="text" class="form-control" [(ngModel)]="model.title" name="nbTicketAvailable" required>
+            </div>
+            <div class="form-group">
+              <label for="sport">Sport</label>
+              <ng2-completer [inputClass]="'form-control'" [(ngModel)]="model.sport.name" name="sport" [inputName]="sport" [overrideSuggested]="true" [dataService]="sportDataService" (selected)="selectSport($event)" [textNoResults]="'Valider'"></ng2-completer>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input">Durée</label>
+              <!-- <md-slider min="0" max="360" step="15" value="45" thumbLabel tickInterval="1" class="form-control" [(ngModel)]="duration" name="duration" ></md-slider> -->
+              <ngb-timepicker [(ngModel)]="duration" (ngModelChange)="recalcMainModelDates()" name="duration" [spinners]="false " [size]="small"></ngb-timepicker>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title">
+            <h4>Lieu</h4>
+          </div>
+          <div class="form-card-content">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-7">
+                  <select class="addresses form-control">
+                          <option *ngFor="let address of addresses" (click)="selectAddress(address)">
+                              {{address.name}} - {{address.city}}
+                          </option>
+                      </select>
+                </div>
+                <div class="col-5">
+                  <button md-raised-button color="accent" (click)="showModalAddressFormComponent()">
+                          <md-icon class="md-24">add</md-icon>Ajouter une adresse
+                      </button>
+                </div>
+              </div>
+              <div class="row" *ngIf="model.address.name">
+                <div class="col-12">
+                  <p class="address">{{model.address.name}}<br/> {{model.address.firstline}}
+                    <br/> {{model.address.postalCode}} - {{model.address.city}}
+                  </p>
+                  <!-- <button  md-mini-fab color="primary" (click)="showModalAddressFormComponent()">
+                        <md-icon>edit</md-icon>
+                    </button> -->
+                </div>
+              </div>
+
+              <!-- <div class="radio-box" *ngFor="let address of addresses" (click)="selectAddress(address)" [class.active]="address.id == model.address.id">
+                      <span>{{address.name}}</span>
+                    </div> -->
+              <!-- <div class="radio-box radio-add" (click)="showModalAddressFormComponent()">
+                      <md-icon class="md-24">add</md-icon>
+                    </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="form-card">
+          <div class="form-card-content">
+            <div class="form-group">
+              <label for="price" class="big">Prix par participant :</label>
+              <div class="input-group input-float">
+                <input type="text" class="form-control" id="price" [(ngModel)]="model.price" name="price" required #price="ngModel">
+                <div class="input-group-addon">€</div>
+              </div>
+              <!-- <div [hidden]="price.valid || price.pristine" class="alert alert-danger">
+                Price is required
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="form-card">
+          <div class="form-card-content">
+            <div class="form-group">
+              <label for="example-text-input" class="big">Nombre de places proposées :</label>
+
+              <input type="number" class="form-control input-float" id="nbTicketAvailable" [(ngModel)]="model.nbTicketAvailable" name="nbTicketAvailable" required #nbTicketAvailable="ngModel">
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-tab>
+
+    <md-tab label="3 - Détails">
+      <div class="tab-container">
+        <div class="form-card">
+          <div class="form-card-title">
+            <h4>Image</h4>
+          </div>
+          <div class="form-card-content">
+            <div class="form-group">
+                <img-cropper [image]="cropperData" [settings]="cropperSettings"></img-cropper><br>
+                <img [src]="cropperData.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+            </div>
+          </div>
+        </div>
+        <!-- <div class="form-card">
+          <div class="form-card-title">
+            <h4>Image</h4>
+          </div>
+          <div class="form-card-content">
+            <div class="form-group">
+              <input type="file" imageToBase64 (complete)="refreshImage($event)" />
+            </div>
+          </div>
+        </div> -->
+        <div class="form-card">
+          <div class="form-card-title">
+            <h4>Description</h4>
+          </div>
+          <div class="form-card-content">
+            <div class="form-group">
+              <label for="example-text-input">Description générale</label>
+              <textarea placeholder="Décrivez ici le déroulement et atouts de votre séance. " [(ngModel)]="model.description" name="description" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input">Tenue</label>
+              <textarea placeholder="Notez ici les besoins spécifique pour votre séance.  " [(ngModel)]="model.outfit" name="outfit" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="example-text-input">Remarque utile</label>
+              <textarea placeholder="Exemple : Vous trouverez un parking à 150 mètre sur la droite du bâtiment..." [(ngModel)]="model.notice" name="notice" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-card">
+          <div class="form-card-title">
+            <h4>Tags</h4>
+          </div>
+          <div class="form-card-content">
+            <ng2-completer [inputClass]="'form-control'" [(ngModel)]="model.tags.name" name="tags" [inputName]="tags" [overrideSuggested]="true" [dataService]="tagDataService" (selected)="selectTag($event)" [textNoResults]="'Ajouter ce tag'"></ng2-completer>
+            <div class="taglist">
+              <span class="tagbadge" *ngFor="let tag of tagList">
+            {{tag.name}} <md-icon (click)="removeTag(tag)">delete</md-icon>
+                </span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" md-raised-button color="primary">Enregistrer</button>
+      </div>
+    </md-tab>
+  </md-tab-group>
+</form>
+<!-- <div class="form-group">
+    <label for="title">Titre</label>
+    <div class="col-10">
+        <input type="text" class="form-control" id="title" [(ngModel)]="model.title" name="title" required #spy #title="ngModel" >
+        <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+          Name is required
+        </div>
+        <br>TODO: remove this: {{spy.className}}
+    </div>
+</div> -->
+<!-- <div class="form-group">
+    <label for="example-text-input">Intensité</label>
+    <div class="col-10">
+        <select class="form-control custom-select" id="exampleSelect1">
+          <option>Faible (mode mamie)</option>
+          <option>Modéré (mode enfants)</option>
+          <option>Forte (mode sportif)</option>
+          <option>Exagéré (mode warrior)</option>
+        </select>
+    </div>
+</div> -->
+<!-- <div class="form-group">
+    <label for="example-text-input">Sexe</label>
+    <div class="col-10">
+        <select class="form-control custom-select" id="exampleSelect1">
+          <option>Mixte</option>
+          <option>Femme</option>
+          <option>Homme</option>
+        </select>
+    </div>
+</div> -->
+<!-- <div class="form-group">
+    <label for="example-text-input">Public</label>
+    <div class="col-10">
+        <label class="form-check-inline">
+          <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="Palais des sports de beaulieu"> Enfants
+        </label>
+        <label class="form-check-inline">
+          <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="Point de rdv running"> Adolescents
+        </label>
+        <label class="form-check-inline">
+          <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="Palais des sports de beaulieu"> Adulte
+        </label>
+        <label class="form-check-inline">
+          <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="Point de rdv running"> Séniors
+        </label>
+    </div>
+</div> -->

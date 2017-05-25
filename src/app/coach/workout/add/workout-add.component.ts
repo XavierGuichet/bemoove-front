@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { WorkoutDateProvider } from '../workoutdate.provider';
-import { Workout } from '../../models/workout';
+import { WorkoutDateProvider } from '../../workoutdate.provider';
+import { Workout } from '../../../models/workout';
 
 @Component({
-    selector: 'coach-add-workout',
-    templateUrl: 'add-workout.component.html'
+    selector: 'coach-workout-add',
+    templateUrl: 'workout-add.component.html'
 })
 
-export class CoachAddWorkoutComponent implements OnInit {
+export class CoachWorkoutAddComponent implements OnInit {
     public newWorkout = new Workout();
     constructor(
         private router: Router,

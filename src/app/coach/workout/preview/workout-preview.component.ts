@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Workout } from '../../models/workout';
+import { Workout } from '../../../models/workout';
 
 @Component({
     selector: 'workout-preview',

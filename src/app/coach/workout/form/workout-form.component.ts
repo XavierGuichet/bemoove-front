@@ -1,12 +1,14 @@
-import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { Headers } from '@angular/http';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { ModalAddressFormComponent  } from '../../modal/modal-address-form.component';
+import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 import { CompleterService, RemoteData, CompleterData } from 'ng2-completer';
+
+import { ModalAddressFormComponent  } from '../../modal/modal-address-form.component';
 
 import { Workout } from '../../../models/workout';
 import { Sport } from '../../../models/sport';
@@ -23,8 +25,8 @@ import { WorkoutService } from '../../../_services/workout.service';
 
 @Component({
   selector: 'workout-form',
-  templateUrl: 'workout.component.html',
-  styleUrls: ['workout.component.scss']
+  templateUrl: 'workout-form.component.html',
+  styleUrls: ['workout-form.component.scss']
 })
 
 export class WorkoutFormComponent implements OnInit {
@@ -36,10 +38,15 @@ export class WorkoutFormComponent implements OnInit {
 
     public selectedStartDate: { year: 2017, month: 2, day: 1};
     public selectedStartTime: { hour: 10, minute: 0, second: 0 };
-    public duration: number = 30;
+    public duration: any = {hour: 1, minute: 0};
 
     public sportDataService: RemoteData;
     public tagDataService: RemoteData;
+
+    public cropperData: any;
+    public cropperSettings: CropperSettings;
+
+    @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
 
     private loading = false;
     private submitted = false;
@@ -71,6 +78,18 @@ export class WorkoutFormComponent implements OnInit {
                     this.tagDataService.headers(new Headers({
                                             'Content-Type': 'application/json',
                                             'Accept': 'application/json'}));
+
+
+                    this.cropperSettings = new CropperSettings();
+                      this.cropperSettings.width = 160;
+                      this.cropperSettings.height = 90;
+                      this.cropperSettings.croppedWidth =160;
+                      this.cropperSettings.croppedHeight = 90;
+                      this.cropperSettings.canvasWidth = 400;
+                      this.cropperSettings.canvasHeight = 300;
+                      this.cropperSettings.keepAspect = true;
+
+                      this.cropperData = {};
                 }
 
     public ngOnInit(): void {
@@ -140,8 +159,9 @@ export class WorkoutFormComponent implements OnInit {
         let startDateIso =  this.formatDate(this.selectedStartDate) + 'T' +
                             this.formatTime(this.selectedStartTime) + '+01:00';
         let startDate = new Date(startDateIso);
+        console.log(startDate);
         this.model.startdate = startDate;
-        this.model.enddate = new Date((startDate.getTime() + this.duration * 60 * 1000));
+        this.model.enddate = new Date((startDate.getTime() + this.duration.hour * 60 * 1000 + this.duration.minute * 1000));
     }
 
     public addWorkout() {
