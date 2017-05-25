@@ -65,7 +65,7 @@ export class ViewComponent implements OnInit {
         date.setHours(hour);
         date.setMinutes(minute);
         this.WorkoutDateProvider.setDate(date);
-        this.router.navigate(['/coach/add-workout']);
+        this.router.navigate(['/coach/workout/add']);
     }
 
     public changeDisplayStyle(style: string) {
