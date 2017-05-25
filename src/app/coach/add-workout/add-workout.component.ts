@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { WorkoutDateProvider } from '../workoutdate.provider';
 import { Workout } from '../../models/workout';
 
 @Component({
@@ -11,10 +12,13 @@ import { Workout } from '../../models/workout';
 export class CoachAddWorkoutComponent implements OnInit {
     public newWorkout = new Workout();
     constructor(
-        private router: Router
-    ) { }
+        private router: Router,
+        private WorkoutDateProvider: WorkoutDateProvider
+    ) {
+
+    }
 
     public ngOnInit(): void {
-        // TODO
+        this.newWorkout.startdate = this.WorkoutDateProvider.getDate();
     }
 }

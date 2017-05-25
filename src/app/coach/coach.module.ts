@@ -10,10 +10,10 @@ import { ImageUploadModule } from 'angular2-image-upload';
 
 import { CoachComponent } from './coach.component';
 import { CoachRoutingModule } from './coach-routing.module';
+import { PlanningModule } from './planning/planning.module';
 
 import { CoachAddWorkoutComponent } from './add-workout/add-workout.component';
 import { CoachEditWorkoutComponent } from './edit-workout/edit-workout.component';
-import { CoachMyWorkoutComponent } from './my-workout/my-workout.component';
 import { CoachMyProfileComponent } from './my-profile/my-profile.component';
 import { CoachNavComponent } from './nav/nav.component';
 import { WorkoutFormComponent } from './form/workout/workout.component';
@@ -29,6 +29,8 @@ import { WorkoutService } from '../_services/workout.service';
 import { TagService } from '../_services/tag.service';
 import { SpaceService } from '../_services/space.service';
 
+import { WorkoutDateProvider } from './workoutdate.provider';
+
 import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute';
 
 @NgModule({
@@ -40,15 +42,15 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
         FormsModule,
         NgbModule.forRoot(),
         MaterialModule.forRoot(),
+        PlanningModule,
         CoachRoutingModule,
         Ng2CompleterModule,
-        ImageUploadModule.forRoot()
+        ImageUploadModule.forRoot(),
     ],
   declarations: [
         CoachComponent,
         CoachAddWorkoutComponent,
         CoachEditWorkoutComponent,
-        CoachMyWorkoutComponent,
         CoachMyProfileComponent,
         CoachNavComponent,
         WorkoutFormComponent,
@@ -65,6 +67,7 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
         TagService,
         WorkoutService,
         ImageService,
-        SpaceService ]
+        SpaceService,
+        WorkoutDateProvider ]
 })
 export class CoachModule { }
