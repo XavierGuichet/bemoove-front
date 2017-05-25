@@ -21,6 +21,8 @@ export class Workout {
     public notation: number;
     public address: any;
     public description: string;
+    public outfit: string;
+    public notice: string;
     public tags: any[];
     public addedExistingTags: Tag[];
     public addedNewTags: Tag[];
