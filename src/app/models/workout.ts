@@ -29,6 +29,8 @@ export class Workout {
     public title: string;
     public photo: any;
     public favorite: boolean;
+    public styleTop: string;
+    public styleHeight: string;
 
     constructor(
     ) {
