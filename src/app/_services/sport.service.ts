@@ -9,7 +9,7 @@ import { Sport } from '../models/sport';
 export class SportService {
     private headers = new Headers({ 'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
-    private SportsUrl = 'http://api.bemoove.local/sports';
+    private SportsUrl = 'http://' + process.env.API_URL + '/sports';
 
     constructor(private http: Http) { }
 

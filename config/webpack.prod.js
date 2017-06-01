@@ -23,11 +23,13 @@ const OptimizeJsPlugin = require('optimize-js-plugin');
  */
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
+const API_URL = process.env.API_URL = 'api-prj-1.bemoove.fr';
 const PORT = process.env.PORT || 8080;
 const METADATA = webpackMerge(commonConfig({
   env: ENV
 }).metadata, {
   host: HOST,
+  API_URL: API_URL,
   port: PORT,
   ENV: ENV,
   HMR: false
@@ -160,6 +162,7 @@ module.exports = function (env) {
         'process.env': {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
+          'API_URL' : JSON.stringify(METADATA.API_URL),
           'HMR': METADATA.HMR,
         }
       }),

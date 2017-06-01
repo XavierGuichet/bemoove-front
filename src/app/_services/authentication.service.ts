@@ -12,7 +12,7 @@ export class AuthenticationService {
     private headers = new Headers({
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json'});
-    private authentificationUrl = 'http://api.bemoove.local/login_check';
+    private authentificationUrl = 'http://' + process.env.API_URL + '/login_check';
     constructor(private http: Http, private spaceService: SpaceService) { }
 
     public login(username: string, password: string) {

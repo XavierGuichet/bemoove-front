@@ -10,7 +10,7 @@ export class AddressService {
     private headers = new Headers({ 'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
     private headersSearch = new Headers({Accept: 'application/json'});
-    private AddressesUrl = 'http://api.bemoove.local/addresses';
+    private AddressesUrl = 'http://' + process.env.API_URL + '/addresses';
 
     constructor(private http: Http) { }
 

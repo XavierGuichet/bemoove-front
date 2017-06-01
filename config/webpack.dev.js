@@ -20,10 +20,12 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
  */
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
+const API_URL = process.env.API_URL = 'api.bemoove.local';
 const PORT = process.env.PORT || 3000;
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
   host: HOST,
+  API_URL: API_URL,
   port: PORT,
   ENV: ENV,
   HMR: HMR
@@ -149,6 +151,7 @@ module.exports = function (options) {
         'process.env': {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
+          'API_URL' : JSON.stringify(METADATA.API_URL),
           'HMR': METADATA.HMR,
         }
       }),

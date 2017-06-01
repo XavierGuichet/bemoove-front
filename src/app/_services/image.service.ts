@@ -9,7 +9,7 @@ import { Image } from '../models/image';
 export class ImageService {
     private headers = new Headers({ 'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
-    private ImagesUrl = 'http://api.bemoove.local/images';
+    private ImagesUrl = 'http://' + process.env.API_URL + '/images';
 
     constructor(private http: Http) { }
 

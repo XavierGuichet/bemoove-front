@@ -8,7 +8,7 @@ export class TagService {
     private headers = new Headers({ 'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
     private headersSearch = new Headers({Accept: 'application/json'});
-    private tagsUrl = 'http://api.bemoove.local/tags';
+    private tagsUrl = 'http://' + process.env.API_URL + '/tags';
 
     constructor(
             private http: Http) {}

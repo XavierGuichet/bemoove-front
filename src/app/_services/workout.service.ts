@@ -10,7 +10,7 @@ export class WorkoutService {
     private headers = new Headers({ 'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
     private headersSearch = new Headers({ Accept: 'application/json'});
-    private workoutsUrl = 'http://api.bemoove.local/workouts';
+    private workoutsUrl = 'http://' + process.env.API_URL + '/workouts';
     private searchDate: Date;
 
     constructor(private http: Http) { }
@@ -56,18 +56,12 @@ export class WorkoutService {
             .then((workouts) => workouts.find((workout) => workout.id === id));
     }
 
-    public getCommingWorkoutByCoachId(id: number): Promise<Workout[]> {
-        return this.http.get(this.workoutsUrl + '?coach.id=' + id,
+    public getWorkoutsByCoachIdAndDateInterval(id: number, startdate: Date, lastdate: Date): Promise<Workout[]> {
+        return this.http.get(this.workoutsUrl + '?coach.id=' + id + '&startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
                             { headers: this.headersSearch })
             .toPromise()
             .then((response) => response.json() as Workout[])
             .catch(this.handleError);
-    }
-
-    public getPastWorkoutByCoachId(id: number): Promise<Workout[]> {
-        return this.getWorkouts()
-            .then((workouts) => workouts.filter((workout) => workout.coach === id))
-            .then((workouts) => workouts.filter(this.passedDate));
     }
 
     public getWorkoutByDay(date: Date): Promise<Workout[]> {

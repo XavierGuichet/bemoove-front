@@ -9,7 +9,7 @@ import { User } from '../models/user';
 export class UserService {
     private headers = new Headers({'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
-    private UsersUrl = 'http://api.bemoove.local/users';
+    private UsersUrl = 'http://' + process.env.API_URL + '/users';
 
     constructor(private http: Http) { }
 
