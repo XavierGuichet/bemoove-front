@@ -1,1 +1,11 @@
-<h1>Coach - Edit Workout</h1>
+<div class="container">
+    <h1>Modifier une séance</h1>
+    <div class="row">
+        <div class="col-sm-7">
+            <workout-form-reactive [workout]="editedWorkout"></workout-form-reactive>
+        </div>
+        <div class="col-5">
+            <workout-preview [workout]="editedWorkout" class="planning__detail"></workout-preview>
+        </div>
+    </div>
+</div>

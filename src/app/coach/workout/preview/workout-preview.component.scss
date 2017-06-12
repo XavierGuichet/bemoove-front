@@ -1,10 +1,90 @@
 .workout-detail {
-    width: 40vw;
-    max-width: 560px;
+  width: 40vw;
+  max-width: 560px;
 }
+
 .workout-detail-closed {
-    width: 30px;
-    background: #ffdd00;
-    flex-shrink: 0;
-    flex-grow: 0;
+  width: 30px;
+  background: #ffdd00;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.image-container img {
+  width: 100%;
+}
+
+.mat-card > .colored:first-child {
+  margin-top: -24px;
+  display: flex;
+  padding: 0 0 0 24px;
+}
+
+.mat-card-image {
+  margin-bottom: 0;
+}
+
+.colored {
+  background: #3dcad8;
+  color: #ffffff;
+  margin-left: -24px;
+  margin-right: -24px;
+}
+
+.mat-card-header .mat-card-title.title {
+  font-size: 1.25em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.mat-card-image {
+    min-height: 250px;
+    background: #ddd;
+}
+.mat-card-header-text {
+    margin: 0;
+    padding-top: 8px;
+  flex: 1 1 auto !important;
+}
+.price {
+    float: left;
+    height: 42px;
+    background: #fff;
+    color: #666;
+    padding: 0.5em;
+    margin-right: 8px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.mat-card-content p.styled {
+    font-size: 15px;
+  font-family: 'texgyreadventor';
+  font-weight: bold;
+  color: #888;
+  margin-top: 16px;
+}
+
+.timeblock {
+  font-size: 1.25em;
+  text-transform: uppercase;
+  text-align: center;
+  border-top: 1px solid #fff;
+
+  .small {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+    text-transform: none;
+    color: #666;
+    &.bold {
+        font-weight: bold;
+    }
+  }
+
+  & > div {
+    padding: 0.75rem 0;
+    border-right: 1px solid #ffffff;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
 }

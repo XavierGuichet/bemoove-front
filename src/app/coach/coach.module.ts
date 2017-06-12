@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 import { Ng2CompleterModule } from 'ng2-completer';
@@ -19,7 +20,7 @@ import { WorkoutPreviewComponent } from './workout/preview/workout-preview.compo
 
 import { CoachMyProfileComponent } from './my-profile/my-profile.component';
 import { CoachNavComponent } from './nav/nav.component';
-import { WorkoutFormComponent } from './workout/form/workout-form.component';
+import { WorkoutFormReactiveComponent } from './workout/form/workout-form-reactive.component';
 import { AddressFormComponent } from './form/address/address.component';
 
 import { ModalAddressFormComponent } from './modal/modal-address-form.component';
@@ -42,6 +43,7 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
   imports:      [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         NgbModule.forRoot(),
         MaterialModule.forRoot(),
         PlanningModule,
@@ -56,7 +58,7 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
         WorkoutPreviewComponent,
         CoachMyProfileComponent,
         CoachNavComponent,
-        WorkoutFormComponent,
+        WorkoutFormReactiveComponent,
         AddressFormComponent,
         ModalAddressFormComponent,
         ImageToBase64Directive,

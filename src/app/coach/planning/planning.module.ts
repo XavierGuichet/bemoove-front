@@ -9,9 +9,12 @@ import { PlanningComponent } from './planning.component';
 import { ViewComponent } from './view/view.component';
 import { PlanningRoutingModule } from './planning-routing.module';
 
+import { WorkoutModalComponent } from './workout-information/workout-modal.component';
+import { WorkoutInformationComponent } from './workout-information/workout-information.component';
+
 @NgModule({
     bootstrap: [
-        PlanningComponent
+        PlanningComponent,
     ],
   imports: [
         CommonModule,
@@ -23,9 +26,11 @@ import { PlanningRoutingModule } from './planning-routing.module';
   declarations: [
       PlanningComponent,
       ViewComponent,
+      WorkoutModalComponent,
+      WorkoutInformationComponent
     ],
   exports: [ PlanningComponent ],
-  entryComponents: [ ],
+  entryComponents: [ WorkoutModalComponent ],
   providers:    [
     ]
 })

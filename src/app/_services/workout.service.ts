@@ -4,6 +4,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Workout } from '../models/workout';
+import { WorkoutApi } from './api-models/workout-api';
 
 @Injectable()
 export class WorkoutService {
@@ -12,26 +13,16 @@ export class WorkoutService {
     private headersSearch = new Headers({ Accept: 'application/json'});
     private workoutsUrl = 'http://' + process.env.API_URL + '/workouts';
     private searchDate: Date;
+    private workoutApi: WorkoutApi;
 
     constructor(private http: Http) { }
 
     public create(workout: Workout) {
-        if ( workout.sport.id ) {
-            workout.sport = '/sports/' + workout.sport.id;
-        }
-        if ( workout.address.id ) {
-            workout.address = '/addresses/' + workout.address.id;
-        }
-        if ( workout.photo.id ) {
-            workout.photo = '/images/' + workout.photo.id;
-        }
-        workout.tags = new Array();
-        for ( let addedExistingTag of workout.addedExistingTags ) {
-            workout.tags.push('/tags/' + addedExistingTag.id);
-        }
-        workout.tags = workout.tags.concat(workout.addedNewTags);
+        // Workout Api class convert workout model used in front
+        // in the model used by API POST
+        this.workoutApi = new WorkoutApi(workout);
         return this.http.post(  this.workoutsUrl,
-                                workout,
+                                this.workoutApi,
                                 this.jwt())
                         .map((response: Response) => response.json());
     }

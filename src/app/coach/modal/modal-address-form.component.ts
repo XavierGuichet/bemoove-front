@@ -27,7 +27,7 @@ export class ModalAddressFormComponent {
         // dialog.setCloseGuard(this);
     }
 
-    public onSuccess(success: boolean) {
-        return success ? this.dialogRef.close(this.model) : '';
+    public onSuccess(address: Address) {
+        return address ? this.dialogRef.close(address) : '';
     }
 }

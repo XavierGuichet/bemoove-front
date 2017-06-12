@@ -23,7 +23,7 @@ export class AddressFormComponent {
         this.addressService.create(this.model).subscribe(
             (data) => {
                 this.loading = false;
-                this.onSuccess.emit(true);
+                this.onSuccess.emit(data);
             },
             (error) => {
                 this.loading = false;

@@ -1,0 +1,21 @@
+<div class="hollow-modal">
+    <md-icon (click)="editWorkout()">edit</md-icon>
+  <md-tab-group [dynamicHeight]="false">
+    <md-tab label="Preview">
+      <div class="tab-container">
+        <workout-information [id]="id"></workout-information>
+      </div>
+    </md-tab>
+    <md-tab label="Inscrit">
+      <div class="tab-container">
+        Ici la liste de vos inscrits à ce cours
+      </div>
+    </md-tab>
+
+    <md-tab>
+      <ng-template md-tab-label>
+        <md-icon color="warn">delete</md-icon>
+      </ng-template>
+    </md-tab>
+  </md-tab-group>
+</div>

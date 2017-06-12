@@ -20,7 +20,7 @@ import { AuthUserGuard, AuthCoachGuard } from '../_guards/index';
     children: [
         { path: '', redirectTo: 'profile', pathMatch: 'full' },
         { path: 'workout/add', component: CoachWorkoutAddComponent },
-        { path: 'workout/edit', component: CoachWorkoutEditComponent },
+        { path: 'workout/:id/edit', component: CoachWorkoutEditComponent },
         { path: 'profile', component: CoachMyProfileComponent },
         { path: '', loadChildren : () => PlanningModule }
     ]

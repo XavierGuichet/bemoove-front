@@ -1,3 +1,7 @@
+<div>
+    <h1>diagnostic</h1>
+{{diagnostic}}
+</div>
 <div class="planning">
   <div class="container">
     <div class="row button-row">
@@ -25,12 +29,28 @@
       </div>
       <div class="col-11">
         <div class="row">
-          <div class="day" *ngFor="let day of displayedDays" [class.col-4]="displayStyle === '3days'" [class.col-1-7]="displayStyle === 'week'">
-            <h4 class="title">{{day|date:'EEE. dd'}}</h4>
-            <div class="hour" *ngFor="let hour of hours">
-              <div class="quarter selector" *ngFor="let quarter of quarters" (click)="addworkout(day,hour, quarter)">
-                Ajouter un cours
-              </div>
+          <div class="day" *ngFor="let day of displayedDays" [class.col-4]="displayStyle === '3days'" [class.col-1-7]="displayStyle === 'week'" [class.inactive]="(tomorrow > day.date)">
+            <div *ngFor="let workout of day.workouts" class="workout-wrapper"  [ngStyle]="{'top': workout.styleTop, 'height': workout.styleHeight }">
+                <div class="workout" (click)="showModalWorkoutInformationComponent(workout.id)">
+                    <h5>{{workout.title}}</h5>
+                    <p class="bookings"><md-icon>group</md-icon> : 0 / 5</p>
+                    <button md-icon-button class="right"><md-icon>pageview</md-icon></button>
+                </div>
+            </div>
+            <h4 class="title">{{day.date|date:'EEE. dd'}}</h4>
+            <div *ngIf="(tomorrow > day.date)">
+                <div class="hour" *ngFor="let hour of hours">
+                  <div class="quarter" *ngFor="let quarter of quarters">
+                      &nbsp;
+                  </div>
+                </div>
+            </div>
+            <div *ngIf="(tomorrow <= day.date)">
+                <div class="hour" *ngFor="let hour of hours">
+                  <div class="quarter selector" *ngFor="let quarter of quarters" (click)="addworkout(day.date,hour, quarter)">
+                    Ajouter un cours
+                  </div>
+                </div>
             </div>
           </div>
         </div>

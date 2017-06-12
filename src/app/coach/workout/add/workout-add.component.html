@@ -2,7 +2,7 @@
     <h1>Ajouter une séance</h1>
     <div class="row">
         <div class="col-sm-7">
-            <workout-form [model]="newWorkout"></workout-form>
+            <workout-form-reactive [workout]="newWorkout"></workout-form-reactive>
         </div>
         <div class="col-5">
             <workout-preview [workout]="newWorkout" class="planning__detail"></workout-preview>

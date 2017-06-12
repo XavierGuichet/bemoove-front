@@ -3,6 +3,7 @@
 }
 .col-1-7 {
     width: 14.285714%;
+    position: relative;
 }
 .timeline {
     border-top: 1px solid #ffffff;
@@ -65,4 +66,31 @@
     h4 {
         margin: 0;
     }
+}
+
+.workout-wrapper {
+    position: absolute;
+    height: 52px;
+    width: 100%;
+    padding: 4px;
+}
+.workout {
+    height: 100%;
+    width: 100%;
+    color: #ffffff;
+    background: #2ac2d1;
+    border-radius: 4px;
+    padding: 1em;
+    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.35), 0 1px 0 rgba(0, 0, 0, 0.35), 0px 1px 2px #bbb;
+    border: 1px solid #bbb;
+}
+.right {
+    float: right;
+}
+.inactive {
+    background-color: #e0e0e0;
+    background-image: linear-gradient(-45deg, rgba(255, 255, 255, .9) 40%, transparent 40%,
+                                            transparent 50%, rgba(255, 255, 255, .9) 50%,
+                                            rgba(255, 255, 255, .9) 90%, transparent 90%, transparent);
+    background-size: 15px 15px;
 }
