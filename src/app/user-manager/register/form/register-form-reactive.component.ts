@@ -114,6 +114,4 @@ export class RegisterFormReactiveComponent implements OnInit {
 
         this.onValueChanged(); // (re)set validation messages now
     }
-
-    get diagnostic() { return JSON.stringify(this.user); }
 }
