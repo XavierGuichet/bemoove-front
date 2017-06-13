@@ -27,6 +27,14 @@ export class WorkoutService {
                         .map((response: Response) => response.json());
     }
 
+    public update(workout: Workout) {
+        this.workoutApi = new WorkoutApi(workout);
+        return this.http.put(   this.workoutsUrl + '/' + workout.id, 
+                                this.workoutApi,
+                                this.jwt())
+                        .map((response: Response) => response.json());
+    }
+
     public delete(id: number): Promise<void> {
         const url = `${this.workoutsUrl}/${id}`;
         return this.http.delete(url, {headers: this.headers})
