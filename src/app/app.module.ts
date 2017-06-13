@@ -103,7 +103,7 @@ type StoreType = {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    { provide: LOCALE_ID, useValue: "fr-FR" }
+    { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   entryComponents: [ ]
   // entryComponents: [ SportySubscribeModalComponent ]
