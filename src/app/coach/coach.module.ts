@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { CustomDatepickerI18n } from '../_helpers/custom-datepicker.component';
 import { MaterialModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -73,6 +75,7 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
         WorkoutService,
         ImageService,
         SpaceService,
-        WorkoutDateProvider ]
+        WorkoutDateProvider,
+        {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n} ]
 })
 export class CoachModule { }

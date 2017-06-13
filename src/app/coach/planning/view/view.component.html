@@ -1,7 +1,3 @@
-<div>
-    <h1>diagnostic</h1>
-{{diagnostic}}
-</div>
 <div class="planning">
   <div class="container">
     <div class="row button-row">
@@ -37,7 +33,7 @@
                     <button md-icon-button class="right"><md-icon>pageview</md-icon></button>
                 </div>
             </div>
-            <h4 class="title">{{day.date|date:'EEE. dd'}}</h4>
+            <h4 class="title">{{day.date|date:'EEE dd'}}</h4>
             <div *ngIf="(tomorrow > day.date)">
                 <div class="hour" *ngFor="let hour of hours">
                   <div class="quarter" *ngFor="let quarter of quarters">

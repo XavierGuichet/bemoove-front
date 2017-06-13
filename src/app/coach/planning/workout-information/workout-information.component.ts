@@ -23,6 +23,5 @@ export class WorkoutInformationComponent implements OnInit {
     public ngOnInit(): void {
         this.workoutService.getWorkout(this.id)
             .then( (workout) => this.workout = workout);
-        console.log('id : ' + this.id);
     }
 }

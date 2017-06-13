@@ -1,21 +1,18 @@
 <div class="hollow-modal">
-    <md-icon (click)="editWorkout()">edit</md-icon>
-  <md-tab-group [dynamicHeight]="false">
-    <md-tab label="Preview">
+  <md-tab-group [dynamicHeight]="true">
+    <md-tab label="Ma séance">
       <div class="tab-container">
         <workout-information [id]="id"></workout-information>
       </div>
+      <div class="pull-right">
+          <button md-raised-button color="warn"><md-icon>delete</md-icon>Supprimer</button>
+        <button md-raised-button color="primary" (click)="editWorkout()"><md-icon>edit</md-icon>Modifier</button>
+        </div>
     </md-tab>
     <md-tab label="Inscrit">
       <div class="tab-container">
         Ici la liste de vos inscrits à ce cours
       </div>
-    </md-tab>
-
-    <md-tab>
-      <ng-template md-tab-label>
-        <md-icon color="warn">delete</md-icon>
-      </ng-template>
     </md-tab>
   </md-tab-group>
 </div>

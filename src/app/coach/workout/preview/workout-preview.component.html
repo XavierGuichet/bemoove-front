@@ -1,14 +1,14 @@
 <md-card>
   <md-card-header class="colored">
-    <div class="mat-card-header-text">
+      <div class="price">
+          {{workout.price}} €
+      </div>
       <md-card-title class="title">{{workout.title}}&nbsp;</md-card-title>
       <md-card-subtitle>{{workout.sport.name}}&nbsp;</md-card-subtitle>
-    </div>
-    <div class="price">
-      {{workout.price}} €
-    </div>
   </md-card-header>
-  <img *ngIf="workout.photo.base64data" md-card-image src="{{workout.photo.base64data}}">
+  <div *ngIf="!workout.photo.base64data && !workout.photo.base64data" md-card-image><md-icon class="md-72">fitness_center</md-icon></div>
+  <img *ngIf="workout.photo.base64data && !workout.photo.path" md-card-image src="{{workout.photo.base64data}}">
+  <img *ngIf="workout.photo.path && !workout.photo.base64data" md-card-image src="{{workout.photo.path}}">
   <md-card-content>
     <div class="row colored timeblock">
       <div class="col-8">
@@ -17,11 +17,11 @@
       </div>
       <div class="col-2">
         <p class="small">début</p>
-        {{workout.startdate | date: 'HH\:mm'}}
+        {{workout.startdate | date: 'shortTime'}}
       </div>
       <div class="col-2">
         <p class="small">fin</p>
-        {{workout.enddate | date: 'HH\:mm'}}
+        {{workout.enddate | date: 'shortTime'}}
       </div>
     </div>
     <div class="description">

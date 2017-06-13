@@ -322,14 +322,25 @@ export class WorkoutFormReactiveComponent implements OnInit {
                       this.submitted = true;
                       this.loading = true;
 
-                      this.workoutService.create(saveWorkout)
-                        .subscribe(
-                        (data) => {
-                          this.loading = false;
-                        },
-                        (error) => {
-                          this.loading = false;
-                        });
+                      if (!this.workout.id) {
+                          this.workoutService.create(saveWorkout)
+                            .subscribe(
+                            (data) => {
+                              this.loading = false;
+                            },
+                            (error) => {
+                              this.loading = false;
+                            });
+                        } else {
+                            this.workoutService.update(saveWorkout)
+                              .subscribe(
+                              (data) => {
+                                this.loading = false;
+                              },
+                              (error) => {
+                                this.loading = false;
+                              });
+                        }
                   },
                   (error) => {
                     alert('echec de l\'ajout du sport');
@@ -339,14 +350,25 @@ export class WorkoutFormReactiveComponent implements OnInit {
                     this.submitted = true;
                     this.loading = true;
 
-                    this.workoutService.create(saveWorkout)
-                      .subscribe(
-                      (data) => {
-                        this.loading = false;
-                      },
-                      (error) => {
-                        this.loading = false;
-                      });
+                    if (!this.workout.id) {
+                        this.workoutService.create(saveWorkout)
+                          .subscribe(
+                          (data) => {
+                            this.loading = false;
+                          },
+                          (error) => {
+                            this.loading = false;
+                          });
+                      } else {
+                          this.workoutService.update(saveWorkout)
+                            .subscribe(
+                            (data) => {
+                              this.loading = false;
+                            },
+                            (error) => {
+                              this.loading = false;
+                            });
+                      }
                 }
             },
             (error) => {
@@ -361,14 +383,25 @@ export class WorkoutFormReactiveComponent implements OnInit {
                 this.submitted = true;
                 this.loading = true;
 
-                this.workoutService.create(saveWorkout)
-                  .subscribe(
-                  (data) => {
-                    this.loading = false;
-                  },
-                  (error) => {
-                    this.loading = false;
-                  });
+                if (!this.workout.id) {
+                    this.workoutService.create(saveWorkout)
+                      .subscribe(
+                      (data) => {
+                        this.loading = false;
+                      },
+                      (error) => {
+                        this.loading = false;
+                      });
+                  } else {
+                      this.workoutService.update(saveWorkout)
+                        .subscribe(
+                        (data) => {
+                          this.loading = false;
+                        },
+                        (error) => {
+                          this.loading = false;
+                        });
+                  }
             },
             (error) => {
               alert('echec de l\'ajout du sport');
@@ -378,14 +411,25 @@ export class WorkoutFormReactiveComponent implements OnInit {
               this.submitted = true;
               this.loading = true;
 
-              this.workoutService.create(saveWorkout)
-                .subscribe(
-                (data) => {
-                  this.loading = false;
-                },
-                (error) => {
-                  this.loading = false;
-                });
+              if (!this.workout.id) {
+                  this.workoutService.create(saveWorkout)
+                    .subscribe(
+                    (data) => {
+                      this.loading = false;
+                    },
+                    (error) => {
+                      this.loading = false;
+                    });
+                } else {
+                    this.workoutService.update(saveWorkout)
+                      .subscribe(
+                      (data) => {
+                        this.loading = false;
+                      },
+                      (error) => {
+                        this.loading = false;
+                      });
+                }
           }
       }
 
