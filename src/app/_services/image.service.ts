@@ -25,7 +25,6 @@ export class ImageService {
     }
 
     public create(Image: Image) {
-        console.log(Image);
         return this.http.post(this.ImagesUrl, Image, this.jwt())
                         .map((response: Response) => response.json());
     }
