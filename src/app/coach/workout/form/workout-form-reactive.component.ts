@@ -32,6 +32,7 @@ import { WorkoutService } from '../../../_services/workout.service';
 
 export class WorkoutFormReactiveComponent implements OnInit {
   public loading = false;
+  public valid = false;
 
   public workoutForm: FormGroup;
   public submitted = false;
@@ -156,9 +157,9 @@ export class WorkoutFormReactiveComponent implements OnInit {
 
     this.addressService.getAddressesByCoachId(this.spaceService.getUserId())
       .then((addresses) => {
-          if (addresses.length > 0) {
-            this.coachAddresses = addresses;
-            this.workoutForm.patchValue({ address: this.coachAddresses[0] });
+        if (addresses.length > 0) {
+          this.coachAddresses = addresses;
+          this.workoutForm.patchValue({ address: this.coachAddresses[0] });
         }
       });
     this.sportService.getAll().then((sports) => this.sports = sports);
@@ -177,13 +178,13 @@ export class WorkoutFormReactiveComponent implements OnInit {
 
   public selectSport(event) {
     if (event == null || event.title.trim().length === 0) {
-       return;
+      return;
     }
-    if (event.originalObject == null && event.title.trim() !== this.workout.sport.name ) {
-       let newSport = new Sport();
-       newSport.name = event.title.trim();
-       this.workout.sport = newSport;
-       return;
+    if (event.originalObject == null && event.title.trim() !== this.workout.sport.name) {
+      let newSport = new Sport();
+      newSport.name = event.title.trim();
+      this.workout.sport = newSport;
+      return;
     }
     if (event.originalObject != null) {
       this.workout.sport = event.originalObject;
@@ -193,9 +194,9 @@ export class WorkoutFormReactiveComponent implements OnInit {
 
   public selectTag(event) {
     if (event == null
-        || event.title.trim().length === 0 ||
+      || event.title.trim().length === 0 ||
       this.workout.tags.filter((t) => t.name === event.title.trim()).length > 0
-      ) {
+    ) {
       return;
     }
     if (event.originalObject != null) {
@@ -230,7 +231,7 @@ export class WorkoutFormReactiveComponent implements OnInit {
       this.coachAddresses.unshift(resultPromise);
       this.workout.address = resultPromise;
       this.workoutForm.patchValue({
-          address: this.workout.address
+        address: this.workout.address
       });
     });
   }
@@ -294,148 +295,64 @@ export class WorkoutFormReactiveComponent implements OnInit {
       this.selectedStartTime.second);
     this.workout.enddate = new Date(this.workout.startdate.getTime() + (this.duration.hour * 60 + this.duration.minute) * 60 * 1000);
   }
+  //
+  // public refreshImage(imagedata): void {
+  //   this.workout.photo = new Image();
+  //   this.workout.photo.base64data = 'data:image/jpeg;base64,' + imagedata;
+  //   this.imageService.create(this.workout.photo)
+  //     .subscribe(
+  //     (data) => {
+  //       this.loading = false;
+  //     },
+  //     (error) => {
+  //       this.loading = false;
+  //     });
+  // }
 
-  public refreshImage(imagedata): void {
-    this.workout.photo = new Image();
-    this.workout.photo.base64data = 'data:image/jpeg;base64,' + imagedata;
-    this.imageService.create(this.workout.photo)
-      .subscribe(
-      (data) => {
-        this.loading = false;
-      },
-      (error) => {
-        this.loading = false;
-      });
+  public createRelatedNewEntities() {
+    let ObservableOfCreation: any[] = new Array();
+
+    if (!this.workout.photo.id) {
+      ObservableOfCreation.push(this.imageService.create(this.workout.photo).map( (image) => this.workout.photo = image));
+    }
+
+    if (!this.workout.sport.id) {
+      ObservableOfCreation.push(this.sportService.create(this.workout.sport).map( (sport) => this.workout.sport = sport));
+    }
+
+    if (!this.workout.photo.id || !this.workout.sport.id) {
+      return Observable.forkJoin(ObservableOfCreation).map( () => true);
+    } else {
+      return Observable.empty();
+    }
   }
-  // TODO : remove repetition
+
   public onSubmit() {
-      if (!this.workout.photo.id) {
-          this.imageService.create(this.workout.photo).subscribe(
-            (image) => {
-                this.workout.photo = image;
-
-                if (!this.workout.sport.id) {
-                this.sportService.create(this.workout.sport).subscribe(
-                  (sport) => {
-                      this.workout.sport = sport;
-                      let saveWorkout = this.prepareSaveWorkout();
-                      this.submitted = true;
-                      this.loading = true;
-
-                      if (!this.workout.id) {
-                          this.workoutService.create(saveWorkout)
-                            .subscribe(
-                            (data) => {
-                              this.loading = false;
-                            },
-                            (error) => {
-                              this.loading = false;
-                            });
-                        } else {
-                            this.workoutService.update(saveWorkout)
-                              .subscribe(
-                              (data) => {
-                                this.loading = false;
-                              },
-                              (error) => {
-                                this.loading = false;
-                              });
-                        }
-                  },
-                  (error) => {
-                    alert('echec de l\'ajout du sport');
-                  });
-                } else {
-                    let saveWorkout = this.prepareSaveWorkout();
-                    this.submitted = true;
-                    this.loading = true;
-
-                    if (!this.workout.id) {
-                        this.workoutService.create(saveWorkout)
-                          .subscribe(
-                          (data) => {
-                            this.loading = false;
-                          },
-                          (error) => {
-                            this.loading = false;
-                          });
-                      } else {
-                          this.workoutService.update(saveWorkout)
-                            .subscribe(
-                            (data) => {
-                              this.loading = false;
-                            },
-                            (error) => {
-                              this.loading = false;
-                            });
-                      }
-                }
-            },
-            (error) => {
-              alert('echec de l\'ajout de l\'image');
-            });
+    this.createRelatedNewEntities().subscribe( () => {
+      let saveWorkout = this.prepareSaveWorkout();
+      this.submitted = true;
+      this.loading = true;
+      if (!this.workout.id) {
+        this.workoutService.create(saveWorkout)
+          .subscribe(
+          (data) => {
+            this.loading = false;
+          },
+          (error) => {
+            this.loading = false;
+          });
       } else {
-          if (!this.workout.sport.id) {
-          this.sportService.create(this.workout.sport).subscribe(
-            (sport) => {
-                this.workout.sport = sport;
-                let saveWorkout = this.prepareSaveWorkout();
-                this.submitted = true;
-                this.loading = true;
-
-                if (!this.workout.id) {
-                    this.workoutService.create(saveWorkout)
-                      .subscribe(
-                      (data) => {
-                        this.loading = false;
-                      },
-                      (error) => {
-                        this.loading = false;
-                      });
-                  } else {
-                      this.workoutService.update(saveWorkout)
-                        .subscribe(
-                        (data) => {
-                          this.loading = false;
-                        },
-                        (error) => {
-                          this.loading = false;
-                        });
-                  }
-            },
-            (error) => {
-              alert('echec de l\'ajout du sport');
-            });
-          } else {
-              let saveWorkout = this.prepareSaveWorkout();
-              this.submitted = true;
-              this.loading = true;
-
-              if (!this.workout.id) {
-                  this.workoutService.create(saveWorkout)
-                    .subscribe(
-                    (data) => {
-                      this.loading = false;
-                    },
-                    (error) => {
-                      this.loading = false;
-                    });
-                } else {
-                    this.workoutService.update(saveWorkout)
-                      .subscribe(
-                      (data) => {
-                        this.loading = false;
-                      },
-                      (error) => {
-                        this.loading = false;
-                      });
-                }
-          }
+        this.workoutService.update(saveWorkout)
+          .subscribe(
+          (data) => {
+            this.loading = false;
+          },
+          (error) => {
+            this.loading = false;
+          });
       }
-
-
-
-
+    }
+    );
   }
 
   public prepareSaveWorkout() {
@@ -465,7 +382,6 @@ export class WorkoutFormReactiveComponent implements OnInit {
   public onValueChanged(data?: any) {
     if (!this.workoutForm) { return; }
     const form = this.workoutForm;
-
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
         // clear previous error message (if any)
@@ -535,22 +451,22 @@ export class WorkoutFormReactiveComponent implements OnInit {
     this.workoutForm.valueChanges
       .subscribe((data) => this.onValueChanged(data));
 
-      const titleControl = this.workoutForm.get('title');
-      titleControl.valueChanges.forEach(
-        (value: string) => this.workout.title = value
-      );
-      const descriptionControl = this.workoutForm.get('description');
-      descriptionControl.valueChanges.forEach(
-          (value: string) => this.workout.description = value
-      );
-      const outfitControl = this.workoutForm.get('outfit');
-      outfitControl.valueChanges.forEach(
-          (value: string) => this.workout.description = value
-      );
-      const noticeControl = this.workoutForm.get('notice');
-      noticeControl.valueChanges.forEach(
-          (value: string) => this.workout.description = value
-      );
+    const titleControl = this.workoutForm.get('title');
+    titleControl.valueChanges.forEach(
+      (value: string) => this.workout.title = value
+    );
+    const descriptionControl = this.workoutForm.get('description');
+    descriptionControl.valueChanges.forEach(
+      (value: string) => this.workout.description = value
+    );
+    const outfitControl = this.workoutForm.get('outfit');
+    outfitControl.valueChanges.forEach(
+      (value: string) => this.workout.description = value
+    );
+    const noticeControl = this.workoutForm.get('notice');
+    noticeControl.valueChanges.forEach(
+      (value: string) => this.workout.description = value
+    );
 
     const durationControl = this.workoutForm.get('duration');
     durationControl.valueChanges.forEach(

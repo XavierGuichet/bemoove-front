@@ -183,7 +183,7 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="loading" md-raised-button color="primary">Enregistrer</button>
+        <button type="submit" [disabled]="loading || !workoutForm.valid" md-raised-button color="primary">Enregistrer</button>
       </div>
     </md-tab>
   </md-tab-group>
