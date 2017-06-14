@@ -29,7 +29,7 @@ export class WorkoutService {
 
     public update(workout: Workout) {
         this.workoutApi = new WorkoutApi(workout);
-        return this.http.put(   this.workoutsUrl + '/' + workout.id, 
+        return this.http.put(   this.workoutsUrl + '/' + workout.id,
                                 this.workoutApi,
                                 this.jwt())
                         .map((response: Response) => response.json());
