@@ -23,14 +23,19 @@ export class Workout {
     public styleTop: string;
     public styleHeight: string;
 
-    constructor(
+    constructor(sport = new Sport(), address = new Address(), startdate = new Date(), enddate = new Date(), tags = new Array(), photo = new Image()
     ) {
-        this.sport = new Sport();
-        this.address = new Address();
-        this.startdate = new Date();
-        this.enddate = new Date();
-        this.tags = new Array();
-        this.photo = new Image();
+        this.sport = sport;
+        this.address = address;
+        if (startdate instanceof Date) {
+        this.startdate = new Date(startdate);
+        console.log(this.startdate);
+        } else { this.startdate = startdate; }
+        if (enddate instanceof Date) {
+        this.enddate = new Date(enddate);
+        } else { this.enddate = enddate; }
+        this.tags = tags;
+        this.photo = photo;
     }
 
 }
