@@ -9,6 +9,7 @@ import { SpaceService } from '../../_services/space.service';
 })
 
 export class CoachMyProfileComponent implements OnInit {
+    public model: any = {};
     constructor(
         private router: Router,
         private spaceService: SpaceService
