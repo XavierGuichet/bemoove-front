@@ -154,6 +154,7 @@ export class WorkoutFormReactiveComponent implements OnInit {
 
   public ngOnInit(): void {
     this.buildForm();
+    this.initFormValue();
 
     this.addressService.getAddressesByCoachId(this.spaceService.getUserId())
       .then((addresses) => {
@@ -162,8 +163,8 @@ export class WorkoutFormReactiveComponent implements OnInit {
           this.workoutForm.patchValue({ address: this.coachAddresses[0] });
         }
       });
+      this.setStartDate();
     this.sportService.getAll().then((sports) => this.sports = sports);
-    this.setStartDate();
     let tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
     this.ngbTomorrow = {
       year: tomorrow.getFullYear(),
@@ -295,19 +296,6 @@ export class WorkoutFormReactiveComponent implements OnInit {
       this.selectedStartTime.second);
     this.workout.enddate = new Date(this.workout.startdate.getTime() + (this.duration.hour * 60 + this.duration.minute) * 60 * 1000);
   }
-  //
-  // public refreshImage(imagedata): void {
-  //   this.workout.photo = new Image();
-  //   this.workout.photo.base64data = 'data:image/jpeg;base64,' + imagedata;
-  //   this.imageService.create(this.workout.photo)
-  //     .subscribe(
-  //     (data) => {
-  //       this.loading = false;
-  //     },
-  //     (error) => {
-  //       this.loading = false;
-  //     });
-  // }
 
   public createRelatedNewEntities() {
     let ObservableOfCreation: any[] = new Array();
@@ -397,6 +385,13 @@ export class WorkoutFormReactiveComponent implements OnInit {
         }
       }
     }
+  }
+
+  private initFormValue(): void {
+    //   console.log(this.workout);
+    //   if (this.workout.id) {
+    //       console.log("workout present");
+    //   }
   }
 
   private buildForm(): void {

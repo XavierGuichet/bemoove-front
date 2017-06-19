@@ -28,8 +28,7 @@ export class ViewComponent implements OnInit {
     public displayStyle: string = 'week';
     public hours: any = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     public quarters: any = [0, 15, 30, 45];
-    public commingWorkouts: Workout[];
-    public pastWorkouts: Workout[];
+    public displayedWorkouts: Workout[];
     constructor(
         private spaceService: SpaceService,
         private router: Router,
@@ -66,7 +65,7 @@ export class ViewComponent implements OnInit {
     public displayWorkout() {
         let quarterHeight = 1.05;
         let hoursHeight = quarterHeight * 4 + 1 / 16;
-        this.commingWorkouts.forEach( (workout) => {
+        this.displayedWorkouts.forEach( (workout) => {
             let workoutstartDate = new Date(workout.startdate);
             this.displayedDays.forEach( (day) => {
                 if (workoutstartDate.getDate() === day.date.getDate()
@@ -88,7 +87,7 @@ export class ViewComponent implements OnInit {
     public getWorkoutsByCoach(id: number, startdate: Date, lastdate: Date): void {
         this.workoutService.getWorkoutsByCoachIdAndDateInterval(id, startdate, lastdate)
                    .then((workouts) => {
-                       this.commingWorkouts = workouts;
+                       this.displayedWorkouts = workouts;
                        this.displayWorkout();
                    });
     }
@@ -97,8 +96,7 @@ export class ViewComponent implements OnInit {
         this.workoutService
             .delete(workout.id)
             .then(() => {
-            this.commingWorkouts = this.commingWorkouts.filter((w) => w !== workout);
-            this.pastWorkouts = this.pastWorkouts.filter((w) => w !== workout);
+            this.displayedWorkouts = this.displayedWorkouts.filter((w) => w !== workout);
             });
     }
 
@@ -184,5 +182,5 @@ export class ViewComponent implements OnInit {
                                 this.lastDisplayedDay);
     }
 
-    get diagnostic() { return JSON.stringify(this.commingWorkouts); }
+    get diagnostic() { return JSON.stringify(this.displayedWorkouts); }
 }

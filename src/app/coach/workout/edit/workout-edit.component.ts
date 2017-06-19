@@ -12,17 +12,23 @@ import { WorkoutService } from '../../../_services/workout.service';
 })
 
 export class CoachWorkoutEditComponent implements OnInit {
-  public editedWorkout: Workout = new Workout();
+  public editedWorkout: Workout;
   constructor(
     private workoutService: WorkoutService,
     private route: ActivatedRoute,
     private location: Location,
     private router: Router
-  ) { }
+  ) {
+
+  }
 
   public ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.workoutService.getWorkout(+params['id']))
-      .subscribe( (workout) => {this.editedWorkout = workout; console.log(workout);});
+      this.route.params
+        .switchMap( (params: Params) => this.workoutService.getWorkout(+params['id']))
+        .subscribe( (workout) => {
+            workout.startdate = new Date(workout.startdate);
+            workout.enddate = new Date(workout.enddate);
+            this.editedWorkout = workout;
+        });
   }
 }

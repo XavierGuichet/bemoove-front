@@ -3,10 +3,10 @@
       <div class="price">
           {{workout.price}} €
       </div>
-      <md-card-title class="title">{{workout.title}}&nbsp;</md-card-title>
+      <md-card-title class="title">{{workout.title}}&nbsp;{{workout.id}}</md-card-title>
       <md-card-subtitle>{{workout.sport.name}}&nbsp;</md-card-subtitle>
   </md-card-header>
-  <div *ngIf="!workout.photo.base64data && !workout.photo.base64data" md-card-image><md-icon class="md-72">fitness_center</md-icon></div>
+  <div *ngIf="!workout.photo.path && !workout.photo.base64data" md-card-image><md-icon class="md-72">fitness_center</md-icon></div>
   <img *ngIf="workout.photo.base64data && !workout.photo.path" md-card-image src="{{workout.photo.base64data}}">
   <img *ngIf="workout.photo.path && !workout.photo.base64data" md-card-image src="{{workout.photo.path}}">
   <md-card-content>
