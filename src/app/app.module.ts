@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomMaterialModule } from './custom-material.module';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { Ng2SimplePageScrollModule } from 'ng2-simple-page-scroll';
 import './rxjs-extensions';
 /*
  * Platform and Environment providers/directives/pipes
@@ -40,6 +41,7 @@ import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { CoachModule } from './coach/coach.module';
+import { WorkoutListModule } from './workout-list/workout-list.module';
 
 import { WorkoutService } from './_services/workout.service';
 import { TagService } from './tag-service/tag.service';
@@ -98,7 +100,9 @@ type StoreType = {
     CustomMaterialModule,
     UserManagerModule,
     Angular2FontawesomeModule,
-    CoachModule
+    Ng2SimplePageScrollModule.forRoot(),
+    CoachModule,
+    WorkoutListModule,
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
