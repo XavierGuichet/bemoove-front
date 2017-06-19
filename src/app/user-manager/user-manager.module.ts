@@ -35,7 +35,7 @@ import { LoginButtonComponent } from './login/button/login-button.component';
       LoginModalComponent,
       LoginButtonComponent
     ],
-  exports: [ RegisterButtonComponent, LoginButtonComponent ],
+  exports: [ RegisterButtonComponent, LoginButtonComponent, RegisterFormReactiveModule ],
   entryComponents: [ RegisterModalComponent, LoginModalComponent ],
   providers:    [
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MdSnackBar, MdButton } from '@angular/material';
 
@@ -11,9 +11,13 @@ import { AlertService, UserService } from '../../../_services/index';
 @Component({
     selector: 'register-form-reactive',
     templateUrl: 'register-form-reactive.component.html',
-    styleUrls: ['../../form.component.scss']
+    styleUrls: ['../../form.component.scss', './register-form-reactive.component.scss']
 })
 export class RegisterFormReactiveComponent implements OnInit {
+    @Input()
+    public theme: string = 'default';
+    @Input()
+    public registerUserType: string = 'User';
     public user: User = new User();
     public showpassword: boolean = false;
 
@@ -57,7 +61,7 @@ export class RegisterFormReactiveComponent implements OnInit {
         this.submitted = true;
         this.loading = true;
         this.user = this.RegisterForm.value;
-        this.userService.create(this.user)
+        this.userService.create(this.user, this.registerUserType)
             .subscribe(
                 (data) => {
                     this.alertService.success('Registration successful', true);

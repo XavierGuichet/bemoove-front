@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule,
     MdButtonModule,
     MdDialogModule,
+    MdInputModule,
 MdProgressSpinnerModule } from '@angular/material';
 import { SharedModule } from '../../../shared/shared.module';
 import { RegisterFormReactiveComponent } from './register-form-reactive.component';
@@ -13,6 +14,7 @@ import { RegisterFormReactiveComponent } from './register-form-reactive.componen
       SharedModule,
       ReactiveFormsModule,
       MdButtonModule,
+      MdInputModule,
       MdProgressSpinnerModule,
       MdDialogModule // TODO delete me ?
   ],

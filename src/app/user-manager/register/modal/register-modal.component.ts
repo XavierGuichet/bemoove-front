@@ -13,10 +13,6 @@ import { AlertService, UserService } from '../../../_services/index';
     styleUrls: ['../../modal.component.scss']
 })
 export class RegisterModalComponent {
-    public showpassword: boolean = false;
-    public loading = false;
-    public model: any = {};
-
     constructor(
         public dialog: MdDialog,
         public dialogRef: MdDialogRef<RegisterModalComponent>,
