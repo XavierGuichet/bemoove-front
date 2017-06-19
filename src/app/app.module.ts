@@ -23,14 +23,11 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { NoContentComponent } from './no-content';
 
-// import { SportySubscribeModalComponent  } from './modal/sporty-subscribe/sporty-subscribe-modal';
-
 import { AlertComponent } from './_directives/index';
 import { AuthUserGuard, AuthCoachGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService } from './_services/index';
 
 // Forms
-// import { SubscribeFormReactiveModule } from './form/subscribe/subscribe-form-reactive.module';
 import { UserManagerModule } from './user-manager/user-manager.module';
 
 import { WelcomeCoachComponent } from './welcome/coach/coach.component';
@@ -83,8 +80,6 @@ type StoreType = {
     WelcomeCoachComponent,
     HomeComponent,
 
-    // SportySubscribeModalComponent,
-
     AlertComponent,
 
     TextChangerDirective
@@ -110,7 +105,6 @@ type StoreType = {
     { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   entryComponents: [ ]
-  // entryComponents: [ SportySubscribeModalComponent ]
 })
 
 export class AppModule {
