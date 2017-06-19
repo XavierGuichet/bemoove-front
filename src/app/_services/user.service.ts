@@ -24,7 +24,14 @@ export class UserService {
                         .map((response: Response) => response.json());
     }
 
-    public create(user: User) {
+    public create(user: User, registerUserType: string) {
+        if (registerUserType === 'User') {
+            user.roles = 'ROLE_USER';
+        } else if (registerUserType === 'Coach') {
+            user.roles = 'ROLE_COACH';
+        } else {
+            console.log('error bad user Type');
+        }
         return this.http.post(this.UsersUrl, user, this.jwt())
                         .map((response: Response) => response.json());
     }
