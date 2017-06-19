@@ -2,6 +2,7 @@
   <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
     <h1>Bye-bye les places vacantes.</h1>
     <h2>Rentabilisez vos cours collectif</h2>
+    <button type="button" md-raised-button color="primary" class="cta_subsribe"  simplePageScroll href="#subscribeForm">Je propose mes cours sur Bemoove</button>
   </div>
 </div>
 
@@ -99,30 +100,13 @@
 
 <div class="view form-section">
   <div class="row">
-    <div class="col-10 offset-1 text-center">
+    <div class="col-10 offset-1 text-center" id="subscribeForm">
       <h2>Augmentez votre <span class="yellow">pouvoir d’attraction</span><br/> dès aujourd’hui</h2>
     </div>
-    <form class="col-6 offset-3 " (ngSubmit)="callmeback()">
-      <h3 class="text-center">Inscrivez-vous</h3>
-      <div class="col-8 offset-2 white">
-        <md-input-container class="full-width">
-          <input mdInput placeholder="Nom, Prénom" value="" [(ngModel)]="name"  name="name">
-        </md-input-container>
-      </div>
-      <div class="col-8 offset-2 white">
-        <md-input-container class="full-width">
-          <input mdInput placeholder="Téléphone" value="" [(ngModel)]="phone" name="phone">
-        </md-input-container>
-      </div>
-      <div class="col-8 offset-2 white">
-        <md-input-container class="full-width">
-          <input mdInput placeholder="Mail" value="" [(ngModel)]="mail" name="mail">
-        </md-input-container>
-      </div>
-      <div class="text-center cols-8">
-        <button type="submit" md-raised-button color="primary">Contactez moi</button>
-      </div>
-    </form>
+    <div class="col-4 offset-4">
+        <h3 class="text-center">Inscrivez-vous</h3>
+        <register-form-reactive [theme]="'material'" [registerUserType]="'Coach'"></register-form-reactive>
+    </div>
   </div>
 </div>
 
