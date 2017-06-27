@@ -3,11 +3,12 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { MdSnackBar, MdButtonModule, MdDialogRef } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { User } from '../../../models/user';
+import { User } from '../../../models/index';
 import { LoginModalComponent  } from '../modal/login-modal.component';
 
-import { AlertService, AuthenticationService } from '../../../_services/index';
-import { SpaceService } from '../../../_services/space.service';
+import { AlertService,
+         AuthenticationService,
+         SpaceService } from '../../../_services/index';
 
 @Component({
     selector: 'login-form-reactive',
@@ -69,10 +70,10 @@ export class LoginFormReactiveComponent implements OnInit {
                         return;
                     }
                     if (zone === 'ROLE_USER') {
-                        this.router.navigate(['/user']);
+                        this.router.navigate(['/workouts']);
                         return;
                     }
-                    this.router.navigate(['/search']);
+                    this.router.navigate(['/workouts']);
                 },
                 (error) => {
                     this.alertService.error(error);
