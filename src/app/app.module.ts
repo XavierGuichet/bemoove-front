@@ -24,7 +24,7 @@ import { AppState, InternalStateType } from './app.service';
 import { NoContentComponent } from './no-content';
 
 import { AlertComponent } from './_directives/index';
-import { AuthUserGuard, AuthCoachGuard } from './_guards/index';
+import { AuthMemberGuard, AuthCoachGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService } from './_services/index';
 
 // Forms
@@ -52,7 +52,7 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
   // WorkoutService,
-  AuthUserGuard, AuthCoachGuard,
+  AuthMemberGuard, AuthCoachGuard,
   AlertService,
   AuthenticationService,
   UserService,

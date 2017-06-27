@@ -7,7 +7,7 @@ import { WelcomeCoachComponent } from './welcome/coach/coach.component';
 import { HomeComponent } from './home/home.component';
 import { PagesListComponent } from './pages-list/pages-list.component';
 
-import { AuthUserGuard, AuthCoachGuard } from './_guards/index';
+import { AuthMemberGuard, AuthCoachGuard } from './_guards/index';
 
 // export const ROUTES: Routes = [
 //     { path: '', component: WelcomeSearchComponent },
