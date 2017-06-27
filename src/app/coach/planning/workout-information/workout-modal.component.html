@@ -11,7 +11,12 @@
     </md-tab>
     <md-tab label="Inscrit">
       <div class="tab-container">
-        Ici la liste de vos inscrits à ce cours
+          <table>
+              <tr><th>Ici la liste de vos inscrits à ce cours</th></tr>
+              <tr *ngFor="let booking of bookings">
+                  <td>{{ booking.user.email }}</td>
+              </tr>
+          </table>
       </div>
     </md-tab>
   </md-tab-group>

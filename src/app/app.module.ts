@@ -41,6 +41,7 @@ import { CoachModule } from './coach/coach.module';
 import { WorkoutListModule } from './workout-list/workout-list.module';
 
 import { WorkoutService } from './_services/workout.service';
+import { BookingService } from './_services/booking.service';
 import { TagService } from './tag-service/tag.service';
 
 import { SpaceService } from './_services/space.service';
@@ -55,7 +56,8 @@ const APP_PROVIDERS = [
   AlertService,
   AuthenticationService,
   UserService,
-  SpaceService
+  SpaceService,
+  BookingService
 ];
 
 type StoreType = {

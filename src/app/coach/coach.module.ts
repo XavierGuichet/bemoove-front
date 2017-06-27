@@ -27,12 +27,14 @@ import { AddressFormComponent } from './form/address/address.component';
 
 import { ModalAddressFormComponent } from './modal/modal-address-form.component';
 
-import { SportService } from '../_services/sport.service';
-import { AddressService } from '../_services/address.service';
-import { ImageService } from '../_services/image.service';
-import { WorkoutService } from '../_services/workout.service';
-import { TagService } from '../_services/tag.service';
-import { SpaceService } from '../_services/space.service';
+import { SportService,
+         AddressService,
+         ImageService,
+         WorkoutService,
+         TagService,
+         SpaceService,
+         BookingService
+     } from '../_services/index';
 
 import { WorkoutDateProvider } from './workoutdate.provider';
 
@@ -75,6 +77,7 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
         WorkoutService,
         ImageService,
         SpaceService,
+        BookingService,
         WorkoutDateProvider,
         {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n} ]
 })
