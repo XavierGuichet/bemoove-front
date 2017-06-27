@@ -37,5 +37,4 @@ export class Workout {
         this.tags = tags;
         this.photo = photo;
     }
-
 }
