@@ -1,5 +1,5 @@
 <md-spinner *ngIf="loading" class="block-center" color="accent"></md-spinner>
-<form [formGroup]="LoginForm" *ngIf="active" (ngSubmit)="onSubmit()">
+<form [formGroup]="LoginForm" *ngIf="active && !loading" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="username">Identifiant</label>
     <input type="text" class="form-control" formControlName="username" required  />
