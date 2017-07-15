@@ -49,9 +49,9 @@ export class BookingService {
 
     private jwt() {
         // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token ,
+        let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
+        if (currentAccount && currentAccount.token) {
+            let headers = new Headers({ 'Authorization': 'Bearer ' + currentAccount.token ,
                                         'Content-Type': 'application/json',
                                         'Accept': 'application/json' });
             return new RequestOptions({ headers });

@@ -1,0 +1,33 @@
+h1 {
+    margin-top: 1em;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+h2 {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+.tab-container {
+    margin: 24px 0;
+}
+.mat-card {
+    &.form-card {
+        margin-bottom: 2em;
+        & .form-card__title {
+            font-family: 'texgyreadventor';
+            font-size: 1.125rem;
+            color: #229ba7;
+        }
+    }
+}
+
+.secondary-navigation {
+    z-index: 5;
+    border-right: 1px solid #D9096D;
+    padding: 0;
+}
+.main-content {
+    padding: 0 2em;
+    background: #ffffff;
+}

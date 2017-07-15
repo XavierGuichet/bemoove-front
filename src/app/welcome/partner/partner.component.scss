@@ -1,0 +1,195 @@
+.jumbotron {
+    position: relative;
+    background: url("/assets/img/partner-jumbotron.jpg") no-repeat bottom center fixed;
+    min-height: calc(100vh - 5.5rem);
+    z-index: 10;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 0;
+
+    h1 {
+        font-size: 3.25em;
+        color: white;
+        margin-top: 3.5em;
+        text-align: center;
+        text-transform: uppercase;
+        // text-shadow: 1px 1px 2px #363636;
+    }
+    h2 {
+        color: white;
+        font-size: 2em;
+        text-align: center;
+        margin-bottom: 5em;
+    }
+    .cta_subsribe {
+        margin: 0 auto;
+        display: block;
+    }
+}
+.view {
+    min-height: calc(100vh - 3.5rem);
+    margin-bottom: 4em;
+}
+
+.padded {
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
+    h3 {
+        span.title_num {
+            font-weight: 700;
+            position: absolute;
+            left: -0.25em;
+            color: #D9096D;
+        }
+        font-size: 1.375em;
+    }
+    h4 {
+        font-size: 1.125em;
+        color: #D9096D;
+    }
+}
+.avantages {
+    min-height: calc(100vh - 3.5rem);
+    margin-bottom: 8em;
+    h2 {
+        width: 100%;
+        background: #D9096D;
+        color: #ffffff;
+        padding: 1.5em;
+        margin: 0 0 3em;
+    }
+    p {
+        color: #AAAAAA;
+        transition: all 1s;
+    }
+    & .avantages__item:hover {
+        p {
+            color: #363636;
+        }
+    }
+}
+
+
+
+.system {
+    padding: 4em 0;
+    background: #3dcad8;
+    color: #fff;
+    .row.marged {
+        margin-bottom: 1.5em;
+    }
+    h2 {
+        margin: 0em 0 1em;
+    }
+    .systemcard {
+        h3 {
+            font-size: 1.375em;
+            font-weight: normal;
+        }
+        border: 1px solid transparent;
+        transition: all 500ms;
+        padding: 1em;
+        &:hover {
+            border-radius: 1em;
+            border: 1px solid #ffffff;
+            & .material-icons {
+                color: #0d7b8c;
+                transition: all 1s;
+            }
+        }
+    }
+}
+
+.yellow {
+    color: #DFCA1F;
+}
+
+.form-section {
+    background: url("/assets/img/feet-1845598_1920.jpg") no-repeat top center fixed;
+    h2 {
+        font-weight: 700;
+        color: #fff;
+        text-transform: uppercase;
+        margin: 2.5em 0 2.5em;
+    }
+    h3 {
+        margin-bottom: 1em;
+        color: #fff;
+    }
+}
+
+.faq {
+    h2 {
+        text-transform: uppercase;
+        margin: 0em 0 1em;
+    }
+}
+
+#my_typeform {
+    border: none;
+    height: 800px;
+}
+
+.md-18 {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.md-24 {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.md-36 {
+    width: 36px;
+    height: 36px;
+    font-size: 36px;
+    line-height: 1;
+}
+
+.md-48 {
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+    line-height: 1;
+}
+
+.md-64 {
+    width: 64px;
+    height: 64px;
+    font-size: 64px;
+    line-height: 1;
+}
+
+.md-72 {
+    width: 72px;
+    height: 72px;
+    font-size: 72px;
+    line-height: 1;
+}
+
+.md-128 {
+    width: 128px;
+    height: 128px;
+    font-size: 128px;
+    line-height: 1;
+}
+
+.outlined {
+    border: 1px solid #363636;
+}
+
+.round {
+    border-radius: 100%;
+    &.md-64 {
+        padding: 5px;
+        font-size: 0.875em;
+        font-size: 48px;
+        padding: 6px;
+        margin-bottom: 1em;
+    }
+}

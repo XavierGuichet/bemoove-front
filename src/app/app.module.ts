@@ -24,27 +24,25 @@ import { AppState, InternalStateType } from './app.service';
 import { NoContentComponent } from './no-content';
 
 import { AlertComponent } from './_directives/index';
-import { AuthMemberGuard, AuthCoachGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { AuthMemberGuard, AuthPartnerGuard } from './_guards/index';
+import { AlertService, AuthenticationService, AccountService,
+        WorkoutService, BookingService, SpaceService
+        } from './_services/index';
 
 // Forms
-import { UserManagerModule } from './user-manager/user-manager.module';
+import { AccountManagerModule } from './account-manager/account-manager.module';
 
-import { WelcomeCoachComponent } from './welcome/coach/coach.component';
+import { WelcomePartnerComponent } from './welcome/partner/partner.component';
+import { PartnerRegistrationComponent } from './welcome/partner-registration/partner-registration.component';
 import { HomeComponent } from './home/home.component';
 
-import { TopBarCoachRecruitComponent } from './topbar/coach-recruit/coach-recruit.component';
+import { TopBarPartnerRecruitComponent } from './topbar/partner-recruit/partner-recruit.component';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { FooterComponent } from './footer/footer.component';
 
-import { CoachModule } from './coach/coach.module';
+import { PartnerModule } from './partner/partner.module';
+import { MemberModule } from './member/member.module';
 import { WorkoutListModule } from './workout-list/workout-list.module';
-
-import { WorkoutService } from './_services/workout.service';
-import { BookingService } from './_services/booking.service';
-import { TagService } from './tag-service/tag.service';
-
-import { SpaceService } from './_services/space.service';
 
 import { TextChangerDirective } from './_directives/text-changer.attribute';
 // Application wide providers
@@ -52,10 +50,10 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
   // WorkoutService,
-  AuthMemberGuard, AuthCoachGuard,
+  AuthMemberGuard, AuthPartnerGuard,
   AlertService,
   AuthenticationService,
-  UserService,
+  AccountService,
   SpaceService,
   BookingService
 ];
@@ -75,11 +73,12 @@ type StoreType = {
     AppComponent,
     NoContentComponent,
 
-    TopBarCoachRecruitComponent,
+    TopBarPartnerRecruitComponent,
     HeaderNavComponent,
     FooterComponent,
 
-    WelcomeCoachComponent,
+    WelcomePartnerComponent,
+    PartnerRegistrationComponent,
     HomeComponent,
 
     AlertComponent,
@@ -95,10 +94,11 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
     NgbModule.forRoot(),
     CustomMaterialModule,
-    UserManagerModule,
+    AccountManagerModule,
     Angular2FontawesomeModule,
     Ng2SimplePageScrollModule.forRoot(),
-    CoachModule,
+    PartnerModule,
+    MemberModule,
     WorkoutListModule,
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

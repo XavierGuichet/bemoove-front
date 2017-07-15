@@ -1,0 +1,90 @@
+<h1>Coordonnées</h1>
+    <div class="row">
+      <md-card class="form-card col-4">
+        <form>
+          <md-card-title color="primary" class="form-card__title">Coordonnées de votre entreprise</md-card-title>
+          <md-card-content>
+            <div class="form-group">
+              <label for="price">Nom de votre entreprise</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="price">N° d'immatriculation (SIRET)</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="price">N° de TVA</label>
+              <input type="text" class="form-control">
+            </div>
+          </md-card-content>
+          <md-card-actions align="end">
+            <button md-raised-button color="accent">Enregistrer</button>
+          </md-card-actions>
+        </form>
+      </md-card>
+    </div>
+    <div class="row">
+      <md-card class="form-card col-4">
+        <form>
+          <md-card-title color="primary" class="form-card__title">Réprésentant légal</md-card-title>
+          <md-card-content>
+            <form>
+              <div class="form-group">
+                <label for="price">Prénom</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="price">Nom</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="price">Adresse mail</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="price">Date de naissance</label>
+                <div class="input-group">
+                  <input class="form-control" placeholder="dd/mm/YYYY" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                  <!-- <div class="input-group-addon" (click)="d.toggle()">
+                            <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                          </div> -->
+                </div>
+              </div>
+            </form>
+          </md-card-content>
+          <md-card-actions align="end">
+            <button md-raised-button color="accent">Enregistrer</button>
+          </md-card-actions>
+        </form>
+      </md-card>
+    </div>
+    <div class="row">
+      <md-card class="form-card col-4">
+        <form>
+          <md-card-title color="primary" class="form-card__title">Adresse de facturation</md-card-title>
+          <md-card-content>
+            <div class="form-group">
+              <label for="price">Adresse</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="price">Complément d'adresse</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <label for="price">Code Postal</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group col-xs-8">
+                <label for="price">Ville</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </md-card-content>
+          <md-card-actions align="end">
+            <button md-raised-button color="accent">Enregistrer</button>
+          </md-card-actions>
+        </form>
+      </md-card>
+    </div>

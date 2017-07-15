@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Mon compte</h1>
+  <div class="row">
+    <div class="col-12">
+      <md-tab-group>
+        <md-tab label="Coordonées">
+          <div class="tab-container row">
+            <div class="col-12 col-md-6">
+              <personnal-informations-form-reactive *ngIf="profile" [profile]="profile"></personnal-informations-form-reactive>
+            </div>
+            <div class="col-12 col-md-6">
+              <contact-details-form-reactive *ngIf="profile" [profile]="profile"></contact-details-form-reactive>
+              <address-form-reactive *ngIf="profile" [profile]="profile"></address-form-reactive>
+            </div>
+          </div>
+        </md-tab>
+        <md-tab label="Informations de connexion">
+          <div class="tab-container row">
+            <div class="col-12 col-md-6">
+              <email-change-form-reactive></email-change-form-reactive>
+            </div>
+            <div class="col-12 col-md-6">
+              <password-change-form-reactive></password-change-form-reactive>
+            </div>
+          </div>
+        </md-tab>
+      </md-tab-group>
+    </div>
+  </div>
+</div>

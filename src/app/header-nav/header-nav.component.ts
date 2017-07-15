@@ -2,7 +2,7 @@ import { Component, Input, OnInit, HostListener, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/platform-browser';
 
-import { UserManagerModule  } from '../user-manager/user-manager.module';
+import { AccountManagerModule  } from '../account-manager/account-manager.module';
 
 import { AuthenticationService } from '../_services/index';
 import { SpaceService } from '../_services/space.service';

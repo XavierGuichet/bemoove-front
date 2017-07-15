@@ -5,7 +5,7 @@ import { Image } from './image';
 
 export class Workout {
     public id: number;
-    public coach: number;
+    public partner: number;
     public title: string;
     public sport: any;
     public startdate: Date;
@@ -29,7 +29,6 @@ export class Workout {
         this.address = address;
         if (startdate instanceof Date) {
         this.startdate = new Date(startdate);
-        console.log(this.startdate);
         } else { this.startdate = startdate; }
         if (enddate instanceof Date) {
         this.enddate = new Date(enddate);

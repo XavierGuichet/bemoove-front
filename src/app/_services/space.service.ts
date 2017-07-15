@@ -29,10 +29,10 @@ export class SpaceService {
     }
 
     public refreshSpace(): void {
-        let token = localStorage.getItem('currentUser');
+        let token = localStorage.getItem('currentAccount');
         if (token == null || this.jwtHelper.isTokenExpired(token)) {
             if (token != null) {
-                localStorage.removeItem('currentUser');
+                localStorage.removeItem('currentAccount');
             }
             this.setLogged(false);
             this.setUserId(0);
@@ -47,8 +47,8 @@ export class SpaceService {
         if (tokenpayload.roles.filter( (r) => r.indexOf('ROLE_USER') !== -1).length > 0) {
             this.setZone('ROLE_USER');
         }
-        if (tokenpayload.roles.filter( (r) => r.indexOf('ROLE_COACH') !== -1).length > 0) {
-            this.setZone('ROLE_COACH');
+        if (tokenpayload.roles.filter( (r) => r.indexOf('ROLE_PARTNER') !== -1).length > 0) {
+            this.setZone('ROLE_PARTNER');
         }
         this.setUserId(tokenpayload.id);
     }

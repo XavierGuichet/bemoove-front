@@ -1,0 +1,74 @@
+<h1>Bank Account</h1>
+<div class="row">
+  <md-card class="form-card col-4">
+    <form *ngIf="bankAccount" [formGroup]="bankAccountForm" (ngSubmit)="onSubmit()" novalidate>
+      <md-card-title color="primary" class="form-card__title">Coordonnées bancaires</md-card-title>
+      <md-card-content>
+        <div class="form-group row">
+          <label for="ownerName" class="col-sm-3 col-form-label">Nom et Prénom (ou raison sociale) *</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" formControlName="ownerName" name="ownerName">
+            <div *ngIf="formErrors.ownerName" class="form-error">
+              {{ formErrors.ownerName }}
+            </div>
+          </div>
+        </div>
+
+        <div formGroupName="address">
+            <div class="form-group row">
+              <label for="firstline" class="col-sm-3 col-form-label">Adresse *</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="firstline" name="firstline">
+                <div *ngIf="formErrors.address.firstline" class="form-error">
+                  {{ formErrors.address.firstline }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="secondline" class="col-sm-3 col-form-label">Adresse *</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="secondline" name="secondline">
+                <div *ngIf="formErrors.address.secondline" class="form-error">
+                  {{ formErrors.address.secondline }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="postalCode" class="col-sm-3 col-form-label">Code postal *</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="postalCode" name="postalCode">
+                <div *ngIf="formErrors.address.postalCode" class="form-error">
+                  {{ formErrors.address.postalCode }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="city" class="col-sm-3 col-form-label">Ville *</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="city" name="city">
+                <div *ngIf="formErrors.address.city" class="form-error">
+                  {{ formErrors.address.city }}
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="iban" class="col-sm-3 col-form-label">IBAN *</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" formControlName="iban" name="iban">
+            <div *ngIf="formErrors.iban" class="form-error">
+              {{ formErrors.iban }}
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+      <md-card-actions align="end">
+        <button [disabled]="loading || !bankAccountForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+      </md-card-actions>
+    </form>
+  </md-card>
+</div>

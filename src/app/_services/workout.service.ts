@@ -55,8 +55,16 @@ export class WorkoutService {
             .then((workouts) => workouts.find((workout) => workout.id === id));
     }
 
-    public getWorkoutsByCoachIdAndDateInterval(id: number, startdate: Date, lastdate: Date): Promise<Workout[]> {
-        return this.http.get(this.workoutsUrl + '?coach.id=' + id + '&startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
+    public getWorkoutsByPartnerIdAndDateInterval(id: number, startdate: Date, lastdate: Date): Promise<Workout[]> {
+        return this.http.get(this.workoutsUrl + '?partner.id=' + id + '&startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
+                            { headers: this.headersSearch })
+            .toPromise()
+            .then((response) => response.json() as Workout[])
+            .catch(this.handleError);
+    }
+
+    public getWorkoutsByDateInterval(startdate: Date, lastdate: Date): Promise<Workout[]> {
+        return this.http.get(this.workoutsUrl + '?startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
                             { headers: this.headersSearch })
             .toPromise()
             .then((response) => response.json() as Workout[])
@@ -94,10 +102,10 @@ export class WorkoutService {
 
     private jwt() {
         // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
+        let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
+        if (currentAccount && currentAccount.token) {
             let headers = new Headers({
-                'Authorization': 'Bearer ' + currentUser.token,
+                'Authorization': 'Bearer ' + currentAccount.token,
                 'Content-Type': 'application/json',
                 'Accept': 'application/json' });
             // fixme : above is not accepted by linter, don't know if it work now

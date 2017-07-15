@@ -1,0 +1,16 @@
+.tab-container {
+    margin: 24px 0;
+}
+.mat-card {
+    &.form-card {
+        margin-bottom: 24px;
+        & .form-card__title {
+            font-family: 'texgyreadventor';
+            font-size: 1.125rem;
+            color: #229ba7;
+        }
+    }
+}
+.col-form-label {
+    text-align: right;
+}

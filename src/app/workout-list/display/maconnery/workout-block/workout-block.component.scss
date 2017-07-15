@@ -1,88 +1,200 @@
-.mat-card {
-    padding: 0 24px 24px !important;
-    margin-bottom: 24px;
-}
-.mat-card > .colored:first-child {
-  margin-top: -24px;
-  display: flex;
-  padding: 0 0 0 24px;
-}
-.image-container {
-    position: relative;
+.workout-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 1.5em;
+  color: #fff;
+  color: white;
+  border: 1px solid #d5d5d5;
+  background-size: contain;
+  box-shadow: 1px 1px 2px #ddd;
 
-    .mat-card-image {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-    }
-
-    .price {
-        position: absolute;
-        top: 0;
-        right: -12px;
-        height: 42px;
-        background: #fff;
-        color: #666;
-        padding: 0.5em;
-        margin-right: 8px;
-        box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
-        z-index: 2;
-    }
-
-    .sport {
-        position: absolute;
-        top: 4px;
-        background: rgba(61 ,202, 216, 0.5);
-        padding: 5px;
-        width: calc( 100% + 48px);
-        margin-left: -24px;
-        margin-right: 24px;
-        z-index: 1;
-        color: #fff;
-        padding-left: 24px;
-    }
-}
-
-.colored {
-  background: #3dcad8;
-  color: #ffffff;
-  margin-left: -24px;
-  margin-right: -24px;
-}
-
-.mat-card-content p.styled {
-    font-size: 15px;
-  font-family: 'texgyreadventor';
-  font-weight: bold;
-  color: #888;
-  margin-top: 16px;
-}
-
-.timeblock {
-  font-size: 1.25em;
-  text-transform: uppercase;
-  text-align: center;
-  border-top: 1px solid #fff;
-
-  .small {
-    font-size: 0.75rem;
-    margin-bottom: 0;
-    text-transform: none;
-    color: #666;
-    &.bold {
-        font-weight: bold;
-    }
+  &:before {
+    display: block;
+    padding-top: 100%;
+    content: "";
   }
 
-  & > div {
-    padding: 0.75rem 0;
-    border-right: 1px solid #ffffff;
+  .workout-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-    &:last-child {
-      border-right: none;
+    .workout-sport {
+      position: absolute;
+      z-index: 10;
+      top: 8px;
+      right: 0;
+      display: inline-block;
+      padding: 2px 8px;
+      cursor: pointer;
+      border-radius: 4px 0 0 4px;
+      background: rgba(231, 62, 96, 0.8);
+    }
+
+    .workout-content {
+      position: absolute;
+      z-index: 5;
+      bottom: 36px;
+      left: 0;
+      padding: 0 8px;
+      transition: all 0.25s ease-out;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 5px ,rgba(0,0,0,0.65) 100%);
+      height: 34%;
+      overflow: hidden;
+
+      h3 {
+          width: auto;
+        padding: 0.5rem 0;
+        margin:0 auto 0.5rem;
+        font-size: 1.1rem;
+        .time {
+            font-size: 1rem;
+        }
+      }
+
+      .date {
+        margin-bottom: 0.5em;
+        font-size: 0.875em;
+      }
+
+      p.subtitle {
+        margin-bottom: 0.5em;
+        font-size: 0.875em;
+      }
+
+      p.description {
+        overflow: hidden;
+        transition: all 0.5s ease-out;
+        color: #ccc;
+        font-size: 0.875em;
+        line-height: 1.4em;
+      }
+    }
+    &:hover .workout-content {
+      bottom: 34%;
+      height: 66%;
+      p.description {
+          color: #fff;
+      }
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      transition: all 0.25s ease-out;
+      background: rgb(231, 62, 96);
+      overflow: hidden;
+      height: 36px;
+      width: 100%;
+
+      .workout-address {
+        position: absolute;
+        bottom: 36px;
+        padding: 8px 8px 0;
+        font-size: 0.9125em;
+        p.address {
+            margin: 0;
+            line-height: 1.2em;
+        }
+      }
+
+      .workout-bookit {
+        position: absolute;
+        bottom: 0;
+        z-index: 15;
+        display: flex;
+        width: 100%;
+        height: 36px;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+
+        p {
+          margin: 0;
+        }
+
+        span.price {}
+
+        span.bookit {
+          font-weight: bold;
+        }
+      }
+    }
+    &:hover .footer {
+      height: 34%;
     }
   }
 }
-.tag {
-    display: inline-block;
-    border: 1px solid #363636;
-}
+
+//
+//
+//
+//
+// .footer {
+//   position: absolute;
+//   bottom: 0;
+//   height: auto;
+//   transition: all 0.25s ease-out;
+//   background: #363636;
+//   overflow: hidden;
+//   height: 36px;
+//   width: 100%;
+//
+//   .booking-container {
+//     position: absolute;
+//     bottom: 0;
+//     z-index: 15;
+//     display: flex;
+//     width: 100%;
+//     height: 36px;
+//     padding: 0;
+//     color: #fff;
+//     font-size: 16px;
+//     align-items: center;
+//     justify-content: center;
+//
+//     button {
+//       margin: 4px 0;
+//       padding: 4px 6px;
+//       color: #fff;
+//       border: 1px solid transparent;
+//       background: transparent;
+//       font-weight: bold;
+//     }
+//   }
+//
+//   .icon-container {
+//     color: #fff;
+//     position: absolute;
+//     bottom: 36px;
+//   }
+// }
+//
+// &:hover .footer {
+//   height: 34%;
+// }
+//   }
+// }
+//
+// .md-14 {
+//   font-size: 14px;
+//   height: 14px;
+//   width: 14px;
+// }
+//
+// .md-16 {
+//   font-size:16px;
+//   height: 16px;
+//   width: 16px;
+//   line-height: 18px;
+// }
+//
+// .md-18 {
+//   font-size:18px;
+//   height: 18px;
+//   width: 18px;
+//   vertical-align: baseline;
+// }
