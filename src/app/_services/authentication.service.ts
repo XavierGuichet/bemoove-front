@@ -25,7 +25,7 @@ export class AuthenticationService {
                 if (user && user.token) {
                     // store user details and jwt token in local storage
                     //          to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem('currentAccount', JSON.stringify(user));
                 }
                 this.spaceService.refreshSpace();
             });
@@ -33,7 +33,7 @@ export class AuthenticationService {
 
     public logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('currentAccount');
         this.spaceService.refreshSpace();
     }
 

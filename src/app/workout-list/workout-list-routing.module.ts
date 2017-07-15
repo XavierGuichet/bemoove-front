@@ -6,8 +6,6 @@ import { WorkoutListMaconneryComponent } from './display/maconnery/workout-list-
 
 import { SpaceService } from '../_services/space.service';
 
-import { AuthUserGuard, AuthCoachGuard } from '../_guards/index';
-
 @NgModule({
   imports: [RouterModule.forChild([
     {

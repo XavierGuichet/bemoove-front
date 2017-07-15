@@ -1,0 +1,55 @@
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
+  <md-card class="form-card">
+    <md-card-title color="primary" class="form-card__title">Mon adresse</md-card-title>
+    <md-card-content>
+      <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">Nom de l'addresse</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="name" name="name">
+          <div *ngIf="formErrors.name" class="form-error">
+            {{ formErrors.name }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="firstline" class="col-sm-3 col-form-label required">Adresse</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="firstline" name="firstline">
+          <div *ngIf="formErrors.firstline" class="form-error">
+            {{ formErrors.firstline }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="secondline" class="col-sm-3 col-form-label">Adresse</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="secondline" name="secondline">
+          <div *ngIf="formErrors.secondline" class="form-error">
+            {{ formErrors.secondline }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="postalCode" class="col-sm-3 col-form-label">Code postal</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="postalCode" name="postalCode">
+          <div *ngIf="formErrors.postalCode" class="form-error">
+            {{ formErrors.postalCode }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="city" class="col-sm-3 col-form-label">Ville</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="city" name="city">
+          <div *ngIf="formErrors.city" class="form-error">
+            {{ formErrors.city }}
+          </div>
+        </div>
+      </div>
+    </md-card-content>
+    <md-card-actions align="end">
+      <button [disabled]="loading || !addressForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+    </md-card-actions>
+  </md-card>
+</form>

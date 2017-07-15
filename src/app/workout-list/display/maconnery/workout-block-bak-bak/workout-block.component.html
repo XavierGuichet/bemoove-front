@@ -1,0 +1,44 @@
+<md-card *ngIf="workout" class="workout-card">
+  <div class="image-container">
+      <img *ngIf="workout.photo && workout.photo.path" md-card-image src="{{workout.photo.path}}">
+      <div class="price">
+        {{workout.price}} €
+      </div>
+      <div class="sport">
+          {{workout.sport.name}}
+      </div>
+  </div>
+  <md-card-content>
+    <div class="row colored timeblock">
+      <div class="col-8">
+        {{workout.startdate | date: 'EEEE d MMMM'}}
+        <p class="small">{{workout.address.city}}</p>
+      </div>
+      <div class="col-2">
+        <p class="small">début</p>
+        {{workout.startdate | date: 'HH\:mm'}}
+      </div>
+      <div class="col-2">
+        <p class="small">fin</p>
+        {{workout.enddate | date: 'HH\:mm'}}
+      </div>
+    </div>
+    <div class="description">
+        <!-- <md-card-title class="title">{{workout.title}}&nbsp;</md-card-title> -->
+      <p class="styled">{{workout.description}}</p>
+      <p class="styled">{{workout.outfit}}</p>
+      <p class="styled">{{workout.notice}}</p>
+      <div *ngFor="let tag of workout.tags" class="tag">
+        {{tag.name}}
+      </div>
+    </div>
+  </md-card-content>
+  <md-card-actions>
+      <select>
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+      </select>
+      <button md-raised-button type="button" color="primary" (click)="bookWorkout();">Reserver cette séance</button>
+  </md-card-actions>
+</md-card>

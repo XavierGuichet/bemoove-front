@@ -1,0 +1,40 @@
+.navbar {
+  padding: 1em 0 0;
+  border-radius: 0;
+}
+
+.top-menu {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    box-sizing: border-box;
+    & a {
+        display: block;
+        line-height: 2.25em;
+        font-size: 0.875rem;
+        padding: 0.5em 1em 0.5em;
+        margin: 0 0.125em;
+        color: #363636;
+        border-bottom: 1px dotted #b5b5b5;
+        &:visited, &:link {
+            color: #363636;
+        }
+        &:hover, &.active {
+            color: #D9096D;
+            text-decoration: none;
+        }
+    }
+    .valign {
+        vertical-align: middle;
+    }
+  }
+}
+
+
+.top-menu li a, .top-menu li a:visited, .top-menu li a:link
+
+.top-menu li a:hover {
+}
