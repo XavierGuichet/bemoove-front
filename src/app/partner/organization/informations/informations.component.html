@@ -1,89 +1,135 @@
 <h1>Coordonnées</h1>
     <div class="row">
       <md-card class="form-card col-4">
-        <form>
+        <form *ngIf="organization" [formGroup]="contactDetailForm" (ngSubmit)="onSubmitContactDetail()" novalidate>
           <md-card-title color="primary" class="form-card__title">Coordonnées de votre entreprise</md-card-title>
           <md-card-content>
-            <div class="form-group">
-              <label for="price">Nom de votre entreprise</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="price">N° d'immatriculation (SIRET)</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="price">N° de TVA</label>
-              <input type="text" class="form-control">
-            </div>
-          </md-card-content>
-          <md-card-actions align="end">
-            <button md-raised-button color="accent">Enregistrer</button>
-          </md-card-actions>
-        </form>
-      </md-card>
-    </div>
-    <div class="row">
-      <md-card class="form-card col-4">
-        <form>
-          <md-card-title color="primary" class="form-card__title">Réprésentant légal</md-card-title>
-          <md-card-content>
-            <form>
-              <div class="form-group">
-                <label for="price">Prénom</label>
-                <input type="text" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="price">Nom</label>
-                <input type="text" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="price">Adresse mail</label>
-                <input type="text" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="price">Date de naissance</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="dd/mm/YYYY" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-                  <!-- <div class="input-group-addon" (click)="d.toggle()">
-                            <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                          </div> -->
+              <div class="form-group row">
+                <label for="legalName" class="col-sm-3 col-form-label">Nom de votre entreprise</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="legalName" name="legalName">
+                  <div *ngIf="formErrors.legalName" class="form-error">
+                    {{ formErrors.legalName }}
+                  </div>
                 </div>
               </div>
-            </form>
+              <div class="form-group row">
+                <label for="siret" class="col-sm-3 col-form-label">N° d'immatriculation (SIRET)</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="siret" name="siret">
+                  <div *ngIf="formErrors.siret" class="form-error">
+                    {{ formErrors.siret }}
+                  </div>
+                </div>
+              </div>
+            <div class="form-group row">
+              <label for="vatNumber" class="col-sm-3 col-form-label">N° de TVA</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="vatNumber" name="vatNumber">
+                <div *ngIf="formErrors.vatNumber" class="form-error">
+                  {{ formErrors.vatNumber }}
+                </div>
+              </div>
+            </div>
           </md-card-content>
           <md-card-actions align="end">
-            <button md-raised-button color="accent">Enregistrer</button>
+            <button [disabled]="loading || !contactDetailForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
           </md-card-actions>
         </form>
       </md-card>
     </div>
     <div class="row">
       <md-card class="form-card col-4">
-        <form>
+          <form *ngIf="organization" [formGroup]="legalRepresentativeForm" (ngSubmit)="onSubmitLegalRepresentative()" novalidate>
+            <md-card-title color="primary" class="form-card__title">Réprésentant légal</md-card-title>
+            <md-card-content>
+              <div class="form-group row">
+                <label for="firstname" class="col-sm-3 col-form-label">Prénom</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="firstname" name="firstname">
+                  <div *ngIf="formErrors.legalRepresentativefirstname" class="form-error">
+                    {{ formErrors.legalRepresentativefirstname }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="lastname" class="col-sm-3 col-form-label">Nom</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="lastname" name="lastname">
+                  <div *ngIf="formErrors.legalRepresentativelastname" class="form-error">
+                    {{ formErrors.legalRepresentativelastname }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label">Adresse email</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="email" name="email">
+                  <div *ngIf="formErrors.legalRepresentativeemail" class="form-error">
+                    {{ formErrors.legalRepresentativeemail }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="birthdate" class="col-sm-3 col-form-label">Date de naissance</label>
+                <div class="col-sm-9">
+                    <ngb-datepicker #dp formControlName="birthdate"  name="birthdate"></ngb-datepicker>
+                  <div *ngIf="formErrors.legalRepresentativebirthdate" class="form-error">
+                    {{ formErrors.legalRepresentativebirthdate }}
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+            <md-card-actions align="end">
+              <button [disabled]="loading || !legalRepresentativeForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+            </md-card-actions>
+          </form>
+      </md-card>
+    </div>
+    <div class="row">
+      <md-card class="form-card col-6">
+        <form *ngIf="organization" [formGroup]="addressForm" (ngSubmit)="onSubmitAddress()" novalidate>
           <md-card-title color="primary" class="form-card__title">Adresse de facturation</md-card-title>
           <md-card-content>
-            <div class="form-group">
-              <label for="price">Adresse</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="price">Complément d'adresse</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <label for="price">Code Postal</label>
-                <input type="text" class="form-control">
+              <div class="form-group row">
+                <label for="firstline" class="col-sm-3 col-form-label">Adresse</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="firstline" name="firstline">
+                  <div *ngIf="formErrors.addressfirstline" class="form-error">
+                    {{ formErrors.addressfirstline }}
+                  </div>
+                </div>
               </div>
-              <div class="form-group col-xs-8">
-                <label for="price">Ville</label>
-                <input type="text" class="form-control">
+            <div class="form-group row">
+              <label for="secondline" class="col-sm-3 col-form-label">Complément d'adresse</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="secondline" name="secondline">
+                <div *ngIf="formErrors.addresssecondline" class="form-error">
+                  {{ formErrors.addresssecondline }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="postalCode" class="col-sm-3 col-form-label">Code Postal</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="postalCode" name="postalCode">
+                <div *ngIf="formErrors.addresspostalCode" class="form-error">
+                  {{ formErrors.addresspostalCode }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="city" class="col-sm-3 col-form-label">Ville</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="city" name="city">
+                <div *ngIf="formErrors.addresscity" class="form-error">
+                  {{ formErrors.addresscity }}
+                </div>
               </div>
             </div>
           </md-card-content>
           <md-card-actions align="end">
-            <button md-raised-button color="accent">Enregistrer</button>
+            <button [disabled]="loading || !addressForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
           </md-card-actions>
         </form>
       </md-card>

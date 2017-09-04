@@ -18,10 +18,8 @@ import { SpaceService, AddressService } from '../../../_services/index';
 
 export class BankAccountComponent implements OnInit {
   public loading = false;
-  public valid = false; // TODO unused ?
 
   public bankAccountForm: FormGroup;
-  public submitted = false;
 
   public bankAccount: BankAccount;
   public limitedBankAccount: BankAccount;
@@ -32,10 +30,7 @@ export class BankAccountComponent implements OnInit {
       firstline: '',
       secondline: '',
       city: '',
-      postalCode: '',
-      other: {
-          item1: ''
-      }
+      postalCode: ''
     },
     iban: '',
   };
@@ -45,19 +40,19 @@ export class BankAccountComponent implements OnInit {
       required: 'startdate is required.',
     },
     'address.firstline': {
-            required: 'firstline is required.',
-        },
+      required: 'firstline is required.',
+    },
     'address.secondline': {
-        },
+    },
     'address.city': {
-          required: 'city est nécessaire.',
-        },
+      required: 'city est nécessaire.',
+    },
     'address.postalCode': {
-          required: 'postalCode est réquise.',
-      },
-      'address.other.item1': {
-          required: 'blabla',
-      },
+      required: 'postalCode est réquise.',
+    },
+    'address.other.item1': {
+      required: 'blabla',
+    },
     'iban': {
       required: 'Veuillez choisir une adresse.',
     }
@@ -73,25 +68,22 @@ export class BankAccountComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-      this.bankAccountService.getByOwnerId(this.spaceService.getUserId()).then((bankAccount) => {
-          if (bankAccount.hasOwnProperty('id')) {
-              this.bankAccount = bankAccount[0];
-          } else {
-              this.bankAccount = new BankAccount();
-              this.bankAccount.address = new Address();
-          }
-          this.buildForm();
-      });
-    // this.bankAccount = new BankAccount();
+    this.bankAccountService.getByOwnerId(this.spaceService.getUserId()).then((bankAccount) => {
+        // TODO : This is ugly, service should return one result in this case
+      if (bankAccount[0].hasOwnProperty('id')) {
+        this.bankAccount = bankAccount[0];
+      } else {
+        this.bankAccount = new BankAccount();
+        this.bankAccount.address = new Address();
+      }
+      this.buildForm();
+    });
   }
 
   public onSubmit(): void {
-      this.limitedBankAccount = this.prepareLimitedBankAccount();
+    this.limitedBankAccount = this.prepareLimitedBankAccount();
     this.createRelatedEntities(this.limitedBankAccount).subscribe(() => {
       let request;
-    //   console.log(limitedBankAccount);
-    //
-      this.submitted = true;
       this.loading = true;
       if (this.limitedBankAccount.id) {
         request = this.bankAccountService.update(this.limitedBankAccount);
@@ -104,20 +96,20 @@ export class BankAccountComponent implements OnInit {
 
   public createRelatedEntities(limitedBankAccount) {
     let ObservableOfCreation: any[] = new Array();
-    console.log(this.limitedBankAccount);
-    if (this.limitedBankAccount.address) {
-      ObservableOfCreation.push(this.addressService.create(limitedBankAccount.address).map((address) => this.limitedBankAccount.address.id = address.id));
+
+    if (this.limitedBankAccount.hasOwnProperty('address')) {
+      ObservableOfCreation.push(this.addressService.create(this.limitedBankAccount.address).map((address) => this.limitedBankAccount.address.id = address.id));
     }
 
-      if (this.bankAccount.address) {
-          return Observable.forkJoin(ObservableOfCreation).map(() => true);
-      } else {
-        return Observable.empty();
-      }
+    if (this.bankAccount.address) {
+      return Observable.forkJoin(ObservableOfCreation).map(() => true);
+    } else {
+      return Observable.empty();
+    }
   }
 
-  private prepareLimitedBankAccount() {
-      const form = this.bankAccountForm;
+  private prepareLimitedBankAccount(): BankAccount {
+    const form = this.bankAccountForm;
     const formModel = this.bankAccountForm.value;
 
     const limitedBankAccount: BankAccount = new BankAccount();
@@ -125,16 +117,17 @@ export class BankAccountComponent implements OnInit {
       limitedBankAccount.id = this.bankAccount.id;
     }
     if (form.get('ownerName').dirty) {
-        limitedBankAccount.ownerName = formModel.ownerName;
+      limitedBankAccount.ownerName = formModel.ownerName;
     }
     if (form.get('address').dirty) {
-        limitedBankAccount.address.firstline = formModel.address.firstline;
-        limitedBankAccount.address.secondline = formModel.address.secondline;
-        limitedBankAccount.address.city = formModel.address.city;
-        limitedBankAccount.address.postalCode = formModel.address.postalCode;
+      limitedBankAccount.address = new Address();
+      limitedBankAccount.address.firstline = formModel.address.firstline;
+      limitedBankAccount.address.secondline = formModel.address.secondline;
+      limitedBankAccount.address.city = formModel.address.city;
+      limitedBankAccount.address.postalCode = formModel.address.postalCode;
     }
     if (form.get('iban').dirty) {
-        limitedBankAccount.iban = formModel.iban;
+      limitedBankAccount.iban = formModel.iban;
     }
     return limitedBankAccount;
   }
@@ -147,33 +140,33 @@ export class BankAccountComponent implements OnInit {
   }
 
   private recursiveCheck(formErrors, validationprefix = '') {
-      const form = this.bankAccountForm;
-      if (validationprefix !== '') {
-          validationprefix += '.';
+    const form = this.bankAccountForm;
+    if (validationprefix !== '') {
+      validationprefix += '.';
+    }
+    for (const field in formErrors) {
+      if (typeof formErrors[field] === 'string') {
+        const control = form.get(validationprefix + field);
+        formErrors[field] = this.checkControlError(control, validationprefix + field);
+      } else if (typeof this.formErrors[field] === 'object') {
+        let prefix = validationprefix + field;
+        formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
       }
-      for (const field in formErrors) {
-          if (typeof formErrors[field] === 'string') {
-              const control = form.get(validationprefix + field);
-              formErrors[field] = this.checkControlError(control, validationprefix + field);
-          } else if (typeof this.formErrors[field] === 'object') {
-              let prefix = validationprefix + field;
-              formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
-          }
-      }
-      return formErrors;
+    }
+    return formErrors;
   }
 
   private checkControlError(control, field) {
-      let errorMessages = '';
-      if (control && control.dirty && !control.valid) {
-       const messages = this.validationMessages[field];
-       for (const key in control.errors) {
-           if (control.errors.hasOwnProperty(key)) {
-               errorMessages += messages[key] + ' ';
-           }
-       }
-     }
-     return errorMessages;
+    let errorMessages = '';
+    if (control && control.dirty && !control.valid) {
+      const messages = this.validationMessages[field];
+      for (const key in control.errors) {
+        if (control.errors.hasOwnProperty(key)) {
+          errorMessages += messages[key] + ' ';
+        }
+      }
+    }
+    return errorMessages;
   }
 
   private buildForm(): void {
@@ -182,7 +175,7 @@ export class BankAccountComponent implements OnInit {
         Validators.required,
       ]
       ],
-      address: this.fb.group({ // <-- the child FormGroup
+      address: this.fb.group({
         firstline: [this.bankAccount.address.firstline, [
           Validators.required,
         ]

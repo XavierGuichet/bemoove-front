@@ -29,5 +29,19 @@ h2 {
 }
 .main-content {
     padding: 0 2em;
-    background: #ffffff;
+    background: #ffffff url('/assets/img/admin-bg.jpg') left bottom / 100% auto no-repeat;
+}
+
+.form-control-inline-seamless {
+    border: none;
+    border-bottom: 1px solid grey;
+    &.small {
+        width: 80px;
+    }
+    &.medium {
+        width: 120px;
+    }
+    &.large {
+        width: 160px;
+    }
 }

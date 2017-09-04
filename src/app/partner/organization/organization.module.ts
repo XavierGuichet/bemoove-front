@@ -11,11 +11,16 @@ import { BillingMandateComponent } from './billing-mandate/billing-mandate.compo
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
 
+import { LegalRepresentativeFormReactiveComponent } from './form/legalrepresentative/legalrepresentative-reactive-form.component';
+
 import { OrganizationRoutingModule } from './organization-routing.module';
 
 import { PartnerNavSecondaryComponent } from '../nav/secondary/nav-secondary.component';
 
 import { BankAccountService } from './_services/bank-account.service';
+import { LegalRepresentativeService } from './_services/legal-representative.service';
+import { InvoiceSettingsService } from './_services/invoice-settings.service';
+import { PersonService } from './_services/person.service';
 
 @NgModule({
     bootstrap: [
@@ -35,12 +40,16 @@ import { BankAccountService } from './_services/bank-account.service';
       InvoiceSettingsComponent,
       BankAccountComponent,
       BillingMandateComponent,
-      PartnerNavSecondaryComponent
+      PartnerNavSecondaryComponent,
+      LegalRepresentativeFormReactiveComponent
     ],
   exports: [ OrganizationComponent ],
   entryComponents: [ ],
   providers:    [
-      BankAccountService
+      BankAccountService,
+      LegalRepresentativeService,
+      InvoiceSettingsService,
+      PersonService
     ]
 })
 export class OrganizationModule { }
