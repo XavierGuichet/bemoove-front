@@ -12,4 +12,8 @@ export class Profile {
     public presentation: string;
     public birthdate: Date;
     public avatar: Image;
+
+    constructor(
+    ) {
+    }
 }

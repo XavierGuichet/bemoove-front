@@ -21,19 +21,19 @@ export class MemberProfileComponent implements OnInit {
 
   public ngOnInit(): void {
     // TODO
-    this.profileService.getByUserId(this.spaceService.getUserId())
-      .subscribe((profile) => {
-        if (profile.length > 0) {
-          this.profile = profile[0];
-        } else {
-          this.profile = new Profile();
-        }
-        if (!this.profile.address) {
-            this.profile.address = new Address();
-        }
-        console.log('from profileComponent');
-        console.log(this.profile);
-      });
+    // this.profileService.getByOwnerId(this.spaceService.getUserId())
+    //   .then((profile) => {
+    //     if (profile.length > 0) {
+    //       this.profile = profile[0];
+    //     } else {
+    //       this.profile = new Profile();
+    //     }
+    //     if (!this.profile.address) {
+    //         this.profile.address = new Address();
+    //     }
+    //     console.log('from profileComponent');
+    //     console.log(this.profile);
+    //   });
       this.alertService.success('I\'m a cool success message');
   }
 }

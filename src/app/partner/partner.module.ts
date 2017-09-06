@@ -19,6 +19,7 @@ import { PlanningModule } from './planning/planning.module';
 import { PartnerWorkoutAddComponent } from './workout/add/workout-add.component';
 import { PartnerWorkoutEditComponent } from './workout/edit/workout-edit.component';
 import { WorkoutPreviewComponent } from './workout/preview/workout-preview.component';
+import { ProfileComponent } from './profile/profile.component';
 
 import { PartnerNavPrimaryComponent } from './nav/primary/nav-primary.component';
 import { WorkoutFormReactiveComponent } from './workout/form/workout-form-reactive.component';
@@ -63,6 +64,7 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
         WorkoutFormReactiveComponent,
         AddressFormComponent,
         ModalAddressFormComponent,
+        ProfileComponent,
         ImageToBase64Directive,
         ImageCropperComponent
     ],

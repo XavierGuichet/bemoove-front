@@ -24,9 +24,11 @@ export class ProfileService {
                         .map((response: Response) => response.json());
     }
 
-    public getByUserId(id: number) {
-        return this.http.get(this.ProfilesUrl + '?user.id=' + id, this.jwt())
-                        .map((response: Response) => response.json());
+    public getByOwnerId(id: number): Promise<Profile> {
+        return this.http.get(this.ProfilesUrl + '?owner.id=' + id, this.jwt())
+                        .toPromise()
+                        .then((response) => response.json() as Profile)
+                        .catch(this.handleError);
     }
 
     public create(profile: Profile) {
@@ -55,5 +57,10 @@ export class ProfileService {
             options.headers = headers;
             return options;
         }
+    }
+
+    private handleError(error: any): Promise<any> {
+      console.error('An error occurred', error); // for demo purposes only
+      return Promise.reject(error.message || error);
     }
 }
