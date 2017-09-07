@@ -40,7 +40,6 @@ export class ImageService {
     }
 
     // private helper methods
-
     private jwt() {
         // create authorization header with jwt token
         let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));

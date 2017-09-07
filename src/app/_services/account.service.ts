@@ -25,13 +25,6 @@ export class AccountService {
     }
 
     public create(account: Account) {
-        // if (registerAccountType === 'Account') {
-        //     account.roles = 'ROLE_USER';
-        // } else if (registerAccountType === 'Partner') {
-        //     account.roles = 'ROLE_PARTNER';
-        // } else {
-        //     console.log('error bad account Type');
-        // }
         return this.http.post(this.AccountsUrl, account, this.jwt())
                         .map((response: Response) => response.json());
     }
@@ -47,7 +40,6 @@ export class AccountService {
     }
 
     // private helper methods
-
     private jwt() {
         // create authorization header with jwt token
         let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));

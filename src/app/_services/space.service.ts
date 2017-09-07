@@ -40,7 +40,6 @@ export class SpaceService {
             return;
         }
         let tokenpayload = this.jwtHelper.decodeToken(token);
-        console.log(tokenpayload);
         this.setUserId(tokenpayload.id);
         this.setLogged(true);
         this.toggleTopBar(false);

@@ -18,8 +18,6 @@ export class WorkoutService {
     constructor(private http: Http) { }
 
     public create(workout: Workout) {
-        // Workout Api class convert workout model used in front
-        // in the model used by API POST
         this.workoutApi = new WorkoutApi(workout);
         return this.http.post(  this.workoutsUrl,
                                 this.workoutApi,
@@ -108,9 +106,6 @@ export class WorkoutService {
                 'Authorization': 'Bearer ' + currentAccount.token,
                 'Content-Type': 'application/json',
                 'Accept': 'application/json' });
-            // fixme : above is not accepted by linter, don't know if it work now
-            // should be test and understood
-            // return new RequestOptions({ headers: headers });
             return new RequestOptions({ headers });
         }
     }

@@ -1,4 +1,4 @@
-import { Profile } from './index';
+import { Profile } from '../../models/index';
 
 export class ProfileApi {
     public id: number;
@@ -22,9 +22,6 @@ export class ProfileApi {
         this.presentation = profile.presentation;
         this.birthdate = profile.birthdate;
 
-        // if ( profile.address.id ) {
-        //     this.address = '/addresses/' + profile.address.id;
-        // }
         if ( profile.photo.id ) {
             this.photo = '/images/' + profile.photo.id;
         }

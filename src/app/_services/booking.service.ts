@@ -25,27 +25,12 @@ export class BookingService {
                  .then((response) => response.json() as Booking[]);
     }
 
-    // public getById(id: number) {
-    //     return this.http.get(this.bookingUrl + '/' + id, this.jwt())
-    //                     .map((response: Response) => response.json());
-    // }
-
     public create(booking: Booking) {
         this.bookingApi = new BookingApi(booking);
         console.log(this.bookingApi);
         return this.http.post(this.bookingUrl, this.bookingApi, this.jwt())
                         .map((response: Response) => response.json());
     }
-
-    // public update(booking: Booking) {
-    //     return this.http.put(this.bookingUrl + '/' + sport.id, sport, this.jwt())
-    //                     .map((response: Response) => response.json());
-    // }
-    //
-    // public delete(id: number) {
-    //     return this.http.delete(this.bookingUrl + '/' + id, this.jwt())
-    //                     .map((response: Response) => response.json());
-    // }
 
     private jwt() {
         // create authorization header with jwt token
