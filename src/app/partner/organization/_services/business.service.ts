@@ -34,7 +34,6 @@ export class BusinessService {
     private jwt() {
         // create authorization header with jwt token
         let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
-        console.log(currentAccount);
         if (currentAccount && currentAccount.token) {
             let headers = new Headers({
                                 'Authorization': 'Bearer ' + currentAccount.token,

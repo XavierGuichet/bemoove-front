@@ -49,17 +49,6 @@ export class ViewComponent implements OnInit {
       let dialogRef = this.dialog.open(WorkoutModalComponent, {
           data: id,
         });
-  //     dialogRef.afterClosed().subscribe(result => {
-  //   console.log(`Dialog result: ${result}`); // Pizza!
-  // });
-
-      dialogRef.afterClosed().subscribe((resultPromise) => {
-      //     console.log(resultPromise);
-      //   return resultPromise.result.then((result) => {
-        //   this.addresses.unshift(resultPromise);
-        //   this.workout.address = resultPromise;
-      //   }, () => { console.log('Rejected!'); });
-      });
     }
 
     public displayWorkout() {

@@ -6,7 +6,6 @@ import 'rxjs/add/operator/toPromise';
 import { Profile } from '../models/profile';
 import { ProfileApi } from './api-models/profile-api';
 
-
 @Injectable()
 export class ProfileService {
     private headers = new Headers({'Content-Type': 'application/json',

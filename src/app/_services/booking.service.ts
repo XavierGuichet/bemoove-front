@@ -27,7 +27,6 @@ export class BookingService {
 
     public create(booking: Booking) {
         this.bookingApi = new BookingApi(booking);
-        console.log(this.bookingApi);
         return this.http.post(this.bookingUrl, this.bookingApi, this.jwt())
                         .map((response: Response) => response.json());
     }

@@ -50,10 +50,8 @@ export class WorkoutListMaconneryComponent implements OnInit {
     const thisWeekEnd = this.getNextSunday(new Date(), 23, 59, 0);
     if (tommorowEnd.getUTCDay() !== 0) {
         this.thisWeekWorkouts = this.workouts.filter((workout) => {
-            console.log(tommorowEnd < new Date(workout.startdate) && new Date(workout.startdate) < thisWeekEnd);
           return tommorowEnd < new Date(workout.startdate) && new Date(workout.startdate) < thisWeekEnd;
         });
-        console.log(this.thisWeekWorkouts);
     }
 
     // below, nextsunday is recalc as using the variable modify it !!!

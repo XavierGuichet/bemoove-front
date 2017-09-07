@@ -31,8 +31,6 @@ export class MemberProfileComponent implements OnInit {
     //     if (!this.profile.address) {
     //         this.profile.address = new Address();
     //     }
-    //     console.log('from profileComponent');
-    //     console.log(this.profile);
     //   });
       this.alertService.success('I\'m a cool success message');
   }

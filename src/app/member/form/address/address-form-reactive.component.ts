@@ -63,10 +63,6 @@ export class AddressFormReactiveComponent implements OnInit {
     let limitedProfile = this.profile;
     limitedProfile.address = limitedAddress;
     let request;
-    // this.submitted = true;
-    // this.loading = true;
-    alert('on Submit');
-    console.log(limitedProfile);
     if (limitedProfile.id) {
       request = this.profileService.update(limitedProfile);
     } else {

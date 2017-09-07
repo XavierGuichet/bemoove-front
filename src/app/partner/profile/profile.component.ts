@@ -66,7 +66,7 @@ export class ProfileComponent implements OnInit {
   public ngOnInit(): void {
     this.profileService.getByOwnerId(this.spaceService.getUserId()).then((Profile) => {
         this.profile = Profile[0];
-        if(this.profile.photo == null) {
+        if (this.profile.photo == null) {
             this.profile.photo = new Image();
         }
         this.buildForm();

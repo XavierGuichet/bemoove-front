@@ -37,10 +37,8 @@ export class WorkoutBlockComponent {
         //         this.bookingService.create(this.booking)
         //             .subscribe(
         //                 (data) => {
-        //                     console.log(data);
         //                 },
         //                 (error) => {
-        //                     console.log(error);
         //                 });
         //     },
         //     (error) => {
