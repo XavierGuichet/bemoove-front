@@ -11,7 +11,7 @@ export class Profile {
     public ismale: boolean;
     public presentation: string;
     public birthdate: Date;
-    public avatar: Image;
+    public photo: Image;
 
     constructor(
     ) {

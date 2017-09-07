@@ -4,12 +4,15 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Profile } from '../models/profile';
+import { ProfileApi } from './api-models/profile-api';
+
 
 @Injectable()
 export class ProfileService {
     private headers = new Headers({'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
     private ProfilesUrl = 'http://' + process.env.API_URL + '/profiles';
+    private profileApi: ProfileApi;
 
     constructor(private http: Http) { }
 
@@ -37,7 +40,8 @@ export class ProfileService {
     }
 
     public update(profile: Profile) {
-        return this.http.put(this.ProfilesUrl + '/' + profile.id, profile, this.jwt())
+        this.profileApi = new ProfileApi(profile);
+        return this.http.put(this.ProfilesUrl + '/' + this.profileApi.id, this.profileApi, this.jwt())
                         .map((response: Response) => response.json());
     }
 
