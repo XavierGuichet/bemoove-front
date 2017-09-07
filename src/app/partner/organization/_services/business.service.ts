@@ -5,7 +5,7 @@ import { Organization } from '../models/organization';
 import { BusinessApi } from './api-models/business-api';
 
 @Injectable()
-export class InvoiceSettingsService {
+export class BusinessService {
     private headers = new Headers({ 'Content-Type': 'application/json',
                                     'Accept': 'application/json'});
     private headersSearch = new Headers({Accept: 'application/json'});
@@ -15,22 +15,6 @@ export class InvoiceSettingsService {
 
     constructor(
             private http: Http) {}
-
-    public updateVatRate(organization: Organization) {
-        this.businessApi = new BusinessApi(organization);
-        return this.http.put(   this.businessUrl + '/' + this.businessApi.id,
-                                this.businessApi,
-                                this.jwt())
-                            .map((response: Response) => response.json());
-    }
-
-    public updateInvoiceNotice(organization: Organization) {
-        this.businessApi = new BusinessApi(organization);
-        return this.http.put(   this.businessUrl + '/' + this.businessApi.id,
-                                this.businessApi,
-                                this.jwt())
-                            .map((response: Response) => response.json());
-    }
 
     public update(organization: Organization) {
         this.businessApi = new BusinessApi(organization);

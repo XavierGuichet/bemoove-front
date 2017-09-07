@@ -5,7 +5,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { SpaceService } from '../../../_services/space.service';
 import { AddressService } from '../../../_services/address.service';
 import { PersonService } from '../_services/person.service';
-import { InvoiceSettingsService } from '../_services/invoice-settings.service';
+import { BusinessService } from '../_services/business.service';
 
 import { Organization } from '../models/organization';
 import { Address } from '../../../models/address';
@@ -77,13 +77,13 @@ export class OrganizationInformationsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private invoiceSettingsService: InvoiceSettingsService,
+    private businessService: BusinessService,
     private addressService: AddressService,
     private personService: PersonService,
     private spaceService: SpaceService) { }
 
   public ngOnInit(): void {
-    this.invoiceSettingsService.getByOwnerId(this.spaceService.getUserId()).then((Business) => {
+    this.businessService.getByOwnerId(this.spaceService.getUserId()).then((Business) => {
       // TODO : This is ugly, service should return one result in this case
       if (Business[0].hasOwnProperty('id')) {
         this.organization = Business[0];
@@ -115,7 +115,7 @@ export class OrganizationInformationsComponent implements OnInit {
         limitedOrganization.vatNumber = formModel.vatNumber;
       }
 
-      this.invoiceSettingsService.update( limitedOrganization )
+      this.businessService.update( limitedOrganization )
                                  .subscribe((organization) => {
                                      this.organization = organization;
                                      this.loading = false;
@@ -204,7 +204,6 @@ export class OrganizationInformationsComponent implements OnInit {
       ]
       ],
       vatNumber: [this.organization.vatNumber, [
-        Validators.required
       ]
       ],
     });

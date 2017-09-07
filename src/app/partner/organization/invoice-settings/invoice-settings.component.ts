@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { SpaceService } from '../../../_services/space.service';
-import { InvoiceSettingsService } from '../_services/invoice-settings.service';
+import { BusinessService } from '../_services/business.service';
 
 import { Organization } from '../models/organization';
 
@@ -84,11 +84,11 @@ export class InvoiceSettingsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private invoiceSettingsService: InvoiceSettingsService,
+    private businessService: BusinessService,
     private spaceService: SpaceService) { }
 
   public ngOnInit(): void {
-      this.invoiceSettingsService.getByOwnerId(this.spaceService.getUserId()).then((Business) => {
+      this.businessService.getByOwnerId(this.spaceService.getUserId()).then((Business) => {
           // TODO : This is ugly, service should return one result in this case
         if (Business[0].hasOwnProperty('id')) {
           this.organization = Business[0];
@@ -107,14 +107,14 @@ export class InvoiceSettingsComponent implements OnInit {
   public onSubmitTvaRate() {
       this.loading = true;
       this.limitedOrganization = this.prepareTvaRate();
-      this.invoiceSettingsService.updateVatRate( this.limitedOrganization ).subscribe((organization) => { this.organization = organization; this.loading = false; });
+      this.businessService.update( this.limitedOrganization ).subscribe((organization) => { this.organization = organization; this.loading = false; });
 
   }
 
   public onSubmit() {
       this.loading = true;
       this.limitedOrganization = this.prepareInvoiceNotice();
-      this.invoiceSettingsService.updateInvoiceNotice( this.limitedOrganization )
+      this.businessService.update( this.limitedOrganization )
                                 .subscribe((organization) => {
                                     this.organization = organization;
                                     this.loading = false;

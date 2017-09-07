@@ -19,7 +19,7 @@ import { PartnerNavSecondaryComponent } from '../nav/secondary/nav-secondary.com
 
 import { BankAccountService } from './_services/bank-account.service';
 import { LegalRepresentativeService } from './_services/legal-representative.service';
-import { InvoiceSettingsService } from './_services/invoice-settings.service';
+import { BusinessService } from './_services/business.service';
 import { PersonService } from './_services/person.service';
 
 @NgModule({
@@ -48,7 +48,7 @@ import { PersonService } from './_services/person.service';
   providers:    [
       BankAccountService,
       LegalRepresentativeService,
-      InvoiceSettingsService,
+      BusinessService,
       PersonService
     ]
 })
