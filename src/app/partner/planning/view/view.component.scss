@@ -51,9 +51,10 @@
     line-height: 1.4em;
     &.selector {
         cursor: pointer;
-        color: #ffffff;
+        color: transparent;
         text-align: center;
         &:hover {
+            color: #ffffff;
             background: #2ac2d1;
         }
     }
