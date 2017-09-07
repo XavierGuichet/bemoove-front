@@ -154,7 +154,6 @@ export class WorkoutFormReactiveComponent implements OnInit {
 
   public ngOnInit(): void {
     this.buildForm();
-    this.initFormValue();
 
     this.addressService.getAddressesByPartnerId(this.spaceService.getUserId())
       .then((addresses) => {
@@ -385,13 +384,6 @@ export class WorkoutFormReactiveComponent implements OnInit {
         }
       }
     }
-  }
-
-  private initFormValue(): void {
-    //   console.log(this.workout);
-    //   if (this.workout.id) {
-    //       console.log("workout present");
-    //   }
   }
 
   private buildForm(): void {
