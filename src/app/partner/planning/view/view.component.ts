@@ -26,7 +26,7 @@ export class ViewComponent implements OnInit {
     public lastDisplayedDay: Date;
     public displayedDays: Day[];
     public displayStyle: string = 'week';
-    public hours: any = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    public hours: any = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     public quarters: any = [0, 15, 30, 45];
     public displayedWorkouts: Workout[];
     constructor(
@@ -62,7 +62,7 @@ export class ViewComponent implements OnInit {
                         let workoutEndDate = new Date(workout.enddate);
                         let hours = workoutEndDate.getHours() - workoutstartDate.getHours();
                         let minutes = workoutEndDate.getMinutes() - workoutstartDate.getMinutes();
-                        let top = 2 + workoutstartDate.getHours() * hoursHeight + Math.ceil(workoutstartDate.getMinutes() / 15) * quarterHeight;
+                        let top = 2 + (workoutstartDate.getHours() - 6) * hoursHeight + Math.ceil(workoutstartDate.getMinutes() / 15) * quarterHeight;
                         let height = (hours) * hoursHeight
                                         + Math.ceil( minutes / 15) * 1.05;
                         workout.styleTop = top + 'rem'; // 0.75rem*1.4 = 15min
