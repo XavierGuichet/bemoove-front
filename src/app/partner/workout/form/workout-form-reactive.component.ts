@@ -106,6 +106,8 @@ export class WorkoutFormReactiveComponent implements OnInit {
   public cropperData: any;
   public cropperSettings: CropperSettings;
 
+  public selectedTab;
+
   @ViewChild('cropper', undefined) public cropper: ImageCropperComponent;
 
   private SportsUrl = 'http://' + process.env.API_URL + '/sports';
@@ -170,6 +172,10 @@ export class WorkoutFormReactiveComponent implements OnInit {
       month: tomorrow.getMonth() + 1,
       day: tomorrow.getDate()
     };
+  }
+
+  public changeTab(index: integer): void {
+      this.selectedTab = index;
   }
 
   public setWorkoutImageData() {

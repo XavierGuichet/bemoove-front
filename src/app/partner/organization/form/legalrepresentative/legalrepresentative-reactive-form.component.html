@@ -1,4 +1,4 @@
-<form *ngIf="legalRepresentative" [formGroup]="legalRepresentativeForm" (ngSubmit)="onSubmit()" novalidate>
+<form *ngIf="person" [formGroup]="legalRepresentativeForm" (ngSubmit)="onSubmit()" novalidate>
   <md-card-title color="primary" class="form-card__title">Réprésentant légal</md-card-title>
   <md-card-content>
     <div class="form-group row">

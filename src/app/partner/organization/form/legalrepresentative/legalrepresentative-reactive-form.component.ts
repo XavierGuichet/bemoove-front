@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { LegalRepresentative } from '../../models/legal-representative';
+import { Person } from '../../models/person';
+import { PersonService } from '../../_services/person.service';
 import { LegalRepresentativeService } from '../../_services/legal-representative.service';
 
 @Component({
@@ -23,6 +25,8 @@ export class LegalRepresentativeFormReactiveComponent implements OnInit {
 
   public legalRepresentativeForm: FormGroup;
 
+  @Input()
+  public person: Person;
   public legalRepresentative: LegalRepresentative;
   public limitedLegalRepresentative: LegalRepresentative;
 
