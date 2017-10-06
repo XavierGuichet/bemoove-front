@@ -1,0 +1,97 @@
+<div *ngIf="workout">
+  <div class="header container-fluid" [style.background-image]="headerimage">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-8 pt-3">
+        <h1 class="f-blue alt-font">{{workout.title}}</h1>
+        <p class="h5"><span class="bg-grey py-1 px-2">{{workout.sport.name}}</span></p>
+        <div class="my-4">
+          <p>Le {{workout.startdate | date: 'EEEE d MMMM'}} de {{workout.startdate | date: 'shortTime'}} à {{workout.enddate | date: 'shortTime'}}</p>
+        </div>
+        <div class="mb-4">
+          <ul class="d-flex w-100 align-items-center text-center">
+            <li class="w-25"><i class="fa fa-clock-o" aria-hidden="true"></i><br/>durée</li>
+            <li class="w-25"><i class="fa fa-heartbeat" aria-hidden="true"></i><br/>Intense</li>
+            <li class="w-25"><i class="fa fa-users" aria-hidden="true"></i><br/>En groupe</li>
+            <li class="w-25"><i class="fa fa-bus" aria-hidden="true"></i><br/>Accès facile</li>
+          </ul>
+        </div>
+        <div class="tab-navigation">
+          <ul>
+            <li>La séance</li>
+            <li>La tenue</li>
+            <li>S'y rendre</li>
+            <li>Info. Pratique</li>
+          </ul>
+        </div>
+        <div class="tab mb-4">
+          <h2 class="h4 f-blue">Présentation du cours</h2>
+          <p>{{workout.description}}</p>
+        </div>
+        <div class="tab mb-4">
+          <h2 class="h4 f-blue">Info tenue</h2>
+          <p>{{workout.outfit}}</p>
+        </div>
+        <div class="tab mb-4">
+          <h2 class="h4 f-blue">Info diverse</h2>
+          <p>{{workout.notice}}</p>
+        </div>
+        <div class="mb-3 coach">
+          <h2 class="h4 f-blue">Votre coach</h2>
+          <div class="row">
+            <div class="col-3">
+              <img src="#" class="col-12">
+            </div>
+            <div class="col-9">
+              <h3>Nom du coach</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab mt-3">
+          <h2 class="h4 f-blue">accès</h2>
+          <p>{{workout.address.firstline}}</p>
+          <p>{{workout.address.secondline}}</p>
+          <p>{{workout.address.postalCode}} {{workout.address.city}}</p>
+        </div>
+      </div>
+      <div class="aside col-4">
+        <div class="booking bg-white" [ngClass]="{'fix-to-top': scrolled}">
+          <div class="booking__header bg-blue px-4">
+            <p class="h3 booking__header_price">{{workout.price}} € / personne</p>
+          </div>
+          <div class="booking__content px-3 py-2">
+            <div class="col-12">
+              <div class="form-group row">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="INPUT_NAME">
+                  <div>
+                    <button>-</button>
+                  </div>
+                  <div>
+                    <button>+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="booking__action clearfix px-3 py-2">
+            <button type="button" md-raised-button color="accent" class="col-6">Reserver</button>
+          </div>
+          <div class="booking__notice bg- border-top-1 px-4 py-2">
+            <div class="row">
+              <div class="col-2 text-center">
+                <md-icon class="md-48 f-grey">help_outline</md-icon>
+              </div>
+              <div class="col-10">
+                <p class="h6 f-grey">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

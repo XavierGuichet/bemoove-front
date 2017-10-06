@@ -1,9 +1,9 @@
-import { Workout } from './workout';
+import { WorkoutInstance } from './index';
 export class Day {
     public date: Date;
-    public workouts: Workout[];
-    constructor() {
-        this.date = new Date();
+    public workouts: WorkoutInstance[];
+    constructor(date: Date = new Date()) {
+        this.date = date;
         this.workouts = [];
     }
 }

@@ -10,7 +10,8 @@ const planningRoutes: Routes = [
   component: PlanningComponent,
   children: [
       { path: '', redirectTo: 'view', pathMatch: 'full' },
-      { path: 'view', component: ViewComponent }
+      { path: 'view', component: ViewComponent },
+      { path: 'view/coach/:id', component: ViewComponent }
   ]
 }
 ];

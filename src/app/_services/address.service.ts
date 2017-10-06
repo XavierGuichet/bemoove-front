@@ -21,7 +21,7 @@ export class AddressService {
     }
 
     public getAddressesByPartnerId(id: number): Promise<Address[]> {
-        return this.http.get(this.AddressesUrl + '?user.id=' + id, this.jwt())
+        return this.http.get(this.AddressesUrl + '?owner.id=' + id, this.jwt())
             .toPromise()
             .then((response) => response.json() as Address[])
             .catch(this.handleError);

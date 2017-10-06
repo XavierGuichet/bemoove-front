@@ -9,7 +9,7 @@ import { Workout } from '../../../models/workout';
     templateUrl: 'workout-add.component.html'
 })
 
-export class PartnerWorkoutAddComponent implements OnInit {
+export class WorkoutAddComponent implements OnInit {
     public newWorkout = new Workout();
     constructor(
         private router: Router,
@@ -19,6 +19,8 @@ export class PartnerWorkoutAddComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.newWorkout.startdate = this.WorkoutDateProvider.getDate();
+        // console.log(this.newWorkout);
+        // this.newWorkout.startdate = this.WorkoutDateProvider.getDate();
+        // console.log(this.newWorkout);
     }
 }

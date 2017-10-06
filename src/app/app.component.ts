@@ -12,7 +12,9 @@ import { SpaceService } from './_services/space.service';
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
       './main-themes.scss',
-    './app.component.scss'
+    './app.component.scss',
+    './app.color.tools.scss',
+    './app.various.tools.scss'
   ],
   template: `
     <top-bar-partner-recruit  *ngIf="showTopBar"

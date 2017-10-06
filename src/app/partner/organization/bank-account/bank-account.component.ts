@@ -5,11 +5,9 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { BankAccount } from '../models/bank-account';
-import { Address } from '../../../models/address';
+import { Address, BankAccount } from '../../../models/index';
 
-import { BankAccountService } from '../_services/bank-account.service';
-import { SpaceService, AddressService } from '../../../_services/index';
+import { SpaceService, AddressService, BankAccountService } from '../../../_services/index';
 
 @Component({
   selector: 'bank-account',

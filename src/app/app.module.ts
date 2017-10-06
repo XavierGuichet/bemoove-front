@@ -44,7 +44,7 @@ import { PartnerModule } from './partner/partner.module';
 import { MemberModule } from './member/member.module';
 import { WorkoutListModule } from './workout-list/workout-list.module';
 
-import { TextChangerDirective } from './_directives/text-changer.attribute';
+import { TextChangerDirective, OnlyNumberDirective } from './_directives/index';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -83,7 +83,8 @@ type StoreType = {
 
     AlertComponent,
 
-    TextChangerDirective
+    TextChangerDirective,
+    OnlyNumberDirective
   ],
   imports: [ // import Angular's modules
     BrowserModule,

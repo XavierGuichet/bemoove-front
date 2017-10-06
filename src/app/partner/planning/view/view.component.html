@@ -1,10 +1,13 @@
-<div class="planning">
+<div class="mb-3">
   <div class="container">
     <div class="row button-row">
       <div>
         <button type="button" md-raised-button color="accent" (click)="backwardSelectedDay()"><md-icon class="md-24">keyboard_arrow_left</md-icon></button>
         <button type="button" md-raised-button color="accent" (click)="forwardSelectedDay()"><md-icon class="md-24">keyboard_arrow_right</md-icon></button>
-        <button type="button" md-raised-button color="accent" (click)="setToToday()">Aujourd'hui</button>
+
+          <md-select [(ngModel)]="selectedCoach" (change)="onCoachChange()">
+            <md-option *ngFor="let coach of coaches" [value]="coach">{{ coach.firstname }}</md-option>
+          </md-select>
       </div>
       <span class="title-filler"><h4>{{firstDisplayedDay|date:'dd'}} - {{lastDisplayedDay|date:'dd MMMM y'}}</h4></span>
       <div>
@@ -13,35 +16,35 @@
       </div>
     </div>
     <div class="row">
-          <div class="timeline">
-            <h4 class="title">&nbsp;</h4>
-            <div class="hour" *ngFor="let hour of hours">
-              {{hour}}h
-            </div>
-          </div>
+      <div class="timeline">
+        <h4 class="title">&nbsp;</h4>
+        <div class="hour" *ngFor="let hour of hours">
+          {{hour}}h
+        </div>
+      </div>
       <div class="day-container">
-          <div class="day" *ngFor="let day of displayedDays" [class.col-4]="displayStyle === '3days'" [class.col-1-7]="displayStyle === 'week'" [class.inactive]="(tomorrow > day.date)">
-            <div *ngFor="let workout of day.workouts" class="workout-wrapper"  [ngStyle]="{'top': workout.styleTop, 'height': workout.styleHeight }">
-                <div class="workout" (click)="showModalWorkoutInformationComponent(workout.id)">
-                    <p class="workout-title">{{workout.title}}</p>
-                </div>
-            </div>
-            <h4 class="title">{{day.date|date:'EEE dd'}}</h4>
-            <div *ngIf="(tomorrow > day.date)">
-                <div class="hour" *ngFor="let hour of hours">
-                  <div class="quarter" *ngFor="let quarter of quarters">
-                      &nbsp;
-                  </div>
-                </div>
-            </div>
-            <div *ngIf="(tomorrow <= day.date)">
-                <div class="hour" *ngFor="let hour of hours">
-                  <div class="quarter selector" *ngFor="let quarter of quarters" (click)="addworkout(day.date,hour, quarter)">
-                    Ajouter un cours
-                  </div>
-                </div>
+        <div class="day" *ngFor="let day of displayedDays" [class.col-4]="displayStyle === '3days'" [class.col-1-7]="displayStyle === 'week'" [class.inactive]="(tomorrow > day.date)">
+          <div *ngFor="let workout of day.workouts" class="workout-wrapper" [ngStyle]="{'top': workout.styleTop, 'height': workout.styleHeight }">
+            <div class="workout" (click)="showModalWorkoutInformationComponent(workout.id)">
+              <p class="h5 mb-0 text-center">{{workout.workout.title}}</p>
             </div>
           </div>
+          <h4 class="title">{{day.date|date:'EEE dd'}}</h4>
+          <div *ngIf="(tomorrow > day.date)">
+            <div class="hour" *ngFor="let hour of hours">
+              <div class="quarter" *ngFor="let quarter of quarters">
+                &nbsp;
+              </div>
+            </div>
+          </div>
+          <div *ngIf="(tomorrow <= day.date)">
+            <div class="hour" *ngFor="let hour of hours">
+              <div class="quarter selector" *ngFor="let quarter of quarters" (click)="addworkout(day.date,hour, quarter)">
+                Ajouter un cours
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,140 @@
+<div *ngIf="workout">
+  <div class="header container-fluid" [style.background-image]="headerimage">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-8 pt-3">
+        <h1 class="f-blue alt-font">Découverte du MMA</h1>
+        <p class="h4 mb-3"><span class="badge badge-default mr-2">Boxe Thai</span><span class="badge badge-default bg-yellow"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; 60 min</span></p>
+        <p class="h5 mb-4">
+          <span class="badge badge-default badge-pill bg-grey">Intense</span>
+          <span class="badge badge-default badge-pill bg-grey">Extérieur</span>
+          <span class="badge badge-default badge-pill bg-grey">Sécurité</span>
+          <span class="badge badge-default badge-pill bg-grey">Tout niveaux</span>
+          <span class="badge badge-default badge-pill bg-grey">Enfants</span>
+          <span class="badge badge-default badge-pill bg-grey">Sous la pluie</span>
+          <span class="badge badge-default badge-pill bg-grey">Mouille</span>
+          <span class="badge badge-default badge-pill bg-yellow">+ 3</span>
+        </p>
+        <!-- <div class="mb-4">
+          <ul class="d-flex w-100 align-items-center text-center">
+            <li class="w-25"><i class="fa fa-clock-o" aria-hidden="true"></i><br/>durée</li>
+            <li class="w-25"><i class="fa fa-heartbeat" aria-hidden="true"></i><br/>Intense</li>
+            <li class="w-25"><i class="fa fa-users" aria-hidden="true"></i><br/>En groupe</li>
+            <li class="w-25"><i class="fa fa-bus" aria-hidden="true"></i><br/>Accès facile</li>
+          </ul>
+        </div> -->
+        <div class="tab-navigation mb-0">
+          <ul class="mb-0">
+            <li>La séance</li>
+            <li>Équipements</li>
+            <li>Détails Pratique</li>
+            <li>S'y rendre</li>
+          </ul>
+        </div>
+        <div class="tab mb-4 bg-white px-4 pt-3 pb-4">
+          <h2 class="h5 f-grey font-weight-bold mb-4 alt-font ">Détails de l'activité</h2>
+          <p class="f-darkgrey">{{workout.description}}</p>
+        </div>
+        <div class="tab mb-4 bg-white px-4 pt-2 pb-4">
+          <h2 class="h5 f-grey alt-font mb-3 font-weight-bold">Équipements</h2>
+          <div class="row">
+            <div class="col-6">
+              <h3 class="h6 f-blue font-weight-bold  mb-1 alt-font">Inclus</h3>
+              <ul class="f-darkgrey list-check">
+                <li><i class="fa fa-check mr-2"></i>Douches</li>
+                <li><i class="fa fa-check mr-2"></i>Vestiaires</li>
+                <li><i class="fa fa-check mr-2"></i>Accès au SPA</li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <h3 class="h6 f-blue font-weight-bold mb-1 alt-font">A prévoir</h3>
+              <ul class="f-darkgrey list-check">
+                <li><i class="fa fa-check mr-2"></i>Chaussures de sports</li>
+                <li><i class="fa fa-check mr-2"></i>Bouteille d'eau</li>
+                <li><i class="fa fa-check mr-2"></i>Serviettes</li>
+                <li><i class="fa fa-check mr-2"></i>Combinaison</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="tab mb-4 bg-white px-4 pt-2 pb-4">
+          <h2 class="h5 f-grey font-weight-bold  mb-4  alt-font">Détails pratiques</h2>
+          <p class="f-darkgrey">{{workout.notice}}</p>
+        </div>
+        <div class="mb-3 bg-white px-4 pt-2 pb-4">
+          <h2 class="h5 f-grey font-weight-bold mb-4 alt-font">Votre coach</h2>
+          <div class="row">
+            <div class="col-4">
+              <img src="http://api.bemoove.local/uploads/images/788c7491ffb86fe6c5d4aef7883c3d45.jpg" class="col-12 rounded-circle">
+            </div>
+            <div class="col-8">
+              <h3 class="f-blue">Ronan Luce</h3>
+              <p class="f-darkgrey">Renan Luce naît le 5 mars 1980 à Paris mais vit toute son enfance et son adolescence en Bretagne, à Plourin-lès-Morlaix (près de Morlaix, dans le Finistère). Il commence sa formation musicale en participant avec son frère Damien Luce et
+                avec sa sœur Claire à une chorale, puis commence l'étude du piano classique avec Damien. Il poursuit ensuite son apprentissage aux conservatoires de Brest puis de Saint-Brieuc. Il remplace alors le piano par le saxophone et apprend seul
+                la guitare en composant ses premières chansons.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab mt-3 bg-white px-4 pt-2 pb-4">
+          <h2 class="h5 f-grey font-weight-bold mb-3">Accès</h2>
+          <div class="row">
+            <div class="col-4 text-center">
+              <p>{{workout.address.name}}<br/> {{workout.address.firstline}}
+                <br/> {{workout.address.secondline}}
+                <br/> {{workout.address.postalCode}} {{workout.address.city}}</p>
+            </div>
+            <div class="col-8"><img src="assets/img/wide-map-placeholder.jpg" class="col-12"></div>
+          </div>
+        </div>
+      </div>
+      <div class="aside col-4">
+        <div class="booking bg-white" [ngClass]="{'fix-to-top': scrolled}">
+          <div class="booking__header bg-blue px-4">
+            <p class="h3 booking__header_price">{{workout.price}} € / personne</p>
+          </div>
+          <div class="booking__content px-3 pb-2 pt-4">
+            <div class="col-12">
+              <div class="row mb-3">
+                <label class="f-grey">Choisissez votre date</label>
+                <select class="form-control">
+                    <option>{{workout.startdate | date: 'EEEE d MMM'}} à {{workout.startdate | date: 'shortTime'}}</option>
+                </select>
+              </div>
+              <div class="row mb-3">
+                <div class="form-group mb-0">
+                  <div class="input-group">
+                    <span class="input-group-addon">Places : </span>
+                    <input type="text" class="form-control" name="INPUT_NAME" value="1">
+                    <div class="input-group-addon p-0">
+                        <button md-raised-button color="accent" class="my-btn">-</button>
+                    </div>
+                    <div class="input-group-addon p-0">
+                      <button md-raised-button color="accent" class="my-btn">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-1 clearfix">
+                  <label><input type="checkbox"> J'accepte les <a href="#">conditions générales</a>.</label>
+              </div>
+            </div>
+          </div>
+          <div class="booking__action clearfix px-3 py-2">
+            <button type="button" md-raised-button color="accent" class="col-6">Reserver</button>
+          </div>
+          <div class="booking__notice bg- border-top-1 px-4 py-2">
+            <div class="row">
+              <div class="col-2 text-center">
+                <md-icon class="md-48 f-grey font-weight-bold">help_outline</md-icon>
+              </div>
+              <div class="col-10">
+                <p class="h6 f-grey">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

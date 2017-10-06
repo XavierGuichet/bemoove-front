@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 class="h2 alt-font mb-3">Gestion des séances</h1>
+  <div class="alert alert-info">
+      <strong>Gestion des séances</strong><br/>
+      Sur cette page, vous pouvez créer et modifier vos séances types !
+    </div>
+  <div class="row">
+    <div *ngFor="let workout of workouts" class="col-3 mb-4">
+      <div class="square">
+        <div class="hover-hide w-100 mb-1">
+          <img src="{{workout.photo.path}}" class="w-100" />
+        </div>
+        <div class="text-center">
+        <button md-raised-button color="accent" class="mr-1" routerLink="../{{workout.id}}/edit">MODIFIER</button>
+        <button md-raised-button color="primary" routerLink="../{{workout.id}}/dates/add">Ajouter des dates</button>
+    </div>
+      </div>
+    </div>
+    <div class="col-3 mb-4">
+      <div class="square h-100 w-100">
+        <button md-raised-button class="h-100 w-100" routerLink="../add">AJOUTER UNE SÉANCE</button>
+      </div>
+    </div>
+  </div>
+</div>

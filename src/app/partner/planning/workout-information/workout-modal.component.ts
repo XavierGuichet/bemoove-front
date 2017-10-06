@@ -34,14 +34,14 @@ export class WorkoutModalComponent implements OnInit {
     public ngOnInit(): void {
         this.workoutService.getWorkout(this.id)
             .then( (workout) => {
-                workout.startdate = new Date(workout.startdate);
-                workout.enddate = new Date(workout.enddate);
-                this.workout = workout;
-                this.editable = (this.workout.startdate > new Date());
-                this.bookingService.getAll()
-                    .then( (bookings) => {
-                        this.bookings = bookings;
-                    });
+                // workout.startdate = new Date(workout.startdate);
+                // workout.enddate = new Date(workout.enddate);
+                // this.workout = workout;
+                // this.editable = (this.workout.startdate > new Date());
+                // this.bookingService.getAll()
+                //     .then( (bookings) => {
+                //         this.bookings = bookings;
+                //     });
             });
     }
 

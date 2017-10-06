@@ -43,27 +43,27 @@ export class WorkoutListMaconneryComponent implements OnInit {
 
   private splitWorkoutByDate() {
     const tommorowEnd = this.getRelativeDay(new Date(), 2, 0, 0, 0);
-    this.tommorowWorkouts = this.workouts.filter((workout) => {
-      return new Date(workout.startdate) < tommorowEnd;
-    });
+    // this.tommorowWorkouts = this.workouts.filter((workout) => {
+    //   return new Date(workout.startdate) < tommorowEnd;
+    // });
 
     const thisWeekEnd = this.getNextSunday(new Date(), 23, 59, 0);
-    if (tommorowEnd.getUTCDay() !== 0) {
-        this.thisWeekWorkouts = this.workouts.filter((workout) => {
-          return tommorowEnd < new Date(workout.startdate) && new Date(workout.startdate) < thisWeekEnd;
-        });
-    }
+    // if (tommorowEnd.getUTCDay() !== 0) {
+    //     this.thisWeekWorkouts = this.workouts.filter((workout) => {
+    //       return tommorowEnd < new Date(workout.startdate) && new Date(workout.startdate) < thisWeekEnd;
+    //     });
+    // }
 
     // below, nextsunday is recalc as using the variable modify it !!!
     // It's fucking weird, don't actually understand the reason
     const nextWeekEnd = this.getRelativeDay(this.getNextSunday(new Date(), 23, 59, 0), 7, 23, 59, 0);
-    this.nextWeekWorkouts = this.workouts.filter((workout) => {
-      return thisWeekEnd < new Date(workout.startdate) && new Date(workout.startdate) < nextWeekEnd;
-    });
+    // this.nextWeekWorkouts = this.workouts.filter((workout) => {
+    //   return thisWeekEnd < new Date(workout.startdate) && new Date(workout.startdate) < nextWeekEnd;
+    // });
 
-    this.afterWorkouts = this.workouts.filter((workout) => {
-      return nextWeekEnd < new Date(workout.startdate);
-    });
+    // this.afterWorkouts = this.workouts.filter((workout) => {
+    //   return nextWeekEnd < new Date(workout.startdate);
+    // });
 
   }
 

@@ -1,0 +1,49 @@
+.f- {
+    &blue {
+        color: #2ac2d1;
+    }
+    &pink {
+        color: #ea5573;
+    }
+    &yellow {
+        color: #DFCA1F;
+    }
+    &lightgrey {
+        color: #dddddd; // value to reedit
+    }
+    &grey {
+        color: #999999; // value to reedit
+    }
+    &mediumgrey {
+        color: #6a6a6a; // value to reedit
+    }
+    &darkgrey {
+        color: #444444; // value to reedit
+    }
+}
+.bg- {
+    &grey {
+        background-color: #999999;
+        color: #ffffff;
+    }
+    &white {
+        background-color: #ffffff;
+        color: #000000;
+    }
+    &blue {
+        background-color: #2ac2d1;
+        color: #ffffff;
+    }
+    &pink {
+        background-color: #ea5573;
+        color: #ffffff;
+    }
+    &mediumgrey {
+        background-color: #6a6a6a; // value to reedit
+        color: #ffffff;
+    }
+    &yellow {
+        background-color: #DFCA1F;
+        color: #fff;
+    }
+}

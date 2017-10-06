@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { SpaceService } from '../../../_services/space.service';
-import { AddressService } from '../../../_services/address.service';
-import { PersonService } from '../_services/person.service';
-import { BusinessService } from '../_services/business.service';
+import { AddressService,
+    BusinessService,
+    PersonService,
+    SpaceService } from '../../../_services/index';
 
-import { Organization } from '../models/organization';
-import { Address } from '../../../models/address';
-import { Person } from '../models/person';
+import { Address, Person, Organization } from '../../../models/index';
 
 @Component({
   selector: 'organization-informations',
@@ -83,14 +81,8 @@ export class OrganizationInformationsComponent implements OnInit {
     private spaceService: SpaceService) { }
 
   public ngOnInit(): void {
-    this.businessService.getByOwnerId(this.spaceService.getUserId()).then((Business) => {
-      // TODO : This is ugly, service should return one result in this case
-      if (Business[0].hasOwnProperty('id')) {
-        this.organization = Business[0];
-      } else {
-        this.organization = new Organization();
-      }
-
+    this.businessService.getMyBusiness().then((Business) => {
+        this.organization = Business;
       this.buildForms();
     });
   }

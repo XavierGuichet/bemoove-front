@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Modifier un Coach <button md-raised-button color="primary" (click)="deleteCoach()">SUPPRIMER</button></h1>
+    <p class="help_text">
+        Remplissez içi, votre profil qui sera visible sur les fiches de vos cours.
+    </p>
+  <div class="row">
+    <div class="col-sm-12">
+      <coach-form [coach]="coach" *ngIf="coach"></coach-form>
+    </div>
+  </div>
+</div>

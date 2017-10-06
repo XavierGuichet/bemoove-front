@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { PlanningModule } from './planning/planning.module';
+import { CoachModule } from './coach/coach.module';
 import { OrganizationModule } from './organization/organization.module';
+import { WorkoutModule } from './workout/workout.module';
 
 import { PartnerComponent } from './partner.component';
-import { PartnerWorkoutAddComponent } from './workout/add/workout-add.component';
-import { PartnerWorkoutEditComponent } from './workout/edit/workout-edit.component';
-import { ProfileComponent } from './profile/profile.component';
 
 import { SpaceService } from '../_services/space.service';
 
@@ -21,11 +20,10 @@ import { AuthPartnerGuard } from '../_guards/index';
     canActivate: [AuthPartnerGuard],
     children: [
         { path: '', redirectTo: 'planning', pathMatch: 'full' },
-        { path: 'workout/add', component: PartnerWorkoutAddComponent },
-        { path: 'workout/:id/edit', component: PartnerWorkoutEditComponent },
-        { path: 'profile', component: ProfileComponent },
-        { path: '', loadChildren : () => PlanningModule },
-        { path: '', loadChildren : () => OrganizationModule }
+        { path: '', loadChildren : () => WorkoutModule },
+        { path: '', loadChildren : () => OrganizationModule },
+        { path: '', loadChildren : () => CoachModule },
+        { path: '', loadChildren : () => PlanningModule }
     ]
   }
   ])],

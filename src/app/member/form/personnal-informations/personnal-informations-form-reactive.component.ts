@@ -11,8 +11,7 @@ import { ProfileService } from '../../../_services/index';
 
 @Component({
   selector: 'personnal-informations-form-reactive',
-  templateUrl: './personnal-informations-form-reactive.component.html',
-  styleUrls: ['./personnal-informations-form-reactive.component.scss']
+  templateUrl: './personnal-informations-form-reactive.component.html'
 })
 
 export class PersonnalInformationsFormReactiveComponent implements OnInit {

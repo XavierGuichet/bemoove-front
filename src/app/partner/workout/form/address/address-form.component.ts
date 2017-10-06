@@ -1,0 +1,33 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+import { Address } from '../../../../models/index';
+
+import { AddressService } from '../../../../_services/index';
+
+@Component({
+  selector: 'address-form',
+  templateUrl: 'address-form.component.html'
+})
+
+export class AddressFormComponent {
+    @Input()
+    public model: Address;
+    @Output()
+    public onSuccess = new EventEmitter<boolean>();
+    public loading: boolean = false;
+
+    constructor(private addressService: AddressService) {}
+
+    public addAddress() {
+        this.loading = true;
+        this.model.isWorkoutLocation = true;
+        this.addressService.create(this.model).subscribe(
+            (data) => {
+                this.loading = false;
+                this.onSuccess.emit(data);
+            },
+            (error) => {
+                this.loading = false;
+            });
+    }
+}

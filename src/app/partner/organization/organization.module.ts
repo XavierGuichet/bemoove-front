@@ -17,11 +17,6 @@ import { OrganizationRoutingModule } from './organization-routing.module';
 
 import { PartnerNavSecondaryComponent } from '../nav/secondary/nav-secondary.component';
 
-import { BankAccountService } from './_services/bank-account.service';
-import { LegalRepresentativeService } from './_services/legal-representative.service';
-import { BusinessService } from './_services/business.service';
-import { PersonService } from './_services/person.service';
-
 @NgModule({
     bootstrap: [
         OrganizationComponent,
@@ -46,10 +41,7 @@ import { PersonService } from './_services/person.service';
   exports: [ OrganizationComponent ],
   entryComponents: [ ],
   providers:    [
-      BankAccountService,
-      LegalRepresentativeService,
-      BusinessService,
-      PersonService
+
     ]
 })
 export class OrganizationModule { }

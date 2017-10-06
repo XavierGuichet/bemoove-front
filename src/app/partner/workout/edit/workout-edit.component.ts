@@ -11,7 +11,7 @@ import { WorkoutService } from '../../../_services/workout.service';
   templateUrl: 'workout-edit.component.html'
 })
 
-export class PartnerWorkoutEditComponent implements OnInit {
+export class WorkoutEditComponent implements OnInit {
   public editedWorkout: Workout;
   constructor(
     private workoutService: WorkoutService,
@@ -26,8 +26,8 @@ export class PartnerWorkoutEditComponent implements OnInit {
       this.route.params
         .switchMap( (params: Params) => this.workoutService.getWorkout(+params['id']))
         .subscribe( (workout) => {
-            workout.startdate = new Date(workout.startdate);
-            workout.enddate = new Date(workout.enddate);
+            // workout.startdate = new Date(workout.startdate);
+            // workout.enddate = new Date(workout.enddate);
             this.editedWorkout = workout;
         });
   }

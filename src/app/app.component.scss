@@ -21,21 +21,13 @@ html {
   background: #f5f5f5;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'texgyreadventor';
-  font-weight: normal;
-}
-
-h2 {
-  font-family: 'texgyreadventor';
-  font-size: 36px;
-  font-size: 2.25rem;
-}
-
-h3 {
-  font-family: 'texgyreadventor';
-  font-size: 32px;
-  font-size: 2rem;
 }
 
 .toptoolbar {
@@ -74,10 +66,6 @@ span.active {
   background-color: gray;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .modal-dialog {
   width: 360px;
   margin-top: 128px;
@@ -96,6 +84,27 @@ label.required:after {
   width: 28px !important;
   margin: 2px auto;
 }
+
+.square:before {
+  content: '';
+  padding-top: 100%;
+  float: left;
+}
+
+.hover-toggle {
+  &:hover {
+    .hover-hide {
+      display: none;
+    }
+
+    .hover-show {
+      display: block;
+    }
+  }
+  .hover-show {
+    display: none;
+  }
+}
 /* MD-ICON size modifier */
 .mat-icon {
   &.md-16 {
@@ -104,52 +113,57 @@ label.required:after {
     font-size: 16px;
     line-height: 1;
   }
+
   &.md-18 {
-      width: 18px;
-      height: 18px;
-      font-size: 18px;
-      line-height: 1;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    line-height: 1;
   }
 
   &.md-24 {
-      width: 24px;
-      height: 24px;
-      font-size: 24px;
-      line-height: 1;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 1;
   }
 
   &.md-36 {
-      width: 36px;
-      height: 36px;
-      font-size: 36px;
-      line-height: 1;
+    width: 36px;
+    height: 36px;
+    font-size: 36px;
+    line-height: 1;
   }
 
   &.md-48 {
-      width: 48px;
-      height: 48px;
-      font-size: 48px;
-      line-height: 1;
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+    line-height: 1;
   }
 
   &.md-64 {
-      width: 64px;
-      height: 64px;
-      font-size: 64px;
-      line-height: 1;
+    width: 64px;
+    height: 64px;
+    font-size: 64px;
+    line-height: 1;
   }
 
   &.md-72 {
-      width: 72px;
-      height: 72px;
-      font-size: 72px;
-      line-height: 1;
+    width: 72px;
+    height: 72px;
+    font-size: 72px;
+    line-height: 1;
   }
 
   &.md-128 {
-      width: 128px;
-      height: 128px;
-      font-size: 128px;
-      line-height: 1;
+    width: 128px;
+    height: 128px;
+    font-size: 128px;
+    line-height: 1;
   }
+}
+
+table.table-valign td {
+    vertical-align: middle;
 }

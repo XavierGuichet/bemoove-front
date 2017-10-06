@@ -22,4 +22,8 @@ export class HomeComponent implements OnInit {
         this.spaceService.toggleTopBar(true);
         this.spaceService.setHeaderAbove(true);
     }
+
+    public gotolist(): void {
+        this.router.navigate(['/workouts/view']);
+    }
 }

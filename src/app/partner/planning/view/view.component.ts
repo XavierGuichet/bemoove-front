@@ -1,175 +1,191 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { Workout } from '../../../models/workout';
-import { Day } from '../../../models/day';
+import { Coach, Workout, WorkoutInstance, Day } from '../../../models/index';
 
 import { WorkoutModalComponent } from '../workout-information/workout-modal.component';
 
 import { WorkoutDateProvider } from '../../workoutdate.provider';
-import { WorkoutService } from '../../../_services/workout.service';
-import { SpaceService } from '../../../_services/space.service';
+import { CoachService,
+  WorkoutService,
+  WorkoutInstanceService,
+  SpaceService } from '../../../_services/index';
 
 @Component({
-    selector: 'planning-view',
-    styleUrls: [ './view.component.scss' ],
-    templateUrl: 'view.component.html'
+  selector: 'planning-view',
+  styleUrls: ['./view.component.scss'],
+  templateUrl: 'view.component.html'
 })
 
 export class ViewComponent implements OnInit {
-    public tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-    public displayEarlyMorning: boolean = false;
-    public displayLateEvening: boolean = false;
-    public selectedDay: Date;
-    public firstDisplayedDay: Date;
-    public lastDisplayedDay: Date;
-    public displayedDays: Day[];
-    public displayStyle: string = 'week';
-    public hours: any = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-    public quarters: any = [0, 15, 30, 45];
-    public displayedWorkouts: Workout[];
-    constructor(
-        private spaceService: SpaceService,
-        private router: Router,
-        private workoutService: WorkoutService,
-        private WorkoutDateProvider: WorkoutDateProvider,
-        public dialog: MdDialog
-    ) {
-        this.selectedDay = new Date();
-        this.firstDisplayedDay = new Date();
-        this.lastDisplayedDay = new Date();
-    }
+  public selectedCoach: Coach;
+  public coaches: Coach[];
+  public tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  public firstDisplayedDay: Date;
+  public lastDisplayedDay: Date;
+  public displayedDays: Day[];
+  public displayStyle: string = 'week';
+  public hours: any = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+  public quarters: any = [0, 15, 30, 45];
+  public displayedWorkouts: WorkoutInstance[];
+  constructor(
+    private spaceService: SpaceService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private coachService: CoachService,
+    private workoutService: WorkoutService,
+    private workoutInstanceService: WorkoutInstanceService,
+    private WorkoutDateProvider: WorkoutDateProvider,
+    public dialog: MdDialog
+  ) {
+    this.firstDisplayedDay = new Date();
+    this.lastDisplayedDay = new Date();
+    this.setDateBoundaries();
+  }
 
-    public ngOnInit(): void {
-        this.changeDisplayedDays();
-    }
-
-    public showModalWorkoutInformationComponent(id: number) {
-      let dialogRef = this.dialog.open(WorkoutModalComponent, {
-          data: id,
+  public ngOnInit(): void {
+    this.coachService.getMyCoaches()
+      .then((coaches) => {
+        this.coaches = coaches;
+        this.route.params.subscribe((params: Params) => {
+          this.selectedCoach = this.coaches.find(
+            (coach: Coach) => coach.id === parseInt(params['id'], 10));
+          if (!(this.selectedCoach instanceof Object)) {
+            this.selectedCoach = this.coaches[0];
+          }
+          this.refreshDisplayedDays();
         });
-    }
+      })
+      .catch(this.handleError);
 
-    public displayWorkout() {
-        let quarterHeight = 1.05;
-        let hoursHeight = quarterHeight * 4 + 1 / 16;
-        this.displayedWorkouts.forEach( (workout) => {
-            let workoutstartDate = new Date(workout.startdate);
-            this.displayedDays.forEach( (day) => {
-                if (workoutstartDate.getDate() === day.date.getDate()
-                    && workoutstartDate.getDate() === day.date.getDate()) {
-                        let workoutEndDate = new Date(workout.enddate);
-                        let hours = workoutEndDate.getHours() - workoutstartDate.getHours();
-                        let minutes = workoutEndDate.getMinutes() - workoutstartDate.getMinutes();
-                        let top = 2 + (workoutstartDate.getHours() - 6) * hoursHeight + Math.ceil(workoutstartDate.getMinutes() / 15) * quarterHeight;
-                        let height = (hours) * hoursHeight
-                                        + Math.ceil( minutes / 15) * 1.05;
-                        workout.styleTop = top + 'rem'; // 0.75rem*1.4 = 15min
-                        workout.styleHeight = height + 'rem'; // 0.75rem*1.4 = 15min
-                        day.workouts.push(workout);
-                    }
-            });
-        });
-    }
+  }
 
-    public getWorkoutsByPartner(id: number, startdate: Date, lastdate: Date): void {
-        this.workoutService.getWorkoutsByPartnerIdAndDateInterval(id, startdate, lastdate)
-                   .then((workouts) => {
-                       this.displayedWorkouts = workouts;
-                       this.displayWorkout();
-                   });
-    }
+  public onCoachChange() {
+    this.refreshDisplayedDays();
+  }
 
-    public delete(workout: Workout): void {
-        this.workoutService
-            .delete(workout.id)
-            .then(() => {
-            this.displayedWorkouts = this.displayedWorkouts.filter((w) => w !== workout);
-            });
-    }
+  public showModalWorkoutInformationComponent(id: number) {
+    let dialogRef = this.dialog.open(WorkoutModalComponent, {
+      data: id,
+    });
+  }
 
-    public addworkout(date: Date, hour: number, minute: number) {
-        date.setHours(hour);
-        date.setMinutes(minute);
-        this.WorkoutDateProvider.setDate(date);
-        this.router.navigate(['/partner/workout/add']);
-    }
-
-    public changeDisplayStyle(style: string) {
-        this.displayStyle = style;
-        this.changeDisplayedDays();
-    }
-
-    public setToToday() {
-        let currentDate = new Date();
-        this.selectedDay.setTime(currentDate.getTime());
-        this.changeDisplayedDays();
-    }
-
-    public toggleEarlyMorning() {
-        // TODO
-    }
-
-    public toggleLateEvening() {
-        // TODO
-    }
-
-    public backwardSelectedDay() {
-        if (this.displayStyle === '3days') {
-            this.selectedDay.setTime(this.selectedDay.getTime() - 3 * 24 * 3600 * 1000);
-        } else {
-            this.selectedDay.setTime(this.selectedDay.getTime() - 7 * 24 * 3600 * 1000);
+  public displayWorkout() {
+    let quarterHeight = 1.05;
+    let hoursHeight = quarterHeight * 4 + 1 / 16;
+    this.displayedWorkouts.forEach((workout) => {
+      let workoutstartDate = new Date(workout.startdate);
+      this.displayedDays.forEach((day) => {
+        if (workoutstartDate.getDate() === day.date.getDate()
+          && workoutstartDate.getDate() === day.date.getDate()) {
+          let workoutEndDate = new Date(workout.enddate);
+          let hours = Math.ceil(workout.workout.duration / 60);
+          let minutes = workout.workout.duration % 60;
+          let top = 2 + (workoutstartDate.getHours() - 6) * hoursHeight + Math.ceil(workoutstartDate.getMinutes() / 15) * quarterHeight;
+          let height = (hours) * hoursHeight + Math.ceil(minutes / 15) * 1.05;
+          workout.styleTop = top + 'rem'; // 0.75rem*1.4 = 15min
+          workout.styleHeight = height + 'rem'; // 0.75rem*1.4 = 15min
+          day.workouts.push(workout);
         }
-        this.changeDisplayedDays();
-    }
+      });
+    });
+  }
 
-    public forwardSelectedDay() {
-        if (this.displayStyle === '3days') {
-            this.selectedDay.setTime(this.selectedDay.getTime() + 3 * 24 * 3600 * 1000);
-        } else {
-            this.selectedDay.setTime(this.selectedDay.getTime() + 7 * 24 * 3600 * 1000);
-        }
-        this.changeDisplayedDays();
-    }
+  public refreshWorkouts(): void {
+    this.workoutInstanceService.getByCoachIdAndDateInterval(this.selectedCoach.id, this.firstDisplayedDay, this.lastDisplayedDay)
+      .then((workoutInstances) => {
+        this.displayedWorkouts = workoutInstances;
+        this.displayWorkout();
+      });
+  }
 
-    private changeDisplayedDays() {
-        if (this.displayStyle === '3days') {
-            this.displayedDays = [new Day(), new Day(), new Day()];
-            this.displayedDays[0].date.setTime(this.selectedDay.getTime() - 24 * 3600 * 1000);
-            this.firstDisplayedDay = new Date();
-            this.firstDisplayedDay.setTime(this.selectedDay.getTime() - 24 * 3600 * 1000);
-            this.firstDisplayedDay.setHours(0, 0, 0, 0);
-            this.displayedDays[1].date.setTime(this.selectedDay.getTime());
-            this.displayedDays[2].date.setTime(this.selectedDay.getTime() + 24 * 3600 * 1000);
-            this.lastDisplayedDay = new Date();
-            this.lastDisplayedDay.setTime(this.selectedDay.getTime() + 24 * 3600 * 1000);
-            this.lastDisplayedDay.setHours(23, 59, 59, 0);
-        } else {
-            this.displayedDays = [new Day(), new Day(), new Day(), new Day(), new Day(), new Day(), new Day()];
-            let weekDay = this.selectedDay.getUTCDay();
-            this.lastDisplayedDay.setTime(this.displayedDays[2].date.getTime());
-            let max = 7 - weekDay;
-            let min = max + 1 - 7;
-            let i = 0;
-            for ( min; min <= max; min++) {
-                if (i === 0) {
-                    this.firstDisplayedDay = new Date();
-                    this.firstDisplayedDay.setTime(this.selectedDay.getTime() + min  *  24 * 3600 * 1000);
-                    this.firstDisplayedDay.setHours(0, 0, 0, 0);
-                } else if (i === 6) {
-                    this.lastDisplayedDay = new Date();
-                    this.lastDisplayedDay.setTime(this.selectedDay.getTime() + min  *  24 * 3600 * 1000);
-                    this.lastDisplayedDay.setHours(23, 59, 59, 0);
-                }
-                this.displayedDays[i].date.setTime(this.selectedDay.getTime() + min  *  24 * 3600 * 1000);
-                i++;
-            }
-        }
-        this.getWorkoutsByPartner(this.spaceService.getUserId(),
-                                this.firstDisplayedDay,
-                                this.lastDisplayedDay);
-    }
+  public delete(workout: Workout): void {
+    // this.workoutService
+    //     .delete(workout.id)
+    //     .then(() => {
+    //     this.displayedWorkouts = this.displayedWorkouts.filter((w) => w !== workout);
+    //     });
+  }
 
-    get diagnostic() { return JSON.stringify(this.displayedWorkouts); }
+  public addworkout(date: Date, hour: number, minute: number) {
+    console.log('add workout');
+    // date.setHours(hour);
+    // date.setMinutes(minute);
+    // this.WorkoutDateProvider.setDate(date);
+    // this.router.navigate(['/partner/workout/add']);
+  }
+
+  public changeDisplayStyle(style: string) {
+    this.displayStyle = style;
+    this.refreshDisplayedDays();
+  }
+
+  public backwardSelectedDay() {
+    let nbDisplayedDay: number;
+    if (this.displayStyle === '3days') {
+      nbDisplayedDay = -3;
+    } else {
+      nbDisplayedDay = -7;
+    }
+    this.translateDateBoundaries(nbDisplayedDay);
+    this.refreshDisplayedDays();
+  }
+
+  public forwardSelectedDay() {
+    let nbDisplayedDay: number;
+    if (this.displayStyle === '3days') {
+      nbDisplayedDay = 3;
+    } else {
+      nbDisplayedDay = 7;
+    }
+    this.translateDateBoundaries(nbDisplayedDay);
+    this.refreshDisplayedDays();
+  }
+
+  private dateDiff(date1: Date, date2: Date) {
+    let timeDiff = date1.getTime() - date2.getTime();
+    return (timeDiff / (24 * 3600 * 1000));
+  }
+
+  private setDateBoundaries() {
+    if (this.displayStyle === '3days') {
+      this.lastDisplayedDay = this.getRelativeDate(this.firstDisplayedDay, 2);
+    } else {
+      this.firstDisplayedDay = this.getDayXOfWeekOf(this.firstDisplayedDay, 1);
+      this.lastDisplayedDay = this.getRelativeDate(this.firstDisplayedDay, 6);
+    }
+    this.firstDisplayedDay.setUTCHours(0, 0, 0, 0); // should check use of UTC or standard
+    this.lastDisplayedDay.setUTCHours(23, 59, 59, 0); // should check use of UTC or standard
+  }
+
+  private getRelativeDate(date: Date, nbDay: number): Date {
+    let relativeDate = new Date(date);
+    relativeDate.setTime(date.getTime() + nbDay * 24 * 3600 * 1000);
+    return relativeDate;
+  }
+
+  private getDayXOfWeekOf(date: Date, dayX: number): Date {
+    let ofDay = date.getDay() || 7; // transform sunday 0, in 7
+    let dayDiff = dayX - ofDay;
+    return this.getRelativeDate(date, dayDiff);
+  }
+
+  private translateDateBoundaries(nbDay: number) {
+    this.firstDisplayedDay.setTime(this.firstDisplayedDay.getTime() + nbDay * 24 * 3600 * 1000);
+    this.lastDisplayedDay.setTime(this.lastDisplayedDay.getTime() + nbDay * 24 * 3600 * 1000);
+  }
+
+  private refreshDisplayedDays() {
+    this.displayedDays = new Array();
+    for (let date = new Date(this.firstDisplayedDay); date.getTime() < this.lastDisplayedDay.getTime(); date.setTime(date.getTime() + 24 * 3600 * 1000)) {
+      this.displayedDays.push(new Day(new Date(date)));
+    }
+    this.refreshWorkouts();
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
 }

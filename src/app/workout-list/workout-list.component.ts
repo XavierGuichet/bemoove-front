@@ -5,7 +5,6 @@ import { SpaceService } from '../_services/index';
 @Component({
   selector: 'workout-list',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [ './workout-list.component.scss' ],
   template: `
     <router-outlet></router-outlet>
   `

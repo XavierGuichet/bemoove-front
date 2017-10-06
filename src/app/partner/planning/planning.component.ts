@@ -3,7 +3,6 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 @Component({
   selector: 'planning',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [ './planning.component.scss' ],
   template: `
     <router-outlet></router-outlet>
   `

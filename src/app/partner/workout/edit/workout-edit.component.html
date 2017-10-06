@@ -1,11 +1,11 @@
 <div class="container">
-    <h1>Modifier une séance</h1>
+    <h1 class="h2 alt-font mb-3">Modifier une séance</h1>
     <div class="row">
         <div class="col-sm-7">
-            <workout-form-reactive [workout]="editedWorkout"  *ngIf="editedWorkout"></workout-form-reactive>
+            <workout-form [workout]="editedWorkout" *ngIf="editedWorkout"></workout-form>
         </div>
         <div class="col-5">
-            <workout-preview [workout]="editedWorkout" class="planning__detail" *ngIf="editedWorkout"></workout-preview>
+            <!-- <workout-preview [workout]="editedWorkout" class="planning__detail" *ngIf="editedWorkout"></workout-preview> -->
         </div>
     </div>
 </div>

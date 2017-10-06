@@ -48,13 +48,33 @@ export class WorkoutService {
                  .catch(this.handleError);
     }
 
+    // Return workouts of the business assossiated with current connected account
+    public getMyWorkouts(): Promise<Workout[]> {
+        let url = 'http://' + process.env.API_URL + '/getMyWorkouts';
+        return this.http.get(url, this.jwt())
+            .toPromise()
+            .then((response) => response.json() as Workout[])
+            .catch(this.handleError);
+    }
+
     public getWorkout(id: number): Promise<Workout> {
-        return this.getWorkouts()
-            .then((workouts) => workouts.find((workout) => workout.id === id));
+        let url = this.workoutsUrl + '/' + id;
+        return this.http.get(url, { headers: this.headers })
+                   .toPromise()
+                   .then((response) => response.json() as Workout)
+                   .catch(this.handleError);
+    }
+
+    public getWorkoutsByCoachIdAndDateInterval(id: number, startdate: Date, lastdate: Date): Promise<Workout[]> {
+        return this.http.get(this.workoutsUrl + '?coach.id=' + id + '&startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
+                            { headers: this.headersSearch })
+            .toPromise()
+            .then((response) => response.json() as Workout[])
+            .catch(this.handleError);
     }
 
     public getWorkoutsByPartnerIdAndDateInterval(id: number, startdate: Date, lastdate: Date): Promise<Workout[]> {
-        return this.http.get(this.workoutsUrl + '?partner.id=' + id + '&startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
+        return this.http.get(this.workoutsUrl + '?owner.id=' + id + '&startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
                             { headers: this.headersSearch })
             .toPromise()
             .then((response) => response.json() as Workout[])
@@ -73,7 +93,9 @@ export class WorkoutService {
         return this.getWorkouts()
             .then((workouts) => workouts.filter(
                 (workout) =>
-                    date.getDate() === new Date( workout.startdate ).getDate() ));
+                    1
+                    // date.getDate() === new Date( workout.startdate ).getDate()
+                ));
     }
 
     private passedDate(workout, i, o): any {

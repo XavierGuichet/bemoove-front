@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { WorkoutListComponent } from './workout-list.component';
 import { WorkoutListMaconneryComponent } from './display/maconnery/workout-list-display-maconnery.component';
+import { WorkoutDetailsComponent } from './display/details/workout-details.component';
 
 import { SpaceService } from '../_services/space.service';
 
@@ -15,6 +16,7 @@ import { SpaceService } from '../_services/space.service';
     children: [
         { path: '', redirectTo: 'view', pathMatch: 'full' },
         { path: 'view', component: WorkoutListMaconneryComponent },
+        { path: 'view/:id', component: WorkoutDetailsComponent },
     ]
   }
   ])],

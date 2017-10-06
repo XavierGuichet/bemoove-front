@@ -10,8 +10,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'email-change-form-reactive',
-  templateUrl: './email-change-form-reactive.component.html',
-  styleUrls: ['./email-change-form-reactive.component.scss']
+  templateUrl: './email-change-form-reactive.component.html'
 })
 
 export class EmailChangeFormReactiveComponent implements OnInit {

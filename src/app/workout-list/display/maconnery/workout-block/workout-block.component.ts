@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Workout } from '../../../../models/workout';
 import { Booking } from '../../../../models/booking';
@@ -22,13 +23,19 @@ export class WorkoutBlockComponent {
     // private account: Account;
     constructor(
         private bookingService: BookingService,
+        private router: Router,
+
         // private accountService: AccountService,
         private spaceService: SpaceService,
     ) {
         // TODO
     }
 
-    public bookWorkout(): void {
+    public viewWorkout(): void {
+        this.router.navigate(['/workouts/view/' + this.workout.id]);
+        return;
+    }
+        // OLD BOOKWORKOUT()
         // let userId = this.spaceService.getUserId();
         // this.accountService.getById(userId).subscribe(
         //     (data) => {
@@ -43,5 +50,4 @@ export class WorkoutBlockComponent {
         //     },
         //     (error) => {
         //     });
-    }
 }

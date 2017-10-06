@@ -13,8 +13,7 @@ import { ProfileService } from '../../../_services/index';
 
 @Component({
   selector: 'contact-details-form-reactive',
-  templateUrl: './contact-details-form-reactive.component.html',
-  styleUrls: ['./contact-details-form-reactive.component.scss']
+  templateUrl: './contact-details-form-reactive.component.html'
 })
 
 export class ContactDetailsFormReactiveComponent implements OnInit {

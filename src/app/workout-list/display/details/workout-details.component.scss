@@ -1,0 +1,74 @@
+.header {
+  height: 350px;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.tab-navigation {
+  & ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    border-bottom: 1px solid lightgrey;
+    padding: 0 12px;
+    margin-bottom: 24px;
+
+    & li {
+      flex: 1 1 auto;
+      cursor: pointer;
+      text-align: center;
+      padding: 0.5em 0;
+      transition: all 500ms;
+
+      &:first-child {
+        border-bottom: 2px solid #52d0dc;
+      }
+
+      &:hover {
+        background: lightgrey;
+      }
+    }
+  }
+}
+
+.coach {
+  border: 1px solid lightgrey;
+}
+.list-check {
+    list-style: none outside;
+    margin: 0;
+    padding: 0;
+}
+.booking {
+  margin-top: -64px;
+  border: 1px solid lightgrey;
+
+  &__header {
+    height: 64px;
+    opacity: 0.85;
+
+    &_price {
+      line-height: 64px;
+      opacity: 1;
+    }
+  }
+
+  &__content {
+      
+  }
+
+  &__action {
+
+    & button {
+      float: right;
+    }
+  }
+  &__notice {
+      border-top: 1px solid lightgrey;
+  }
+}
+.my-btn {
+    min-width: auto;
+}

@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { SpaceService } from '../../../_services/space.service';
-import { BusinessService } from '../_services/business.service';
+import { BusinessService, SpaceService } from '../../../_services/index';
 
-import { Organization } from '../models/organization';
+import { Organization } from '../../../models/index';
 
 function validateLuhn(c: FormControl) {
   const value = c.value;
@@ -88,13 +87,10 @@ export class InvoiceSettingsComponent implements OnInit {
     private spaceService: SpaceService) { }
 
   public ngOnInit(): void {
-      this.businessService.getByOwnerId(this.spaceService.getUserId()).then((Business) => {
+      this.businessService.getMyBusiness().then((Business) => {
           // TODO : This is ugly, service should return one result in this case
-        if (Business[0].hasOwnProperty('id')) {
-          this.organization = Business[0];
-        } else {
-          this.organization = new Organization();
-        }
+          this.organization = Business;
+
         if (this.organization.legalStatus === null) {
             this.organization.legalStatus = '-1';
         }

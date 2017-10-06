@@ -3,11 +3,7 @@ import { Workout } from '../../models/workout';
 export class WorkoutApi {
     public title: string;
     public sport: string;
-    public startdate: Date;
-    public enddate: Date;
-    public duration: string;
-    public nbTicketAvailable: number;
-    public nbTicketBooked: number;
+    public duration: number;
     public price: number;
     public address: any;
     public photo: any;
@@ -18,11 +14,7 @@ export class WorkoutApi {
 
     constructor(workout: Workout) {
         this.title = workout.title;
-        this.startdate = workout.startdate;
-        this.enddate = workout.enddate;
         this.duration = workout.duration;
-        this.nbTicketAvailable = workout.nbTicketAvailable;
-        this.nbTicketBooked = 0 ;
         this.price = workout.price;
         this.description = workout.description;
         this.outfit = workout.outfit;

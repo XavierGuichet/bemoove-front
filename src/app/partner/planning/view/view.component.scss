@@ -1,112 +1,117 @@
-.planning {
-    margin-bottom: 2em;
-}
+$white: #fff;
+$bg-grey: #e0e0e0;
+
 .col-1-7 {
-    width: 14.285714%;
-    position: relative;
+  position: relative;
+  width: 14.285714%;
 }
+
 .timeline {
-    width: 50px;
-    border-top: 1px solid #ffffff;
-    border-left: 1px solid #ffffff;
-    padding: 0;
-    .hour {
-        border-bottom: 1px solid #ffffff;
-        border-right: 1px solid #ffffff;
-        padding: 0.2rem 0.56rem 2.6rem;
-        background: #e0e0e0;
-        font-size: 1rem;
-        line-height: 1.4em;
-        font-weight: bold;
-        text-align: right;
-    }
+  border-left: 1px solid $white;
+  border-top: 1px solid $white;
+  padding: 0;
+  width: 50px;
+
+  .hour {
+    background: $bg-grey;
+    border-bottom: 1px solid $white;
+    border-right: 1px solid $white;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.4em;
+    padding: 0.2rem 0.56rem 2.6rem;
+    text-align: right;
+  }
 }
+
 .day-container {
-    display: flex;
-    flex: 1 1 auto;
+  display: flex;
+  flex: 1 1 auto;
 }
 
 .day {
-    border-top: 1px solid #ffffff;
-    padding: 0;
+  border-top: 1px solid $white;
+  padding: 0;
 }
+
 .title {
-    text-align: center;
-    background: #52d0dc;
-    border-right: 1px solid #ffffff;
-    color: #ffffff;
-    padding: 0.125rem 0;
-    margin: 0;
-    border-bottom: 1px solid #ffffff;
+  text-align: center;
+  background: #52d0dc;
+  border-right: 1px solid $white;
+  color: $white;
+  padding: 0.125rem 0;
+  margin: 0;
+  border-bottom: 1px solid $white;
 }
+
 .day:hover .title {
-    background: #c9b61c;
+  background: #c9b61c;
 }
+
 .hour {
-    border-bottom: 1px solid #e0e0e0;
-    border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid $bg-grey;
+  border-right: 1px solid $bg-grey;
 }
+
 .quarter {
-    font-size: 0.75rem;
-    line-height: 1.4em;
-    &.selector {
-        cursor: pointer;
-        color: transparent;
-        text-align: center;
-        &:hover {
-            color: #ffffff;
-            background: #2ac2d1;
-        }
+  font-size: 0.75rem;
+  line-height: 1.4em;
+
+  &.selector {
+    cursor: pointer;
+    color: transparent;
+    text-align: center;
+
+    &:hover {
+      color: $white;
+      background: #2ac2d1;
     }
+  }
 }
 
 .button-row {
-    display: flex;
-    flex-direction: row;
-    margin: 1.5em 0;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin: 1.5em 0;
+  align-items: center;
 }
+
 .title-filler {
-    flex: 1 1 auto;
-    text-align: center;
-    h4 {
-        margin: 0;
-    }
+  flex: 1 1 auto;
+  text-align: center;
+
+  h4 {
+    margin: 0;
+  }
 }
 
 .workout-wrapper {
-    position: absolute;
-    height: 52px;
-    width: 100%;
-    padding: 4px;
-}
-.workout {
-    height: 100%;
-    width: 100%;
-    color: #ffffff;
-    background: #2ac2d1;
-    border-radius: 4px;
-    padding: 0.25em;
-    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.35), 0 1px 0 rgba(0, 0, 0, 0.35), 0px 1px 2px #bbb;
-    border: 1px solid #bbb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.right {
-    float: right;
-}
-.inactive {
-    background-color: #e0e0e0;
-    background-image: linear-gradient(-45deg, rgba(255, 255, 255, .9) 40%, transparent 40%,
-                                            transparent 50%, rgba(255, 255, 255, .9) 50%,
-                                            rgba(255, 255, 255, .9) 90%, transparent 90%, transparent);
-    background-size: 15px 15px;
+  position: absolute;
+  height: 52px;
+  width: 100%;
+  padding: 4px;
 }
 
-.workout-title {
-    font-size: 1.25em;
-    text-transform: uppercase;
-    margin-bottom: 0;
-    text-align: center;
+.workout {
+  height: 100%;
+  width: 100%;
+  color: $white;
+  background: #2ac2d1;
+  border-radius: 4px;
+  padding: 0.25em;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.35), 0 1px 0 rgba(0, 0, 0, 0.35), 0 1px 2px #bbb;
+  border: 1px solid #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right {
+  float: right;
+}
+
+.inactive {
+  background-color: $bg-grey;
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, .9) 40%, transparent 40%, transparent 50%, rgba(255, 255, 255, .9) 50%, rgba(255, 255, 255, .9) 90%, transparent 90%, transparent);
+  background-size: 15px 15px;
 }

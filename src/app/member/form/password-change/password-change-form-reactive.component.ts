@@ -8,8 +8,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'password-change-form-reactive',
-  templateUrl: './password-change-form-reactive.component.html',
-  styleUrls: ['./password-change-form-reactive.component.scss']
+  templateUrl: './password-change-form-reactive.component.html'
 })
 
 export class PasswordChangeFormReactiveComponent implements OnInit {
