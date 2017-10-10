@@ -8,7 +8,7 @@
             <div class="row">
               <div class="form-group col-6">
                 <label for="example-text-input" class="big">Coach</label>
-                <select *ngIf="coaches.length" class="addresses form-control" formControlName="coach">
+                <select *ngIf="coaches.length" class="form-control" formControlName="coach">
                 <option *ngFor="let coach of coaches" [ngValue]="coach">
                 {{coach.firstname}} - {{coach.lastname}}
                 </option>

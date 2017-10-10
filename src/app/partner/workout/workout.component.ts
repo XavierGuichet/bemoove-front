@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
   selector: 'workout',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
   template: `
     <router-outlet></router-outlet>
   `
