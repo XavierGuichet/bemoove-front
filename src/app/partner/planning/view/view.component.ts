@@ -5,6 +5,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { Coach, Workout, WorkoutInstance, Day } from '../../../models/index';
 
 import { WorkoutModalComponent } from '../workout-information/workout-modal.component';
+import { AddSessionModalComponent } from '../modal/add-session-modal.component';
 
 import { WorkoutDateProvider } from '../../workoutdate.provider';
 import { CoachService,
@@ -109,11 +110,18 @@ export class ViewComponent implements OnInit {
   }
 
   public addworkout(date: Date, hour: number, minute: number) {
-    console.log('add workout');
-    // date.setHours(hour);
-    // date.setMinutes(minute);
-    // this.WorkoutDateProvider.setDate(date);
-    // this.router.navigate(['/partner/workout/add']);
+    date.setHours(hour);
+    date.setMinutes(minute);
+    let workoutInstance = new WorkoutInstance(this.selectedCoach, date);
+    workoutInstance.startdate = date;
+    let dialogRef = this.dialog.open(AddSessionModalComponent, {
+        data: {workoutInstance},
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+        if (result === true) {
+            this.refreshDisplayedDays();
+        }
+    });
   }
 
   public changeDisplayStyle(style: string) {

@@ -1,0 +1,58 @@
+<form *ngIf="formReady" [formGroup]="workoutInstanceForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row">
+    <div class="form-group col-6">
+        <label for="coach" class="form-label">Coach</label>
+        <div class="">
+            <select *ngIf="coaches.length" class="form-control" formControlName="coach" name="coach">
+                <option *ngFor="let coach of coaches" [ngValue]="coach">
+                    {{coach.firstname}} - {{coach.lastname}}
+                </option>
+            </select>
+            <div *ngIf="formErrors.coach" class="form-error">
+                {{ formErrors.coach }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-6">
+        <label for="workout" class="form-label">Séance type</label>
+        <div class="">
+            <select *ngIf="workouts.length" class="form-control" formControlName="workout" name="workout">
+                <option *ngFor="let workout of workouts" [ngValue]="workout">
+                    {{workout.title}}
+                </option>
+            </select>
+            <div *ngIf="formErrors.workout" class="form-error">
+                {{ formErrors.workout }}
+            </div>
+        </div>
+    </div>
+    </div>
+  <div class="form-group row">
+    <label for="nbTicketAvailable" class="col-sm-3 col-form-label">Quantité de place disponible à la réservation</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" formControlName="nbTicketAvailable" name="nbTicketAvailable">
+      <div *ngIf="formErrors.nbTicketAvailable" class="form-error">
+        {{ formErrors.nbTicketAvailable }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-6">
+      <label for="startdate">Date</label>
+      <div>
+        <ngb-datepicker #dp formControlName="startdate" name="startdate" [minDate]="ngbTomorrow"></ngb-datepicker>
+        <div *ngIf="formErrors.startdate" class="form-error">
+          {{ formErrors.startdate }}
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-6">
+      <label for="starttime">Heure de début</label>
+      <ngb-timepicker [spinners]="false" formControlName="starttime" name="starttime"></ngb-timepicker>
+      <div *ngIf="formErrors.starttime" class="form-error">
+        {{ formErrors.starttime }}
+      </div>
+    </div>
+  </div>
+  <button type="submit" [disabled]="loading || !workoutInstanceForm.valid" md-raised-button color="primary" class="pull-right mb-3">Enregistrer</button>
+</form>

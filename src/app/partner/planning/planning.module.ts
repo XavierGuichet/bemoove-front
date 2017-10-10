@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '@angular/material';
@@ -12,6 +12,9 @@ import { PlanningRoutingModule } from './planning-routing.module';
 import { WorkoutModalComponent } from './workout-information/workout-modal.component';
 import { WorkoutInformationComponent } from './workout-information/workout-information.component';
 
+import { AddSessionFormComponent } from './form/add-session-form.component';
+import { AddSessionModalComponent } from './modal/add-session-modal.component';
+
 @NgModule({
     bootstrap: [
         PlanningComponent,
@@ -19,6 +22,7 @@ import { WorkoutInformationComponent } from './workout-information/workout-infor
   imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         NgbModule.forRoot(),
         MaterialModule.forRoot(),
         PlanningRoutingModule
@@ -27,10 +31,12 @@ import { WorkoutInformationComponent } from './workout-information/workout-infor
       PlanningComponent,
       ViewComponent,
       WorkoutModalComponent,
-      WorkoutInformationComponent
+      WorkoutInformationComponent,
+      AddSessionFormComponent,
+      AddSessionModalComponent
     ],
   exports: [ PlanningComponent ],
-  entryComponents: [ WorkoutModalComponent ],
+  entryComponents: [ WorkoutModalComponent, AddSessionModalComponent ],
   providers:    [
     ]
 })

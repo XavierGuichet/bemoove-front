@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject, Optional } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Output,  OnInit, Inject, Optional } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
-import { Workout, Booking } from '../../../models/index';
+import { Workout, WorkoutInstance, Booking } from '../../../models/index';
 
 import { AlertService,
          AccountService,
@@ -11,44 +11,28 @@ import { AlertService,
 
 @Component({
     selector: 'add-session-modal',
-    templateUrl: './workout-modal.component.html',
-    styleUrls: ['./workout-modal.component.scss']
+    template: '<add-session-form [(workoutInstance)]="workoutInstance" (onSuccess)="onSuccess($event)"></add-session-form>'
 })
 
-export class AddSessionModalComponent implements OnInit {
-    public workout: Workout;
-    public bookings: Booking[];
-    public editable: boolean = false;
+export class AddSessionModalComponent {
+    public workoutInstance: WorkoutInstance;
 
-    constructor(
-        @Optional() @Inject(MD_DIALOG_DATA) public id: any,
-        public dialog: MdDialog,
-        public dialogRef: MdDialogRef<WorkoutModalComponent>,
-        private router: Router,
-        private workoutService: WorkoutService,
-        private accountService: AccountService,
-        private alertService: AlertService,
-        private bookingService: BookingService) {
+    @Output()
+    public onCreation = new EventEmitter<WorkoutInstance>();
+
+    constructor(@Optional() @Inject(MD_DIALOG_DATA) private data: any,
+                public dialog: MdDialog,
+                public dialogRef: MdDialogRef<AddSessionModalComponent>,
+                private route: ActivatedRoute,
+                private router: Router) {
+        if (this.data.workoutInstance instanceof WorkoutInstance) {
+            this.workoutInstance = this.data.workoutInstance;
+        } else {
+            this.workoutInstance = new WorkoutInstance();
+        }
     }
 
-    public ngOnInit(): void {
-        this.workoutService.getWorkout(this.id)
-            .then( (workout) => {
-                // workout.startdate = new Date(workout.startdate);
-                // workout.enddate = new Date(workout.enddate);
-                // this.workout = workout;
-                // this.editable = (this.workout.startdate > new Date());
-                // this.bookingService.getAll()
-                //     .then( (bookings) => {
-                //         this.bookings = bookings;
-                //     });
-            });
-    }
-
-    public editWorkout() {
-        this.dialogRef.afterClosed().subscribe( () => {
-          this.router.navigate(['/partner/workout', this.id, 'edit']);
-        });
-        this.dialogRef.close();
+    public onSuccess(workoutInstance: WorkoutInstance) {
+        return workoutInstance ? this.dialogRef.close(workoutInstance) : '';
     }
 }
