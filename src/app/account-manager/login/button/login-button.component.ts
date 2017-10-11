@@ -4,7 +4,7 @@ import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
 
 import { LoginModalComponent  } from '../modal/login-modal.component';
 
-import { AlertService, AccountService } from '../../../_services/index';
+import { AlertService } from '../../../_services/index';
 
 @Component({
     selector: 'login-button',
@@ -22,7 +22,6 @@ export class LoginButtonComponent {
         public dialog: MdDialog,
         public snackBar: MdSnackBar,
         private router: Router,
-        private accountService: AccountService,
         private alertService: AlertService) {
     }
 

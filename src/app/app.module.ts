@@ -25,7 +25,7 @@ import { NoContentComponent } from './no-content';
 
 import { AlertComponent } from './_directives/index';
 import { AuthMemberGuard, AuthPartnerGuard } from './_guards/index';
-import { AlertService, AuthenticationService, AccountService,
+import { AlertService, AuthenticationService,
         WorkoutService, BookingService, SpaceService
         } from './_services/index';
 
@@ -53,7 +53,6 @@ const APP_PROVIDERS = [
   AuthMemberGuard, AuthPartnerGuard,
   AlertService,
   AuthenticationService,
-  AccountService,
   SpaceService,
   BookingService
 ];

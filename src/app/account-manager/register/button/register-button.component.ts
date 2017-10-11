@@ -4,7 +4,7 @@ import { MdDialog, MdDialogRef, MdButtonModule, MdSnackBar } from '@angular/mate
 
 import { RegisterModalComponent  } from '../modal/register-modal.component';
 
-import { AlertService, AccountService } from '../../../_services/index';
+import { AlertService } from '../../../_services/index';
 
 @Component({
     selector: 'register-button',
@@ -22,7 +22,6 @@ export class RegisterButtonComponent {
         public dialog: MdDialog,
         public snackBar: MdSnackBar,
         private router: Router,
-        private accountService: AccountService,
         private alertService: AlertService) {
     }
 

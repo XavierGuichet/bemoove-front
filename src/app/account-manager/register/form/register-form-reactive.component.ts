@@ -7,7 +7,7 @@ import { Account } from '../../../models/account';
 import { SocietyType } from '../../../models/society-type';
 import { RegexpValidator } from '../../../_directives/regexp.directive';
 
-import { AlertService, AuthenticationService, AccountService, SpaceService } from '../../../_services/index';
+import { AlertService, AuthenticationService, SpaceService } from '../../../_services/index';
 
 @Component({
   selector: 'register-form-reactive',
@@ -56,7 +56,6 @@ export class RegisterFormReactiveComponent implements OnInit {
   constructor(private fb: FormBuilder,
     public snackBar: MdSnackBar,
     private authenticationService: AuthenticationService,
-    private accountService: AccountService,
     private router: Router,
     private alertService: AlertService,
     private spaceService: SpaceService
@@ -70,7 +69,7 @@ export class RegisterFormReactiveComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     this.account = this.RegisterForm.value;
-    this.accountService.create(this.account)
+    this.authenticationService.register(this.account)
       .subscribe(
       (data) => {
         this.alertService.success('Registration successful', true);

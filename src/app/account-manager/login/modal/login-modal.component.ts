@@ -4,7 +4,7 @@ import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
 
 import { RegisterModalComponent  } from '../../register/modal/register-modal.component';
 
-import { AlertService, AccountService } from '../../../_services/index';
+import { AlertService } from '../../../_services/index';
 
 @Component({
     // moduleId: module.id,
@@ -22,7 +22,6 @@ export class LoginModalComponent {
         public dialogRef: MdDialogRef<LoginModalComponent>,
         public snackBar: MdSnackBar,
         private router: Router,
-        private accountService: AccountService,
         private alertService: AlertService) {
     }
 
