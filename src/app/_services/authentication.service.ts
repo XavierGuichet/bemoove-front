@@ -21,14 +21,12 @@ export class AuthenticationService {
     //                                 'Accept': 'application/json'});
     private AccountsUrl = 'http://' + process.env.API_URL + '/accounts';
 
-
     constructor(private http: Http, private spaceService: SpaceService) { }
 
     public register(account: Account) {
         return this.http.post(this.AccountsUrl, account, this.jwt())
                         .map((response: Response) => response.json());
     }
-
 
     public login(username: string, password: string) {
         return this.http.post( this.authentificationUrl,

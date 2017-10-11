@@ -5,7 +5,6 @@ export * from './account';
 ﻿export * from './booking';
 ﻿export * from './coach';
 ﻿export * from './day';
-﻿export * from './legal-representative';
 ﻿export * from './image';
 ﻿export * from './organization';
 ﻿export * from './person';

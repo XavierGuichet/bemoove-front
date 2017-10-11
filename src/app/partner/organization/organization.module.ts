@@ -11,7 +11,9 @@ import { BillingMandateComponent } from './billing-mandate/billing-mandate.compo
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
 
-import { LegalRepresentativeFormReactiveComponent } from './form/legalrepresentative/legalrepresentative-reactive-form.component';
+import { AddressFormComponent } from './form/address/address-form.component';
+import { BusinessInfoFormComponent } from './form/business-info/business-info-form.component';
+import { LegalRepresentativeFormComponent } from './form/legalrepresentative/legalrepresentative-form.component';
 
 import { OrganizationRoutingModule } from './organization-routing.module';
 
@@ -36,7 +38,9 @@ import { PartnerNavSecondaryComponent } from '../nav/secondary/nav-secondary.com
       BankAccountComponent,
       BillingMandateComponent,
       PartnerNavSecondaryComponent,
-      LegalRepresentativeFormReactiveComponent
+      AddressFormComponent,
+      BusinessInfoFormComponent,
+      LegalRepresentativeFormComponent
     ],
   exports: [ OrganizationComponent ],
   entryComponents: [ ],

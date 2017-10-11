@@ -5,7 +5,6 @@ export * from './bank-account.service';
 export * from './booking.service';
 export * from './business.service';
 export * from './coach.service';
-export * from './legal-representative.service';
 export * from './image.service';
 export * from './person.service';
 export * from './profile.service';

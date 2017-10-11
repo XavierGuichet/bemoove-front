@@ -22,7 +22,6 @@ import { PartnerNavPrimaryComponent } from './nav/primary/nav-primary.component'
 import { SportService,
   AddressService,
   BankAccountService,
-  LegalRepresentativeService,
   BusinessService,
   PersonService,
   ImageService,
@@ -61,7 +60,6 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
   ],
   providers: [
     BankAccountService,
-    LegalRepresentativeService,
     BusinessService,
     PersonService,
     SportService,
