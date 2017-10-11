@@ -12,6 +12,5 @@ export * from './profile.service';
 export * from './space.service';
 export * from './sport.service';
 export * from './tag.service';
-export * from './account.service';
 export * from './workout.service';
 export * from './workout-instance.service';
