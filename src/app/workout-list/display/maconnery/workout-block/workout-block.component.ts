@@ -31,19 +31,4 @@ export class WorkoutBlockComponent {
         this.router.navigate(['/workouts/view/' + this.workout.id]);
         return;
     }
-        // OLD BOOKWORKOUT()
-        // let userId = this.spaceService.getUserId();
-        // this.accountService.getById(userId).subscribe(
-        //     (data) => {
-        //         this.user = data;
-        //         this.booking = new Booking(this.user, this.workout, 1);
-        //         this.bookingService.create(this.booking)
-        //             .subscribe(
-        //                 (data) => {
-        //                 },
-        //                 (error) => {
-        //                 });
-        //     },
-        //     (error) => {
-        //     });
 }
