@@ -5,7 +5,6 @@ import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { Workout, WorkoutInstance, Booking } from '../../../models/index';
 
 import { AlertService,
-         AccountService,
          WorkoutService,
          BookingService } from '../../../_services/index';
 

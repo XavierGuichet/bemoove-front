@@ -5,7 +5,6 @@ import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { Workout, Booking } from '../../../models/index';
 
 import { AlertService,
-         AccountService,
          WorkoutService,
          BookingService } from '../../../_services/index';
 
@@ -26,7 +25,6 @@ export class WorkoutModalComponent implements OnInit {
         public dialogRef: MdDialogRef<WorkoutModalComponent>,
         private router: Router,
         private workoutService: WorkoutService,
-        private accountService: AccountService,
         private alertService: AlertService,
         private bookingService: BookingService) {
     }

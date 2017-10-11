@@ -3,11 +3,9 @@ import { Router } from '@angular/router';
 
 import { Workout } from '../../../../models/workout';
 import { Booking } from '../../../../models/booking';
-// import { User } from '../../../../models/user';
 
 import { SpaceService } from '../../../../_services/space.service';
 import { BookingService } from '../../../../_services/booking.service';
-// import { AccountService } from '../../../../_services/account.service';
 
 @Component({
   selector: 'workout-block',
@@ -24,8 +22,6 @@ export class WorkoutBlockComponent {
     constructor(
         private bookingService: BookingService,
         private router: Router,
-
-        // private accountService: AccountService,
         private spaceService: SpaceService,
     ) {
         // TODO

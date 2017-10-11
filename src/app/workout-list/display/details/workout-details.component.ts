@@ -9,7 +9,6 @@ import {
 
 import { Workout } from '../../../models/workout';
 import { Booking } from '../../../models/booking';
-// import { User } from '../../../../models/user';
 
 import { SpaceService } from '../../../_services/space.service';
 import { BookingService } from '../../../_services/booking.service';
@@ -28,7 +27,6 @@ export class WorkoutDetailsComponent implements OnInit {
     public scrolled: boolean = false;
     public headerimage: any;
     private booking: Booking;
-    // private account: Account;
     constructor(
         private domSanitizer: DomSanitizer,
         private bookingService: BookingService,
@@ -36,7 +34,6 @@ export class WorkoutDetailsComponent implements OnInit {
         private profileService: ProfileService,
         private router: Router,
         private route: ActivatedRoute,
-        // private accountService: AccountService,
         private spaceService: SpaceService,
     ) {
         // TODO
