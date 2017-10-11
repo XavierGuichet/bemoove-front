@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MdSnackBar, MdButton } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Account } from '../../../models/account';
 import { SocietyType } from '../../../models/society-type';
 import { RegexpValidator } from '../../../_directives/regexp.directive';
 
-import { AlertService, AccountService } from '../../../_services/index';
+import { AlertService, AuthenticationService, AccountService, SpaceService } from '../../../_services/index';
 
 @Component({
   selector: 'register-form-reactive',
@@ -54,8 +55,12 @@ export class RegisterFormReactiveComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     public snackBar: MdSnackBar,
+    private authenticationService: AuthenticationService,
     private accountService: AccountService,
-    private alertService: AlertService) { }
+    private router: Router,
+    private alertService: AlertService,
+    private spaceService: SpaceService
+    ) { }
 
   public ngOnInit(): void {
     this.buildForm();
@@ -72,10 +77,32 @@ export class RegisterFormReactiveComponent implements OnInit {
         this.snackBar.open('Inscription réussie', '', {
           duration: 10000,
         });
+        this.authenticate();
       },
       (error) => {
         this.alertService.error(error);
       });
+  }
+
+  public authenticate() {
+      this.authenticationService.login(this.account.email, this.account.password)
+          .subscribe(
+              (data) => {
+                  let zone = this.spaceService.getZone();
+                  if (zone === 'ROLE_PARTNER') {
+                      this.router.navigate(['/partner']);
+                      return;
+                  }
+                  if (zone === 'ROLE_USER') {
+                      this.router.navigate(['/workouts']);
+                      return;
+                  }
+                  this.router.navigate(['/workouts']);
+              },
+              (error) => {
+                  this.alertService.error(error);
+                  this.loading = false;
+              });
   }
 
   public onValueChanged(data?: any) {
