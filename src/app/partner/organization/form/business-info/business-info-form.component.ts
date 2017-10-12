@@ -17,6 +17,8 @@ export class BusinessInfoFormComponent implements OnInit {
   public business: Business;
   public limitedBusiness: Business;
 
+public formResult: any;
+  public formReady: boolean = false;
   public loading: boolean = false;
   public businessForm: FormGroup;
   public formErrors = {
@@ -51,14 +53,20 @@ export class BusinessInfoFormComponent implements OnInit {
 
   public onSubmit(): void {
       this.loading = true;
+      this.hideFormResult();
 
       this.limitedBusiness = this.prepareLimitedBusiness();
 
       this.businessService.update( this.limitedBusiness )
-                                 .subscribe((business) => {
+                                 .then((business) => {
                                      this.business = business;
                                      this.loading = false;
-                                 });
+                                     this.showFormResult('success', 'Sauvegarde réussie');
+                                 },
+                                    (error) => {
+                                        this.showFormResult('error', 'Echec de la sauvegarde');
+                                        this.loading = false;
+                                    });
   }
 
   private prepareLimitedBusiness(): Business {
@@ -102,6 +110,16 @@ export class BusinessInfoFormComponent implements OnInit {
 
       // (re)set validation messages.
       this.onValueChanged(this.businessForm);
+
+      this.formReady = true;
+  }
+
+  private hideFormResult() {
+      this.formResult = false;
+  }
+
+  private showFormResult(type: string, title: string, content: string = '') {
+      this.formResult = { type, title, content};
   }
 
   private onValueChanged(form, data?: any): void {

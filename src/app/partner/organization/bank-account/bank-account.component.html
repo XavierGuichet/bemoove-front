@@ -2,7 +2,7 @@
     <div class="col-4">
         <h1 class="h2 alt-font mb-3">Vos coordonnées bancaires</h1>
         <p class="help_text">
-            Il s'agit du compte bancaire vers lequel sont virées les paiements suites au cours réalisé avec Bemoove.
+            Il s'agit du compte bancaire vers lequel sont virées les paiements suite au cours réalisé avec Bemoove.
             Perferendis autem esse accusamus in culpa enim in cumque. Molestias atque autem sed iusto. Minus impedit animi minus adipisci numquam. Ducimus inventore velit aut et et atque dolor. Dolor aliquid eum cupiditate. Consequatur possimus nihil itaque necessitatibus eius.
         </p>
     </div>
@@ -72,6 +72,9 @@
               {{ formErrors.iban }}
             </div>
           </div>
+        </div>
+        <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+          <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
         </div>
       </md-card-content>
       <md-card-actions align="end">

@@ -1,4 +1,4 @@
-<form *ngIf="address" [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
+<form *ngIf="formReady" [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
   <md-card-title color="primary" class="form-card__title">Adresse de facturation</md-card-title>
   <md-card-content>
     <div class="form-group row">
@@ -36,6 +36,9 @@
           {{ formErrors.city }}
         </div>
       </div>
+    </div>
+    <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+      <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
     </div>
   </md-card-content>
   <md-card-actions align="end">

@@ -14,6 +14,8 @@ export class AddressFormComponent implements OnInit {
   public address: Address;
   public limitedAddress: Address;
 
+public formResult: any;
+  public formReady = false;
   public loading: boolean = false;
   public addressForm: FormGroup;
   public formErrors = {
@@ -51,12 +53,17 @@ export class AddressFormComponent implements OnInit {
       this.loading = true;
 
       this.limitedAddress = this.prepareLimitedAddress();
-
+      this.hideFormResult();
       this.addressService.update( this.limitedAddress )
-                                 .subscribe((address) => {
+                                 .then((address) => {
                                      this.address = address;
                                      this.loading = false;
-                                 });
+                                     this.showFormResult('success', 'Sauvegarde réussie');
+                                 },
+                                    (error) => {
+                                        this.showFormResult('error', 'Echec de la sauvegarde');
+                                        this.loading = false;
+                                    });
   }
 
   private prepareLimitedAddress(): Address {
@@ -106,6 +113,16 @@ export class AddressFormComponent implements OnInit {
 
       // (re)set validation messages.
       this.onValueChanged(this.addressForm);
+
+      this.formReady = true;
+  }
+
+  private hideFormResult() {
+      this.formResult = false;
+  }
+
+  private showFormResult(type: string, title: string, content: string = '') {
+      this.formResult = { type, title, content};
   }
 
   private onValueChanged(form, data?: any): void {

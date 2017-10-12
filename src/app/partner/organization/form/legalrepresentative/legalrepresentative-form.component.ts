@@ -8,7 +8,7 @@ import { Person } from '../../../../models/index';
 import { PersonService } from '../../../../_services/index';
 
 @Component({
-  selector: 'legalrepresentative-form',
+  selector: 'legal-representative-form',
   templateUrl: './legalrepresentative-form.component.html'
 })
 
@@ -17,6 +17,8 @@ export class LegalRepresentativeFormComponent implements OnInit {
   public person: Person;
   public limitedPerson: Person;
 
+  public formResult: any;
+  public formReady: boolean = false;
   public loading: boolean = false;
   public personForm: FormGroup;
   public formErrors = {
@@ -56,14 +58,20 @@ export class LegalRepresentativeFormComponent implements OnInit {
 
   public onSubmit(): void {
       this.loading = true;
+      this.hideFormResult();
 
       this.limitedPerson = this.prepareLimitedPerson();
 
       this.personService.update( this.limitedPerson )
-                                 .subscribe((person) => {
+                                 .then((person) => {
                                      this.person = person;
                                      this.loading = false;
-                                 });
+                                     this.showFormResult('success', 'Sauvegarde réussie');
+                                 },
+                                    (error) => {
+                                        this.showFormResult('error', 'Echec de la sauvegarde');
+                                        this.loading = false;
+                                    });
   }
 
   private prepareLimitedPerson(): Person {
@@ -104,7 +112,7 @@ export class LegalRepresentativeFormComponent implements OnInit {
         Validators.required
       ]
       ],
-      birthdate: [this.ngbDateParserFormatter.parse(this.person.birthdate.toISOString()), [
+      birthdate: [this.ngbDateParserFormatter.parse(new Date(this.person.birthdate).toISOString()), [
         Validators.required
       ]
       ],
@@ -115,6 +123,16 @@ export class LegalRepresentativeFormComponent implements OnInit {
 
     // (re)set validation messages.
     this.onValueChanged(this.personForm);
+
+    this.formReady = true;
+  }
+
+  private hideFormResult() {
+      this.formResult = false;
+  }
+
+  private showFormResult(type: string, title: string, content: string = '') {
+      this.formResult = { type, title, content};
   }
 
   private onValueChanged(form, data?: any): void {

@@ -36,6 +36,7 @@ function validateLuhn(c: FormControl) {
 })
 
 export class InvoiceSettingsComponent implements OnInit {
+  public formResult: any;
   public loading = false;
   public tvaRateForm: FormGroup;
   public invoiceNoticeForm: FormGroup;
@@ -103,18 +104,31 @@ export class InvoiceSettingsComponent implements OnInit {
   public onSubmitTvaRate() {
       this.loading = true;
       this.limitedOrganization = this.prepareTvaRate();
-      this.businessService.update( this.limitedOrganization ).subscribe((organization) => { this.organization = organization; this.loading = false; });
-
+      this.businessService.update( this.limitedOrganization ).then(
+        (business) => {
+            this.organization = business;
+            this.loading = false;
+            this.showFormResult('success', 'Sauvegarde réussie');
+            },
+            (error) => {
+               this.showFormResult('error', 'Echec de la sauvegarde');
+               this.loading = false;
+            });
   }
 
   public onSubmit() {
       this.loading = true;
       this.limitedOrganization = this.prepareInvoiceNotice();
-      this.businessService.update( this.limitedOrganization )
-                                .subscribe((organization) => {
-                                    this.organization = organization;
-                                    this.loading = false;
-                                });
+      this.businessService.update( this.limitedOrganization ).then(
+        (business) => {
+            this.organization = business;
+            this.loading = false;
+            this.showFormResult('success', 'Sauvegarde réussie');
+            },
+            (error) => {
+               this.showFormResult('error', 'Echec de la sauvegarde');
+               this.loading = false;
+            });
   }
 
   private prepareInvoiceNotice() {
@@ -217,6 +231,14 @@ export class InvoiceSettingsComponent implements OnInit {
     );
     // (re)set validation messages.
     this.onValueChanged(this.invoiceNoticeForm);
+  }
+
+  private hideFormResult() {
+      this.formResult = false;
+  }
+
+  private showFormResult(type: string, title: string, content: string = '') {
+      this.formResult = { type, title, content};
   }
 
   /*

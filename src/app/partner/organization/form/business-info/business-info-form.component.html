@@ -1,37 +1,38 @@
-<md-card class="form-card col-4">
-  <form *ngIf="business" [formGroup]="businessForm" (ngSubmit)="onSubmit()" novalidate>
-    <md-card-title color="primary" class="form-card__title">Coordonnées de votre entreprise</md-card-title>
-    <md-card-content>
-      <div class="form-group row">
-        <label for="legalName" class="col-sm-3 col-form-label">Nom de votre entreprise</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" formControlName="legalName" name="legalName">
-          <div *ngIf="formErrors.legalName" class="form-error">
-            {{ formErrors.legalName }}
-          </div>
+<form *ngIf="formReady" [formGroup]="businessForm" (ngSubmit)="onSubmit()" novalidate>
+  <md-card-title color="primary" class="form-card__title">Coordonnées de votre entreprise</md-card-title>
+  <md-card-content>
+    <div class="form-group row">
+      <label for="legalName" class="col-sm-3 col-form-label">Nom de votre entreprise</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" formControlName="legalName" name="legalName">
+        <div *ngIf="formErrors.legalName" class="form-error">
+          {{ formErrors.legalName }}
         </div>
       </div>
-      <div class="form-group row">
-        <label for="siret" class="col-sm-3 col-form-label">N° d'immatriculation (SIRET)</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" formControlName="siret" name="siret">
-          <div *ngIf="formErrors.siret" class="form-error">
-            {{ formErrors.siret }}
-          </div>
+    </div>
+    <div class="form-group row">
+      <label for="siret" class="col-sm-3 col-form-label">N° d'immatriculation (SIRET)</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" formControlName="siret" name="siret">
+        <div *ngIf="formErrors.siret" class="form-error">
+          {{ formErrors.siret }}
         </div>
       </div>
-      <div class="form-group row">
-        <label for="vatNumber" class="col-sm-3 col-form-label">N° de TVA</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" formControlName="vatNumber" name="vatNumber">
-          <div *ngIf="formErrors.vatNumber" class="form-error">
-            {{ formErrors.vatNumber }}
-          </div>
+    </div>
+    <div class="form-group row">
+      <label for="vatNumber" class="col-sm-3 col-form-label">N° de TVA</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" formControlName="vatNumber" name="vatNumber">
+        <div *ngIf="formErrors.vatNumber" class="form-error">
+          {{ formErrors.vatNumber }}
         </div>
       </div>
-    </md-card-content>
-    <md-card-actions align="end">
-      <button [disabled]="loading || !businessForm.valid" md-raised-button class="mr-3" color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
-    </md-card-actions>
-  </form>
-</md-card>
+    </div>
+    <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+      <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
+    </div>
+  </md-card-content>
+  <md-card-actions align="end">
+    <button [disabled]="loading || !businessForm.valid" md-raised-button class="mr-3" color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+  </md-card-actions>
+</form>

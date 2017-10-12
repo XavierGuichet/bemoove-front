@@ -11,6 +11,7 @@ import { Business } from '../../../models/index';
 
 export class OrganizationInformationsComponent implements OnInit {
   public business: Business;
+  public formResult: any;
 
   constructor(
     private businessService: BusinessService
@@ -19,6 +20,13 @@ export class OrganizationInformationsComponent implements OnInit {
   public ngOnInit(): void {
     this.businessService.getMyBusiness().then((Business) => {
         this.business = Business;
-    });
+    },
+       (error) => {
+           this.showFormResult('error', 'Le service a rencontré une erreur ou n\'a pas pu trouver votre société.');
+       });
+  }
+
+  private showFormResult(type: string, title: string, content: string = '') {
+      this.formResult = { type, title, content};
   }
 }

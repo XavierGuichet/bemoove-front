@@ -15,7 +15,9 @@ import { SpaceService, AddressService, BankAccountService } from '../../../_serv
 })
 
 export class BankAccountComponent implements OnInit {
-  public loading = false;
+  public formResult: any;
+  public formReady: boolean = false;
+  public loading: boolean = false;
 
   public bankAccountForm: FormGroup;
 
@@ -66,15 +68,9 @@ export class BankAccountComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.bankAccountService.getByOwnerId(this.spaceService.getUserId()).then((bankAccount) => {
-        // TODO : This is ugly, service should return one result in this case
-      if (bankAccount[0].hasOwnProperty('id')) {
-        this.bankAccount = bankAccount[0];
-      } else {
-        this.bankAccount = new BankAccount();
-        this.bankAccount.address = new Address();
-      }
-      this.buildForm();
+    this.bankAccountService.getMyBankAccount().then((bankAccount) => {
+        this.bankAccount = bankAccount;
+        this.buildForm();
     });
   }
 
@@ -83,12 +79,17 @@ export class BankAccountComponent implements OnInit {
     this.createRelatedEntities(this.limitedBankAccount).subscribe(() => {
       let request;
       this.loading = true;
-      if (this.limitedBankAccount.id) {
-        request = this.bankAccountService.update(this.limitedBankAccount);
-      } else {
-        request = this.bankAccountService.create(this.limitedBankAccount);
-      }
-      request.subscribe((bankAccount) => { this.bankAccount = bankAccount; this.loading = false; });
+      this.hideFormResult();
+        request = this.bankAccountService.update(this.limitedBankAccount).then(
+          (bankAccount) => {
+              this.bankAccount = bankAccount;
+              this.loading = false;
+              this.showFormResult('success', 'Sauvegarde réussie');
+              },
+              (error) => {
+                 this.showFormResult('error', 'Echec de la sauvegarde');
+                 this.loading = false;
+              });
     });
   }
 
@@ -128,6 +129,14 @@ export class BankAccountComponent implements OnInit {
       limitedBankAccount.iban = formModel.iban;
     }
     return limitedBankAccount;
+  }
+
+  private hideFormResult() {
+      this.formResult = false;
+  }
+
+  private showFormResult(type: string, title: string, content: string = '') {
+      this.formResult = { type, title, content};
   }
 
   private onValueChanged(data?: any): void {
