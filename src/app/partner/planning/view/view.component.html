@@ -1,3 +1,13 @@
+<div class="mt-2 mb-3 container" *ngIf="alertNoCoach || alertInfo">
+<div *ngIf="alertInfo" class="alert" [ngClass]="{ 'alert': alertInfo, 'alert-success': alertInfo.type === 'success', 'alert-danger': alertInfo.type === 'error', 'alert-info': alertInfo.type === 'info', 'alert-warning': alertInfo.type === 'warn' }">
+  <strong>{{alertInfo.title}}</strong><br/>
+  <div [innerHTML]="alertInfo.content"></div>
+</div>
+<div *ngIf="alertNoCoach" class="alert" [ngClass]="{ 'alert': alertNoCoach, 'alert-success': alertNoCoach.type === 'success', 'alert-danger': alertNoCoach.type === 'error', 'alert-info': alertNoCoach.type === 'info', 'alert-warning': alertNoCoach.type === 'warn' }">
+    <strong>{{alertNoCoach.title}}</strong><br/>
+    <div [innerHTML]="alertNoCoach.content"></div>
+</div>
+</div>
 <div class="mb-3">
   <div class="container">
     <div class="row button-row">

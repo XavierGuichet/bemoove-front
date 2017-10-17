@@ -21,6 +21,8 @@ import { WorkoutInstanceService,
 })
 
 export class AddSessionFormComponent implements OnInit {
+  public alertNoCoach: any;
+  public alertNoWorkout: any;
   public formReady = false;
   public loading = false;
 
@@ -80,7 +82,13 @@ export class AddSessionFormComponent implements OnInit {
     Promise.all([this.coachService.getMyCoaches(), this.workoutService.getMyWorkouts()])
       .then((results) => {
         this.coaches = results[0];
+        if (!this.coaches.length) {
+            this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: 'Vous n\'avez pas encore crée de coach pour votre société.<br/>Pour pouvoir ajouter une séance au planning, il vous faut dans un premier temps créer un coach.' };
+        }
         this.workouts = results[1];
+        if (!this.workouts.length) {
+            this.alertNoWorkout = { type: 'error', title: 'Aucune séance type', content: 'Vous n\'avez pas encore crée de séance type.<br/>Pour pouvoir ajouter une session au planning, il vous faut dans un premier temps créer une séance type.' };
+        }
         this.buildForm();
         this.workoutInstanceForm.patchValue({ coach: this.workoutInstance.coach });
         this.formReady = true;

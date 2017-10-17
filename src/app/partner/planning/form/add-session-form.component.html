@@ -1,3 +1,13 @@
+<div class="mt-2 mb-3 container" *ngIf="alertNoCoach || alertNoWorkout">
+    <div *ngIf="alertNoWorkout" class="alert" [ngClass]="{ 'alert': alertNoWorkout, 'alert-success': alertNoWorkout.type === 'success', 'alert-danger': alertNoWorkout.type === 'error', 'alert-info': alertNoWorkout.type === 'info', 'alert-warning': alertNoWorkout.type === 'warn' }">
+      <strong>{{alertNoWorkout.title}}</strong><br/>
+      <div [innerHTML]="alertNoWorkout.content"></div>
+    </div>
+    <div *ngIf="alertNoCoach" class="alert" [ngClass]="{ 'alert': alertNoCoach, 'alert-success': alertNoCoach.type === 'success', 'alert-danger': alertNoCoach.type === 'error', 'alert-info': alertNoCoach.type === 'info', 'alert-warning': alertNoCoach.type === 'warn' }">
+        <strong>{{alertNoCoach.title}}</strong><br/>
+        <div [innerHTML]="alertNoCoach.content"></div>
+    </div>
+</div>
 <form *ngIf="formReady" [formGroup]="workoutInstanceForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="row">
     <div class="form-group col-6">

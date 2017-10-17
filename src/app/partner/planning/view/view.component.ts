@@ -20,6 +20,9 @@ import { CoachService,
 })
 
 export class ViewComponent implements OnInit {
+  public alertNoCoach: any;
+  public alertInfo: any = { type: 'info', title: 'Le planning', content: 'Le planning vous permets pour chaque coach, de definir la date a laquelle celui ci encadre des séances qui seront disponibles à la reservation sur Bemoove.' };
+
   public selectedCoach: Coach;
   public coaches: Coach[];
   public tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
@@ -49,14 +52,19 @@ export class ViewComponent implements OnInit {
     this.coachService.getMyCoaches()
       .then((coaches) => {
         this.coaches = coaches;
-        this.route.params.subscribe((params: Params) => {
-          this.selectedCoach = this.coaches.find(
-            (coach: Coach) => coach.id === parseInt(params['id'], 10));
-          if (!(this.selectedCoach instanceof Object)) {
-            this.selectedCoach = this.coaches[0];
-          }
-          this.refreshDisplayedDays();
-        });
+        console.log(this.coaches);
+        if (this.coaches.length === 0) {
+          this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: 'Vous n\'avez pas encore crée de coach pour votre société.<br/>Pour pouvoir utiliser le planning, il vous faut dans un premier temps créer un coach.' };
+        } else {
+          this.route.params.subscribe((params: Params) => {
+            this.selectedCoach = this.coaches.find(
+              (coach: Coach) => coach.id === parseInt(params['id'], 10));
+            if (!(this.selectedCoach instanceof Object)) {
+              this.selectedCoach = this.coaches[0];
+            }
+          });
+        }
+        this.refreshDisplayedDays();
       })
       .catch(this.handleError);
 
@@ -115,12 +123,12 @@ export class ViewComponent implements OnInit {
     let workoutInstance = new WorkoutInstance(this.selectedCoach, date);
     workoutInstance.startdate = date;
     let dialogRef = this.dialog.open(AddSessionModalComponent, {
-        data: {workoutInstance},
+      data: { workoutInstance },
     });
     dialogRef.afterClosed().subscribe((result) => {
-        if (result === true) {
-            this.refreshDisplayedDays();
-        }
+      if (result === true) {
+        this.refreshDisplayedDays();
+      }
     });
   }
 
