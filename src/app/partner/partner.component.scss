@@ -24,11 +24,13 @@ h2 {
 
 .secondary-navigation {
     z-index: 5;
+    min-height: 100vh;
     border-right: 1px solid #e73e60;
     padding: 0;
 }
 .main-content {
     padding: 0 2em;
+    min-height: 100vh;
     background: #ffffff url('/assets/img/admin-bg.jpg') left bottom / 100% auto no-repeat;
 }
 
