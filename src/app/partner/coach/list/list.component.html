@@ -1,5 +1,6 @@
 <div class="container">
   <h1 class="h2 alt-font mb-3">Liste des coachs</h1>
+  <button md-button color="primary" routerLink="../add">AJOUTER UN COACH</button>
   <div class="row">
       <div *ngFor="let coach of coaches" class="col-2 mb-4">
           <div class="square w-100 h-100 hover-toggle">
@@ -10,10 +11,5 @@
           </div>
           <button md-raised-button routerLink="../../planning/view/coach/{{coach.id}}">Planning</button>
       </div>
-    <div class="col-2 mb-4">
-      <div class="square w-100 h-100">
-        <button md-fab class="h-100 w-100" routerLink="../add">AJOUTER UN COACH</button>
-      </div>
-    </div>
   </div>
 </div>

@@ -7,13 +7,16 @@ import { MaterialModule } from '@angular/material';
 import { CoachComponent } from './coach.component';
 import { ListComponent } from './list/list.component';
 import { CoachFormComponent } from './form/coach-form.component';
+import { CoachViewComponent } from './view/coach-view.component';
 import { CoachAddComponent } from './add/coach-add.component';
 import { CoachEditComponent } from './edit/coach-edit.component';
+import { CoachDashBoardComponent } from './dashboard/coach-dashboard.component';
 
 import { CoachRoutingModule } from './coach-routing.module';
 
 import { SharedModule } from '../../shared/shared.module';
 import { BmFormModule } from '../../shared/form.module';
+import { PartnerNavSecondaryModule } from '../nav/secondary/nav-secondary.module';
 
 import { CoachService,
     ImageService,
@@ -29,14 +32,17 @@ import { CoachService,
         SharedModule,
         NgbModule.forRoot(),
         MaterialModule.forRoot(),
-        CoachRoutingModule
+        CoachRoutingModule,
+        PartnerNavSecondaryModule
     ],
   declarations: [
       CoachComponent,
+      CoachViewComponent,
       ListComponent,
       CoachFormComponent,
       CoachAddComponent,
-      CoachEditComponent
+      CoachEditComponent,
+      CoachDashBoardComponent
     ],
   exports: [ CoachComponent ],
   entryComponents: [ ],

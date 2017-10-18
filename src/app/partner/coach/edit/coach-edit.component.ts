@@ -23,12 +23,4 @@ export class CoachEditComponent {
               this.coach = coach;
           });
     }
-
-    public deleteCoach() {
-        if (confirm('Êtes vous sur de vouloir supprimer ce coach ?')) {
-            this.coachService.delete(this.coach.id).subscribe( (data) => {
-                this.router.navigate(['/partner/coach/list']);
-            });
-        }
-    }
 }
