@@ -18,6 +18,7 @@ import { CoachModule } from './coach/coach.module';
 import { WorkoutModule } from './workout/workout.module';
 
 import { PartnerNavPrimaryComponent } from './nav/primary/nav-primary.component';
+import { PartnerNavSecondaryModule } from './nav/secondary/nav-secondary.module';
 
 import { SportService,
   AddressService,
@@ -48,6 +49,7 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
     PlanningModule,
     CoachModule,
     WorkoutModule,
+    PartnerNavSecondaryModule,
     PartnerRoutingModule
   ],
   declarations: [

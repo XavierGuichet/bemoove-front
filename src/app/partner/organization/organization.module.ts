@@ -16,8 +16,7 @@ import { BusinessInfoFormComponent } from './form/business-info/business-info-fo
 import { LegalRepresentativeFormComponent } from './form/legalrepresentative/legalrepresentative-form.component';
 
 import { OrganizationRoutingModule } from './organization-routing.module';
-
-import { PartnerNavSecondaryComponent } from '../nav/secondary/nav-secondary.component';
+import { PartnerNavSecondaryModule } from '../nav/secondary/nav-secondary.module';
 
 @NgModule({
     bootstrap: [
@@ -29,7 +28,8 @@ import { PartnerNavSecondaryComponent } from '../nav/secondary/nav-secondary.com
         ReactiveFormsModule,
         NgbModule.forRoot(),
         MaterialModule.forRoot(),
-        OrganizationRoutingModule
+        OrganizationRoutingModule,
+        PartnerNavSecondaryModule
     ],
   declarations: [
       OrganizationComponent,
@@ -37,7 +37,6 @@ import { PartnerNavSecondaryComponent } from '../nav/secondary/nav-secondary.com
       InvoiceSettingsComponent,
       BankAccountComponent,
       BillingMandateComponent,
-      PartnerNavSecondaryComponent,
       AddressFormComponent,
       BusinessInfoFormComponent,
       LegalRepresentativeFormComponent
