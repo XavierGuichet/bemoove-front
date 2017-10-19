@@ -23,7 +23,6 @@ import { SpaceService } from './_services/space.service';
     <header-nav></header-nav>
     <main [ngClass]="{'withToolBarAbove':showTopBar,'withHeaderAbove':withHeaderAbove}">
         <router-outlet></router-outlet>
-        <alert></alert>
     </main>
     <footer></footer>
   `
