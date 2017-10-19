@@ -71,6 +71,14 @@ span.active {
   margin-top: 128px;
 }
 
+.modal-close {
+  position: absolute !important;
+  top: 0.5em;
+  right: 0.75em;
+  padding: 0 !important;
+  min-width: auto !important;
+}
+
 label.required:after {
   content: "*";
   color: #f10a79;
@@ -101,6 +109,7 @@ label.required:after {
       display: block;
     }
   }
+
   .hover-show {
     display: none;
   }
@@ -165,5 +174,5 @@ label.required:after {
 }
 
 table.table-valign td {
-    vertical-align: middle;
+  vertical-align: middle;
 }
