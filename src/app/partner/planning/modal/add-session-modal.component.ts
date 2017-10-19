@@ -10,7 +10,7 @@ import { AlertService,
 
 @Component({
     selector: 'add-session-modal',
-    template: '<add-session-form [(workoutInstance)]="workoutInstance" (onSuccess)="onSuccess($event)"></add-session-form>'
+    template: '<button md-button class="modal-close" md-dialog-close><md-icon>close</md-icon></button><add-session-form [(workoutInstance)]="workoutInstance" (onSuccess)="onSuccess($event)"></add-session-form>'
 })
 
 export class AddSessionModalComponent {
