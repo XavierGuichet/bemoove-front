@@ -31,6 +31,9 @@
               </div>
             </div>
           </div>
+          <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+            <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
+          </div>
         </md-card-content>
         <md-card-actions align="end">
           <button [disabled]="loading || !coachForm.valid" md-raised-button class="mr-3" color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
@@ -49,6 +52,9 @@
             <div class="col-sm-9" *ngIf="coach.photo.path && coachPhotoPathBackup.length == 0">
               <img src="{{coach.photo.path}}" class="col-12 rounded-circle" />
             </div>
+          </div>
+          <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+            <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
           </div>
         </md-card-content>
         <md-card-actions align="end">

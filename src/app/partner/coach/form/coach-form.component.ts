@@ -24,6 +24,7 @@ import { CoachService,
 })
 
 export class CoachFormComponent implements OnInit {
+  public formResult: any;
   public loading = false;
   @Input()
   public coach: Coach;
@@ -88,23 +89,29 @@ export class CoachFormComponent implements OnInit {
     this.createRelatedNewEntities().subscribe(() => {
       let submittedEntity = this.prepareSubmittedEntity();
       this.loading = true;
+      this.hideFormResult();
       if (!this.coach.id) {
         this.coachService.create(submittedEntity)
           .subscribe(
           (data) => {
             this.coach = data;
+            this.showFormResult('success', 'Sauvegarde réussie');
+            this.router.navigate(['/partner/coach/'+this.coach.id]);
             this.loading = false;
           },
           (error) => {
+            this.showFormResult('error', 'Echec de la sauvegarde');
             this.loading = false;
           });
       } else {
         this.coachService.update(submittedEntity)
           .subscribe(
           (data) => {
+            this.showFormResult('success', 'Sauvegarde réussie');
             this.loading = false;
           },
           (error) => {
+            this.showFormResult('error', 'Echec de la sauvegarde');
             this.loading = false;
           });
       }
@@ -171,6 +178,14 @@ export class CoachFormComponent implements OnInit {
 
     // (re)set validation messages.
     this.onValueChanged(this.coachForm);
+  }
+
+  private hideFormResult() {
+      this.formResult = false;
+  }
+
+  private showFormResult(type: string, title: string, content: string = '') {
+      this.formResult = { type, title, content};
   }
 
   private onValueChanged(form, data?: any): void {
