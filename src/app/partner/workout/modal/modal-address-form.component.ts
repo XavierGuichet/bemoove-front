@@ -6,11 +6,11 @@ import { Address } from '../../../models/address';
 
 @Component({
     selector: 'modal-address-form',
-    template: '<address-form [(model)]="model" (onSuccess)="onSuccess($event)"></address-form>'
+    template: `<button md-button class="modal-close" md-dialog-close><md-icon>close</md-icon></button>
+    <address-form (onSuccess)="onSuccess($event)"></address-form>`
 })
 
 export class ModalAddressFormComponent {
-    public model: Address = new Address();
     public loading = false;
     public returnUrl: string;
 

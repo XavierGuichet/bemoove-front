@@ -25,6 +25,18 @@ import { SpaceService,
   TagService,
   WorkoutService } from '../../../../_services/index';
 
+
+function validateCreatedObject(c: FormControl) {
+    console.log(c);
+  const value = c.value;
+  console.log(value);
+  if (isNaN(value.id)) {
+    return { validateCreatedObject: true };
+  }
+
+  return null;
+}
+
 @Component({
   selector: 'workout-form',
   templateUrl: './workout-form.component.html',
@@ -226,13 +238,13 @@ export class WorkoutFormComponent implements OnInit {
   public showModalAddressFormComponent() {
     let dialogRef = this.dialog.open(ModalAddressFormComponent);
     dialogRef.afterClosed().subscribe((newAddress) => {
-        if (newAddress instanceof Address) {
-          this.partnerAddresses.unshift(newAddress);
-          this.workout.address = newAddress;
-          this.workoutForm.patchValue({
-            address: this.workout.address
-          });
-        }
+      if (newAddress instanceof Object) {
+        this.partnerAddresses.push(newAddress);
+        this.workout.address = newAddress;
+        this.workoutForm.patchValue({
+          address: this.workout.address
+        });
+      }
     });
   }
 
@@ -323,9 +335,9 @@ export class WorkoutFormComponent implements OnInit {
         Validators.required,
       ]
       ],
-
       address: [this.workout.address, [
         Validators.required,
+        validateCreatedObject
       ]
       ],
       price: [this.workout.price, [

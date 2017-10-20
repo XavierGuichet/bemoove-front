@@ -1,48 +1,56 @@
-<form name="addressform" (ngSubmit)="f.form.valid && addAddress()" #f="ngForm" novalidate>
-    <md-spinner *ngIf="loading"></md-spinner>
-    <md-card class="demo-card demo-basic" *ngIf="!loading">
-    <md-card-title color="primary">
-        <md-input-container class="demo-full-width">
-            <input mdInput #name
-            placeholder="Nom de l'adresse"
-            name="name"
-            [(ngModel)]="model.name" />
-        </md-input-container>
-    </md-card-title>
-    <!-- <img md-card-image src="http://placehold.it/350x150"> -->
-    <md-card-content>
-            <p>
-                <md-input-container class="demo-full-width col-xs-12">
-                  <textarea mdInput placeholder="Address" [(ngModel)]="model.firstline" name="firstline"></textarea>
-                </md-input-container>
-                <md-input-container class="demo-full-width col-xs-12">
-                  <textarea mdInput placeholder="Address 2" [(ngModel)]="model.secondline" name="secondline"></textarea>
-                </md-input-container>
-            </p>
-            <table style="width: 100%" cellspacing="0">
-                <tr>
-                    <td>
-                        <md-input-container class="demo-full-width">
-                            <input mdInput #name
-                            placeholder="Ville"
-                            name="city"
-                            [(ngModel)]="model.city">
-                        </md-input-container>
-                    </td>
-                    <td>
-                        <md-input-container class="demo-full-width">
-                            <input mdInput #postalCode
-                            maxlength="5"
-                            placeholder="Code postal"
-                            name="postalcode"
-                            [(ngModel)]="model.postalCode">
-                        </md-input-container>
-                    </td>
-                </tr>
-            </table>
-    </md-card-content>
-    <md-card-actions align="end">
-        <button type="submit" md-raised-button color="primary">Enregistrer</button>
-    </md-card-actions>
-    </md-card>
+<form *ngIf="formReady" [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
+  <md-card-title color="primary" class="form-card__title">Ajouter un lieu sportif</md-card-title>
+  <md-card-content>
+      <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">Nom de l'adresse</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="name" name="name">
+          <div *ngIf="formErrors.name" class="form-error">
+            {{ formErrors.name }}
+          </div>
+        </div>
+      </div>
+    <div class="form-group row">
+      <label for="firstline" class="col-sm-3 col-form-label">Adresse</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" formControlName="firstline" name="firstline">
+        <div *ngIf="formErrors.firstline" class="form-error">
+          {{ formErrors.firstline }}
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="secondline" class="col-sm-3 col-form-label">Complément d'adresse</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" formControlName="secondline" name="secondline">
+        <div *ngIf="formErrors.secondline" class="form-error">
+          {{ formErrors.secondline }}
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="postalCode" class="col-sm-3 col-form-label">Code Postal</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" formControlName="postalCode" name="postalCode">
+        <div *ngIf="formErrors.postalCode" class="form-error">
+          {{ formErrors.postalCode }}
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="city" class="col-sm-3 col-form-label">Ville</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" formControlName="city" name="city">
+        <div *ngIf="formErrors.city" class="form-error">
+          {{ formErrors.city }}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+      <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
+    </div>
+  </md-card-content>
+  <md-card-actions align="end">
+    <button [disabled]="loading || !addressForm.valid" md-raised-button class="mr-3" color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+  </md-card-actions>
 </form>
