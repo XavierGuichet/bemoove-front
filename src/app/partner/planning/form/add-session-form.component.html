@@ -1,11 +1,11 @@
 <div class="mt-2 mb-3 container" *ngIf="alertNoCoach || alertNoWorkout">
     <div *ngIf="alertNoWorkout" class="alert" [ngClass]="{ 'alert': alertNoWorkout, 'alert-success': alertNoWorkout.type === 'success', 'alert-danger': alertNoWorkout.type === 'error', 'alert-info': alertNoWorkout.type === 'info', 'alert-warning': alertNoWorkout.type === 'warn' }">
       <strong>{{alertNoWorkout.title}}</strong><br/>
-      <p>Vous n'avez pas encore crée de coach pour votre société.<br/>Pour pouvoir ajouter une session au planning, il vous faut dans un premier temps <a routerLink="/partner/coach/add">créer un coach</a>.</p>
+      <p>Vous n'avez pas encore crée de séance type.<br/>Pour pouvoir ajouter une session au planning, il vous faut dans un premier temps  <a routerLink="/partner/workouts/add">créer une séance type</a>.</p>
     </div>
     <div *ngIf="alertNoCoach" class="alert" [ngClass]="{ 'alert': alertNoCoach, 'alert-success': alertNoCoach.type === 'success', 'alert-danger': alertNoCoach.type === 'error', 'alert-info': alertNoCoach.type === 'info', 'alert-warning': alertNoCoach.type === 'warn' }">
         <strong>{{alertNoCoach.title}}</strong><br/>
-        <p>Vous n'avez pas encore crée de séance type.<br/>Pour pouvoir ajouter une session au planning, il vous faut dans un premier temps  <a routerLink="/partner/workouts/add">créer une séance type</a>.</p>
+        <p>Vous n'avez pas encore crée de coach pour votre société.<br/>Pour pouvoir ajouter une session au planning, il vous faut dans un premier temps <a routerLink="/partner/coach/add">créer un coach</a>.</p>
     </div>
 </div>
 <form *ngIf="formReady" [formGroup]="workoutInstanceForm" (ngSubmit)="onSubmit()" novalidate>
