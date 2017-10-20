@@ -34,9 +34,11 @@ export class AddressService {
       .map((response: Response) => response.json());
   }
 
-  public create(address: Address) {
+  public create(address: Address): Promise<Address> {
     return this.http.post(this.AddressesUrl, address, this.jwt())
-      .map((response: Response) => response.json());
+    .toPromise()
+    .then((response) => response.json() as Address)
+    .catch(this.handleError);
   }
 
   public update(address: Address): Promise<Address> {

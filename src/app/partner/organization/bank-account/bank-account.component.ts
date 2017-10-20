@@ -97,7 +97,7 @@ export class BankAccountComponent implements OnInit {
     let ObservableOfCreation: any[] = new Array();
 
     if (this.limitedBankAccount.hasOwnProperty('address')) {
-      ObservableOfCreation.push(this.addressService.create(this.limitedBankAccount.address).map((address) => this.limitedBankAccount.address.id = address.id));
+      ObservableOfCreation.push(this.addressService.create(this.limitedBankAccount.address).then((address) => this.limitedBankAccount.address.id = address.id));
     }
 
     if (this.bankAccount.address) {
