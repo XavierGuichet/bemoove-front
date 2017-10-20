@@ -91,7 +91,11 @@ export class AddSessionFormComponent implements OnInit {
         }
         if (this.coaches.length && this.workouts.length) {
             this.buildForm();
-            this.workoutInstanceForm.patchValue({ coach: this.workoutInstance.coach });
+            // Rappel
+            // Pour qu'un select soit prechoisi, il faut bien donner au patch value l'objet present dans sa liste
+            // et non pas un objet equivalent
+            let selectcoach = this.coaches.find( (coach) => coach.id === this.workoutInstance.coach.id );
+            this.workoutInstanceForm.patchValue({ coach: selectcoach });
             this.formReady = true;
         }
       })
