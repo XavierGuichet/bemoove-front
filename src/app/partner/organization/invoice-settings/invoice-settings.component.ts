@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
+
 import { BusinessService, SpaceService } from '../../../_services/index';
 
 import { Organization } from '../../../models/index';
@@ -24,10 +26,10 @@ function validateLuhn(c: FormControl) {
     }
     sum += tmp;
   }
-  if ( (sum % 10) === 0 ) {
-      return null;
+  if ((sum % 10) === 0) {
+    return null;
   }
-  return {validateLuhn : {value}};
+  return { validateLuhn: { value } };
 }
 
 @Component({
@@ -35,11 +37,14 @@ function validateLuhn(c: FormControl) {
   templateUrl: 'invoice-settings.component.html'
 })
 
-export class InvoiceSettingsComponent implements OnInit {
+export class InvoiceSettingsComponent extends BMReactFormComponent implements OnInit {
   public formResult: any;
-  public loading = false;
+  public loading: boolean;
+  public formReady: boolean = false;
+
   public tvaRateForm: FormGroup;
   public invoiceNoticeForm: FormGroup;
+
   public organization: Organization;
   public limitedOrganization: Organization;
   public organizationLegalStatus: string;
@@ -85,93 +90,95 @@ export class InvoiceSettingsComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private businessService: BusinessService,
-    private spaceService: SpaceService) { }
+    private spaceService: SpaceService) {
+    super();
+  }
 
   public ngOnInit(): void {
-      this.businessService.getMyBusiness().then((Business) => {
-          // TODO : This is ugly, service should return one result in this case
-          this.organization = Business;
+    this.businessService.getMyBusiness().then((Business) => {
+      // TODO : This is ugly, service should return one result in this case
+      this.organization = Business;
 
-        if (this.organization.legalStatus === null) {
-            this.organization.legalStatus = '-1';
-        }
-        this.organizationLegalStatus = this.organization.legalStatus;
+      if (this.organization.legalStatus === null) {
+        this.organization.legalStatus = '-1';
+      }
+      this.organizationLegalStatus = this.organization.legalStatus;
 
-        this.buildForms();
+      this.buildForms();
     });
   }
 
   public onSubmitTvaRate() {
-      this.loading = true;
-      this.limitedOrganization = this.prepareTvaRate();
-      this.businessService.update( this.limitedOrganization ).then(
-        (business) => {
-            this.organization = business;
-            this.loading = false;
-            this.showFormResult('success', 'Sauvegarde réussie');
-            },
-            (error) => {
-               this.showFormResult('error', 'Echec de la sauvegarde');
-               this.loading = false;
-            });
+    this.loading = true;
+    this.limitedOrganization = this.prepareTvaRate();
+    this.businessService.update(this.limitedOrganization).then(
+      (business) => {
+        this.organization = business;
+        this.loading = false;
+        this.showFormResult('success', 'Sauvegarde réussie');
+      },
+      (error) => {
+        this.showFormResult('error', 'Echec de la sauvegarde');
+        this.loading = false;
+      });
   }
 
   public onSubmit() {
-      this.loading = true;
-      this.limitedOrganization = this.prepareInvoiceNotice();
-      this.businessService.update( this.limitedOrganization ).then(
-        (business) => {
-            this.organization = business;
-            this.loading = false;
-            this.showFormResult('success', 'Sauvegarde réussie');
-            },
-            (error) => {
-               this.showFormResult('error', 'Echec de la sauvegarde');
-               this.loading = false;
-            });
+    this.loading = true;
+    this.limitedOrganization = this.prepareInvoiceNotice();
+    this.businessService.update(this.limitedOrganization).then(
+      (business) => {
+        this.organization = business;
+        this.loading = false;
+        this.showFormResult('success', 'Sauvegarde réussie');
+      },
+      (error) => {
+        this.showFormResult('error', 'Echec de la sauvegarde');
+        this.loading = false;
+      });
   }
 
   private prepareInvoiceNotice() {
-      const form = this.invoiceNoticeForm;
-      const formModel = this.invoiceNoticeForm.value;
+    const form = this.invoiceNoticeForm;
+    const formModel = this.invoiceNoticeForm.value;
 
-      const limitedOrganization: Organization = new Organization();
-      if (this.organization.id) {
-        limitedOrganization.id = this.organization.id;
-      }
-      if (form.get('organizationLegalStatus').dirty) {
-        limitedOrganization.legalStatus = formModel.organizationLegalStatus;
-      }
-      if (form.get('organizationSiret').dirty) {
-        limitedOrganization.siret = formModel.organizationSiret;
-      }
-      if (form.get('organizationAPENumber').dirty) {
-        limitedOrganization.APECode = formModel.organizationAPENumber;
-      }
-      if (form.get('organizationVATNumber').dirty) {
-        limitedOrganization.vatNumber = formModel.organizationVATNumber;
-      }
-      if (form.get('organizationRCSNumber').dirty) {
-        limitedOrganization.RCSNumber = formModel.organizationRCSNumber;
-      }
-      if (form.get('organizationShareCapital').dirty) {
-        limitedOrganization.shareCapital = formModel.organizationShareCapital;
-      }
-      return limitedOrganization;
+    const limitedOrganization: Organization = new Organization();
+    if (this.organization.id) {
+      limitedOrganization.id = this.organization.id;
+    }
+    if (form.get('organizationLegalStatus').dirty) {
+      limitedOrganization.legalStatus = formModel.organizationLegalStatus;
+    }
+    if (form.get('organizationSiret').dirty) {
+      limitedOrganization.siret = formModel.organizationSiret;
+    }
+    if (form.get('organizationAPENumber').dirty) {
+      limitedOrganization.APECode = formModel.organizationAPENumber;
+    }
+    if (form.get('organizationVATNumber').dirty) {
+      limitedOrganization.vatNumber = formModel.organizationVATNumber;
+    }
+    if (form.get('organizationRCSNumber').dirty) {
+      limitedOrganization.RCSNumber = formModel.organizationRCSNumber;
+    }
+    if (form.get('organizationShareCapital').dirty) {
+      limitedOrganization.shareCapital = formModel.organizationShareCapital;
+    }
+    return limitedOrganization;
   }
 
   private prepareTvaRate() {
-      const form = this.tvaRateForm;
-      const formModel = this.tvaRateForm.value;
+    const form = this.tvaRateForm;
+    const formModel = this.tvaRateForm.value;
 
-      const limitedOrganization: Organization = new Organization();
-      if (this.organization.id) {
-        limitedOrganization.id = this.organization.id;
-      }
-      if (form.get('organizationVatRate').dirty) {
-        limitedOrganization.vatRate = formModel.organizationVatRate;
-      }
-      return limitedOrganization;
+    const limitedOrganization: Organization = new Organization();
+    if (this.organization.id) {
+      limitedOrganization.id = this.organization.id;
+    }
+    if (form.get('organizationVatRate').dirty) {
+      limitedOrganization.vatRate = formModel.organizationVatRate;
+    }
+    return limitedOrganization;
   }
 
   private buildForms(): void {
@@ -231,50 +238,5 @@ export class InvoiceSettingsComponent implements OnInit {
     );
     // (re)set validation messages.
     this.onValueChanged(this.invoiceNoticeForm);
-  }
-
-  private hideFormResult() {
-      this.formResult = false;
-  }
-
-  private showFormResult(type: string, title: string, content: string = '') {
-      this.formResult = { type, title, content};
-  }
-
-  /*
-   * Check if a form is valid
-   */
-  private onValueChanged(form, data?: any): void {
-    const formErrors = this.formErrors;
-    this.formErrors = this.recursiveCheck(form, formErrors);
-  }
-
-  private recursiveCheck(form, formErrors, validationprefix = '') {
-    if (validationprefix !== '') {
-      validationprefix += '.';
-    }
-    for (const field in formErrors) {
-      if (typeof formErrors[field] === 'string') {
-        const control = form.get(validationprefix + field);
-        formErrors[field] = this.checkControlError(control, validationprefix + field);
-      } else if (typeof this.formErrors[field] === 'object') {
-        let prefix = validationprefix + field;
-        formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
-      }
-    }
-    return formErrors;
-  }
-
-  private checkControlError(control, field) {
-    let errorMessages = '';
-    if (control && control.dirty && !control.valid) {
-      const messages = this.validationMessages[field];
-      for (const key in control.errors) {
-        if (control.errors.hasOwnProperty(key)) {
-          errorMessages += messages[key] + ' ';
-        }
-      }
-    }
-    return errorMessages;
   }
 }

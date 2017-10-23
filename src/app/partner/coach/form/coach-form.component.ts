@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Headers } from '@angular/http';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
+import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
+
 import { Observable } from 'rxjs/Observable';
 import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 import { Subject } from 'rxjs/Subject';
@@ -23,9 +25,11 @@ import { CoachService,
   styleUrls: ['./coach-form.component.scss']
 })
 
-export class CoachFormComponent implements OnInit {
+export class CoachFormComponent extends BMReactFormComponent implements OnInit {
   public formResult: any;
-  public loading = false;
+  public loading: boolean;
+  public formReady: boolean = false;
+
   @Input()
   public coach: Coach;
   public coachForm: FormGroup;
@@ -56,6 +60,7 @@ export class CoachFormComponent implements OnInit {
     private coachService: CoachService,
     private imageService: ImageService,
     private spaceService: SpaceService) {
+    super();
     this.cropperSettings.width = 100;
     this.cropperSettings.height = 100;
     this.cropperSettings.croppedWidth = 400;
@@ -96,7 +101,7 @@ export class CoachFormComponent implements OnInit {
           (data) => {
             this.coach = data;
             this.showFormResult('success', 'Sauvegarde réussie');
-            this.router.navigate(['/partner/coach/'+this.coach.id]);
+            this.router.navigate(['/partner/coach/' + this.coach.id]);
             this.loading = false;
           },
           (error) => {
@@ -147,12 +152,12 @@ export class CoachFormComponent implements OnInit {
 
     if (!this.coach.photo.id && this.coach.photo.base64data !== null) {
       ObservableOfCreation.push(this.imageService.create(this.coach.photo).map((image) => this.coach.photo = image));
-  } else if (this.coach.photo.base64data !== null) {
+    } else if (this.coach.photo.base64data !== null) {
       ObservableOfCreation.push(this.imageService.update(this.coach.photo).map((image) => { this.coach.photo = image; this.resetPhoto(); }));
     }
 
     if (ObservableOfCreation.length === 0) {
-        ObservableOfCreation.push(Observable.of(''));
+      ObservableOfCreation.push(Observable.of(''));
     }
     return Observable.forkJoin(ObservableOfCreation).map(() => true);
   }
@@ -178,47 +183,5 @@ export class CoachFormComponent implements OnInit {
 
     // (re)set validation messages.
     this.onValueChanged(this.coachForm);
-  }
-
-  private hideFormResult() {
-      this.formResult = false;
-  }
-
-  private showFormResult(type: string, title: string, content: string = '') {
-      this.formResult = { type, title, content};
-  }
-
-  private onValueChanged(form, data?: any): void {
-    const formErrors = this.formErrors;
-    this.formErrors = this.recursiveCheck(form, formErrors);
-  }
-
-  private recursiveCheck(form, formErrors, validationprefix = '') {
-    if (validationprefix !== '') {
-      validationprefix += '.';
-    }
-    for (const field in formErrors) {
-      if (typeof formErrors[field] === 'string') {
-        const control = form.get(validationprefix + field);
-        formErrors[field] = this.checkControlError(control, validationprefix + field);
-      } else if (typeof this.formErrors[field] === 'object') {
-        let prefix = validationprefix + field;
-        formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
-      }
-    }
-    return formErrors;
-  }
-
-  private checkControlError(control, field) {
-    let errorMessages = '';
-    if (control && control.dirty && !control.valid) {
-      const messages = this.validationMessages[field];
-      for (const key in control.errors) {
-        if (control.errors.hasOwnProperty(key)) {
-          errorMessages += messages[key] + ' ';
-        }
-      }
-    }
-    return errorMessages;
   }
 }

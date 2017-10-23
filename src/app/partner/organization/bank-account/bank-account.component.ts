@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
+
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -14,13 +16,12 @@ import { SpaceService, AddressService, BankAccountService } from '../../../_serv
   templateUrl: 'bank-account.component.html'
 })
 
-export class BankAccountComponent implements OnInit {
-  public formResult: any;
-  public formReady: boolean = false;
-  public loading: boolean = false;
+export class BankAccountComponent extends BMReactFormComponent implements OnInit {
+        public formResult: any;
+        public loading: boolean;
+        public formReady: boolean = false;
 
   public bankAccountForm: FormGroup;
-
   public bankAccount: BankAccount;
   public limitedBankAccount: BankAccount;
 
@@ -65,6 +66,7 @@ export class BankAccountComponent implements OnInit {
     private spaceService: SpaceService,
     private addressService: AddressService,
   ) {
+      super();
   }
 
   public ngOnInit(): void {
@@ -131,51 +133,6 @@ export class BankAccountComponent implements OnInit {
     return limitedBankAccount;
   }
 
-  private hideFormResult() {
-      this.formResult = false;
-  }
-
-  private showFormResult(type: string, title: string, content: string = '') {
-      this.formResult = { type, title, content};
-  }
-
-  private onValueChanged(data?: any): void {
-    if (!this.bankAccountForm) { return; }
-
-    const formErrors = this.formErrors;
-    this.formErrors = this.recursiveCheck(formErrors);
-  }
-
-  private recursiveCheck(formErrors, validationprefix = '') {
-    const form = this.bankAccountForm;
-    if (validationprefix !== '') {
-      validationprefix += '.';
-    }
-    for (const field in formErrors) {
-      if (typeof formErrors[field] === 'string') {
-        const control = form.get(validationprefix + field);
-        formErrors[field] = this.checkControlError(control, validationprefix + field);
-      } else if (typeof this.formErrors[field] === 'object') {
-        let prefix = validationprefix + field;
-        formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
-      }
-    }
-    return formErrors;
-  }
-
-  private checkControlError(control, field) {
-    let errorMessages = '';
-    if (control && control.dirty && !control.valid) {
-      const messages = this.validationMessages[field];
-      for (const key in control.errors) {
-        if (control.errors.hasOwnProperty(key)) {
-          errorMessages += messages[key] + ' ';
-        }
-      }
-    }
-    return errorMessages;
-  }
-
   private buildForm(): void {
     this.bankAccountForm = this.fb.group({
       ownerName: [this.bankAccount.ownerName, [
@@ -206,9 +163,9 @@ export class BankAccountComponent implements OnInit {
     });
 
     this.bankAccountForm.valueChanges
-      .subscribe((data) => this.onValueChanged(data));
+      .subscribe((data) => this.onValueChanged(this.bankAccountForm, data));
 
     // (re)set validation messages.
-    this.onValueChanged();
+    this.onValueChanged(this.bankAccountForm);
   }
 }

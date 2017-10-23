@@ -6,6 +6,8 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
+import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
+
 import { Coach,
   Workout,
   WorkoutInstance } from '../../../models/index';
@@ -20,11 +22,14 @@ import { WorkoutInstanceService,
   templateUrl: 'add-session-form.component.html'
 })
 
-export class AddSessionFormComponent implements OnInit {
+export class AddSessionFormComponent extends BMReactFormComponent implements OnInit {
+
+        public formResult: any;
+        public loading: boolean;
+        public formReady: boolean = false;
+
   public alertNoCoach: any;
   public alertNoWorkout: any;
-  public formReady = false;
-  public loading = false;
 
   public workoutInstanceForm: FormGroup;
   @Input()
@@ -73,6 +78,7 @@ export class AddSessionFormComponent implements OnInit {
     private router: Router,
     private spaceService: SpaceService
   ) {
+      super();
   }
 
   public ngOnInit(): void {
@@ -96,7 +102,7 @@ export class AddSessionFormComponent implements OnInit {
             // et non pas un objet equivalent
             let selectcoach = this.coaches.find( (coach) => coach.id === this.workoutInstance.coach.id );
             this.workoutInstanceForm.patchValue({ coach: selectcoach });
-            this.formReady = true;
+            // this.formReady = true;
         }
       })
       .catch(this.handleError);
@@ -157,44 +163,5 @@ export class AddSessionFormComponent implements OnInit {
 
     // (re)set validation messages.
     this.onValueChanged(this.workoutInstanceForm);
-  }
-
-  private onValueChanged(form, data?: any): void {
-    const formErrors = this.formErrors;
-    this.formErrors = this.recursiveCheck(form, formErrors);
-  }
-
-  private recursiveCheck(form, formErrors, validationprefix = '') {
-    if (validationprefix !== '') {
-      validationprefix += '.';
-    }
-    for (const field in formErrors) {
-      if (typeof formErrors[field] === 'string') {
-        const control = form.get(validationprefix + field);
-        formErrors[field] = this.checkControlError(control, validationprefix + field);
-      } else if (typeof this.formErrors[field] === 'object') {
-        let prefix = validationprefix + field;
-        formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
-      }
-    }
-    return formErrors;
-  }
-
-  private checkControlError(control, field) {
-    let errorMessages = '';
-    if (control && control.dirty && !control.valid) {
-      const messages = this.validationMessages[field];
-      for (const key in control.errors) {
-        if (control.errors.hasOwnProperty(key)) {
-          errorMessages += messages[key] + ' ';
-        }
-      }
-    }
-    return errorMessages;
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { BMReactFormComponent } from '../../../../form/bm-react-form/bm-react-form.component';
+
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { RegexpValidator } from '../../../../_directives/regexp.directive';
 
@@ -12,15 +14,15 @@ import { PersonService } from '../../../../_services/index';
   templateUrl: './legalrepresentative-form.component.html'
 })
 
-export class LegalRepresentativeFormComponent implements OnInit {
+export class LegalRepresentativeFormComponent extends BMReactFormComponent implements OnInit {
+    public formResult: any;
+    public loading: boolean;
+    public formReady: boolean = false;
+    public personForm: FormGroup;
   @Input()
   public person: Person;
   public limitedPerson: Person;
 
-  public formResult: any;
-  public formReady: boolean = false;
-  public loading: boolean = false;
-  public personForm: FormGroup;
   public formErrors = {
     firstname: '',
     lastname: '',
@@ -49,7 +51,7 @@ export class LegalRepresentativeFormComponent implements OnInit {
     private personService: PersonService,
     private ngbDateParserFormatter: NgbDateParserFormatter
   ) {
-
+      super();
   }
 
   public ngOnInit(): void {
@@ -125,47 +127,5 @@ export class LegalRepresentativeFormComponent implements OnInit {
     this.onValueChanged(this.personForm);
 
     this.formReady = true;
-  }
-
-  private hideFormResult() {
-      this.formResult = false;
-  }
-
-  private showFormResult(type: string, title: string, content: string = '') {
-      this.formResult = { type, title, content};
-  }
-
-  private onValueChanged(form, data?: any): void {
-    const formErrors = this.formErrors;
-    this.formErrors = this.recursiveCheck(form, formErrors);
-  }
-
-  private recursiveCheck(form, formErrors, validationprefix = '') {
-    if (validationprefix !== '') {
-      validationprefix += '.';
-    }
-    for (const field in formErrors) {
-      if (typeof formErrors[field] === 'string') {
-        const control = form.get(validationprefix + field);
-        formErrors[field] = this.checkControlError(control, validationprefix + field);
-      } else if (typeof this.formErrors[field] === 'object') {
-        let prefix = validationprefix + field;
-        formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
-      }
-    }
-    return formErrors;
-  }
-
-  private checkControlError(control, field) {
-    let errorMessages = '';
-    if (control && control.dirty && !control.valid) {
-      const messages = this.validationMessages[field];
-      for (const key in control.errors) {
-        if (control.errors.hasOwnProperty(key)) {
-          errorMessages += messages[key] + ' ';
-        }
-      }
-    }
-    return errorMessages;
   }
 }

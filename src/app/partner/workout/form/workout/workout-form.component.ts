@@ -3,6 +3,8 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Headers } from '@angular/http';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
+import { BMReactFormComponent } from '../../../../form/bm-react-form/bm-react-form.component';
+
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -25,11 +27,8 @@ import { SpaceService,
   TagService,
   WorkoutService } from '../../../../_services/index';
 
-
 function validateCreatedObject(c: FormControl) {
-    console.log(c);
   const value = c.value;
-  console.log(value);
   if (isNaN(value.id)) {
     return { validateCreatedObject: true };
   }
@@ -43,8 +42,11 @@ function validateCreatedObject(c: FormControl) {
   styleUrls: ['./workout-form.component.scss']
 })
 
-export class WorkoutFormComponent implements OnInit {
-  public loading = false;
+export class WorkoutFormComponent extends BMReactFormComponent implements OnInit {
+  public formResult: any;
+  public loading: boolean;
+  public formReady: boolean = false;
+
   @Input()
   public workout: Workout;
   public workoutForm: FormGroup;
@@ -129,7 +131,7 @@ export class WorkoutFormComponent implements OnInit {
     private tagService: TagService,
     private completerService: CompleterService,
     public dialog: MdDialog) {
-
+    super();
     this.initAutoCompleters(completerService);
     this.initCropper();
   }
@@ -383,40 +385,6 @@ export class WorkoutFormComponent implements OnInit {
       (value: string) => this.workout.address = value
     );
     this.onValueChanged(this.workoutForm); // (re)set validation messages now
-  }
-
-  private onValueChanged(form, data?: any): void {
-    const formErrors = this.formErrors;
-    this.formErrors = this.recursiveCheck(form, formErrors);
-  }
-
-  private recursiveCheck(form, formErrors, validationprefix = '') {
-    if (validationprefix !== '') {
-      validationprefix += '.';
-    }
-    for (const field in formErrors) {
-      if (typeof formErrors[field] === 'string') {
-        const control = form.get(validationprefix + field);
-        formErrors[field] = this.checkControlError(control, validationprefix + field);
-      } else if (typeof this.formErrors[field] === 'object') {
-        let prefix = validationprefix + field;
-        formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
-      }
-    }
-    return formErrors;
-  }
-
-  private checkControlError(control, field) {
-    let errorMessages = '';
-    if (control && control.dirty && !control.valid) {
-      const messages = this.validationMessages[field];
-      for (const key in control.errors) {
-        if (control.errors.hasOwnProperty(key)) {
-          errorMessages += messages[key] + ' ';
-        }
-      }
-    }
-    return errorMessages;
   }
 
   private isNumber(value: any): boolean {
