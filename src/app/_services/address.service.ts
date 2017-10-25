@@ -16,14 +16,9 @@ export class AddressService {
 
   constructor(private http: Http) { }
 
-  public getAll(): Promise<Address[]> {
-    return this.http.get(this.AddressesUrl, { headers: this.headers })
-      .toPromise()
-      .then((response) => response.json() as Address[]);
-  }
-
-  public getAddressesByPartnerId(id: number): Promise<Address[]> {
-    return this.http.get(this.AddressesUrl + '?owner.id=' + id, this.jwt())
+  public getMyWorkoutAdresses(): Promise<Address[]> {
+    let url = 'http://' + process.env.API_URL + '/getMyWorkoutAddress';
+    return this.http.get(url, this.jwt())
       .toPromise()
       .then((response) => response.json() as Address[])
       .catch(this.handleError);
@@ -36,9 +31,9 @@ export class AddressService {
 
   public create(address: Address): Promise<Address> {
     return this.http.post(this.AddressesUrl, address, this.jwt())
-    .toPromise()
-    .then((response) => response.json() as Address)
-    .catch(this.handleError);
+      .toPromise()
+      .then((response) => response.json() as Address)
+      .catch(this.handleError);
   }
 
   public update(address: Address): Promise<Address> {
