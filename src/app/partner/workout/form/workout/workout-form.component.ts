@@ -19,7 +19,7 @@ import { Workout,
   Tag,
   Image } from '../../../../models/index';
 
-import { SpaceService,
+import {
   BusinessService,
   SportService,
   ImageService,
@@ -124,7 +124,6 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     private fb: FormBuilder,
     private businessService: BusinessService,
     private workoutService: WorkoutService,
-    private spaceService: SpaceService,
     private sportService: SportService,
     private addressService: AddressService,
     private imageService: ImageService,
@@ -174,7 +173,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   public ngOnInit(): void {
     this.buildForm();
 
-    this.addressService.getAddressesByPartnerId(this.spaceService.getUserId())
+    this.addressService.getMyWorkoutAdresses()
       .then((addresses) => {
         if (addresses.length > 0) {
           this.partnerAddresses = addresses;
