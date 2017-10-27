@@ -45,16 +45,20 @@ export class CoachService {
       .catch(this.handleError);
   }
 
-  public create(coach: Coach) {
+  public create(coach: Coach): Promise<Coach> {
     this.coachApi = new CoachApi(coach);
     return this.http.post(this.CoachesUrl, this.coachApi, this.jwt())
-      .map((response: Response) => response.json());
+      .toPromise()
+      .then((response) => response.json() as Coach)
+      .catch(this.handleError);
   }
 
-  public update(coach: Coach) {
+  public update(coach: Coach): Promise<Coach> {
     this.coachApi = new CoachApi(coach);
     return this.http.put(this.CoachesUrl + '/' + coach.id, this.coachApi, this.jwt())
-      .map((response: Response) => response.json());
+      .toPromise()
+      .then((response) => response.json() as Coach)
+      .catch(this.handleError);
   }
 
   public delete(id: number) {
