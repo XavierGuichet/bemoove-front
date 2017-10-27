@@ -76,6 +76,7 @@ export class BankAccountComponent extends BMReactFormComponent implements OnInit
 
   public onSubmit(): void {
       this.loading = true;
+      this.hideFormResult();
 
       let bankAccount = this.createObjectFromModel();
 
