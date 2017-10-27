@@ -24,14 +24,16 @@ export class ImageService {
                         .map((response: Response) => response.json());
     }
 
-    public create(Image: Image) {
+    public create(Image: Image): Promise<Image> {
         return this.http.post(this.ImagesUrl, Image, this.jwt())
-                        .map((response: Response) => response.json());
+        .toPromise()
+        .then((response) => response.json() as Image);
     }
 
-    public update(Image: Image) {
+    public update(Image: Image): Promise<Image> {
         return this.http.put(this.ImagesUrl + '/' + Image.id, Image, this.jwt())
-                        .map((response: Response) => response.json());
+        .toPromise()
+        .then((response) => response.json() as Image);
     }
 
     public delete(id: number) {
