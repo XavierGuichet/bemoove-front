@@ -33,10 +33,10 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
   @Input()
   public coach: Coach;
   public coachForm: FormGroup;
+
   public coachPhotoPathBackup: string = '';
   public cropperData: any;
   public cropperSettings: CropperSettings = new CropperSettings();
-
   @ViewChild('cropper', undefined) public cropper: ImageCropperComponent;
 
   public formErrors = {
@@ -47,10 +47,13 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
 
   public validationMessages = {
     firstname: {
+        required: 'Ce champs est obligatoire',
     },
     lastname: {
+        required: 'Ce champs est obligatoire',
     },
     description: {
+        required: 'Ce champs est obligatoire',
     }
   };
 
@@ -61,6 +64,7 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
     private imageService: ImageService,
     private spaceService: SpaceService) {
     super();
+    this.cropperSettings.rounded = true;
     this.cropperSettings.width = 100;
     this.cropperSettings.height = 100;
     this.cropperSettings.croppedWidth = 400;
@@ -76,93 +80,44 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
     this.buildForm();
   }
 
-  public setCoachImageData() {
-    this.coach.photo.base64data = this.cropperData.image;
-    this.cropperSettings.canvasWidth = 175;
-    this.cropperSettings.canvasHeight = 175;
-  }
-
   public changePhoto(): void {
     this.coachPhotoPathBackup = this.coach.photo.path;
   }
 
   public resetPhoto(): void {
     this.coachPhotoPathBackup = '';
+    this.cropperData = {};
   }
 
   public onSubmit(): void {
-    this.createRelatedNewEntities().subscribe(() => {
-      let submittedEntity = this.prepareSubmittedEntity();
-      this.loading = true;
-      this.hideFormResult();
-      if (!this.coach.id) {
-        this.coachService.create(submittedEntity)
-          .subscribe(
-          (data) => {
-            this.coach = data;
-            this.showFormResult('success', 'Sauvegarde réussie');
-            this.router.navigate(['/partner/coach/' + this.coach.id]);
-            this.loading = false;
-          },
-          (error) => {
-            this.showFormResult('error', 'Echec de la sauvegarde');
-            this.loading = false;
-          });
-      } else {
-        this.coachService.update(submittedEntity)
-          .subscribe(
-          (data) => {
-            this.showFormResult('success', 'Sauvegarde réussie');
-            this.loading = false;
-          },
-          (error) => {
-            this.showFormResult('error', 'Echec de la sauvegarde');
-            this.loading = false;
-          });
-      }
-    }
-    );
+    this.loading = true;
+    this.hideFormResult();
+
+    let coach = this.createObjectFromModel();
+
+    this.createNestedEntities(coach).then(
+      (coachWithCreatedNestedEntities) => {
+        return Promise.all([
+          coachWithCreatedNestedEntities,
+          this.createOrUpdate(this.coachService, coachWithCreatedNestedEntities)
+        ]);
+      })
+      .then((resCoach) => {
+        this.loading = false;
+        this.showFormResult('success', 'Sauvegarde réussie');
+        let coachId;
+        if (resCoach[0].hasOwnProperty('id')) {
+            coachId = resCoach[0].id;
+        } else {
+            coachId = resCoach[1].id;
+        }
+        this.router.navigate(['/partner/coach/' + coachId]);
+      })
+      .catch(this.handleError);
+    //   this.showFormResult('error', 'Echec de la sauvegarde');
   }
 
-  private prepareSubmittedEntity() {
-    const form = this.coachForm;
-    const formModel = this.coachForm.value;
-    let limitedCoach = new Coach();
-
-    if (this.coach.id) {
-      limitedCoach.id = this.coach.id;
-    }
-    if (form.get('firstname').dirty) {
-      limitedCoach.firstname = formModel.firstname;
-    }
-    if (form.get('lastname').dirty) {
-      limitedCoach.lastname = formModel.lastname;
-    }
-    if (form.get('description').dirty) {
-      limitedCoach.description = formModel.description;
-    }
-    limitedCoach.business = this.coach.business;
-    limitedCoach.photo = this.coach.photo;
-
-    return limitedCoach;
-  }
-
-  private createRelatedNewEntities() {
-    let ObservableOfCreation: any[] = new Array();
-
-    if (!this.coach.photo.id && this.coach.photo.base64data !== null) {
-      ObservableOfCreation.push(this.imageService.create(this.coach.photo).map((image) => this.coach.photo = image));
-    } else if (this.coach.photo.base64data !== null) {
-      ObservableOfCreation.push(this.imageService.update(this.coach.photo).map((image) => { this.coach.photo = image; this.resetPhoto(); }));
-    }
-
-    if (ObservableOfCreation.length === 0) {
-      ObservableOfCreation.push(Observable.of(''));
-    }
-    return Observable.forkJoin(ObservableOfCreation).map(() => true);
-  }
-
-  private buildForm(): void {
+  protected buildForm(): void {
     this.coachForm = this.fb.group({
       firstname: [this.coach.firstname, [
         Validators.required
@@ -183,5 +138,49 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
 
     // (re)set validation messages.
     this.onValueChanged(this.coachForm);
+  }
+
+  protected createNestedEntities(coach: Coach): Promise<Coach> {
+    let Promises: any[] = new Array();
+    if (!coach.photo.id && coach.photo.base64data !== null) {
+      Promises.push(this.imageService.create(coach.photo).then((image) => coach.photo = image));
+    } else if (coach.photo.base64data !== null) {
+      Promises.push(this.imageService.update(coach.photo).then((image) => { coach.photo = image; this.resetPhoto(); }));
+    }
+
+    if (Promises.length > 0) {
+      return Promise.all(Promises).then(() => {
+        return coach;
+      });
+    } else {
+      return Promise.resolve(coach);
+    }
+  }
+
+  protected createObjectFromModel(): Coach {
+    const form = this.coachForm;
+    const formModel = this.coachForm.value;
+    const coach = new Coach();
+
+    if (this.coach.id) {
+      coach.id = this.coach.id;
+    }
+    coach.business = this.coach.business;
+
+    if (form.get('firstname').dirty) {
+      coach.firstname = formModel.firstname;
+    }
+    if (form.get('lastname').dirty) {
+      coach.lastname = formModel.lastname;
+    }
+    if (form.get('description').dirty) {
+      coach.description = formModel.description;
+    }
+
+    if (this.cropperData.image) {
+        coach.photo.base64data = this.cropperData.image;
+    }
+
+    return coach;
   }
 }
