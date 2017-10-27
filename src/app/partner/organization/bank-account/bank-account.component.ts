@@ -17,13 +17,12 @@ import { SpaceService, AddressService, BankAccountService } from '../../../_serv
 })
 
 export class BankAccountComponent extends BMReactFormComponent implements OnInit {
-        public formResult: any;
-        public loading: boolean;
-        public formReady: boolean = false;
+  public formResult: any;
+  public loading: boolean;
+  public formReady: boolean = false;
 
   public bankAccountForm: FormGroup;
   public bankAccount: BankAccount;
-  public limitedBankAccount: BankAccount;
 
   public formErrors = {
     ownerName: '',
@@ -63,36 +62,36 @@ export class BankAccountComponent extends BMReactFormComponent implements OnInit
     private spaceService: SpaceService,
     private addressService: AddressService,
   ) {
-      super();
+    super();
   }
 
   public ngOnInit(): void {
     this.bankAccountService.getMyBankAccount()
-                            .then((bankAccount) => {
-                                this.bankAccount = bankAccount;
-                                this.buildForm();
-                            });
+      .then((bankAccount) => {
+        this.bankAccount = bankAccount;
+        this.buildForm();
+      });
   }
 
   public onSubmit(): void {
-      this.loading = true;
-      this.hideFormResult();
+    this.loading = true;
+    this.hideFormResult();
 
-      let bankAccount = this.createObjectFromModel();
+    let bankAccount = this.createObjectFromModel();
 
-      this.createNestedEntities(bankAccount).then(
-          (bankAccountWithCreatedNestedEntities) => {
-              return Promise.all([
-                  bankAccountWithCreatedNestedEntities,
-                  this.createOrUpdate(this.bankAccountService, bankAccountWithCreatedNestedEntities)
-              ]);
-          })
-          .then( (result) => {
-              this.loading = false;
-              this.showFormResult('success', 'Sauvegarde réussie');
-          })
-          .catch( this.handleError );
-        //   this.showFormResult('error', 'Echec de la sauvegarde');
+    this.createNestedEntities(bankAccount).then(
+      (bankAccountWithCreatedNestedEntities) => {
+        return Promise.all([
+          bankAccountWithCreatedNestedEntities,
+          this.createOrUpdate(this.bankAccountService, bankAccountWithCreatedNestedEntities)
+        ]);
+      })
+      .then((result) => {
+        this.loading = false;
+        this.showFormResult('success', 'Sauvegarde réussie');
+      })
+      .catch(this.handleError);
+    //   this.showFormResult('error', 'Echec de la sauvegarde');
 
   }
 
@@ -105,7 +104,7 @@ export class BankAccountComponent extends BMReactFormComponent implements OnInit
 
     if (bankAccount.address) {
       return Promise.all(Promises).then(() => {
-          return bankAccount;
+        return bankAccount;
       });
     } else {
       return Promise.resolve(bankAccount);
@@ -149,28 +148,28 @@ export class BankAccountComponent extends BMReactFormComponent implements OnInit
   }
 
   protected createObjectFromModel(): BankAccount {
-      const form = this.bankAccountForm;
-      const formModel = this.bankAccountForm.value;
+    const form = this.bankAccountForm;
+    const formModel = this.bankAccountForm.value;
 
-      const bankAccount = new BankAccount();
-      if (this.bankAccount.id) {
-        bankAccount.id = this.bankAccount.id;
-      }
+    const bankAccount = new BankAccount();
+    if (this.bankAccount.id) {
+      bankAccount.id = this.bankAccount.id;
+    }
 
-      if (form.get('ownerName').dirty) {
-        bankAccount.ownerName = formModel.ownerName;
-      }
-      if (form.get('address').dirty) {
-        bankAccount.address = new Address();
-        bankAccount.address.firstline = formModel.address.firstline;
-        bankAccount.address.secondline = formModel.address.secondline;
-        bankAccount.address.city = formModel.address.city;
-        bankAccount.address.postalCode = formModel.address.postalCode;
-      }
-      if (form.get('iban').dirty) {
-        bankAccount.iban = formModel.iban;
-      }
+    if (form.get('ownerName').dirty) {
+      bankAccount.ownerName = formModel.ownerName;
+    }
+    if (form.get('address').dirty) {
+      bankAccount.address = new Address();
+      bankAccount.address.firstline = formModel.address.firstline;
+      bankAccount.address.secondline = formModel.address.secondline;
+      bankAccount.address.city = formModel.address.city;
+      bankAccount.address.postalCode = formModel.address.postalCode;
+    }
+    if (form.get('iban').dirty) {
+      bankAccount.iban = formModel.iban;
+    }
 
-      return bankAccount;
+    return bankAccount;
   }
 }

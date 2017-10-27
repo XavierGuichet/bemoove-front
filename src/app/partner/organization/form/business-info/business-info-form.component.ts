@@ -19,7 +19,6 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
   public businessForm: FormGroup;
   @Input()
   public business: Business;
-  public limitedBusiness: Business;
 
   public formErrors = {
     legalName: '',
@@ -57,22 +56,22 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
     let business = this.createObjectFromModel();
 
     this.createNestedEntities(business).then(
-        (businessWithCreatedNestedEntities) => {
-            return Promise.all([
-                businessWithCreatedNestedEntities,
-                this.createOrUpdate(this.businessService, businessWithCreatedNestedEntities)
-            ]);
-        })
-        .then( (result) => {
-            this.loading = false;
-            this.showFormResult('success', 'Sauvegarde réussie');
-        })
-        .catch( this.handleError );
-      //   this.showFormResult('error', 'Echec de la sauvegarde');
+      (businessWithCreatedNestedEntities) => {
+        return Promise.all([
+          businessWithCreatedNestedEntities,
+          this.createOrUpdate(this.businessService, businessWithCreatedNestedEntities)
+        ]);
+      })
+      .then((result) => {
+        this.loading = false;
+        this.showFormResult('success', 'Sauvegarde réussie');
+      })
+      .catch(this.handleError);
+    //   this.showFormResult('error', 'Echec de la sauvegarde');
   }
 
   protected createNestedEntities(business: Business): Promise<Business> {
-      return Promise.resolve(business);
+    return Promise.resolve(business);
   }
 
   protected buildForm(): void {

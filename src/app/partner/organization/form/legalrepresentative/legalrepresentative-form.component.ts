@@ -15,13 +15,13 @@ import { PersonService } from '../../../../_services/index';
 })
 
 export class LegalRepresentativeFormComponent extends BMReactFormComponent implements OnInit {
-    public formResult: any;
-    public loading: boolean;
-    public formReady: boolean = false;
-    public personForm: FormGroup;
+  public formResult: any;
+  public loading: boolean;
+  public formReady: boolean = false;
+
+  public personForm: FormGroup;
   @Input()
   public person: Person;
-  public limitedPerson: Person;
 
   public formErrors = {
     firstname: '',
@@ -32,17 +32,17 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
 
   public validationMessages = {
     firstname: {
-      required: 'startdate is required.',
+      required: 'Un prénom est requis.',
     },
     lastname: {
-      required: 'Veuillez choisir une adresse.',
+      required: 'Un nom est requis.',
     },
     email: {
       required: 'Une adresse mail est requise.',
       regexpvalidatorphrase: 'Une adresse mail valide est nécessaire.'
     },
     birthdate: {
-      required: 'Veuillez choisir une adresse.',
+      required: 'Veuillez indiquer la date de naissance du representant légal.',
     }
   };
 
@@ -51,7 +51,7 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
     private personService: PersonService,
     private ngbDateParserFormatter: NgbDateParserFormatter
   ) {
-      super();
+    super();
   }
 
   public ngOnInit(): void {
@@ -59,48 +59,27 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
   }
 
   public onSubmit(): void {
-      this.loading = true;
-      this.hideFormResult();
+    this.loading = true;
+    this.hideFormResult();
 
-      this.limitedPerson = this.prepareLimitedPerson();
+    let person = this.createObjectFromModel();
 
-      this.personService.update( this.limitedPerson )
-                                 .then((person) => {
-                                     this.person = person;
-                                     this.loading = false;
-                                     this.showFormResult('success', 'Sauvegarde réussie');
-                                 },
-                                    (error) => {
-                                        this.showFormResult('error', 'Echec de la sauvegarde');
-                                        this.loading = false;
-                                    });
+    this.createNestedEntities(person).then(
+      (personWithCreatedNestedEntities) => {
+        return Promise.all([
+          personWithCreatedNestedEntities,
+          this.createOrUpdate(this.personService, personWithCreatedNestedEntities)
+        ]);
+      })
+      .then((result) => {
+        this.loading = false;
+        this.showFormResult('success', 'Sauvegarde réussie');
+      })
+      .catch(this.handleError);
+    //   this.showFormResult('error', 'Echec de la sauvegarde');
   }
 
-  private prepareLimitedPerson(): Person {
-      const form = this.personForm;
-      const formModel = this.personForm.value;
-      let limitedPerson = new Person();
-
-      if (this.person.id) {
-        limitedPerson.id = this.person.id;
-      }
-      if (form.get('firstname').dirty) {
-        limitedPerson.firstname = formModel.firstname;
-      }
-      if (form.get('lastname').dirty) {
-        limitedPerson.lastname = formModel.lastname;
-      }
-      if (form.get('email').dirty) {
-        limitedPerson.email = formModel.email;
-      }
-      if (form.get('birthdate').dirty) {
-        limitedPerson.birthdate = new Date(this.ngbDateParserFormatter.format(formModel.birthdate));
-      }
-
-    return limitedPerson;
-  }
-
-  private buildForm(): void {
+  protected buildForm(): void {
     this.personForm = this.fb.group({
       firstname: [this.person.firstname, [
         Validators.required
@@ -127,5 +106,33 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
     this.onValueChanged(this.personForm);
 
     this.formReady = true;
+  }
+
+  protected createNestedEntities(person: Person): Promise<Person> {
+    return Promise.resolve(person);
+  }
+
+  protected createObjectFromModel(): Person {
+    const form = this.personForm;
+    const formModel = this.personForm.value;
+    let person = new Person();
+
+    if (this.person.id) {
+      person.id = this.person.id;
+    }
+    if (form.get('firstname').dirty) {
+      person.firstname = formModel.firstname;
+    }
+    if (form.get('lastname').dirty) {
+      person.lastname = formModel.lastname;
+    }
+    if (form.get('email').dirty) {
+      person.email = formModel.email;
+    }
+    if (form.get('birthdate').dirty) {
+      person.birthdate = new Date(this.ngbDateParserFormatter.format(formModel.birthdate));
+    }
+
+    return person;
   }
 }

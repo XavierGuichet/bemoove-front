@@ -19,7 +19,6 @@ export class AddressFormComponent extends BMReactFormComponent implements OnInit
   public addressForm: FormGroup;
   @Input()
   public address: Address;
-  public limitedAddress: Address;
 
   public formErrors = {
     firstline: '',
@@ -30,15 +29,15 @@ export class AddressFormComponent extends BMReactFormComponent implements OnInit
 
   public validationMessages = {
     firstline: {
-      required: 'firstline is required.',
+      required: 'Une adresse est requise.',
     },
     secondline: {
     },
     city: {
-      required: 'city est nécessaire.',
+      required: 'La ville est nécessaire.',
     },
     postalCode: {
-      required: 'postalCode est réquise.',
+      required: 'Le code postal est réquis.',
     },
   };
 
@@ -55,46 +54,30 @@ export class AddressFormComponent extends BMReactFormComponent implements OnInit
 
   public onSubmit(): void {
     this.loading = true;
-
-    this.limitedAddress = this.prepareLimitedAddress();
     this.hideFormResult();
-    this.addressService.update(this.limitedAddress)
-      .then((address) => {
-        this.address = address;
+
+    let address = this.createObjectFromModel();
+
+    this.createNestedEntities(address).then(
+      (addressWithCreatedNestedEntities) => {
+        return Promise.all([
+          addressWithCreatedNestedEntities,
+          this.createOrUpdate(this.addressService, addressWithCreatedNestedEntities)
+        ]);
+      })
+      .then((result) => {
         this.loading = false;
         this.showFormResult('success', 'Sauvegarde réussie');
-      },
-      (error) => {
-        this.showFormResult('error', 'Echec de la sauvegarde');
-        this.loading = false;
-      });
+      })
+      .catch(this.handleError);
+    //   this.showFormResult('error', 'Echec de la sauvegarde');
   }
 
-  private prepareLimitedAddress(): Address {
-    const form = this.addressForm;
-    const formModel = this.addressForm.value;
-    let limitedAddress = new Address();
-
-    if (this.address.id) {
-      limitedAddress.id = this.address.id;
-    }
-    if (form.get('firstline').dirty) {
-      limitedAddress.firstline = formModel.firstline;
-    }
-    if (form.get('secondline').dirty) {
-      limitedAddress.secondline = formModel.secondline;
-    }
-    if (form.get('postalCode').dirty) {
-      limitedAddress.postalCode = formModel.postalCode;
-    }
-    if (form.get('city').dirty) {
-      limitedAddress.city = formModel.city;
-    }
-
-    return limitedAddress;
+  protected createNestedEntities(address: Address): Promise<Address> {
+    return Promise.resolve(address);
   }
 
-  private buildForm(): void {
+  protected buildForm(): void {
     this.addressForm = this.fb.group({
       firstline: [this.address.firstline, [
         Validators.required,
@@ -119,5 +102,30 @@ export class AddressFormComponent extends BMReactFormComponent implements OnInit
     this.onValueChanged(this.addressForm);
 
     this.formReady = true;
+  }
+
+  protected createObjectFromModel(): Address {
+    const form = this.addressForm;
+    const formModel = this.addressForm.value;
+
+    const address = new Address();
+    if (this.address.id) {
+      address.id = this.address.id;
+    }
+
+    if (form.get('firstline').dirty) {
+      address.firstline = formModel.firstline;
+    }
+    if (form.get('secondline').dirty) {
+      address.secondline = formModel.secondline;
+    }
+    if (form.get('postalCode').dirty) {
+      address.postalCode = formModel.postalCode;
+    }
+    if (form.get('city').dirty) {
+      address.city = formModel.city;
+    }
+
+    return address;
   }
 }

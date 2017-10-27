@@ -37,6 +37,7 @@ function validateLuhn(c: FormControl) {
   templateUrl: 'invoice-settings.component.html'
 })
 
+// TODO : split this form in two
 export class InvoiceSettingsComponent extends BMReactFormComponent implements OnInit {
   public formResult: any;
   public loading: boolean;
@@ -104,7 +105,7 @@ export class InvoiceSettingsComponent extends BMReactFormComponent implements On
       }
       this.organizationLegalStatus = this.organization.legalStatus;
 
-      this.buildForms();
+      this.buildForm();
     });
   }
 
@@ -136,6 +137,19 @@ export class InvoiceSettingsComponent extends BMReactFormComponent implements On
         this.showFormResult('error', 'Echec de la sauvegarde');
         this.loading = false;
       });
+  }
+
+  protected buildForm(): void {
+    this.buildTvaRateForm();
+    this.buildInvoiceNoticeForm();
+  }
+
+  protected createNestedEntities(model: any): Promise<any> {
+      return Promise.resolve(model);
+  }
+
+  protected createObjectFromModel() {
+      // empty
   }
 
   private prepareInvoiceNotice() {
@@ -179,11 +193,6 @@ export class InvoiceSettingsComponent extends BMReactFormComponent implements On
       limitedOrganization.vatRate = formModel.organizationVatRate;
     }
     return limitedOrganization;
-  }
-
-  private buildForms(): void {
-    this.buildTvaRateForm();
-    this.buildInvoiceNoticeForm();
   }
 
   private buildTvaRateForm(): void {
