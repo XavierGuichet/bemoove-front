@@ -3,9 +3,6 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 import { BMReactFormComponent } from '../../../../form/bm-react-form/bm-react-form.component';
 
-import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { RegexpValidator } from '../../../../_directives/regexp.directive';
-
 import { Business } from '../../../../models/index';
 import { BusinessService } from '../../../../_services/index';
 
@@ -44,8 +41,7 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
 
   constructor(
     private fb: FormBuilder,
-    private businessService: BusinessService,
-    private ngbDateParserFormatter: NgbDateParserFormatter
+    private businessService: BusinessService
   ) {
     super();
   }
@@ -58,42 +54,28 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
     this.loading = true;
     this.hideFormResult();
 
-    this.limitedBusiness = this.prepareLimitedBusiness();
+    let business = this.createObjectFromModel();
 
-    this.businessService.update(this.limitedBusiness)
-      .then((business) => {
-        this.business = business;
-        this.loading = false;
-        this.showFormResult('success', 'Sauvegarde réussie');
-      },
-      (error) => {
-        this.showFormResult('error', 'Echec de la sauvegarde');
-        this.loading = false;
-      });
+    this.createNestedEntities(business).then(
+        (businessWithCreatedNestedEntities) => {
+            return Promise.all([
+                businessWithCreatedNestedEntities,
+                this.createOrUpdate(this.businessService, businessWithCreatedNestedEntities)
+            ]);
+        })
+        .then( (result) => {
+            this.loading = false;
+            this.showFormResult('success', 'Sauvegarde réussie');
+        })
+        .catch( this.handleError );
+      //   this.showFormResult('error', 'Echec de la sauvegarde');
   }
 
-  private prepareLimitedBusiness(): Business {
-    const form = this.businessForm;
-    const formModel = this.businessForm.value;
-    let limitedBusiness = new Business();
-
-    if (this.business.id) {
-      limitedBusiness.id = this.business.id;
-    }
-    if (form.get('legalName').dirty) {
-      limitedBusiness.legalName = formModel.legalName;
-    }
-    if (form.get('siret').dirty) {
-      limitedBusiness.siret = formModel.siret;
-    }
-    if (form.get('vatNumber').dirty) {
-      limitedBusiness.vatNumber = formModel.vatNumber;
-    }
-
-    return limitedBusiness;
+  protected createNestedEntities(business: Business): Promise<Business> {
+      return Promise.resolve(business);
   }
 
-  private buildForm(): void {
+  protected buildForm(): void {
     this.businessForm = this.fb.group({
       legalName: [this.business.legalName, [
         Validators.required
@@ -115,5 +97,27 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
     this.onValueChanged(this.businessForm);
 
     this.formReady = true;
+  }
+
+  protected createObjectFromModel(): Business {
+    const form = this.businessForm;
+    const formModel = this.businessForm.value;
+
+    const business = new Business();
+    if (this.business.id) {
+      business.id = this.business.id;
+    }
+
+    if (form.get('legalName').dirty) {
+      business.legalName = formModel.legalName;
+    }
+    if (form.get('siret').dirty) {
+      business.siret = formModel.siret;
+    }
+    if (form.get('vatNumber').dirty) {
+      business.vatNumber = formModel.vatNumber;
+    }
+
+    return business;
   }
 }
