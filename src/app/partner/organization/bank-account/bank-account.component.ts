@@ -38,24 +38,21 @@ export class BankAccountComponent extends BMReactFormComponent implements OnInit
 
   public validationMessages = {
     'ownerName': {
-      required: 'startdate is required.',
+      required: 'Le nom du propriétaire du compte est obligatoire.',
     },
     'address.firstline': {
-      required: 'firstline is required.',
+      required: 'Une adresse est requise.',
     },
     'address.secondline': {
     },
     'address.city': {
-      required: 'city est nécessaire.',
+      required: 'La ville est nécessaire.',
     },
     'address.postalCode': {
-      required: 'postalCode est réquise.',
-    },
-    'address.other.item1': {
-      required: 'blabla',
+      required: 'Le code postal est réquis.',
     },
     'iban': {
-      required: 'Veuillez choisir une adresse.',
+      required: 'Veuillez entrez votre IBAN.',
     }
   };
 
@@ -70,70 +67,51 @@ export class BankAccountComponent extends BMReactFormComponent implements OnInit
   }
 
   public ngOnInit(): void {
-    this.bankAccountService.getMyBankAccount().then((bankAccount) => {
-        this.bankAccount = bankAccount;
-        this.buildForm();
-    });
+    this.bankAccountService.getMyBankAccount()
+                            .then((bankAccount) => {
+                                this.bankAccount = bankAccount;
+                                this.buildForm();
+                            });
   }
 
   public onSubmit(): void {
-    this.limitedBankAccount = this.prepareLimitedBankAccount();
-    this.createRelatedEntities(this.limitedBankAccount).subscribe(() => {
-      let request;
       this.loading = true;
-      this.hideFormResult();
-        request = this.bankAccountService.update(this.limitedBankAccount).then(
-          (bankAccount) => {
-              this.bankAccount = bankAccount;
+
+      let bankAccount = this.createObjectFromModel();
+
+      this.createNestedEntities(bankAccount).then(
+          (bankAccountWithCreatedNestedEntities) => {
+              return Promise.all([
+                  bankAccountWithCreatedNestedEntities,
+                  this.createOrUpdate(this.bankAccountService, bankAccountWithCreatedNestedEntities)
+              ]);
+          })
+          .then( (result) => {
               this.loading = false;
               this.showFormResult('success', 'Sauvegarde réussie');
-              },
-              (error) => {
-                 this.showFormResult('error', 'Echec de la sauvegarde');
-                 this.loading = false;
-              });
-    });
+          })
+          .catch( this.handleError );
+        //   this.showFormResult('error', 'Echec de la sauvegarde');
+
   }
 
-  public createRelatedEntities(limitedBankAccount) {
-    let ObservableOfCreation: any[] = new Array();
+  public createNestedEntities(bankAccount: BankAccount): Promise<BankAccount> {
+    let Promises: any[] = new Array();
 
-    if (this.limitedBankAccount.hasOwnProperty('address')) {
-      ObservableOfCreation.push(this.addressService.create(this.limitedBankAccount.address).then((address) => this.limitedBankAccount.address.id = address.id));
+    if (bankAccount.hasOwnProperty('address')) {
+      Promises.push(this.addressService.create(bankAccount.address).then((address) => bankAccount.address = address));
     }
 
-    if (this.bankAccount.address) {
-      return Observable.forkJoin(ObservableOfCreation).map(() => true);
+    if (bankAccount.address) {
+      return Promise.all(Promises).then(() => {
+          return bankAccount;
+      });
     } else {
-      return Observable.empty();
+      return Promise.resolve(bankAccount);
     }
   }
 
-  private prepareLimitedBankAccount(): BankAccount {
-    const form = this.bankAccountForm;
-    const formModel = this.bankAccountForm.value;
-
-    const limitedBankAccount: BankAccount = new BankAccount();
-    if (this.bankAccount.id) {
-      limitedBankAccount.id = this.bankAccount.id;
-    }
-    if (form.get('ownerName').dirty) {
-      limitedBankAccount.ownerName = formModel.ownerName;
-    }
-    if (form.get('address').dirty) {
-      limitedBankAccount.address = new Address();
-      limitedBankAccount.address.firstline = formModel.address.firstline;
-      limitedBankAccount.address.secondline = formModel.address.secondline;
-      limitedBankAccount.address.city = formModel.address.city;
-      limitedBankAccount.address.postalCode = formModel.address.postalCode;
-    }
-    if (form.get('iban').dirty) {
-      limitedBankAccount.iban = formModel.iban;
-    }
-    return limitedBankAccount;
-  }
-
-  private buildForm(): void {
+  protected buildForm(): void {
     this.bankAccountForm = this.fb.group({
       ownerName: [this.bankAccount.ownerName, [
         Validators.required,
@@ -167,5 +145,31 @@ export class BankAccountComponent extends BMReactFormComponent implements OnInit
 
     // (re)set validation messages.
     this.onValueChanged(this.bankAccountForm);
+  }
+
+  protected createObjectFromModel(): BankAccount {
+      const form = this.bankAccountForm;
+      const formModel = this.bankAccountForm.value;
+
+      const bankAccount = new BankAccount();
+      if (this.bankAccount.id) {
+        bankAccount.id = this.bankAccount.id;
+      }
+
+      if (form.get('ownerName').dirty) {
+        bankAccount.ownerName = formModel.ownerName;
+      }
+      if (form.get('address').dirty) {
+        bankAccount.address = new Address();
+        bankAccount.address.firstline = formModel.address.firstline;
+        bankAccount.address.secondline = formModel.address.secondline;
+        bankAccount.address.city = formModel.address.city;
+        bankAccount.address.postalCode = formModel.address.postalCode;
+      }
+      if (form.get('iban').dirty) {
+        bankAccount.iban = formModel.iban;
+      }
+
+      return bankAccount;
   }
 }
