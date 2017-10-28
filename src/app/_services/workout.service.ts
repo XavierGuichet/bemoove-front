@@ -19,20 +19,24 @@ export class WorkoutService {
 
   constructor(private http: Http) { }
 
-  public create(workout: Workout) {
+  public create(workout: Workout): Promise<Workout> {
     this.workoutApi = new WorkoutApi(workout);
     return this.http.post(this.workoutsUrl,
       this.workoutApi,
       this.jwt())
-      .map((response: Response) => response.json());
+      .toPromise()
+      .then((response) => response.json() as Workout)
+      .catch(this.handleError);
   }
 
-  public update(workout: Workout) {
+  public update(workout: Workout): Promise<Workout> {
     this.workoutApi = new WorkoutApi(workout);
     return this.http.put(this.workoutsUrl + '/' + workout.id,
       this.workoutApi,
       this.jwt())
-      .map((response: Response) => response.json());
+      .toPromise()
+      .then((response) => response.json() as Workout)
+      .catch(this.handleError);
   }
 
   public delete(id: number): Promise<void> {
