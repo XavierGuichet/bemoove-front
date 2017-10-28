@@ -21,7 +21,11 @@ h2 {
         }
     }
 }
-
+.form-card__title {
+    font-family: 'texgyreadventor';
+    font-size: 1.125rem;
+    color: #229ba7;
+}
 .secondary-navigation {
     z-index: 5;
     min-height: 100vh;
