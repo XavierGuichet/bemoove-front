@@ -23,10 +23,9 @@ import { WorkoutInstanceService,
 })
 
 export class AddSessionFormComponent extends BMReactFormComponent implements OnInit {
-
-        public formResult: any;
-        public loading: boolean;
-        public formReady: boolean = false;
+  public formResult: any;
+  public loading: boolean;
+  public formReady: boolean = false;
 
   public alertNoCoach: any;
   public alertNoWorkout: any;
@@ -36,7 +35,6 @@ export class AddSessionFormComponent extends BMReactFormComponent implements OnI
   public workoutInstance: WorkoutInstance;
   @Output()
   public onSuccess = new EventEmitter<boolean>();
-  public limitedWorkoutInstance: WorkoutInstance;
 
   public workouts: Workout[] = new Array();
   public coaches: Coach[] = new Array();
@@ -78,7 +76,7 @@ export class AddSessionFormComponent extends BMReactFormComponent implements OnI
     private router: Router,
     private spaceService: SpaceService
   ) {
-      super();
+    super();
   }
 
   public ngOnInit(): void {
@@ -89,52 +87,48 @@ export class AddSessionFormComponent extends BMReactFormComponent implements OnI
       .then((results) => {
         this.coaches = results[0];
         if (!this.coaches.length) {
-            this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: '.' };
+          this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: '.' };
         }
         this.workouts = results[1];
         if (!this.workouts.length) {
-            this.alertNoWorkout = { type: 'error', title: 'Aucune séance type', content: '' };
+          this.alertNoWorkout = { type: 'error', title: 'Aucune séance type', content: '' };
         }
         if (this.coaches.length && this.workouts.length) {
-            this.buildForm();
-            // Rappel
-            // Pour qu'un select soit prechoisi, il faut bien donner au patch value l'objet present dans sa liste
-            // et non pas un objet equivalent
-            let selectcoach = this.coaches.find( (coach) => coach.id === this.workoutInstance.coach.id );
-            this.workoutInstanceForm.patchValue({ coach: selectcoach });
-            // this.formReady = true;
+          this.buildForm();
+          // Rappel
+          // Pour qu'un select soit prechoisi, il faut bien donner au patch value l'objet present dans sa liste
+          // et non pas un objet equivalent
+          let selectcoach = this.coaches.find((coach) => coach.id === this.workoutInstance.coach.id);
+          this.workoutInstanceForm.patchValue({ coach: selectcoach });
+          // this.formReady = true;
         }
       })
       .catch(this.handleError);
   }
 
   public onSubmit(): void {
-    this.limitedWorkoutInstance = this.prepareLimitedWorkoutInstance();
-    this.loading = true;
-    this.workoutInstanceService.create(this.limitedWorkoutInstance)
-      .subscribe((workoutInstance) => {
-        this.workoutInstance = workoutInstance;
-        this.loading = false;
-        this.onSuccess.emit(true);
-      });
+      this.loading = true;
+      this.hideFormResult();
+
+      let workoutInstance = this.createObjectFromModel();
+
+      this.createNestedEntities(workoutInstance).then(
+        (workoutInstanceWithCreatedNestedEntities) => {
+          return Promise.all([
+            workoutInstanceWithCreatedNestedEntities,
+            this.createOrUpdate(this.workoutInstanceService, workoutInstanceWithCreatedNestedEntities)
+          ]);
+        })
+        .then((result) => {
+          this.loading = false;
+          this.onSuccess.emit(true);
+          this.showFormResult('success', 'Sauvegarde réussie');
+        })
+        .catch(this.handleError);
+      //   this.showFormResult('error', 'Echec de la sauvegarde');
   }
 
-  private prepareLimitedWorkoutInstance(): WorkoutInstance {
-    const form = this.workoutInstanceForm;
-    const formModel = this.workoutInstanceForm.value;
-
-    const limitedWorkoutInstance: WorkoutInstance = new WorkoutInstance();
-
-    limitedWorkoutInstance.startdate = new Date(this.ngbDateParserFormatter.format(formModel.startdate));
-    limitedWorkoutInstance.startdate.setHours(formModel.starttime.hour, formModel.starttime.minute);
-    limitedWorkoutInstance.workout = formModel.workout;
-    limitedWorkoutInstance.nbTicketAvailable = parseInt(formModel.nbTicketAvailable, 10);
-    limitedWorkoutInstance.coach = formModel.coach;
-
-    return limitedWorkoutInstance;
-  }
-
-  private buildForm(): void {
+  protected buildForm(): void {
     this.workoutInstanceForm = this.fb.group({
       coach: [this.workoutInstance.coach, [
         Validators.required,
@@ -163,5 +157,24 @@ export class AddSessionFormComponent extends BMReactFormComponent implements OnI
 
     // (re)set validation messages.
     this.onValueChanged(this.workoutInstanceForm);
+  }
+
+  protected createNestedEntities(workoutInstance: WorkoutInstance): Promise<WorkoutInstance> {
+      return Promise.resolve(workoutInstance);
+  }
+
+  protected createObjectFromModel() {
+      const form = this.workoutInstanceForm;
+      const formModel = this.workoutInstanceForm.value;
+
+      const workoutInstance: WorkoutInstance = new WorkoutInstance();
+
+      workoutInstance.startdate = new Date(this.ngbDateParserFormatter.format(formModel.startdate));
+      workoutInstance.startdate.setHours(formModel.starttime.hour, formModel.starttime.minute);
+      workoutInstance.workout = formModel.workout;
+      workoutInstance.nbTicketAvailable = parseInt(formModel.nbTicketAvailable, 10);
+      workoutInstance.coach = formModel.coach;
+      
+      return workoutInstance;
   }
 }
