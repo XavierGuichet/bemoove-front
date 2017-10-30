@@ -36,6 +36,15 @@ function validateCreatedObject(c: FormControl) {
   return null;
 }
 
+function validateDuration(c: FormControl) {
+  const value = c.value;
+  if (value === null) {
+    return { validateDuration: true };
+  }
+
+  return null;
+}
+
 @Component({
   selector: 'workout-form',
   templateUrl: './workout-form.component.html',
@@ -49,69 +58,70 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
 
   @Input()
   public workout: Workout;
+  public limitedWorkout: Workout;
   public workoutForm: FormGroup;
 
   public formErrors = {
-    startdate: '',
-    starttime: '',
-    title: '',
-    sport: '',
-    duration: '',
-    address: '',
-    price: '',
-    nbTicketAvailable: '',
-    description: '',
-    outfit: '',
-    notice: '',
-    tag: ''
+    main: {
+      title: '',
+      sport: '',
+      duration: '',
+      address: '',
+      price: '',
+    },
+    details: {
+      description: '',
+      outfit: '',
+      notice: '',
+      tag: ''
+    }
   };
 
   public validationMessages = {
-    startdate: {
-      required: 'startdate is required.',
-    },
-    starttime: {
-      required: 'starttime is required.',
-    },
-    title: {
+    'main.title': {
       required: 'Un titre est nécessaire.',
     },
-    sport: {
+    'main.sport': {
       required: 'Un sport est nécessaire.',
     },
-    duration: {
-      required: 'Une durée est réquise.',
+    'main.duration': {
+      validateDuration: 'Une durée est requise.',
     },
-    address: {
+    'main.address': {
       required: 'Veuillez choisir une adresse.',
+      validateCreatedObject: 'Veuillez ajouter une adresse pour cette séance.'
     },
-    price: {
+    'main.price': {
       required: 'Un prix est nécessaire.',
     },
-    nbTicketAvailable: {
-      required: 'Un nombre de place est nécessaire.',
-    },
-    description: {
+    'details.description': {
       required: 'Veuillez entrez une description de votre séance.',
     },
-    outfit: {
+    'details.outfit': {
+      required: 'Veuillez entrez les informations concernant la tenue conseillé pour cette séance.',
     },
-    notice: {
+    'details.notice': {
+      required: 'Veuillez entrez les informations complémentaire pour cette séance.',
     },
-    tag: {
+    'details.tag': {
     }
   };
 
   public partnerAddresses: Address[] = new Array();
-  public sports: Sport[];
+  public sports: Sport[]; //  TODO can be removed ?
+
+  public selectedSport: Sport;
 
   public duration: { hour: number, minute: number, second: number };
 
   public sportDataService: RemoteData;
   public tagDataService: RemoteData;
 
-  public cropperData: any;
-  public cropperSettings: CropperSettings;
+  public cropperDataSquare: any;
+  public cropperSettingsSquare: CropperSettings;
+
+  public cropperDataWide: any;
+  public cropperSettingsWide: CropperSettings;
 
   public activeTab;
 
@@ -158,16 +168,27 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   }
 
   public initCropper(): void {
-    this.cropperSettings = new CropperSettings();
-    this.cropperSettings.width = 10;
-    this.cropperSettings.height = 10;
-    this.cropperSettings.croppedWidth = 300;
-    this.cropperSettings.croppedHeight = 300;
-    this.cropperSettings.canvasWidth = 600;
-    this.cropperSettings.canvasHeight = 337;
-    this.cropperSettings.keepAspect = true;
+    this.cropperSettingsSquare = new CropperSettings();
+    this.cropperSettingsSquare.width = 10;
+    this.cropperSettingsSquare.height = 10;
+    this.cropperSettingsSquare.croppedWidth = 300;
+    this.cropperSettingsSquare.croppedHeight = 300;
+    this.cropperSettingsSquare.canvasWidth = 600;
+    this.cropperSettingsSquare.canvasHeight = 337;
+    this.cropperSettingsSquare.keepAspect = true;
 
-    this.cropperData = {};
+    this.cropperDataSquare = {};
+
+    this.cropperSettingsWide = new CropperSettings();
+    this.cropperSettingsWide.width = 10;
+    this.cropperSettingsWide.height = 10;
+    this.cropperSettingsWide.croppedWidth = 300;
+    this.cropperSettingsWide.croppedHeight = 300;
+    this.cropperSettingsWide.canvasWidth = 600;
+    this.cropperSettingsWide.canvasHeight = 337;
+    this.cropperSettingsWide.keepAspect = true;
+
+    this.cropperDataWide = {};
   }
 
   public ngOnInit(): void {
@@ -177,29 +198,28 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
       .then((addresses) => {
         if (addresses.length > 0) {
           this.partnerAddresses = addresses;
-          this.workoutForm.patchValue({ address: this.partnerAddresses[0] });
+          this.workoutForm.patchValue({ main: { address: this.partnerAddresses[0] } });
         }
       });
-
-    this.sportService.getAll().then((sports) => this.sports = sports);
-  }
-
-  public setWorkoutImageData() {
-    this.workout.photo.base64data = this.cropperData.image;
   }
 
   public selectSport(event) {
-    if (event == null || event.title.trim().length === 0) {
+    if (event == null) {
+      return;
+    }
+    if (event.title.trim().length === 0) {
+      let newSport = new Sport();
+      this.selectedSport = newSport;
       return;
     }
     if (event.originalObject == null && event.title.trim() !== this.workout.sport.name) {
       let newSport = new Sport();
       newSport.name = event.title.trim();
-      this.workout.sport = newSport;
+      this.selectedSport = newSport;
       return;
     }
     if (event.originalObject != null) {
-      this.workout.sport = event.originalObject;
+      this.selectedSport = event.originalObject;
       return;
     }
   }
@@ -242,11 +262,27 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
       if (newAddress instanceof Object) {
         this.partnerAddresses.push(newAddress);
         this.workout.address = newAddress;
-        this.workoutForm.patchValue({
-          address: this.workout.address
-        });
+        this.workoutForm.patchValue({ main: { address: this.workout.address } });
       }
     });
+  }
+
+  public goToDetails() {
+    if (this.workoutForm.get('main').valid) {
+      this.activeTab = 1;
+    } else {
+      const formErrors = this.formErrors.main;
+      this.formErrors.main = this.recursiveCheck(this.workoutForm, formErrors, 'main', true);
+    }
+  }
+
+  public goToImage() {
+    if (this.workoutForm.get('details').valid) {
+      this.activeTab = 2;
+    } else {
+      const formErrors = this.formErrors.details;
+      this.formErrors.details = this.recursiveCheck(this.workoutForm, formErrors, 'details', true);
+    }
   }
 
   public forceIntegerPrice() {
@@ -256,134 +292,145 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     }
   }
 
-  public createRelatedNewEntities() {
-    let ObservableOfCreation: any[] = new Array();
-
-    if (!this.workout.photo.id) {
-      ObservableOfCreation.push(this.imageService.create(this.workout.photo).map((image) => this.workout.photo = image));
-    }
-
-    if (!this.workout.sport.id) {
-      ObservableOfCreation.push(this.sportService.create(this.workout.sport).map((sport) => this.workout.sport = sport));
-    }
-
-    if (!this.workout.photo.id || !this.workout.sport.id) {
-      return Observable.forkJoin(ObservableOfCreation).map(() => true);
-    } else {
-      return Observable.empty();
-    }
-  }
-
   public onSubmit() {
-    this.createRelatedNewEntities().subscribe(() => {
-      let saveWorkout = this.prepareSaveWorkout();
-      this.loading = true;
-      if (!this.workout.id) {
-        this.workoutService.create(saveWorkout)
-          .subscribe(
-          (data) => {
-            this.loading = false;
-          },
-          (error) => {
-            this.loading = false;
-          });
-      } else {
-        this.workoutService.update(saveWorkout)
-          .subscribe(
-          (data) => {
-            this.loading = false;
-          },
-          (error) => {
-            this.loading = false;
-          });
-      }
-    }
-    );
+    this.loading = true;
+    let workout: Workout = this.createObjectFromModel();
+
+    this.createNestedEntities(workout).then(
+      (workoutWithCreatedNestedEntities) => {
+        return Promise.all([
+          workoutWithCreatedNestedEntities,
+          this.createOrUpdate(this.workoutService, workoutWithCreatedNestedEntities)
+        ]);
+      })
+      .then((result) => {
+        this.loading = false;
+      })
+      .catch(this.handleError);
+
   }
 
-  public prepareSaveWorkout() {
+  protected createObjectFromModel() {
     const formModel = this.workoutForm.value;
+    const workout = new Workout();
 
-    const saveWorkout: Workout = new Workout();
+    if (this.workout.id) {
+      workout.id = this.workout.id;
+    }
 
-    saveWorkout.id = this.workout.id;
+    workout.title = formModel.main.title;
+    workout.sport = this.selectedSport;
+    workout.duration = formModel.main.duration.hour * 60 + formModel.main.duration.minute;
 
-    saveWorkout.title = formModel.title;
-    saveWorkout.sport = this.workout.sport;
+    workout.address = formModel.main.address;
+    workout.price = formModel.main.price;
 
-    saveWorkout.address = formModel.address;
-    saveWorkout.price = this.workout.price;
+    workout.description = formModel.details.description;
+    workout.outfit = formModel.details.outfit;
+    workout.notice = formModel.details.notice;
 
-    saveWorkout.photo = this.workout.photo;
-    saveWorkout.description = formModel.description;
-    saveWorkout.outfit = formModel.outfit;
-    saveWorkout.notice = formModel.notice;
-    saveWorkout.tags = this.workout.tags;
-    return saveWorkout;
+    // Todo improve photo system
+    workout.photoSquare.base64data = this.cropperDataSquare.image;
+    workout.photoWide.base64data = this.cropperDataWide.image;
+    // Todo improve tags system
+    workout.tags = this.workout.tags;
+
+    return workout;
   }
 
-  private buildForm(): void {
+  protected buildForm(): void {
     this.workoutForm = this.fb.group({
-      title: [this.workout.title, [
-        Validators.required,
-      ]
-      ],
-      sport: [this.workout.sport.name, [
-        Validators.required,
-      ]
-      ],
-      duration: [this.workout.duration, [
-        Validators.required,
-      ]
-      ],
-      address: [this.workout.address, [
-        Validators.required,
-        validateCreatedObject
-      ]
-      ],
-      price: [this.workout.price, [
-        Validators.required,
-      ]
-      ],
-      description: [this.workout.description, [
-        Validators.required,
-      ]
-      ],
-      outfit: [this.workout.outfit, [
-      ]
-      ],
-      notice: [this.workout.notice, [
-      ]
-      ],
-      tag: [this.workout.tags, [
-      ]
-      ]
+      main: this.fb.group({
+        title: [this.workout.title, [
+          Validators.required,
+        ]
+        ],
+        sport: [this.workout.sport.name, [
+          Validators.required,
+        ]
+        ],
+        duration: [this.workout.duration, [
+          validateDuration,
+        ]
+        ],
+        address: [this.workout.address, [
+          Validators.required,
+          validateCreatedObject
+        ]
+        ],
+        price: [this.workout.price, [
+          Validators.required
+        ]
+        ]
+      }),
+      details: this.fb.group({
+        description: [this.workout.description, [
+          Validators.required,
+        ]
+        ],
+        outfit: [this.workout.outfit, [
+        ]
+        ],
+        notice: [this.workout.notice, [
+        ]
+        ],
+        tag: [this.workout.tags, [
+        ]
+        ]
+      })
     });
 
     this.workoutForm.valueChanges
       .subscribe((data) => this.onValueChanged(this.workoutForm, data));
 
-    const titleControl = this.workoutForm.get('title');
-    titleControl.valueChanges.forEach(
-      (value: string) => this.workout.title = value
-    );
-    const descriptionControl = this.workoutForm.get('description');
-    descriptionControl.valueChanges.forEach(
-      (value: string) => this.workout.description = value
-    );
-    const outfitControl = this.workoutForm.get('outfit');
-    outfitControl.valueChanges.forEach(
-      (value: string) => this.workout.description = value
-    );
-    const noticeControl = this.workoutForm.get('notice');
-    noticeControl.valueChanges.forEach(
-      (value: string) => this.workout.description = value
-    );
-    const addressControl = this.workoutForm.get('address');
-    addressControl.valueChanges.forEach(
-      (value: string) => this.workout.address = value
-    );
+    // This was used to render the preview
+    // const titleControl = this.workoutForm.get('title');
+    // titleControl.valueChanges.forEach(
+    //   (value: string) => this.workout.title = value
+    // );
+    // const descriptionControl = this.workoutForm.get('description');
+    // descriptionControl.valueChanges.forEach(
+    //   (value: string) => this.workout.description = value
+    // );
+    // const outfitControl = this.workoutForm.get('outfit');
+    // outfitControl.valueChanges.forEach(
+    //   (value: string) => this.workout.description = value
+    // );
+    // const noticeControl = this.workoutForm.get('notice');
+    // noticeControl.valueChanges.forEach(
+    //   (value: string) => this.workout.description = value
+    // );
+    // const addressControl = this.workoutForm.get('address');
+    // addressControl.valueChanges.forEach(
+    //   (value: string) => this.workout.address = value
+    // );
     this.onValueChanged(this.workoutForm); // (re)set validation messages now
+  }
+
+  protected createNestedEntities(workout: Workout): Promise<Workout> {
+    let Promises: any[] = new Array();
+
+    if (!workout.photoWide.id && workout.photoWide.base64data !== null) {
+      Promises.push(this.imageService.create(workout.photoWide).then((image) => workout.photoWide = image));
+    } else if (workout.photoWide.base64data !== null) {
+      Promises.push(this.imageService.update(workout.photoWide).then((image) => workout.photoWide = image));
+    }
+
+    if (!workout.photoSquare.id && workout.photoSquare.base64data !== null) {
+      Promises.push(this.imageService.create(workout.photoSquare).then((image) => workout.photoSquare = image));
+    } else if (workout.photoSquare.base64data !== null) {
+      Promises.push(this.imageService.update(workout.photoSquare).then((image) => workout.photoSquare = image));
+    }
+
+    if (!workout.sport.id) {
+      Promises.push(this.sportService.create(this.workout.sport).then((sport) => workout.sport = sport));
+    }
+
+    if (Promises.length > 0) {
+      return Promise.all(Promises).then(() => workout);
+    } else {
+      return Promise.resolve(workout);
+    }
   }
 
   private isNumber(value: any): boolean {
@@ -396,4 +443,5 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
 
   get diagnostic() { return JSON.stringify(this.workout); }
   get diagnostic2() { return JSON.stringify(this.workoutForm.value); }
+  get diagnosticsport() { return JSON.stringify(this.selectedSport); }
 }

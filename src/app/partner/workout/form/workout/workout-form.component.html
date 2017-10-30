@@ -1,7 +1,7 @@
 <form [formGroup]="workoutForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.target.tagName == 'TEXTAREA'" novalidate>
   <md-tab-group [dynamicHeight]="true" [selectedIndex]="activeTab">
     <md-tab label="1 - Votre séance">
-      <div class="tab-container">
+      <div class="tab-container" formGroupName="main">
         <div class="form-card">
           <div class="form-card-title">
             <h4>Votre séance</h4>
@@ -10,22 +10,22 @@
             <div class="form-group">
               <label for="title">Titre de la séance</label>
               <input type="text" class="form-control" formControlName="title" name="title">
-              <div *ngIf="formErrors.title" class="form-error">
-                {{ formErrors.title }}
+              <div *ngIf="formErrors.main.title" class="form-error">
+                {{ formErrors.main.title }}
               </div>
             </div>
             <div class="form-group">
               <label for="sport">Sport</label>
               <ng2-completer [inputClass]="'form-control'" formControlName="sport" name="sport" [overrideSuggested]="true" [dataService]="sportDataService" (selected)="selectSport($event)" [textNoResults]="false"></ng2-completer>
-              <div *ngIf="formErrors.sport" class="form-error">
-                {{ formErrors.sport }}
+              <div *ngIf="formErrors.main.sport" class="form-error">
+                {{ formErrors.main.sport }}
               </div>
             </div>
             <div class="form-group">
               <label for="example-text-input">Durée</label>
-              <ngb-timepicker formControlName="duration" [(ngModel)]="duration" name="duration" [spinners]="false"></ngb-timepicker>
-              <div *ngIf="formErrors.duration" class="form-error">
-                {{ formErrors.duration }}
+              <ngb-timepicker formControlName="duration" name="duration" [spinners]="false"></ngb-timepicker>
+              <div *ngIf="formErrors.main.duration" class="form-error">
+                {{ formErrors.main.duration }}
               </div>
             </div>
           </div>
@@ -43,8 +43,8 @@
                               {{address.name}} - {{address.city}}
                           </option>
                       </select>
-                  <div *ngIf="formErrors.address" class="form-error">
-                    {{ formErrors.address }}
+                  <div *ngIf="formErrors.main.address" class="form-error">
+                    {{ formErrors.main.address }}
                   </div>
                 </div>
                 <div class="col-5 text-right">
@@ -53,7 +53,7 @@
                       </button>
                 </div>
               </div>
-              <div class="row" *ngIf="workoutForm.value.address.name">
+              <div class="row" *ngIf="false && workoutForm.main.value.address.name">
                 <div class="col-12">
                   <p class="address">{{workoutForm.value.address.name}}<br/> {{workoutForm.value.address.firstline}}
                     <br/> {{workoutForm.value.address.postalCode}} - {{workoutForm.value.address.city}}
@@ -71,18 +71,18 @@
                 <input type="text" class="form-control" id="price" formControlName="price" [(ngModel)]="workout.price" name="price" required (blur)="forceIntegerPrice()">
                 <div class="input-group-addon">€</div>
               </div>
-              <div *ngIf="formErrors.price" class="form-error">
-                {{ formErrors.price }}
+              <div *ngIf="formErrors.main.price" class="form-error">
+                {{ formErrors.main.price }}
               </div>
             </div>
           </div>
         </div>
-        <button type="button" md-raised-button color="primary" class="pull-right mb-3" (click)="activeTab = 1">Suivant <md-icon class="md-24">keyboard_arrow_right</md-icon></button>
+        <button type="button" md-raised-button color="primary" class="pull-right mb-3" (click)="goToDetails()">Suivant <md-icon class="md-24">keyboard_arrow_right</md-icon></button>
       </div>
     </md-tab>
 
     <md-tab label="2 - Détails">
-      <div class="tab-container">
+      <div class="tab-container" formGroupName="details">
         <div class="form-card">
           <div class="form-card-title">
             <h4>Description</h4>
@@ -90,23 +90,23 @@
           <div class="form-card-content">
             <div class="form-group">
               <label for="example-text-input">Description générale</label>
-              <textarea placeholder="Décrivez ici le déroulement et atouts de votre séance." formControlName="description" name="description" class="form-control" rows="3"></textarea>
-              <div *ngIf="formErrors.description" class="form-error">
-                {{ formErrors.description }}
+              <textarea placeholder="Décrivez ici le déroulement et atouts de votre séance." formControlName="description" name="description" class="form-control" rows="5"></textarea>
+              <div *ngIf="formErrors.details.description" class="form-error">
+                {{ formErrors.details.description }}
               </div>
             </div>
             <div class="form-group">
               <label for="example-text-input">Tenue</label>
               <textarea placeholder="Notez ici les besoins spécifique pour votre séance." formControlName="outfit" name="outfit" class="form-control" rows="3"></textarea>
-              <div *ngIf="formErrors.outfit" class="form-error">
-                {{ formErrors.outfit }}
+              <div *ngIf="formErrors.details.outfit" class="form-error">
+                {{ formErrors.details.outfit }}
               </div>
             </div>
             <div class="form-group">
               <label for="example-text-input">Remarque utile</label>
               <textarea placeholder="Exemple : Vous trouverez un parking à 150 mètre sur la droite du bâtiment..." formControlName="notice" name="notice" class="form-control" rows="3"></textarea>
-              <div *ngIf="formErrors.notice" class="form-error">
-                {{ formErrors.notice }}
+              <div *ngIf="formErrors.details.notice" class="form-error">
+                {{ formErrors.details.notice }}
               </div>
             </div>
           </div>
@@ -133,28 +133,33 @@
             </div>
           </div>
         </div>
-        <button type="button" md-raised-button color="primary" class="pull-right mb-3" (click)="activeTab = 2">Suivant <md-icon class="md-24">keyboard_arrow_right</md-icon></button>
+        <button type="button" md-raised-button color="primary" class="pull-right mb-3" (click)="goToImage()">Suivant <md-icon class="md-24">keyboard_arrow_right</md-icon></button>
       </div>
     </md-tab>
 
-    <md-tab label="3 - Image">
+    <md-tab label="3 - Images">
       <div class="tab-container">
           <div class="form-card">
             <div class="form-card-title">
-              <h4>Image</h4>
+              <h4>Image (dans les resultats de recherche)</h4>
             </div>
             <div class="form-card-content">
               <div class="form-group">
-                <img-cropper [image]="cropperData" [settings]="cropperSettings" (onCrop)="setWorkoutImageData()"></img-cropper>
+                <img-cropper [image]="cropperDataSquare" [settings]="cropperSettingsSquare"></img-cropper>
+              </div>
+            </div>
+          </div>
+          <div class="form-card">
+            <div class="form-card-title">
+              <h4>Image (dans la fiche du cours)</h4>
+            </div>
+            <div class="form-card-content">
+              <div class="form-group">
+                <img-cropper [image]="cropperDataWide" [settings]="cropperSettingsWide"></img-cropper>
               </div>
             </div>
           </div>
           <button type="submit" [disabled]="loading || !workoutForm.valid" md-raised-button color="primary" class="pull-right mb-3">Enregistrer</button>
-      </div>
-    </md-tab>
-    <md-tab label="Diag">
-      <div class="tab-container">
-          {{diagnostic}}
       </div>
     </md-tab>
   </md-tab-group>
