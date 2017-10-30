@@ -52,7 +52,6 @@ export class ViewComponent implements OnInit {
     this.coachService.getMyCoaches()
       .then((coaches) => {
         this.coaches = coaches;
-        console.log(this.coaches);
         if (this.coaches.length === 0) {
           this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: 'Vous n\'avez pas encore crée de coach pour votre société.<br/>Pour pouvoir utiliser le planning, il vous faut dans un premier temps créer un coach.' };
         } else {
