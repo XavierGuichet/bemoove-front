@@ -24,14 +24,16 @@ export class SportService {
                         .map((response: Response) => response.json());
     }
 
-    public create(sport: Sport) {
+    public create(sport: Sport): Promise<Sport> {
         return this.http.post(this.SportsUrl, sport, this.jwt())
-                        .map((response: Response) => response.json());
+        .toPromise()
+        .then( (response: Response) => response.json() as Sport);
     }
 
-    public update(sport: Sport) {
+    public update(sport: Sport): Promise<Sport> {
         return this.http.put(this.SportsUrl + '/' + sport.id, sport, this.jwt())
-                        .map((response: Response) => response.json());
+        .toPromise()
+        .then( (response: Response) => response.json() as Sport);
     }
 
     public delete(id: number) {
