@@ -171,7 +171,7 @@ export class WorkoutInstanceFormComponent implements OnInit {
       this.newWorkoutInstances.push(addedWorkoutInstance);
   }
 
-  private buildForm(): void {
+  protected buildForm(): void {
     this.workoutInstanceForm = this.fb.group({
       startdate: [this.selectedStartDate, [
         Validators.required,
