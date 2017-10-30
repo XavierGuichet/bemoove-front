@@ -44,7 +44,7 @@ export class WorkoutDetailsComponent implements OnInit {
           .switchMap( (params: Params) => this.workoutService.getWorkout(+params['id']))
           .subscribe( (workout) => {
               this.workout = workout;
-              this.headerimage =  this.domSanitizer.bypassSecurityTrustStyle(`url(${this.workout.photo.path})`);
+              this.headerimage =  this.domSanitizer.bypassSecurityTrustStyle(`url(${this.workout.photoWide.path})`);
             //  this.profileService.getByOwnerId(+params['id']);
           });
     }
