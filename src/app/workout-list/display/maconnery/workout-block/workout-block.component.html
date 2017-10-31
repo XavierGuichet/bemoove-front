@@ -1,28 +1,28 @@
-<div *ngIf="workout" class="workout-card" [ngStyle]="{'background-image': 'url(' + workout.photo.path + ')'}">
+<div *ngIf="workoutinstance" class="workout-card" [ngStyle]="{'background-image': 'url(' + workoutinstance.workout.photoSquare.path + ')'}">
   <div class="workout-container">
     <div class="workout-sport">
-      {{workout.sport.name}}
+      {{workoutinstance.workout.sport.name}}
     </div>
 
-    <div class="workout-content">
-      <h3>{{workout.startdate | date: 'EEEE d MMMM'}}<br/><span class="time">{{workout.startdate | date: 'hh:mm'}} &#8674; {{workout.enddate | date: 'hh:mm'}}</span></h3>
-      <p class="subtitle">{{workout.title}} avec Donatien de la porte</p>
-      <p class="description">{{workout.description}} [suite]</p>
+    <div class="workout-content w-100">
+      <h3>{{workoutinstance.startdate | date: 'EEEE d MMMM'}}<br/><span class="time">{{workoutinstance.startdate | date: 'hh:mm'}} &#8674; {{workoutinstance.enddate | date: 'hh:mm'}}</span></h3>
+      <p class="subtitle">{{workoutinstance.workout.title}} avec {{ workoutinstance.coach.firstname }} {{ workoutinstance.coach.lastname }}</p>
+      <p class="description">{{workoutinstance.workout.description}} [suite]</p>
     </div>
 
     <div class="footer">
       <div class="workout-address">
         <p class="address">
-            <span *ngIf="workout.address.name">{{workout.address.name}}<br/></span>
-          {{workout.address.firstline}}<br/>
-          <span *ngIf="workout.address.secondline">{{workout.address.secondline}}<br/></span>
-          {{workout.address.postalCode}} - {{workout.address.city}}
+            <span *ngIf="workoutinstance.workout.address.name">{{workoutinstance.workout.address.name}}<br/></span>
+          {{workoutinstance.workout.address.firstline}}<br/>
+          <span *ngIf="workoutinstance.workout.address.secondline">{{workoutinstance.workout.address.secondline}}<br/></span>
+          {{workoutinstance.workout.address.postalCode}} - {{workoutinstance.workout.address.city}}
         </p>
       </div>
       <div class="workout-bookit" (click)="viewWorkout();">
         <p>
           <span class="price">
-          {{workout.price}} €
+          {{workoutinstance.workout.price}} €
       </span>
           <span class="bookit">
               Reserver

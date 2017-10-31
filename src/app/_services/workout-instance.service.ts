@@ -43,6 +43,14 @@ export class WorkoutInstanceService {
       .catch(this.handleError);
   }
 
+  public getWorkoutInstancesByDateInterval(startdate: Date, lastdate: Date): Promise<WorkoutInstance[]> {
+    return this.http.get(this.workoutInstancesUrl + '?startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
+      { headers: this.headersSearch })
+      .toPromise()
+      .then((response) => response.json() as WorkoutInstance[])
+      .catch(this.handleError);
+  }
+
   // public delete(id: number): Promise<void> {
   //     const url = `${this.workoutsUrl}/${id}`;
   //     return this.http.delete(url, {headers: this.headers})

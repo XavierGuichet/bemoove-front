@@ -3,26 +3,26 @@
     <div class="col-8 innerscroll">
       <div *ngIf="tommorowWorkouts.length > 0" class="row">
         <h4 class="col-12">Demain</h4>
-        <div *ngFor="let workout of tommorowWorkouts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
-          <workout-block [workout]="workout"></workout-block>
+        <div *ngFor="let workoutinstance of tommorowWorkouts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+          <workout-block [workoutinstance]="workoutinstance"></workout-block>
         </div>
       </div>
       <div *ngIf="thisWeekWorkouts.length > 0" class="row">
         <h4 class="col-12">Cette semaine</h4>
-        <div *ngFor="let workout of thisWeekWorkouts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
-          <workout-block [workout]="workout"></workout-block>
+        <div *ngFor="let workoutinstance of thisWeekWorkouts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+          <workout-block [workoutinstance]="workoutinstance"></workout-block>
         </div>
       </div>
       <div *ngIf="nextWeekWorkouts.length > 0" class="row">
         <h4 class="col-12">La semaine prochaine</h4>
-        <div *ngFor="let workout of nextWeekWorkouts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
-          <workout-block [workout]="workout"></workout-block>
+        <div *ngFor="let workoutinstance of nextWeekWorkouts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+          <workout-block [workoutinstance]="workoutinstance"></workout-block>
         </div>
       </div>
       <div *ngIf="afterWorkouts.length > 0" class="row">
         <h4 class="col-12">Et plus encore</h4>
-        <div *ngFor="let workout of afterWorkouts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
-          <workout-block [workout]="workout"></workout-block>
+        <div *ngFor="let workoutinstance of afterWorkouts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+          <workout-block [workoutinstance]="workoutinstance"></workout-block>
         </div>
       </div>
     </div>

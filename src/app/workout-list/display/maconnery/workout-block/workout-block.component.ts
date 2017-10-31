@@ -1,11 +1,9 @@
-import { Component, ViewEncapsulation, Input } from '@angular/core';
+import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Workout } from '../../../../models/workout';
-import { Booking } from '../../../../models/booking';
+import { Booking, WorkoutInstance } from '../../../../models/index';
 
-import { SpaceService } from '../../../../_services/space.service';
-import { BookingService } from '../../../../_services/booking.service';
+import { BookingService, SpaceService } from '../../../../_services/index';
 
 @Component({
   selector: 'workout-block',
@@ -16,7 +14,7 @@ import { BookingService } from '../../../../_services/booking.service';
 
 export class WorkoutBlockComponent {
     @Input()
-    public workout: Workout;
+    public workoutinstance: WorkoutInstance;
     private booking: Booking;
     // private account: Account;
     constructor(
@@ -28,7 +26,11 @@ export class WorkoutBlockComponent {
     }
 
     public viewWorkout(): void {
-        this.router.navigate(['/workouts/view/' + this.workout.id]);
+        this.router.navigate(['/workouts/view/' + this.workoutinstance.workout.id]);
         return;
+    }
+
+    get diagnostic() {
+        return JSON.stringify(this.workoutinstance);
     }
 }
