@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Headers } from '@angular/http';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
@@ -129,6 +130,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private businessService: BusinessService,
     private workoutService: WorkoutService,
     private sportService: SportService,
@@ -295,6 +297,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
       })
       .then((result) => {
         this.loading = false;
+        this.router.navigate(['/partner/workouts/list']);
       })
       .catch(this.handleError);
 
