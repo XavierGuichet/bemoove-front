@@ -80,7 +80,6 @@
         <button type="button" md-raised-button color="primary" class="pull-right mb-3" (click)="goToDetails()">Suivant <md-icon class="md-24">keyboard_arrow_right</md-icon></button>
       </div>
     </md-tab>
-
     <md-tab label="2 - Détails">
       <div class="tab-container" formGroupName="details">
         <div class="form-card">
@@ -116,50 +115,44 @@
             <h4>Tags</h4>
           </div>
           <div class="form-card-content">
-            <div class="row">
-              <div class="col-7">
-                <ng2-completer [inputClass]="'form-control'" formControlName="tag" [(ngModel)]="workout.tags.name" name="tags" [overrideSuggested]="true" [dataService]="tagDataService" (selected)="selectTag($event)" [textNoResults]="false"></ng2-completer>
+            <tags-selector [parent]="workoutForm" [selected]="tagcontrol.value" (select)="selectTag($event)">
+            </tags-selector>
+            <div formArrayName="tags" *ngIf="tagcontrol.value.length" class="my-2">
+              <div class="tagbadge" *ngFor="let tag of tagcontrol.value; index as i;">
+                <div [formGroupName]="i">
+                  {{ tag.name }}
+                  <md-icon (click)="removeTag(i)">delete</md-icon>
+                </div>
               </div>
-              <div class="col-5">
-                <button type="button" md-raised-button color="accent" (click)="addTag()">
-                      <md-icon class="md-24">add</md-icon>Ajouter
-                  </button>
-              </div>
-            </div>
-            <div class="taglist">
-              <span class="tagbadge" *ngFor="let tag of workout.tags">
-                {{tag.name}} <md-icon (click)="removeTag(tag)">delete</md-icon>
-              </span>
             </div>
           </div>
         </div>
         <button type="button" md-raised-button color="primary" class="pull-right mb-3" (click)="goToImage()">Suivant <md-icon class="md-24">keyboard_arrow_right</md-icon></button>
       </div>
     </md-tab>
-
     <md-tab label="3 - Images">
       <div class="tab-container">
-          <div class="form-card">
-            <div class="form-card-title">
-              <h4>Image (dans les resultats de recherche)</h4>
-            </div>
-            <div class="form-card-content">
-              <div class="form-group">
-                <img-cropper [image]="cropperDataSquare" [settings]="cropperSettingsSquare"></img-cropper>
-              </div>
+        <div class="form-card">
+          <div class="form-card-title">
+            <h4>Image (dans les resultats de recherche)</h4>
+          </div>
+          <div class="form-card-content">
+            <div class="form-group">
+              <img-cropper [image]="cropperDataSquare" [settings]="cropperSettingsSquare"></img-cropper>
             </div>
           </div>
-          <div class="form-card">
-            <div class="form-card-title">
-              <h4>Image (dans la fiche du cours)</h4>
-            </div>
-            <div class="form-card-content">
-              <div class="form-group">
-                <img-cropper [image]="cropperDataWide" [settings]="cropperSettingsWide"></img-cropper>
-              </div>
+        </div>
+        <div class="form-card">
+          <div class="form-card-title">
+            <h4>Image (dans la fiche du cours)</h4>
+          </div>
+          <div class="form-card-content">
+            <div class="form-group">
+              <img-cropper [image]="cropperDataWide" [settings]="cropperSettingsWide"></img-cropper>
             </div>
           </div>
-          <button type="submit" [disabled]="loading || !workoutForm.valid" md-raised-button color="primary" class="pull-right mb-3">Enregistrer</button>
+        </div>
+        <button type="submit" [disabled]="loading || !workoutForm.valid" md-raised-button color="primary" class="pull-right mb-3">Enregistrer</button>
       </div>
     </md-tab>
   </md-tab-group>

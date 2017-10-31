@@ -20,20 +20,6 @@ export class TagService {
       .map((response) => response.json() as string[]);
   }
 
-  public searchExample(term: string) {
-    return this.search(term);
-    //   let wikiUrl = 'http://en.wikipedia.org/w/api.php';
-    //   let params = new URLSearchParams();
-    //   params.set('search', term); // the user's search value
-    //   params.set('action', 'opensearch');
-    //   params.set('format', 'json');
-    //   params.set('callback', 'JSONP_CALLBACK');
-    //   // TODO: Add error handling
-    //   return this.jsonp
-    //              .get(wikiUrl, { search: params })
-    //              .map(response => <string[]> response.json()[1]);
-  }
-
   public create(tag: Tag) {
     return this.http.post(this.tagsUrl, tag, this.jwt()).map(
       (response: Response) => response.json()

@@ -12,6 +12,8 @@ import { WorkoutEditComponent } from './edit/workout-edit.component';
 import { WorkoutPreviewComponent } from './preview/workout-preview.component';
 import { WorkoutInstanceFormComponent } from './form/workout-instance/workout-instance-form.component';
 
+import { TagsSelectorComponent } from './tags-selector/tags-selector.component';
+
 import { AddressFormComponent } from './form/address/address-form.component';
 import { ModalAddressFormComponent } from './modal/modal-address-form.component';
 
@@ -45,7 +47,8 @@ import { WorkoutService, WorkoutInstanceService,
       WorkoutInstanceFormComponent,
       WorkoutPreviewComponent,
       AddressFormComponent,
-      ModalAddressFormComponent
+      ModalAddressFormComponent,
+      TagsSelectorComponent
     ],
   exports: [ WorkoutComponent ],
   entryComponents: [ ModalAddressFormComponent ],

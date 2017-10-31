@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Headers } from '@angular/http';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
@@ -24,7 +24,6 @@ import {
   SportService,
   ImageService,
   AddressService,
-  TagService,
   WorkoutService } from '../../../../_services/index';
 
 function validateCreatedObject(c: FormControl) {
@@ -115,7 +114,6 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   public duration: { hour: number, minute: number, second: number };
 
   public sportDataService: RemoteData;
-  public tagDataService: RemoteData;
 
   public cropperDataSquare: any;
   public cropperSettingsSquare: CropperSettings;
@@ -128,7 +126,6 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   @ViewChild('cropper', undefined) public cropper: ImageCropperComponent;
 
   private SportsUrl = 'http://' + process.env.API_URL + '/sports';
-  private TagsUrl = 'http://' + process.env.API_URL + '/tags';
 
   constructor(
     private fb: FormBuilder,
@@ -137,7 +134,6 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     private sportService: SportService,
     private addressService: AddressService,
     private imageService: ImageService,
-    private tagService: TagService,
     private completerService: CompleterService,
     public dialog: MdDialog) {
     super();
@@ -152,16 +148,6 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
       'name');
 
     this.sportDataService.headers(new Headers({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }));
-
-    this.tagDataService = completerService.remote(
-      this.TagsUrl + '?name=',
-      'name',
-      'name');
-
-    this.tagDataService.headers(new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }));
@@ -224,37 +210,30 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     }
   }
 
-  public selectTag(event) {
-    if (event == null || event.title.trim().length === 0 ||
-      this.workout.tags.filter((t) => t.name === event.title.trim()).length > 0
-    ) {
-      return;
-    }
-    if (event.originalObject != null) {
-      this.workout.tags.push(event.originalObject);
-      return;
-    }
+  get tagcontrol() {
+      return this.workoutForm.get('details.tags') as FormArray;
   }
 
-  public addTag(event) {
-    let tagName = this.workoutForm.value.tag.trim();
-    if (tagName.length > 0) {
-      let newTag = new Tag();
-      newTag.name = tagName;
-      this.tagService.create(newTag).subscribe(
-        (data) => {
-          this.workout.tags.push(data);
-        },
-        (error) => {
-          alert('echec de l\'ajout du tag');
-        });
-      return;
-    }
+  public removeTag(index: number) {
+      this.tagcontrol.removeAt(index);
   }
 
-  public removeTag(tag: Tag) {
-    this.workout.tags = this.workout.tags.filter((t) => t !== tag);
+  public addTag(tag: Tag) {
+      if ( tag.hasOwnProperty('name') ) {
+          this.tagcontrol.push(new FormControl(tag));
+      }
   }
+
+  /* tslint:disable:no-bitwise */
+  public selectTag(tag: Tag) {
+      const index = this.tagcontrol.value.indexOf(tag);
+      if (!!~index) {
+          this.removeTag(index);
+      } else {
+          this.addTag(tag);
+      }
+  }
+  /* tslint:enable:no-bitwise */
 
   public showModalAddressFormComponent() {
     let dialogRef = this.dialog.open(ModalAddressFormComponent);
@@ -321,19 +300,17 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     workout.title = formModel.main.title;
     workout.sport = this.selectedSport;
     workout.duration = formModel.main.duration.hour * 60 + formModel.main.duration.minute;
-
     workout.address = formModel.main.address;
     workout.price = formModel.main.price;
 
     workout.description = formModel.details.description;
     workout.outfit = formModel.details.outfit;
     workout.notice = formModel.details.notice;
+    workout.tags = formModel.details.tags;
 
     // Todo improve photo system
     workout.photoSquare.base64data = this.cropperDataSquare.image;
     workout.photoWide.base64data = this.cropperDataWide.image;
-    // Todo improve tags system
-    workout.tags = this.workout.tags;
 
     return workout;
   }
@@ -374,9 +351,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
         notice: [this.workout.notice, [
         ]
         ],
-        tag: [this.workout.tags, [
-        ]
-        ]
+        tags: this.fb.array(this.workout.tags || []),
       })
     });
 
