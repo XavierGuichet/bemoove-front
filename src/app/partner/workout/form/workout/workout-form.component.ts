@@ -183,8 +183,15 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     this.addressService.getMyWorkoutAdresses()
       .then((addresses) => {
         if (addresses.length > 0) {
-          this.partnerAddresses = addresses;
-          this.workoutForm.patchValue({ main: { address: this.partnerAddresses[0] } });
+            this.partnerAddresses = addresses;
+        // Rappel
+        // Pour qu'un select soit prechoisi, il faut bien donner au patch value l'objet present dans sa liste
+        // et non pas un objet equivalent
+        let selectedAddress = addresses.find((address) => address.id === this.workout.address.id);
+        if (!selectedAddress) {
+            selectedAddress = addresses[0];
+        }
+          this.workoutForm.patchValue({ main: { address: selectedAddress } });
         }
       });
   }
@@ -208,6 +215,10 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
       this.selectedSport = event.originalObject;
       return;
     }
+  }
+
+  get addressControl() {
+      return this.workoutForm.get('main.address');
   }
 
   get tagcontrol() {

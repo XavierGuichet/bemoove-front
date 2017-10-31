@@ -53,10 +53,10 @@
                       </button>
                 </div>
               </div>
-              <div class="row" *ngIf="false && workoutForm.main.value.address.name">
+              <div class="row" *ngIf="!addressControl.pristine && addressControl.valid">
                 <div class="col-12">
-                  <p class="address">{{workoutForm.value.address.name}}<br/> {{workoutForm.value.address.firstline}}
-                    <br/> {{workoutForm.value.address.postalCode}} - {{workoutForm.value.address.city}}
+                  <p class="address">{{addressControl.value.name}}<br/> {{addressControl.value.firstline}}
+                    <br/> {{addressControl.value.postalCode}} - {{addressControl.value.city}}
                   </p>
                 </div>
               </div>
