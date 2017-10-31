@@ -412,7 +412,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     }
 
     if (!workout.sport.id) {
-      Promises.push(this.sportService.create(this.workout.sport).then((sport) => workout.sport = sport));
+      Promises.push(this.sportService.create(workout.sport).then((sport) => workout.sport = sport));
     }
 
     if (Promises.length > 0) {
