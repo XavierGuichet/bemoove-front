@@ -108,11 +108,8 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   };
 
   public partnerAddresses: Address[] = new Array();
-  public sports: Sport[]; //  TODO can be removed ?
 
   public selectedSport: Sport;
-
-  public duration: { hour: number, minute: number, second: number };
 
   public sportDataService: RemoteData;
 
@@ -185,14 +182,14 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     this.addressService.getMyWorkoutAdresses()
       .then((addresses) => {
         if (addresses.length > 0) {
-            this.partnerAddresses = addresses;
-        // Rappel
-        // Pour qu'un select soit prechoisi, il faut bien donner au patch value l'objet present dans sa liste
-        // et non pas un objet equivalent
-        let selectedAddress = addresses.find((address) => address.id === this.workout.address.id);
-        if (!selectedAddress) {
+          this.partnerAddresses = addresses;
+          // Rappel
+          // Pour qu'un select soit prechoisi, il faut bien donner au patch value l'objet present dans sa liste
+          // et non pas un objet equivalent
+          let selectedAddress = addresses.find((address) => address.id === this.workout.address.id);
+          if (!selectedAddress) {
             selectedAddress = addresses[0];
-        }
+          }
           this.workoutForm.patchValue({ main: { address: selectedAddress } });
         }
       });
@@ -220,31 +217,31 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   }
 
   get addressControl() {
-      return this.workoutForm.get('main.address');
+    return this.workoutForm.get('main.address');
   }
 
   get tagcontrol() {
-      return this.workoutForm.get('details.tags') as FormArray;
+    return this.workoutForm.get('details.tags') as FormArray;
   }
 
   public removeTag(index: number) {
-      this.tagcontrol.removeAt(index);
+    this.tagcontrol.removeAt(index);
   }
 
   public addTag(tag: Tag) {
-      if ( tag.hasOwnProperty('name') ) {
-          this.tagcontrol.push(new FormControl(tag));
-      }
+    if (tag.hasOwnProperty('name')) {
+      this.tagcontrol.push(new FormControl(tag));
+    }
   }
 
   /* tslint:disable:no-bitwise */
   public selectTag(tag: Tag) {
-      const index = this.tagcontrol.value.indexOf(tag);
-      if (!!~index) {
-          this.removeTag(index);
-      } else {
-          this.addTag(tag);
-      }
+    const index = this.tagcontrol.value.indexOf(tag);
+    if (!!~index) {
+      this.removeTag(index);
+    } else {
+      this.addTag(tag);
+    }
   }
   /* tslint:enable:no-bitwise */
 
@@ -340,7 +337,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
           Validators.required,
         ]
         ],
-        duration: [this.workout.duration, [
+        duration: [this.toNgbTime(this.workout.duration), [
           validateDuration,
         ]
         ],
@@ -420,6 +417,14 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     } else {
       return Promise.resolve(workout);
     }
+  }
+
+  private toNgbTime(minutes: number) {
+    return {
+      hour: Math.ceil(minutes / 60),
+      minute: minutes % 60,
+      second: 0
+    };
   }
 
   private isNumber(value: any): boolean {
