@@ -19,15 +19,17 @@ export class WorkoutInstanceService {
 
   constructor(private http: Http) { }
 
-  public create(workoutInstance: WorkoutInstance) {
+  public create(workoutInstance: WorkoutInstance): Promise<WorkoutInstance> {
     this.workoutInstanceApi = new WorkoutInstanceApi(workoutInstance);
     return this.http.post(this.workoutInstancesUrl,
       this.workoutInstanceApi,
       this.jwt())
-      .map((response: Response) => response.json());
+      .toPromise()
+      .then((response) => response.json() as WorkoutInstance)
+      .catch(this.handleError);
   }
 
-  public getByWorkoutId(id: number) {
+  public getByWorkoutId(id: number): Promise<WorkoutInstance[]> {
     return this.http.get(this.workoutInstancesUrl + '?workout.id=' + id,
       { headers: this.headersSearch })
       .toPromise()
