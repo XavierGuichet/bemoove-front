@@ -1,0 +1,11 @@
+{
+  "main": {
+    "js": "/bemoove-front/main.bundle.js"
+  },
+  "vendor": {
+    "js": "/bemoove-front/vendor.bundle.js"
+  },
+  "polyfills": {
+    "js": "/bemoove-front/polyfills.bundle.js"
+  }
+}
