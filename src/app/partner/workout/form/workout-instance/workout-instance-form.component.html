@@ -2,8 +2,8 @@
   <h1 class="h2 alt-font mb-3">Ajouter des sessions pour la séance :</h1>
   <div class="row">
     <div class="col-6">
-      <md-card class="form-card">
-        <form [formGroup]="workoutInstanceForm" (ngSubmit)="addWorkoutInstance()" novalidate>
+      <md-card class="form-card h-100">
+        <form *ngIf="formReady" [formGroup]="workoutInstanceForm" (ngSubmit)="addWorkoutInstance()" novalidate>
           <div class="form-card-content">
             <div class="row">
               <div class="form-group col-6">
@@ -16,7 +16,8 @@
               </div>
               <div class="form-group col-6">
                 <label for="example-text-input" class="big">Nombre de places proposées</label>
-                <input type="number" class="form-control input-float" id="nbTicketAvailable" formControlName="nbTicketAvailable" OnlyNumber="true" [(ngModel)]="formModel.nbTicketAvailable" name="nbTicketAvailable" required (blur)="forceIntegerNbTicket()">
+                <input type="number" class="form-control input-float" id="nbTicketAvailable" formControlName="nbTicketAvailable" OnlyNumber="true"
+                name="nbTicketAvailable" required (blur)="forceIntegerNbTicket()">
                 <div *ngIf="formErrors.nbTicketAvailable" class="form-error">
                   {{ formErrors.nbTicketAvailable }}
                 </div>
@@ -26,7 +27,7 @@
               <div class="form-group col-6">
                 <label for="example-text-input">Date</label>
                 <div>
-                  <ngb-datepicker #dp formControlName="startdate" [(ngModel)]="selectedStartDate" name="startdate" [minDate]="ngbTomorrow"></ngb-datepicker>
+                  <ngb-datepicker #dp formControlName="startdate" name="startdate" [minDate]="ngbTomorrow"></ngb-datepicker>
                   <div *ngIf="formErrors.startdate" class="form-error">
                     {{ formErrors.startdate }}
                   </div>
@@ -34,7 +35,7 @@
               </div>
               <div class="form-group col-6">
                 <label for="example-text-input">Heure de début</label>
-                <ngb-timepicker [spinners]="false" formControlName="starttime" [(ngModel)]="selectedStartTime" name="starttime" (ngModelChange)="recalcMainworkoutDates()"></ngb-timepicker>
+                <ngb-timepicker [spinners]="false" formControlName="starttime" name="starttime"></ngb-timepicker>
                 <div *ngIf="formErrors.starttime" class="form-error">
                   {{ formErrors.starttime }}
                 </div>

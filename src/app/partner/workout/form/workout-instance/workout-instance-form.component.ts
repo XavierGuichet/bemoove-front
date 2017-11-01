@@ -3,15 +3,19 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Headers } from '@angular/http';
 
+import { NgbDateStruct, NgbTimeStruct, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
+import { BMReactFormComponent } from '../../../../form/bm-react-form/bm-react-form.component';
+
 import { Workout,
-    WorkoutInstance,
-    Coach } from '../../../../models/index';
+  WorkoutInstance,
+  Coach } from '../../../../models/index';
 
 import { SpaceService,
-    BusinessService,
+  BusinessService,
   CoachService,
   WorkoutService,
   WorkoutInstanceService } from '../../../../_services/index';
@@ -21,18 +25,23 @@ import { SpaceService,
   templateUrl: './workout-instance-form.component.html'
 })
 
-export class WorkoutInstanceFormComponent implements OnInit {
-  public loading = false;
+export class WorkoutInstanceFormComponent extends BMReactFormComponent implements OnInit {
+  public formResult: any;
+  public loading: boolean;
+  public formReady: boolean = false;
+
+  public workoutInstanceForm: FormGroup;
+  public workoutInstance: WorkoutInstance = new WorkoutInstance();
+
   public workoutInstances: WorkoutInstance[] = new Array();
   public newWorkoutInstances: WorkoutInstance[] = new Array();
-  public formModel: WorkoutInstance = new WorkoutInstance();
-  public workoutInstanceForm: FormGroup;
   public workout: Workout;
 
   public formErrors = {
     startdate: '',
     starttime: '',
     nbTicketAvailable: '',
+    workout: '',
     coach: ''
   };
 
@@ -46,6 +55,9 @@ export class WorkoutInstanceFormComponent implements OnInit {
     nbTicketAvailable: {
       required: 'Un nombre de place est nécessaire.',
     },
+    workout: {
+      required: 'Veuillez sélectionner une séance type.'
+    },
     coach: {
       required: 'Veuillez sélectionner le coach qui encadre ce cours.'
     }
@@ -54,10 +66,9 @@ export class WorkoutInstanceFormComponent implements OnInit {
   public coaches: Coach[] = new Array();
 
   public now = new Date();
-  public ngbTomorrow: { year: number, month: number, day: number };
-  public selectedStartDate: { year: number, month: number, day: number };
-  public selectedStartTime: { hour: number, minute: number, second: number };
-  public duration: { hour: number, minute: number, second: number };
+  public ngbTomorrow: NgbDateStruct;
+  public selectedStartDate: NgbDateStruct;
+  public selectedStartTime: NgbTimeStruct;
 
   constructor(
     private fb: FormBuilder,
@@ -65,123 +76,106 @@ export class WorkoutInstanceFormComponent implements OnInit {
     private coachService: CoachService,
     private workoutService: WorkoutService,
     private workoutInstanceService: WorkoutInstanceService,
+    private ngbDateParserFormatter: NgbDateParserFormatter,
     private route: ActivatedRoute,
     private spaceService: SpaceService) {
-        this.route.params
-          .switchMap( (params: Params) => this.workoutService.getWorkout(+params['id']))
-          .subscribe( (workout) => {
-              this.workout = workout;
-              this.workoutInstanceService.getByWorkoutId(this.workout.id).then(
-                  (workoutInstances) => this.workoutInstances = workoutInstances
-              );
-          });
-  }
-
-  public removeWorkoutInstance(workoutInstance: WorkoutInstance): void {
-      this.workoutInstances = this.workoutInstances.filter(
-          (object) =>
-              object !== workoutInstance
-          );
-  }
-
-  public saveWorkoutInstances(): void {
-      this.loading = true;
-      while (this.newWorkoutInstances.length > 0) {
-          let workoutInstance = this.newWorkoutInstances.shift();
-          this.workoutInstanceService.create(workoutInstance)
-                      .subscribe(
-                      (data) => {
-                        this.workoutInstances.push(data);
-                        this.loading = false;
-                      },
-                      (error) => {
-                        this.loading = false;
-                      });
-      }
+    super();
   }
 
   public ngOnInit(): void {
-    this.buildForm();
-
-    this.setStartDate();
-
-    this.coachService.getMyCoaches().then((coaches) => {
-        this.coaches = coaches;
-    });
+    this.route.params
+      .switchMap((params: Params) => this.workoutService.getWorkout(+params['id']))
+      .subscribe((workout) => {
+        this.workoutInstance.workout = workout;
+        this.workoutInstanceService.getByWorkoutId(workout.id).then(
+          (workoutInstances) => this.workoutInstances = workoutInstances
+        );
+        this.coachService.getMyCoaches().then((coaches) => {
+          this.coaches = coaches;
+          this.workoutInstance.coach = coaches[0];
+        });
+        this.buildForm();
+        this.formReady = true;
+      });
 
     let tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-    this.ngbTomorrow = {
-      year: tomorrow.getFullYear(),
-      month: tomorrow.getMonth() + 1,
-      day: tomorrow.getDate()
-    };
+    this.ngbTomorrow = this.ngbDateParserFormatter.parse(tomorrow.toISOString());
+
   }
 
   public forceIntegerNbTicket() {
-    this.formModel.nbTicketAvailable = this.toInteger(this.formModel.nbTicketAvailable);
-    if (!this.isNumber(this.formModel.nbTicketAvailable)) {
-      this.formModel.nbTicketAvailable = 1;
+    this.workoutInstanceForm.value.nbTicketAvailable = this.toInteger(this.workoutInstanceForm.value.nbTicketAvailable);
+    if (!this.isNumber(this.workoutInstanceForm.value.nbTicketAvailable)) {
+      this.workoutInstanceForm.value.nbTicketAvailable = 1;
     }
   }
 
-  public setStartDate() {
-    if (this.formModel.startdate) {
-      this.selectedStartDate = {
-        year: this.formModel.startdate.getFullYear(),
-        month: this.formModel.startdate.getMonth() + 1,
-        day: this.formModel.startdate.getDate()
-      };
-      this.selectedStartTime = {
-        hour: this.formModel.startdate.getHours(),
-        minute: this.formModel.startdate.getMinutes(),
-        second: 0
-      };
-    } else {
-      this.selectedStartDate = { year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate() };
-      this.selectedStartTime = {
-        hour: this.now.getHours(),
-        minute: this.now.getMinutes(),
-        second: 0
-      };
-    }
-      this.duration = {
-        hour: 1,
-        minute: 0,
-        second: 0
-      };
-    this.recalcMainworkoutDates();
+  public removeWorkoutInstance(workoutInstance: WorkoutInstance): void {
+    this.workoutInstances = this.workoutInstances.filter(
+      (object) =>
+        object !== workoutInstance
+    );
   }
 
-  public recalcMainworkoutDates() {
-    this.formModel.startdate = new Date(this.selectedStartDate.year,
-      this.selectedStartDate.month - 1,
-      this.selectedStartDate.day,
-      this.selectedStartTime.hour,
-      this.selectedStartTime.minute,
-      this.selectedStartTime.second);
-    this.formModel.enddate = new Date(this.formModel.startdate.getTime() + (this.duration.hour * 60 + this.duration.minute) * 60 * 1000);
+  public saveWorkoutInstances(): void { // TODO a check
+    this.loading = true;
+    while (this.newWorkoutInstances.length > 0) {
+      let newworkoutInstance = this.newWorkoutInstances.shift();
+      this.workoutInstanceService.create(newworkoutInstance)
+        .then(
+        (workoutInstance) => {
+          this.workoutInstances.push(workoutInstance);
+          this.loading = false;
+        });
+    }
   }
 
   public addWorkoutInstance() {
-      let addedWorkoutInstance = new WorkoutInstance();
-      addedWorkoutInstance.startdate = this.formModel.startdate;
-      addedWorkoutInstance.coach = this.formModel.coach;
-      addedWorkoutInstance.nbTicketAvailable = this.formModel.nbTicketAvailable;
-      addedWorkoutInstance.workout = this.workout;
-      this.newWorkoutInstances.push(addedWorkoutInstance);
+    let workoutInstance = this.createObjectFromModel();
+    this.newWorkoutInstances.push(workoutInstance);
+  }
+
+  protected createNestedEntities(workoutInstance: WorkoutInstance): Promise<WorkoutInstance> {
+    return Promise.resolve(workoutInstance);
+  }
+
+  protected createObjectFromModel(): WorkoutInstance {
+    // TODO a check
+    const form = this.workoutInstanceForm;
+    const formModel = this.workoutInstanceForm.value;
+
+    let workoutInstance = new WorkoutInstance();
+
+    let startdate = new Date(this.ngbDateParserFormatter.format(formModel.startdate));
+    startdate.setHours(formModel.starttime.hour);
+    startdate.setMinutes(formModel.starttime.minute);
+    workoutInstance.startdate = startdate;
+
+    let endDate = new Date();
+    endDate.setTime(startdate.getTime() + formModel.workout.duration * 60 * 1000);
+    workoutInstance.enddate = endDate;
+
+    workoutInstance.coach = formModel.coach;
+    workoutInstance.nbTicketAvailable = formModel.nbTicketAvailable;
+    workoutInstance.workout = formModel.workout;
+    return workoutInstance;
   }
 
   protected buildForm(): void {
     this.workoutInstanceForm = this.fb.group({
-      startdate: [this.selectedStartDate, [
+      startdate: [this.ngbTomorrow, [
         Validators.required,
       ]
       ],
-      starttime: [this.selectedStartTime, [
+      starttime: [this.selectedStartTime, [ // TODO a check
         Validators.required,
       ]
       ],
-      coach: [this.coaches[0], [
+      workout: [this.workoutInstance.workout, [ // TODO a check
+        Validators.required,
+      ]
+      ],
+      coach: [this.workoutInstance.coach, [ // TODO a check
         Validators.required,
       ]
       ],
@@ -194,18 +188,6 @@ export class WorkoutInstanceFormComponent implements OnInit {
     this.workoutInstanceForm.valueChanges
       .subscribe((data) => this.onValueChanged(this.workoutInstanceForm, data));
 
-    const startdateControl = this.workoutInstanceForm.get('startdate');
-    startdateControl.valueChanges.forEach(
-      (value: string) => this.recalcMainworkoutDates()
-    );
-    const starttimeControl = this.workoutInstanceForm.get('starttime');
-    starttimeControl.valueChanges.forEach(
-      (value: string) => this.recalcMainworkoutDates()
-    );
-    const coachControl = this.workoutInstanceForm.get('coach');
-    coachControl.valueChanges.forEach(
-      (value: Coach) => this.formModel.coach = value
-    );
     this.onValueChanged(this.workoutInstanceForm); // (re)set validation messages now
   }
 
@@ -215,39 +197,5 @@ export class WorkoutInstanceFormComponent implements OnInit {
 
   private toInteger(value: any): number {
     return parseInt(`${value}`, 10);
-  }
-
-  private onValueChanged(form, data?: any): void {
-    const formErrors = this.formErrors;
-    this.formErrors = this.recursiveCheck(form, formErrors);
-  }
-
-  private recursiveCheck(form, formErrors, validationprefix = '') {
-    if (validationprefix !== '') {
-      validationprefix += '.';
-    }
-    for (const field in formErrors) {
-      if (typeof formErrors[field] === 'string') {
-        const control = form.get(validationprefix + field);
-        formErrors[field] = this.checkControlError(control, validationprefix + field);
-      } else if (typeof this.formErrors[field] === 'object') {
-        let prefix = validationprefix + field;
-        formErrors[field] = this.recursiveCheck(this.formErrors[field], prefix);
-      }
-    }
-    return formErrors;
-  }
-
-  private checkControlError(control, field) {
-    let errorMessages = '';
-    if (control && control.dirty && !control.valid) {
-      const messages = this.validationMessages[field];
-      for (const key in control.errors) {
-        if (control.errors.hasOwnProperty(key)) {
-          errorMessages += messages[key] + ' ';
-        }
-      }
-    }
-    return errorMessages;
   }
 }
