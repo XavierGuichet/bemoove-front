@@ -100,32 +100,32 @@ export class AddSessionFormComponent extends BMReactFormComponent implements OnI
           // et non pas un objet equivalent
           let selectcoach = this.coaches.find((coach) => coach.id === this.workoutInstance.coach.id);
           this.workoutInstanceForm.patchValue({ coach: selectcoach });
-          // this.formReady = true;
+          this.formReady = true;
         }
       })
       .catch(this.handleError);
   }
 
   public onSubmit(): void {
-      this.loading = true;
-      this.hideFormResult();
+    this.loading = true;
+    this.hideFormResult();
 
-      let workoutInstance = this.createObjectFromModel();
+    let workoutInstance = this.createObjectFromModel();
 
-      this.createNestedEntities(workoutInstance).then(
-        (workoutInstanceWithCreatedNestedEntities) => {
-          return Promise.all([
-            workoutInstanceWithCreatedNestedEntities,
-            this.createOrUpdate(this.workoutInstanceService, workoutInstanceWithCreatedNestedEntities)
-          ]);
-        })
-        .then((result) => {
-          this.loading = false;
-          this.onSuccess.emit(true);
-          this.showFormResult('success', 'Sauvegarde réussie');
-        })
-        .catch(this.handleError);
-      //   this.showFormResult('error', 'Echec de la sauvegarde');
+    this.createNestedEntities(workoutInstance).then(
+      (workoutInstanceWithCreatedNestedEntities) => {
+        return Promise.all([
+          workoutInstanceWithCreatedNestedEntities,
+          this.createOrUpdate(this.workoutInstanceService, workoutInstanceWithCreatedNestedEntities)
+        ]);
+      })
+      .then((result) => {
+        this.loading = false;
+        this.onSuccess.emit(true);
+        this.showFormResult('success', 'Sauvegarde réussie');
+      })
+      .catch(this.handleError);
+    //   this.showFormResult('error', 'Echec de la sauvegarde');
   }
 
   protected buildForm(): void {
@@ -160,21 +160,27 @@ export class AddSessionFormComponent extends BMReactFormComponent implements OnI
   }
 
   protected createNestedEntities(workoutInstance: WorkoutInstance): Promise<WorkoutInstance> {
-      return Promise.resolve(workoutInstance);
+    return Promise.resolve(workoutInstance);
   }
 
   protected createObjectFromModel() {
-      const form = this.workoutInstanceForm;
-      const formModel = this.workoutInstanceForm.value;
+    const form = this.workoutInstanceForm;
+    const formModel = this.workoutInstanceForm.value;
 
-      const workoutInstance: WorkoutInstance = new WorkoutInstance();
+    const workoutInstance: WorkoutInstance = new WorkoutInstance();
 
-      workoutInstance.startdate = new Date(this.ngbDateParserFormatter.format(formModel.startdate));
-      workoutInstance.startdate.setHours(formModel.starttime.hour, formModel.starttime.minute);
-      workoutInstance.workout = formModel.workout;
-      workoutInstance.nbTicketAvailable = parseInt(formModel.nbTicketAvailable, 10);
-      workoutInstance.coach = formModel.coach;
-      
-      return workoutInstance;
+    let startdate = new Date(this.ngbDateParserFormatter.format(formModel.startdate));
+    startdate.setHours(formModel.starttime.hour, formModel.starttime.minute);
+    workoutInstance.startdate = startdate;
+
+    let endDate = new Date();
+    endDate.setTime(startdate.getTime() + formModel.workout.duration * 60 * 1000);
+    workoutInstance.enddate = endDate;
+
+    workoutInstance.workout = formModel.workout;
+    workoutInstance.nbTicketAvailable = parseInt(formModel.nbTicketAvailable, 10);
+    workoutInstance.coach = formModel.coach;
+
+    return workoutInstance;
   }
 }
