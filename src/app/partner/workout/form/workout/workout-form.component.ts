@@ -38,7 +38,7 @@ function validateCreatedObject(c: FormControl) {
 
 function validateDuration(c: FormControl) {
   const value = c.value;
-  if (value === null) {
+  if (value === null || isNaN(value.hour) || isNaN(value.minute)) {
     return { validateDuration: true };
   }
 
