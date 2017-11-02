@@ -2,11 +2,11 @@
   <md-tab-group [dynamicHeight]="true" [selectedIndex]="activeTab">
     <md-tab label="1 - Votre séance">
       <div class="tab-container" formGroupName="main">
-        <div class="form-card">
-          <div class="form-card-title">
+        <div class="workout-form-card">
+          <div class="workout-form-card-title">
             <h4>Votre séance</h4>
           </div>
-          <div class="form-card-content">
+          <div class="workout-form-card-content">
             <div class="form-group">
               <label for="title">Titre de la séance</label>
               <input type="text" class="form-control" formControlName="title" name="title">
@@ -30,11 +30,11 @@
             </div>
           </div>
         </div>
-        <div class="form-card">
-          <div class="form-card-title">
+        <div class="workout-form-card">
+          <div class="workout-form-card-title">
             <h4>Lieu</h4>
           </div>
-          <div class="form-card-content">
+          <div class="workout-form-card-content">
             <div class="form-group">
               <div class="row">
                 <div class="col-7">
@@ -66,8 +66,8 @@
             </div>
           </div>
         </div>
-        <div class="form-card">
-          <div class="form-card-content">
+        <div class="workout-form-card">
+          <div class="workout-form-card-content">
             <div class="form-group">
               <label for="price" class="big">Prix par participant :</label>
               <div class="input-group input-float">
@@ -85,11 +85,11 @@
     </md-tab>
     <md-tab label="2 - Détails">
       <div class="tab-container" formGroupName="details">
-        <div class="form-card">
-          <div class="form-card-title">
+        <div class="workout-form-card">
+          <div class="workout-form-card-title">
             <h4>Description</h4>
           </div>
-          <div class="form-card-content">
+          <div class="workout-form-card-content">
             <div class="form-group">
               <label for="example-text-input">Description générale</label>
               <textarea placeholder="Décrivez ici le déroulement et atouts de votre séance." formControlName="description" name="description" class="form-control" rows="5"></textarea>
@@ -113,11 +113,11 @@
             </div>
           </div>
         </div>
-        <div class="form-card">
-          <div class="form-card-title">
+        <div class="workout-form-card">
+          <div class="workout-form-card-title">
             <h4>Tags</h4>
           </div>
-          <div class="form-card-content">
+          <div class="workout-form-card-content">
             <tags-selector [parent]="workoutForm" [selected]="tagcontrol.value" (select)="selectTag($event)">
             </tags-selector>
             <div formArrayName="tags" *ngIf="tagcontrol.value.length" class="my-2">
@@ -135,21 +135,21 @@
     </md-tab>
     <md-tab label="3 - Images">
       <div class="tab-container">
-        <div class="form-card">
-          <div class="form-card-title">
+        <div class="workout-form-card">
+          <div class="workout-form-card-title">
             <h4>Image (dans les resultats de recherche)</h4>
           </div>
-          <div class="form-card-content">
+          <div class="workout-form-card-content">
             <div class="form-group">
               <img-cropper [image]="cropperDataSquare" [settings]="cropperSettingsSquare"></img-cropper>
             </div>
           </div>
         </div>
-        <div class="form-card">
-          <div class="form-card-title">
+        <div class="workout-form-card">
+          <div class="workout-form-card-title">
             <h4>Image (dans la fiche du cours)</h4>
           </div>
-          <div class="form-card-content">
+          <div class="workout-form-card-content">
             <div class="form-group">
               <img-cropper [image]="cropperDataWide" [settings]="cropperSettingsWide"></img-cropper>
             </div>

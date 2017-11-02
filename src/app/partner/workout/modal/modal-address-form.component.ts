@@ -6,8 +6,8 @@ import { Address } from '../../../models/address';
 
 @Component({
     selector: 'modal-address-form',
-    template: `<button md-button class="modal-close" md-dialog-close><md-icon>close</md-icon></button>
-    <address-form (onSuccess)="onSuccess($event)"></address-form>`
+    template: `<div class="form-card"><button md-button class="modal-close" md-dialog-close><md-icon>close</md-icon></button>
+    <address-form (onSuccess)="onSuccess($event)"></address-form></div>`
 })
 
 export class ModalAddressFormComponent {

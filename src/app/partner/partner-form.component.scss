@@ -1,0 +1,50 @@
+.form-card {
+    margin-bottom: 2em;
+
+    & &__title {
+      color: #229ba7;
+      font-family: 'texgyreadventor';
+      font-size: 1.125rem;
+    }
+  }
+
+.col-form-label {
+  text-align: right;
+}
+
+.form-info {
+  font-size: 0.875rem;
+  color: grey;
+}
+
+.form-control-inline-seamless {
+  border: none;
+  border-bottom: 1px solid grey;
+
+  &.small {
+    width: 80px;
+  }
+
+  &.medium {
+    width: 120px;
+  }
+
+  &.large {
+    width: 160px;
+  }
+}
+
+.form-error {
+  color: #a94442;
+  padding: 0.25rem 1.25rem 0 5px;
+  font-size: 0.875rem;
+}
+
+textarea::placeholder {
+  font-size: 0.875rem;
+}
+
+.input-float {
+  width: 120px;
+  float: right;
+}

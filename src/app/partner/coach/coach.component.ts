@@ -8,7 +8,6 @@ import { CoachService } from '../../_services/index';
 @Component({
   selector: 'coach',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./coach.component.scss'],
   template: `
   <div class="container-fluid">
     <div class="row">

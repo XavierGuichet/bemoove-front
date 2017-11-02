@@ -5,7 +5,7 @@ import { SpaceService } from '../_services/space.service';
 @Component({
   selector: 'partner',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [ './partner.component.scss' ],
+  styleUrls: [ './partner.component.scss', './partner-form.component.scss' ],
   template: `
     <nav-primary></nav-primary>
     <router-outlet></router-outlet>

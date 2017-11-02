@@ -28,7 +28,7 @@
         </div>
       </md-card-content>
       <md-card-actions align="end">
-        <button [disabled]="loading || !tvaRateForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+        <button [disabled]="loading || !tvaRateForm.valid" class="mr-3" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
       </md-card-actions>
     </form>
   </md-card>
@@ -191,7 +191,7 @@
         </div>
       </md-card-content>
       <md-card-actions align="end">
-        <button [disabled]="loading || !invoiceNoticeForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+        <button [disabled]="loading || !invoiceNoticeForm.valid" class="mr-3" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
       </md-card-actions>
     </form>
   </md-card>

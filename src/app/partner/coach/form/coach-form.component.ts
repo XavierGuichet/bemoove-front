@@ -21,8 +21,7 @@ import { CoachService,
 
 @Component({
   selector: 'coach-form',
-  templateUrl: './coach-form.component.html',
-  styleUrls: ['./coach-form.component.scss']
+  templateUrl: './coach-form.component.html'
 })
 
 export class CoachFormComponent extends BMReactFormComponent implements OnInit {

@@ -1,20 +1,8 @@
-.addresses {
-  margin: 0;
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-}
+$grey: #dadada;
 
-p.address {
-  margin-top: 1rem;
-  padding: 1em;
-  background: #fafafa;
-  border: 1px solid #dadada;
-}
-
-.form-card {
-  border: 1px solid #dadada;
-  margin: 0 0 1em;
+.workout-form-card {
+  border: 1px solid $grey;
+  margin: 0 0 2em;
 
   &-title {
     padding: 0.5em 1em;
@@ -44,18 +32,23 @@ p.address {
     }
   }
 
-  .form-group:last-child {
+  & > .form-group:last-child {
     margin-bottom: 0;
   }
 }
 
-textarea::placeholder {
-  font-size: 0.875rem;
+.addresses {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
 }
 
-.input-float {
-  width: 120px;
-  float: right;
+p.address {
+  margin-top: 1rem;
+  padding: 1em;
+  background: #fafafa;
+  border: 1px solid #dadada;
 }
 
 .taglist {
@@ -79,14 +72,4 @@ textarea::placeholder {
     vertical-align: middle;
     cursor: pointer;
   }
-}
-
-
-
-.md-slider-horizontal .md-slider-track {
-  height: 6px;
-}
-
-.md-slider-horizontal .md-slider-track-fill {
-  height: 6px;
 }

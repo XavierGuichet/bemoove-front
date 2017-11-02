@@ -11,21 +11,7 @@ h2 {
 .tab-container {
     margin: 24px 0;
 }
-.mat-card {
-    &.form-card {
-        margin-bottom: 2em;
-        & .form-card__title {
-            font-family: 'texgyreadventor';
-            font-size: 1.125rem;
-            color: #229ba7;
-        }
-    }
-}
-.form-card__title {
-    font-family: 'texgyreadventor';
-    font-size: 1.125rem;
-    color: #229ba7;
-}
+
 .secondary-navigation {
     z-index: 5;
     min-height: 100vh;
@@ -38,21 +24,7 @@ h2 {
     background: #ffffff url('/assets/img/admin-bg.jpg') left bottom / 100% auto no-repeat;
 }
 
-.form-control-inline-seamless {
-    border: none;
-    border-bottom: 1px solid grey;
-    &.small {
-        width: 80px;
-    }
-    &.medium {
-        width: 120px;
-    }
-    &.large {
-        width: 160px;
-    }
-}
-.form-error {
-    color: #a94442;
-    padding: .25rem 1.25rem 0 5px;
-    font-size: 0.875rem;
+.help_text {
+    font-size: 0.875em;
+    color: grey;
 }
