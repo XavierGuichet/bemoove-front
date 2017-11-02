@@ -100,6 +100,8 @@ export class AddSessionFormComponent extends BMReactFormComponent implements OnI
           // et non pas un objet equivalent
           let selectcoach = this.coaches.find((coach) => coach.id === this.workoutInstance.coach.id);
           this.workoutInstanceForm.patchValue({ coach: selectcoach });
+          let defaultWorkout = this.workouts[0];
+          this.workoutInstanceForm.patchValue({ workout: defaultWorkout });
           this.formReady = true;
         }
       })

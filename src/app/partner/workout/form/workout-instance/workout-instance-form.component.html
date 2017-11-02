@@ -9,9 +9,12 @@
               <div class="form-group col-6">
                 <label for="example-text-input" class="big">Coach</label>
                 <select *ngIf="coaches.length" class="form-control" formControlName="coach">
-                <option *ngFor="let coach of coaches" [ngValue]="coach">
-                {{coach.firstname}} - {{coach.lastname}}
-                </option>
+                    <option value="-1" disabled="" selected="">
+                      Sélectionnez un coach
+                    </option>
+                    <option *ngFor="let coach of coaches" [ngValue]="coach">
+                    {{coach.firstname}} - {{coach.lastname}}
+                    </option>
             </select>
               </div>
               <div class="form-group col-6">

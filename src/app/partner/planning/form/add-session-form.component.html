@@ -14,6 +14,9 @@
         <label for="coach" class="form-label">Coach</label>
         <div class="">
             <select *ngIf="coaches.length" class="form-control" formControlName="coach" name="coach">
+                <option value="-1" disabled="" selected="">
+                  Sélectionnez un coach
+                </option>
                 <option *ngFor="let coach of coaches" [ngValue]="coach">
                     {{coach.firstname}} - {{coach.lastname}}
                 </option>
@@ -27,6 +30,9 @@
         <label for="workout" class="form-label">Séance type</label>
         <div class="">
             <select *ngIf="workouts.length" class="form-control" formControlName="workout" name="workout">
+                <option value="-1" disabled="" selected="">
+                  Sélectionnez un séance
+                </option>
                 <option *ngFor="let workout of workouts" [ngValue]="workout">
                     {{workout.title}}
                 </option>

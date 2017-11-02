@@ -87,15 +87,25 @@ export class WorkoutInstanceFormComponent extends BMReactFormComponent implement
       .switchMap((params: Params) => this.workoutService.getWorkout(+params['id']))
       .subscribe((workout) => {
         this.workoutInstance.workout = workout;
-        this.workoutInstanceService.getByWorkoutId(workout.id).then(
-          (workoutInstances) => this.workoutInstances = workoutInstances
-        );
-        this.coachService.getMyCoaches().then((coaches) => {
-          this.coaches = coaches;
-          this.workoutInstance.coach = coaches[0];
-        });
-        this.buildForm();
-        this.formReady = true;
+
+        Promise.all([this.coachService.getMyCoaches(), this.workoutInstanceService.getByWorkoutId(workout.id)])
+          .then((results) => {
+            this.coaches = results[0];
+            if (!this.coaches.length) {
+            //   this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: '.' };
+            }
+            this.workoutInstance.coach = this.coaches[0];
+            this.workoutInstances = results[1];
+            if (this.coaches.length) {
+              this.buildForm();
+              // Rappel
+              // Pour qu'un select soit prechoisi, il faut bien donner au patch value l'objet present dans sa liste
+              // et non pas un objet equivalent
+              this.workoutInstanceForm.patchValue({ coach: this.coaches[0] });
+              this.formReady = true;
+            }
+          })
+          .catch(this.handleError);
       });
 
     let tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
