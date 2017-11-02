@@ -2,6 +2,10 @@
   <md-tab-group [dynamicHeight]="true" [selectedIndex]="activeTab">
     <md-tab label="1 - Votre séance">
       <div class="tab-container" formGroupName="main">
+        <div class="alert alert-warning" *ngIf="!workout.editable">
+            <strong>Séance type protégé</strong><br/>
+            <p>Une ou plusieurs reservations existe pour des sessions de cette séance type. Une partie des informations ne peut plus être changé.</p>
+        </div>
         <div class="workout-form-card">
           <div class="workout-form-card-title">
             <h4>Votre séance</h4>
@@ -9,21 +13,31 @@
           <div class="workout-form-card-content">
             <div class="form-group">
               <label for="title">Titre de la séance</label>
-              <input type="text" class="form-control" formControlName="title" name="title">
+              <input type="text" class="form-control" formControlName="title" name="title" [readonly]="!workout.editable && formEditReadOnly.main.title">
               <div *ngIf="formErrors.main.title" class="form-error">
                 {{ formErrors.main.title }}
               </div>
             </div>
             <div class="form-group">
               <label for="sport">Sport</label>
-              <ng2-completer [inputClass]="'form-control'" formControlName="sport" name="sport" [overrideSuggested]="true" [dataService]="sportDataService" (selected)="selectSport($event)" [textNoResults]="false"></ng2-completer>
+              <div *ngIf="!(!workout.editable && formEditReadOnly.main.sport)">
+                <ng2-completer [inputClass]="'form-control'" formControlName="sport" name="sport" [overrideSuggested]="true" [dataService]="sportDataService" (selected)="selectSport($event)" [textNoResults]="false">
+                </ng2-completer>
+              </div>
+              <input type="text" class="form-control" formControlName="sport" name="sport" *ngIf="!workout.editable && formEditReadOnly.main.sport"
+              [readonly]="!workout.editable && formEditReadOnly.main.sport">
               <div *ngIf="formErrors.main.sport" class="form-error">
                 {{ formErrors.main.sport }}
               </div>
             </div>
             <div class="form-group">
               <label for="example-text-input">Durée</label>
-              <ngb-timepicker formControlName="duration" name="duration" [spinners]="false"></ngb-timepicker>
+              <div *ngIf="!(!workout.editable && formEditReadOnly.main.duration)">
+                  <ngb-timepicker formControlName="duration" name="duration" [spinners]="false"></ngb-timepicker>
+              </div>
+              <div *ngIf="!workout.editable && formEditReadOnly.main.duration">
+                  <span class="tagbadge">{{workout.duration}} min</span>
+              </div>
               <div *ngIf="formErrors.main.duration" class="form-error">
                 {{ formErrors.main.duration }}
               </div>
@@ -36,7 +50,7 @@
           </div>
           <div class="workout-form-card-content">
             <div class="form-group">
-              <div class="row">
+              <div class="row" *ngIf="!(!workout.editable && formEditReadOnly.main.address)">
                 <div class="col-7">
                   <select *ngIf="partnerAddresses.length" class="addresses form-control" formControlName="address">
                           <option value="-1" disabled="" selected="">
@@ -56,7 +70,7 @@
                       </button>
                 </div>
               </div>
-              <div class="row" *ngIf="!addressControl.pristine && addressControl.valid">
+              <div class="row" *ngIf="addressControl.valid">
                 <div class="col-12">
                   <p class="address">{{addressControl.value.name}}<br/> {{addressControl.value.firstline}}
                     <br/> {{addressControl.value.postalCode}} - {{addressControl.value.city}}
@@ -71,7 +85,14 @@
             <div class="form-group">
               <label for="price" class="big">Prix par participant :</label>
               <div class="input-group input-float">
-                <input type="text" class="form-control" id="price" formControlName="price" [(ngModel)]="workout.price" name="price" required (blur)="forceIntegerPrice()">
+                <input type="text"
+                    class="form-control"
+                    id="price"
+                    formControlName="price"
+                    [(ngModel)]="workout.price"
+                    name="price"
+                    [readonly]="!workout.editable && formEditReadOnly.main.price"
+                    (blur)="forceIntegerPrice()">
                 <div class="input-group-addon">€</div>
               </div>
               <div *ngIf="formErrors.main.price" class="form-error">

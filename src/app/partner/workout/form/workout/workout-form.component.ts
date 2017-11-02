@@ -61,6 +61,22 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   public limitedWorkout: Workout;
   public workoutForm: FormGroup;
 
+  public formEditReadOnly = {
+      main: {
+        title: false,
+        sport: true,
+        duration: true,
+        address: true,
+        price: true,
+      },
+      details: {
+        description: false,
+        outfit: false,
+        notice: false,
+        tag: false
+      }
+    };
+
   public formErrors = {
     main: {
       title: '',

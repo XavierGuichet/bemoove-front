@@ -16,6 +16,7 @@ export class Workout {
     public tags: Tag[];
     public styleTop: string;
     public styleHeight: string;
+    public editable: boolean = true;
 
     constructor(sport = new Sport(), address = new Address(),  tags = new Array(), photoWide = new Image(), photoSquare = new Image()
     ) {
