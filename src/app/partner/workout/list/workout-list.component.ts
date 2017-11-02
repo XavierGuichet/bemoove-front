@@ -9,13 +9,18 @@ import { Workout } from '../../../models/workout';
 })
 export class WorkoutListComponent implements OnInit {
     public workouts: Workout[];
+    public loading: boolean = false;
     constructor(private workoutService: WorkoutService,
                 private spaceService: SpaceService) {
 
     }
 
     public ngOnInit(): void {
+        this.loading = true;
         // Recupère la liste des workouts (sans instance) du compte (pas du coach)
-        this.workoutService.getMyWorkouts().then( (workouts) => this.workouts = workouts);
+        this.workoutService.getMyWorkouts().then( (workouts) => {
+            this.workouts = workouts;
+            this.loading = false;
+        });
     }
 }

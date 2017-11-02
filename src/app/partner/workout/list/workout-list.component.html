@@ -5,10 +5,16 @@
       Sur cette page, vous pouvez créer et modifier vos séances types !
     </div>
   <div class="row">
+    <div *ngIf="loading" class="col-3 mb-4">
+        <div class="square alert alert-warning h-100 w-100 text-center">
+            <p>Chargement en cours ...</p>
+        </div>
+    </div>
     <div *ngFor="let workout of workouts" class="col-3 mb-4">
       <div class="square">
-        <div class="hover-hide w-100 mb-1">
+        <div class="w-100 mb-1 relative">
           <img *ngIf="workout.photoSquare !== null" src="{{workout.photoSquare.path}}" class="w-100" />
+          <h3 class="h5 over-img-title w-100 text-center f-white">{{workout.title}}</h3>
         </div>
         <div class="text-center">
         <button md-raised-button color="accent" class="mr-1" routerLink="../{{workout.id}}/edit">MODIFIER</button>
