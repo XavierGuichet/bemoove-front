@@ -1,15 +1,15 @@
 <div class="hollow-modal">
-  <md-tab-group [dynamicHeight]="true">
-    <md-tab label="Ma séance">
+  <mat-tab-group [dynamicHeight]="true">
+    <mat-tab label="Ma séance">
       <div class="tab-container">
         <workout-information [workout]="workout" *ngIf="workout"></workout-information>
       </div>
       <div class="pull-right">
-          <button md-raised-button color="warn"><md-icon>delete</md-icon>Supprimer</button>
-        <button md-raised-button color="primary" (click)="editWorkout()" *ngIf="editable"><md-icon>edit</md-icon>Modifier</button>
+          <button mat-raised-button color="warn"><mat-icon>delete</mat-icon>Supprimer</button>
+        <button mat-raised-button color="primary" (click)="editWorkout()" *ngIf="editable"><mat-icon>edit</mat-icon>Modifier</button>
         </div>
-    </md-tab>
-    <md-tab label="Inscrit">
+    </mat-tab>
+    <mat-tab label="Inscrit">
       <div class="tab-container">
           <table>
               <tr><th>Ici la liste de vos inscrits à ce cours</th></tr>
@@ -18,6 +18,6 @@
               </tr>
           </table>
       </div>
-    </md-tab>
-  </md-tab-group>
+    </mat-tab>
+  </mat-tab-group>
 </div>

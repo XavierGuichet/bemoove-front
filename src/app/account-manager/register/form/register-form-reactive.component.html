@@ -1,24 +1,24 @@
-<md-spinner *ngIf="loading" class="block-center" color="accent"></md-spinner>
+<mat-spinner *ngIf="loading" class="block-center" color="accent"></mat-spinner>
 <form [formGroup]="RegisterForm" *ngIf="!loading" (ngSubmit)="onSubmit()" [ngSwitch]="theme">
     <div *ngSwitchCase="'material'">
         <div class="col-12 white">
-          <md-input-container class="full-width">
+          <mat-input-container class="full-width">
             <input mdInput placeholder="Mail" value="" formControlName="email" required>
-          </md-input-container>
+          </mat-input-container>
         </div>
         <div class="col-12 white password-toggle">
-            <md-input-container class="full-width">
+            <mat-input-container class="full-width">
                 <input [type]="showpassword ? 'text' : 'password'" mdInput placeholder="Mot de passe" value="" formControlName="password" required>
-            </md-input-container>
+            </mat-input-container>
             <a (click)="passwordToggle()" [ngClass]="showpassword ? 'pwd-toggler-show' : 'pwd-toggler-hide'">Voir le mot de passe</a>
         </div>
         <div class="col-12 white" *ngIf="registerAccountType === 'Partner'">
-            <md-input-container class="full-width">
+            <mat-input-container class="full-width">
               <input mdInput placeholder="Code inscription" value="" formControlName="creationToken" required>
-            </md-input-container>
+            </mat-input-container>
         </div>
         <div class="col-12">
-            <button type="submit" md-raised-button color="primary" class="btn-full-width">S'inscrire</button>
+            <button type="submit" mat-raised-button color="primary" class="btn-full-width">S'inscrire</button>
         </div>
     </div>
     <div *ngSwitchDefault>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button [disabled]="loading" class="btn-full-width" md-raised-button color="accent">S'inscrire</button>
+          <button [disabled]="loading" class="btn-full-width" mat-raised-button color="accent">S'inscrire</button>
         </div>
     </div>
 </form>

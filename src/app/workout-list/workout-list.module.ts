@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 import { WorkoutListComponent } from './workout-list.component';
 import { WorkoutListRoutingModule } from './workout-list-routing.module';
@@ -17,9 +17,8 @@ import { WorkoutService, SpaceService } from '../_services/index';
         WorkoutListComponent
     ],
   imports:      [
-        CommonModule,
+        SharedModule,
         NgbModule.forRoot(),
-        MaterialModule.forRoot(),
         WorkoutListRoutingModule
     ],
   declarations: [

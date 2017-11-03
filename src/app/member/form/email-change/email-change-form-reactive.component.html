@@ -1,7 +1,7 @@
 <form [formGroup]="emailChangeForm" (ngSubmit)="onSubmit()" novalidate>
-  <md-card class="form-card">
-    <md-card-title color="primary" class="form-card__title">Modifier mon email</md-card-title>
-    <md-card-content>
+  <mat-card class="form-card">
+    <mat-card-title color="primary" class="form-card__title">Modifier mon email</mat-card-title>
+    <mat-card-content>
       <div class="form-group row">
         <label for="email" class="col-sm-3 col-form-label">Nouveau email</label>
         <div class="col-sm-9">
@@ -20,9 +20,9 @@
           </div>
         </div>
       </div>
-    </md-card-content>
-    <md-card-actions align="end">
-      <button md-raised-button color="accent">Enregistrer</button>
-    </md-card-actions>
-  </md-card>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="accent">Enregistrer</button>
+    </mat-card-actions>
+  </mat-card>
 </form>

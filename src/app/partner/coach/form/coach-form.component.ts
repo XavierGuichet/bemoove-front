@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Headers } from '@angular/http';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
 

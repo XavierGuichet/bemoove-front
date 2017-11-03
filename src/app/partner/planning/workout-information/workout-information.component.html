@@ -1,13 +1,13 @@
-<md-card *ngIf="workout">
-  <md-card-header class="colored">
-      <md-card-title class="title">{{workout.title}}&nbsp;</md-card-title>
-      <md-card-subtitle>{{workout.sport.name}}&nbsp;</md-card-subtitle>
+<mat-card *ngIf="workout">
+  <mat-card-header class="colored">
+      <mat-card-title class="title">{{workout.title}}&nbsp;</mat-card-title>
+      <mat-card-subtitle>{{workout.sport.name}}&nbsp;</mat-card-subtitle>
     <div class="price">
       {{workout.price}} €
     </div>
-  </md-card-header>
-  <img *ngIf="workout.photo.path" md-card-image src="{{workout.photo.path}}">
-  <md-card-content>
+  </mat-card-header>
+  <img *ngIf="workout.photo.path" mat-card-image src="{{workout.photo.path}}">
+  <mat-card-content>
     <div class="row colored timeblock">
       <div class="col-8">
         {{workout.startdate | date: 'EEEE d MMMM'}}
@@ -30,5 +30,5 @@
         <p><b>{{tag.name}}</b></p>
       </div>
     </div>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>

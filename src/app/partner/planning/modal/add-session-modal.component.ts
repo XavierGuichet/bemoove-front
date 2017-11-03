@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output,  OnInit, Inject, Optional } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Workout, WorkoutInstance, Booking } from '../../../models/index';
 
@@ -10,7 +10,7 @@ import { AlertService,
 
 @Component({
     selector: 'add-session-modal',
-    template: '<button md-button class="modal-close" md-dialog-close><md-icon>close</md-icon></button><add-session-form [(workoutInstance)]="workoutInstance" (onSuccess)="onSuccess($event)"></add-session-form>'
+    template: '<button mat-button class="modal-close" mat-dialog-close><mat-icon>close</mat-icon></button><add-session-form [(workoutInstance)]="workoutInstance" (onSuccess)="onSuccess($event)"></add-session-form>'
 })
 
 export class AddSessionModalComponent {
@@ -19,9 +19,9 @@ export class AddSessionModalComponent {
     @Output()
     public onCreation = new EventEmitter<WorkoutInstance>();
 
-    constructor(@Optional() @Inject(MD_DIALOG_DATA) private data: any,
-                public dialog: MdDialog,
-                public dialogRef: MdDialogRef<AddSessionModalComponent>,
+    constructor(@Optional() @Inject(MAT_DIALOG_DATA) private data: any,
+                public dialog: MatDialog,
+                public dialogRef: MatDialogRef<AddSessionModalComponent>,
                 private route: ActivatedRoute,
                 private router: Router) {
         if (this.data.workoutInstance instanceof WorkoutInstance) {

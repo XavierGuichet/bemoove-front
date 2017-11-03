@@ -9,7 +9,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 
-$md-main-pink: (
+$mat-main-pink: (
     50: #f5afbd,
     100: #f299ab,
     200: #ef8298,
@@ -42,7 +42,7 @@ $md-main-pink: (
     )
 );
 
-$md-main-yellow: (
+$mat-main-yellow: (
     50: #59500c,
     100: #6f650f,
     200: #857913,
@@ -75,7 +75,7 @@ $md-main-yellow: (
     )
 );
 
-$md-main-blue: (
+$mat-main-blue: (
     50: #a7e7ed,
     100: #92e1e9,
     200: #7ddbe5,
@@ -109,11 +109,11 @@ $md-main-blue: (
 );
 
 
-$app-primary: mat-palette($md-main-pink);
-$app-accent:  mat-palette($md-main-blue);
+$app-primary: mat-palette($mat-main-pink);
+$app-accent:  mat-palette($mat-main-blue);
 
 // The warn palette is optional (defaults to red).
-$app-warn:    mat-palette($md-main-yellow);
+$app-warn:    mat-palette($mat-main-yellow);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);

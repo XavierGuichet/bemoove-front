@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from '@angular/material';
 
 import { WorkoutComponent } from './workout.component';
 import { WorkoutListComponent } from './list/workout-list.component';
@@ -13,13 +12,13 @@ import { WorkoutPreviewComponent } from './preview/workout-preview.component';
 import { WorkoutInstanceFormComponent } from './form/workout-instance/workout-instance-form.component';
 
 import { TagsSelectorComponent } from './tags-selector/tags-selector.component';
+import { BMImageInputComponent } from '../../form/bm-image-input/bm-image-input.component';
 
 import { AddressFormComponent } from './form/address/address-form.component';
 import { ModalAddressFormComponent } from './modal/modal-address-form.component';
 
 import { WorkoutRoutingModule } from './workout-routing.module';
 
-import { SharedModule } from '../../shared/shared.module';
 import { BmFormModule } from '../../shared/form.module';
 
 import { WorkoutService, WorkoutInstanceService,
@@ -31,11 +30,9 @@ import { WorkoutService, WorkoutInstanceService,
         WorkoutComponent,
     ],
   imports: [
-        CommonModule,
-        BmFormModule,
         SharedModule,
+        BmFormModule,
         NgbModule.forRoot(),
-        MaterialModule.forRoot(),
         WorkoutRoutingModule
     ],
   declarations: [
@@ -48,7 +45,8 @@ import { WorkoutService, WorkoutInstanceService,
       WorkoutPreviewComponent,
       AddressFormComponent,
       ModalAddressFormComponent,
-      TagsSelectorComponent
+      TagsSelectorComponent,
+      BMImageInputComponent
     ],
   exports: [ WorkoutComponent ],
   entryComponents: [ ModalAddressFormComponent ],

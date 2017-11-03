@@ -1,15 +1,15 @@
-<md-card>
-  <md-card-header class="colored">
+<mat-card>
+  <mat-card-header class="colored">
       <div class="price">
           {{workout.price}} €
       </div>
-      <md-card-title class="title">{{workout.title}}&nbsp;{{workout.id}}</md-card-title>
-      <md-card-subtitle>{{workout.sport.name}}&nbsp;</md-card-subtitle>
-  </md-card-header>
-  <div *ngIf="!workout.photo.path && !workout.photo.base64data" md-card-image><md-icon class="md-72">fitness_center</md-icon></div>
-  <img *ngIf="workout.photo.base64data && !workout.photo.path" md-card-image src="{{workout.photo.base64data}}">
-  <img *ngIf="workout.photo.path && !workout.photo.base64data" md-card-image src="{{workout.photo.path}}">
-  <md-card-content>
+      <mat-card-title class="title">{{workout.title}}&nbsp;{{workout.id}}</mat-card-title>
+      <mat-card-subtitle>{{workout.sport.name}}&nbsp;</mat-card-subtitle>
+  </mat-card-header>
+  <div *ngIf="!workout.photo.path && !workout.photo.base64data" mat-card-image><mat-icon class="mat-72">fitness_center</mat-icon></div>
+  <img *ngIf="workout.photo.base64data && !workout.photo.path" mat-card-image src="{{workout.photo.base64data}}">
+  <img *ngIf="workout.photo.path && !workout.photo.base64data" mat-card-image src="{{workout.photo.path}}">
+  <mat-card-content>
     <div class="row colored timeblock">
       <div class="col-8">
         {{workout.startdate | date: 'EEEE d MMMM'}}
@@ -32,5 +32,5 @@
         <p><b>{{tag.name}}</b></p>
       </div>
     </div>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>

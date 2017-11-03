@@ -8,10 +8,10 @@
     </div>
 </div>
 <div class="row">
-  <md-card class="form-card col-4">
+  <mat-card class="form-card col-4">
     <form *ngIf="bankAccount" [formGroup]="bankAccountForm" (ngSubmit)="onSubmit()" novalidate>
-      <md-card-title color="primary" class="form-card__title">Coordonnées bancaires</md-card-title>
-      <md-card-content>
+      <mat-card-title color="primary" class="form-card__title">Coordonnées bancaires</mat-card-title>
+      <mat-card-content>
         <div class="form-group row">
           <label for="ownerName" class="col-sm-3 col-form-label">Nom et Prénom (ou raison sociale) *</label>
           <div class="col-sm-9">
@@ -76,10 +76,10 @@
         <div *ngIf="formResult" class="alert" class="mr-3" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
           <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
         </div>
-      </md-card-content>
-      <md-card-actions align="end">
-        <button [disabled]="loading || !bankAccountForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
-      </md-card-actions>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button [disabled]="loading || !bankAccountForm.valid" mat-raised-button color="accent"><mat-spinner *ngIf="loading" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+      </mat-card-actions>
     </form>
-  </md-card>
+  </mat-card>
 </div>

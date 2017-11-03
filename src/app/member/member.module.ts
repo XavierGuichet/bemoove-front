@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@angular/material';
+import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
@@ -28,11 +27,10 @@ import { AlertService, ProfileService } from '../_services/index';
         MemberComponent
     ],
   imports:      [
-        CommonModule,
+        SharedModule,
         FormsModule,
         ReactiveFormsModule,
         NgbModule.forRoot(),
-        MaterialModule.forRoot(),
         MemberRoutingModule
     ],
   declarations: [

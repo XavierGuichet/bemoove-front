@@ -25,8 +25,8 @@ import {
               </ng2-completer>
           </div>
           <div class="col-5">
-              <button type="button" [disabled]="loading" md-raised-button color="accent" (click)="addTag()">
-              <md-icon class="md-24">add</md-icon>Ajouter
+              <button type="button" [disabled]="loading" mat-raised-button color="accent" (click)="addTag()">
+              <mat-icon class="mat-24">add</mat-icon>Ajouter
               </button>
           </div>
         </div>

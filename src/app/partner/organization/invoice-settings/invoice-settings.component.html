@@ -7,10 +7,10 @@
   </div>
 </div>
 <div class="row">
-  <md-card class="form-card col-5">
+  <mat-card class="form-card col-5">
     <form *ngIf="organization" [formGroup]="tvaRateForm" (ngSubmit)="onSubmitTvaRate()" novalidate>
-      <md-card-title color="primary" class="form-card__title">TVA</md-card-title>
-      <md-card-content>
+      <mat-card-title color="primary" class="form-card__title">TVA</mat-card-title>
+      <mat-card-content>
         <div class="form-group row">
           <label for="organizationVatRate" class="col-sm-3 col-form-label">Taux de TVA</label>
           <div class="col-sm-9">
@@ -26,18 +26,18 @@
             </div>
           </div>
         </div>
-      </md-card-content>
-      <md-card-actions align="end">
-        <button [disabled]="loading || !tvaRateForm.valid" class="mr-3" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
-      </md-card-actions>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button [disabled]="loading || !tvaRateForm.valid" class="mr-3" mat-raised-button color="accent"><mat-spinner *ngIf="loading" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+      </mat-card-actions>
     </form>
-  </md-card>
+  </mat-card>
 </div>
 <div class="row">
-  <md-card class="form-card col-5">
+  <mat-card class="form-card col-5">
     <form *ngIf="organization" [formGroup]="invoiceNoticeForm" (ngSubmit)="onSubmit()" novalidate>
-      <md-card-title color="primary" class="form-card__title">Mentions légales</md-card-title>
-      <md-card-content>
+      <mat-card-title color="primary" class="form-card__title">Mentions légales</mat-card-title>
+      <mat-card-content>
         <div class="form-group row">
           <label for="companyType" class="col-sm-12 form-label">Forme juridique</label>
           <div class="col-sm-12">
@@ -189,10 +189,10 @@
             {{ formErrors.organizationVATNumber }}
           </div>
         </div>
-      </md-card-content>
-      <md-card-actions align="end">
-        <button [disabled]="loading || !invoiceNoticeForm.valid" class="mr-3" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
-      </md-card-actions>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button [disabled]="loading || !invoiceNoticeForm.valid" class="mr-3" mat-raised-button color="accent"><mat-spinner *ngIf="loading" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+      </mat-card-actions>
     </form>
-  </md-card>
+  </mat-card>
 </div>

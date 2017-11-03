@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Workout, Booking } from '../../../models/index';
 
@@ -20,9 +20,9 @@ export class WorkoutModalComponent implements OnInit {
     public editable: boolean = false;
 
     constructor(
-        @Optional() @Inject(MD_DIALOG_DATA) public id: any,
-        public dialog: MdDialog,
-        public dialogRef: MdDialogRef<WorkoutModalComponent>,
+        @Optional() @Inject(MAT_DIALOG_DATA) public id: any,
+        public dialog: MatDialog,
+        public dialogRef: MatDialogRef<WorkoutModalComponent>,
         private router: Router,
         private workoutService: WorkoutService,
         private alertService: AlertService,

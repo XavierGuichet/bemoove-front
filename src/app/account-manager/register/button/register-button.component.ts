@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog, MdDialogRef, MdButtonModule, MdSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatButtonModule, MatSnackBar } from '@angular/material';
 
 import { RegisterModalComponent  } from '../modal/register-modal.component';
 
@@ -19,8 +19,8 @@ export class RegisterButtonComponent {
     public transparent: string;
 
     constructor(
-        public dialog: MdDialog,
-        public snackBar: MdSnackBar,
+        public dialog: MatDialog,
+        public snackBar: MatSnackBar,
         private router: Router,
         private alertService: AlertService) {
     }

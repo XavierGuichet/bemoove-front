@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from '@angular/material';
 
 import { OrganizationComponent } from './organization.component';
 import { OrganizationInformationsComponent } from './informations/informations.component';
@@ -23,11 +22,10 @@ import { PartnerNavSecondaryModule } from '../nav/secondary/nav-secondary.module
         OrganizationComponent,
     ],
   imports: [
-        CommonModule,
+        SharedModule,
         FormsModule,
         ReactiveFormsModule,
         NgbModule.forRoot(),
-        MaterialModule.forRoot(),
         OrganizationRoutingModule,
         PartnerNavSecondaryModule
     ],

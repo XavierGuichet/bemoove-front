@@ -1,9 +1,9 @@
 <div class="row mb-3">
     <div class="col-4">
       <h1 class="h2 alt-font mb-3">Profil de {{coach.firstname}} {{coach.lastname}}</h1>
-      <button md-raised-button color="primary" (click)="deleteCoach()"><md-icon>delete_forever</md-icon>SUPPRIMER</button>
-      <button md-raised-button color="accent" routerLink="../{{coach.id}}/edit"><md-icon>edit</md-icon>MODIFIER</button>
-      <button md-raised-button color="accent" routerLink="../../planning/view/coach/{{coach.id}}"><md-icon>today</md-icon>VOIR LE PLANNING</button>
+      <button mat-raised-button color="primary" (click)="deleteCoach()"><mat-icon>delete_forever</mat-icon>SUPPRIMER</button>
+      <button mat-raised-button color="accent" routerLink="../{{coach.id}}/edit"><mat-icon>edit</mat-icon>MODIFIER</button>
+      <button mat-raised-button color="accent" routerLink="../../planning/view/coach/{{coach.id}}"><mat-icon>today</mat-icon>VOIR LE PLANNING</button>
     </div>
 </div>
 <div class="row">

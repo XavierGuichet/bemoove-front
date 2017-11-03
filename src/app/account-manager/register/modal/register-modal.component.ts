@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 
 import { LoginModalComponent  } from '../../login/modal/login-modal.component';
 
@@ -14,9 +14,9 @@ import { AlertService } from '../../../_services/index';
 })
 export class RegisterModalComponent {
     constructor(
-        public dialog: MdDialog,
-        public dialogRef: MdDialogRef<RegisterModalComponent>,
-        public snackBar: MdSnackBar,
+        public dialog: MatDialog,
+        public dialogRef: MatDialogRef<RegisterModalComponent>,
+        public snackBar: MatSnackBar,
         private router: Router,
         private alertService: AlertService) {
     }

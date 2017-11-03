@@ -2,7 +2,7 @@
   <h1 class="h2 alt-font mb-3">Ajouter des sessions à la séance : <span *ngIf="workoutInstance.workout">{{ workoutInstance.workout.title }}</span></h1>
   <div class="row">
     <div class="col-6">
-      <md-card class="form-card h-100">
+      <mat-card class="form-card h-100">
         <form *ngIf="formReady" [formGroup]="workoutInstanceForm" (ngSubmit)="addWorkoutInstance()" novalidate>
           <div class="form-card-content">
             <div class="row">
@@ -45,9 +45,9 @@
               </div>
             </div>
           </div>
-          <button md-raised-button class="pull-right mb-3" color="primary">Ajouter <md-icon class="md-24">keyboard_arrow_right</md-icon></button>
+          <button mat-raised-button class="pull-right mb-3" color="primary">Ajouter <mat-icon class="mat-24">keyboard_arrow_right</mat-icon></button>
         </form>
-      </md-card>
+      </mat-card>
     </div>
     <div class="col-6">
         <div class="clearfix">
@@ -63,10 +63,10 @@
           <td>{{workoutInstance.startdate | date: 'short'}}</td>
           <td>{{workoutInstance.coach.firstname}} - {{workoutInstance.coach.lastname}}</td>
           <td>{{workoutInstance.nbTicketAvailable}}</td>
-          <td><button md-button color="primary" class="md-18" (click)="removeWorkoutInstance(workoutInstance)"><md-icon class="md-18 valign">remove_circle</md-icon></button></td>
+          <td><button mat-button color="primary" class="mat-18" (click)="removeWorkoutInstance(workoutInstance)"><mat-icon class="mat-18 valign">remove_circle</mat-icon></button></td>
         </tr>
       </table>
-      <button type="button" md-raised-button class="pull-right mb-3" color="primary" (click)="saveWorkoutInstances()">Valider l'ajout de sessions <md-icon class="md-24">keyboard_arrow_right</md-icon></button>
+      <button type="button" mat-raised-button class="pull-right mb-3" color="primary" (click)="saveWorkoutInstances()">Valider l'ajout de sessions <mat-icon class="mat-24">keyboard_arrow_right</mat-icon></button>
   </div>
   <div class="clearfix">
       <h2>Sessions à venir</h2>

@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from '@angular/material';
 
-import { SharedModule } from '../shared/shared.module';
 import { BmFormModule } from '../shared/form.module';
 
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
@@ -41,11 +39,9 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
     PartnerComponent
   ],
   imports: [
-    CommonModule,
     SharedModule,
     BmFormModule,
     NgbModule.forRoot(),
-    MaterialModule.forRoot(),
     PlanningModule,
     CoachModule,
     WorkoutModule,

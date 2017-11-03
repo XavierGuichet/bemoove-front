@@ -1,7 +1,7 @@
 <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
-  <md-card class="form-card">
-    <md-card-title color="primary" class="form-card__title">Mon adresse</md-card-title>
-    <md-card-content>
+  <mat-card class="form-card">
+    <mat-card-title color="primary" class="form-card__title">Mon adresse</mat-card-title>
+    <mat-card-content>
       <div class="form-group row">
         <label for="name" class="col-sm-3 col-form-label">Nom de l'addresse</label>
         <div class="col-sm-9">
@@ -47,9 +47,9 @@
           </div>
         </div>
       </div>
-    </md-card-content>
-    <md-card-actions align="end">
-      <button [disabled]="loading || !addressForm.valid" md-raised-button color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
-    </md-card-actions>
-  </md-card>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button [disabled]="loading || !addressForm.valid" mat-raised-button color="accent"><mat-spinner *ngIf="loading" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+    </mat-card-actions>
+  </mat-card>
 </form>

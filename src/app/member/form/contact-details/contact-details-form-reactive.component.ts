@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Headers } from '@angular/http';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { RegexpValidator } from '../../../_directives/regexp.directive';
 

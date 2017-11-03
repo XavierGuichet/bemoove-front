@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { Coach, Workout, WorkoutInstance, Day } from '../../../models/index';
 
@@ -41,7 +41,7 @@ export class ViewComponent implements OnInit {
     private workoutService: WorkoutService,
     private workoutInstanceService: WorkoutInstanceService,
     private WorkoutDateProvider: WorkoutDateProvider,
-    public dialog: MdDialog
+    public dialog: MatDialog
   ) {
     this.firstDisplayedDay = new Date();
     this.lastDisplayedDay = new Date();

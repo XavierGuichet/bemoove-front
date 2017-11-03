@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MdSnackBar, MdButton } from '@angular/material';
+import { MatSnackBar, MatButton } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Account } from '../../../models/account';
@@ -54,7 +54,7 @@ export class RegisterFormReactiveComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     private authenticationService: AuthenticationService,
     private router: Router,
     private alertService: AlertService,

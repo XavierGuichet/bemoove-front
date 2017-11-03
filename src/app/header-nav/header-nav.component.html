@@ -7,7 +7,7 @@
         <div class="input-group">
         <input type="text" class="form-control" placeholder="Emplacement future recherche rapide" />
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button"><md-icon class="md-16">search</md-icon></button>
+            <button class="btn btn-default" type="button"><mat-icon class="mat-16">search</mat-icon></button>
           </span>
     </div>
     </div>
@@ -15,18 +15,18 @@
     <div class="navbar-container" [ngSwitch]="headerType">
       <div class="navbar-links" *ngSwitchCase="'ROLE_PARTNER'">
           <login-button *ngIf="!logged" [transparent]="transparent"></login-button>
-        <button *ngIf="logged" type="button" md-button class="button-primary" [class.transparent]="transparent" routerLink="/partner">Mon compte</button>
-        <button *ngIf="logged" type="button" md-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><md-icon class="md-18">power_settings_new</md-icon> Déconnexion</button>
+        <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" routerLink="/partner">Mon compte</button>
+        <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><mat-icon class="mat-18">power_settings_new</mat-icon> Déconnexion</button>
       </div>
       <div class="navbar-links" *ngSwitchCase="'ROLE_USER'">
           <login-button *ngIf="!logged" [transparent]="transparent"></login-button>
-        <button *ngIf="logged" type="button" md-button class="button-primary" [class.transparent]="transparent" routerLink="/member/mon-profil">Mon profil</button>
-        <button *ngIf="logged" type="button" md-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><md-icon class="md-18">power_settings_new</md-icon> Déconnexion</button>
+        <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" routerLink="/member/mon-profil">Mon profil</button>
+        <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><mat-icon class="mat-18">power_settings_new</mat-icon> Déconnexion</button>
       </div>
       <div class="navbar-links" *ngSwitchDefault>
         <!-- <register-button [transparent]="transparent"></register-button> -->
         <login-button *ngIf="!logged" [transparent]="transparent"></login-button>
-        <button *ngIf="logged" type="button" md-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><md-icon class="md-18">power_settings_new</md-icon> Déconnexion</button>
+        <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><mat-icon class="mat-18">power_settings_new</mat-icon> Déconnexion</button>
       </div>
     </div>
 </div>

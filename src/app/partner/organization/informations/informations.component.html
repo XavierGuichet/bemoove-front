@@ -1,19 +1,19 @@
 <h1 class="h2 alt-font mb-3">Coordonnées</h1>
 <div *ngIf="business">
   <div class="row">
-    <md-card class="form-card col-4">
+    <mat-card class="form-card col-4">
       <business-info-form [business]="business"></business-info-form>
-    </md-card>
+    </mat-card>
   </div>
   <div class="row">
-    <md-card class="form-card col-4">
+    <mat-card class="form-card col-4">
       <legal-representative-form [person]="business.legalRepresentative"></legal-representative-form>
-    </md-card>
+    </mat-card>
   </div>
   <div class="row">
-    <md-card class="form-card col-4">
+    <mat-card class="form-card col-4">
       <address-form [address]="business.address"></address-form>
-    </md-card>
+    </mat-card>
   </div>
 </div>
 <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">

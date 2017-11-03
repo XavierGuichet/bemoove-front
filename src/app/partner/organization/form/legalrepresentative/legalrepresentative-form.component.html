@@ -1,6 +1,6 @@
 <form *ngIf="formReady" [formGroup]="personForm" (ngSubmit)="onSubmit()" novalidate>
-  <md-card-title color="primary" class="form-card__title">Réprésentant légal</md-card-title>
-  <md-card-content>
+  <mat-card-title color="primary" class="form-card__title">Réprésentant légal</mat-card-title>
+  <mat-card-content>
     <div class="form-group row">
       <label for="firstname" class="col-sm-3 col-form-label">Prénom</label>
       <div class="col-sm-9">
@@ -40,8 +40,8 @@
     <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
       <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
     </div>
-  </md-card-content>
-  <md-card-actions align="end">
-    <button [disabled]="loading || !personForm.valid" md-raised-button class="mr-3" color="accent"><md-spinner *ngIf="loading" class="loading-spinner" color="accent"></md-spinner> <span *ngIf="!loading">Enregistrer</span></button>
-  </md-card-actions>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button [disabled]="loading || !personForm.valid" mat-raised-button class="mr-3" color="accent"><mat-spinner *ngIf="loading" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+  </mat-card-actions>
 </form>

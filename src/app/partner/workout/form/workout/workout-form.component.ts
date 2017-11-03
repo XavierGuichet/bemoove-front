@@ -2,9 +2,10 @@ import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Headers } from '@angular/http';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { BMReactFormComponent } from '../../../../form/bm-react-form/bm-react-form.component';
+import { BMImageInputComponent } from '../../../../form/bm-image-input/bm-image-input.component';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -94,6 +95,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   };
 
   public validationMessages = {
+      'testimage': {},
     'main.title': {
       required: 'Un titre est nécessaire.',
     },
@@ -150,7 +152,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     private addressService: AddressService,
     private imageService: ImageService,
     private completerService: CompleterService,
-    public dialog: MdDialog) {
+    public dialog: MatDialog) {
     super();
     this.initAutoCompleters(completerService);
     this.initCropper();
@@ -168,6 +170,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     }));
   }
 
+  /** Init Cropper Settings for both cropper */
   public initCropper(): void {
     this.cropperSettingsSquare = new CropperSettings();
     this.cropperSettingsSquare.width = 10;
@@ -181,10 +184,10 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     this.cropperDataSquare = {};
 
     this.cropperSettingsWide = new CropperSettings();
-    this.cropperSettingsWide.width = 10;
-    this.cropperSettingsWide.height = 10;
-    this.cropperSettingsWide.croppedWidth = 300;
-    this.cropperSettingsWide.croppedHeight = 300;
+    this.cropperSettingsWide.width = 192;
+    this.cropperSettingsWide.height = 35;
+    this.cropperSettingsWide.croppedWidth = 1920;
+    this.cropperSettingsWide.croppedHeight = 350;
     this.cropperSettingsWide.canvasWidth = 600;
     this.cropperSettingsWide.canvasHeight = 337;
     this.cropperSettingsWide.keepAspect = true;
@@ -313,7 +316,6 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
         this.router.navigate(['/partner/workouts/list']);
       })
       .catch(this.handleError);
-
   }
 
   protected createObjectFromModel() {

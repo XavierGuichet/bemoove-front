@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { Address } from '../../../models/address';
 
 @Component({
     selector: 'modal-address-form',
-    template: `<div class="form-card"><button md-button class="modal-close" md-dialog-close><md-icon>close</md-icon></button>
+    template: `<div class="form-card"><button mat-button class="modal-close" mat-dialog-close><mat-icon>close</mat-icon></button>
     <address-form (onSuccess)="onSuccess($event)"></address-form></div>`
 })
 
@@ -20,8 +20,8 @@ export class ModalAddressFormComponent {
     @Output()
     public onCreation = new EventEmitter<Address>();
 
-    constructor(public dialog: MdDialog,
-                public dialogRef: MdDialogRef<ModalAddressFormComponent>,
+    constructor(public dialog: MatDialog,
+                public dialogRef: MatDialogRef<ModalAddressFormComponent>,
                 private route: ActivatedRoute,
                 private router: Router) {
         // dialog.setCloseGuard(this);

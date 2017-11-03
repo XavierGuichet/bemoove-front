@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 
 import { LoginModalComponent  } from '../modal/login-modal.component';
 
@@ -19,8 +19,8 @@ export class LoginButtonComponent {
     public transparent: boolean;
 
     constructor(
-        public dialog: MdDialog,
-        public snackBar: MdSnackBar,
+        public dialog: MatDialog,
+        public snackBar: MatSnackBar,
         private router: Router,
         private alertService: AlertService) {
     }

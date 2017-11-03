@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MdSnackBar, MdButtonModule, MdDialogRef } from '@angular/material';
+import { MatSnackBar, MatButtonModule, MatDialogRef } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Account } from '../../../models/index';
@@ -44,8 +44,8 @@ export class LoginFormReactiveComponent implements OnInit {
     private returnUrl: string;
 
     constructor(private fb: FormBuilder,
-        public snackBar: MdSnackBar,
-        public dialogRef: MdDialogRef<LoginModalComponent>,
+        public snackBar: MatSnackBar,
+        public dialogRef: MatDialogRef<LoginModalComponent>,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,

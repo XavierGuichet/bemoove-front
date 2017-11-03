@@ -1,6 +1,6 @@
 import { Component, ViewContainerRef, ViewEncapsulation, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { SpaceService } from '../_services/space.service';
 
@@ -12,7 +12,7 @@ import { SpaceService } from '../_services/space.service';
 
 export class HomeComponent implements OnInit {
     constructor(
-        public dialog: MdDialog,
+        public dialog: MatDialog,
         private router: Router,
         private spaceService: SpaceService
     ) {

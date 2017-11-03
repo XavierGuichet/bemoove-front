@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from '@angular/material';
 
 import { PlanningComponent } from './planning.component';
 import { ViewComponent } from './view/view.component';
@@ -20,11 +19,10 @@ import { AddSessionModalComponent } from './modal/add-session-modal.component';
         PlanningComponent,
     ],
   imports: [
-        CommonModule,
+        SharedModule,
         FormsModule,
         ReactiveFormsModule,
         NgbModule.forRoot(),
-        MaterialModule.forRoot(),
         PlanningRoutingModule
     ],
   declarations: [

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 
 import { RegisterModalComponent  } from '../../register/modal/register-modal.component';
 
@@ -18,9 +18,9 @@ export class LoginModalComponent {
     public model: any = {};
 
     constructor(
-        public dialog: MdDialog,
-        public dialogRef: MdDialogRef<LoginModalComponent>,
-        public snackBar: MdSnackBar,
+        public dialog: MatDialog,
+        public dialogRef: MatDialogRef<LoginModalComponent>,
+        public snackBar: MatSnackBar,
         private router: Router,
         private alertService: AlertService) {
     }

@@ -12,17 +12,17 @@
   <div class="container">
     <div class="row button-row">
       <div>
-        <button type="button" md-raised-button color="accent" (click)="backwardSelectedDay()"><md-icon class="md-24">keyboard_arrow_left</md-icon></button>
-        <button type="button" md-raised-button color="accent" (click)="forwardSelectedDay()"><md-icon class="md-24">keyboard_arrow_right</md-icon></button>
+        <button type="button" mat-raised-button color="accent" (click)="backwardSelectedDay()"><mat-icon class="mat-24">keyboard_arrow_left</mat-icon></button>
+        <button type="button" mat-raised-button color="accent" (click)="forwardSelectedDay()"><mat-icon class="mat-24">keyboard_arrow_right</mat-icon></button>
 
-          <md-select [(ngModel)]="selectedCoach" (change)="onCoachChange()">
-            <md-option *ngFor="let coach of coaches" [value]="coach">{{ coach.firstname }}</md-option>
-          </md-select>
+          <mat-select [(ngModel)]="selectedCoach" (change)="onCoachChange()">
+            <mat-option *ngFor="let coach of coaches" [value]="coach">{{ coach.firstname }}</mat-option>
+          </mat-select>
       </div>
       <span class="title-filler"><h4>{{firstDisplayedDay|date:'dd'}} - {{lastDisplayedDay|date:'dd MMMM y'}}</h4></span>
       <div>
-        <button type="button" md-raised-button color="accent" (click)="changeDisplayStyle('3days')">3 Jours</button>
-        <button type="button" md-raised-button color="accent" (click)="changeDisplayStyle('week')">Semaine</button>
+        <button type="button" mat-raised-button color="accent" (click)="changeDisplayStyle('3days')">3 Jours</button>
+        <button type="button" mat-raised-button color="accent" (click)="changeDisplayStyle('week')">Semaine</button>
       </div>
     </div>
     <div class="row">

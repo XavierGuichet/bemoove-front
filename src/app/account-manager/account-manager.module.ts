@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule,
-    MdButtonModule,
-    MdDialogModule } from '@angular/material';
+import {
+    MatButtonModule,
+    MatDialogModule } from '@angular/material';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -20,12 +20,11 @@ import { LoginButtonComponent } from './login/button/login-button.component';
 
     ],
   imports: [
-        CommonModule,
+        SharedModule,
         ReactiveFormsModule,
         NgbModule.forRoot(),
-        MaterialModule.forRoot(),
-        MdDialogModule,
-        MdButtonModule,
+        MatDialogModule,
+        MatButtonModule,
         RegisterFormReactiveModule,
         LoginFormReactiveModule
     ],

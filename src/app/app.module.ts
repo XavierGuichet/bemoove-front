@@ -10,7 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomMaterialModule } from './custom-material.module';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
-import { Ng2SimplePageScrollModule } from 'ng2-simple-page-scroll';
 import './rxjs-extensions';
 /*
  * Platform and Environment providers/directives/pipes
@@ -96,7 +95,6 @@ type StoreType = {
     CustomMaterialModule,
     AccountManagerModule,
     Angular2FontawesomeModule,
-    Ng2SimplePageScrollModule.forRoot(),
     PartnerModule,
     MemberModule,
     WorkoutListModule,

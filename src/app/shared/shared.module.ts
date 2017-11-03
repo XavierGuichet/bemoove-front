@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-// import { ForbiddenValidatorDirective } from './forbidden-name.directive';
-// import { SubmittedComponent }          from './submitted.component';
+import { CommonModule } from '@angular/common';
+import { CustomMaterialModule } from '../custom-material.module';
 
 @NgModule({
-  imports:      [ CommonModule ],
+  imports:      [ CommonModule, CustomMaterialModule ],
   declarations: [  ],
   exports:      [
-      CommonModule
+      CommonModule, CustomMaterialModule
        ]
 })
 export class SharedModule { }
