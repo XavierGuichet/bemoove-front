@@ -10,7 +10,7 @@ export class TagService {
     'Accept': 'application/json'
   });
   private headersSearch = new Headers({ Accept: 'application/json' });
-  private tagsUrl = 'http://' + process.env.API_URL + '/tags';
+  private tagsUrl = process.env.API_URL + '/tags';
 
   constructor(
     private http: Http) { }

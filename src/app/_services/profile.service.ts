@@ -12,7 +12,7 @@ export class ProfileService {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   });
-  private ProfilesUrl = 'http://' + process.env.API_URL + '/profiles';
+  private ProfilesUrl = process.env.API_URL + '/profiles';
   private profileApi: ProfileApi;
 
   constructor(private http: Http) { }

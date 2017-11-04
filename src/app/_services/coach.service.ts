@@ -12,7 +12,7 @@ export class CoachService {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   });
-  private CoachesUrl = 'http://' + process.env.API_URL + '/coaches';
+  private CoachesUrl = process.env.API_URL + '/coaches';
   private coachApi: CoachApi;
 
   constructor(private http: Http) { }
@@ -31,7 +31,7 @@ export class CoachService {
   }
 
   public getMyCoaches(): Promise<Coach[]> {
-    let url = 'http://' + process.env.API_URL + '/getMyCoaches';
+    let url = process.env.API_URL + '/getMyCoaches';
     return this.http.get(url, this.jwt())
       .toPromise()
       .then((response) => response.json() as Coach[])

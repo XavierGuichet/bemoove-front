@@ -15,7 +15,7 @@ export class BookingService {
     private headers = new Headers({
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json'});
-    private bookingUrl = 'http://' + process.env.API_URL + '/bookings';
+    private bookingUrl = process.env.API_URL + '/bookings';
     private bookingApi: BookingApi;
     constructor(private http: Http, private spaceService: SpaceService) { }
 

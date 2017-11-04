@@ -11,7 +11,7 @@ export class BankAccountService {
     'Accept': 'application/json'
   });
   private headersSearch = new Headers({ Accept: 'application/json' });
-  private bankAccountsUrl = 'http://' + process.env.API_URL + '/bank_accounts';
+  private bankAccountsUrl = process.env.API_URL + '/bank_accounts';
   private bankAccountApi: BankAccountApi;
 
   constructor(
@@ -28,7 +28,7 @@ export class BankAccountService {
   }
 
   public getMyBankAccount(): Promise<BankAccount> {
-    let url = 'http://' + process.env.API_URL + '/getMyBankAccount';
+    let url = process.env.API_URL + '/getMyBankAccount';
     return this.http.get(url, this.jwt())
       .toPromise()
       .then((response) => response.json() as BankAccount)

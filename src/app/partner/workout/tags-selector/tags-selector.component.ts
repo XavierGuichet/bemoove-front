@@ -46,7 +46,7 @@ export class TagsSelectorComponent {
   public loading: boolean = false;
   public tag: string;
   public tagDataService: RemoteData;
-  private TagsUrl = 'http://' + process.env.API_URL + '/tags';
+  private TagsUrl = process.env.API_URL + '/tags';
 
   constructor(
     private tagService: TagService,

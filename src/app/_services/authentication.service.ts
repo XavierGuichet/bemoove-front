@@ -14,12 +14,12 @@ export class AuthenticationService {
     private headers = new Headers({
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json'});
-    private authentificationUrl = 'http://' + process.env.API_URL + '/login_check';
+    private authentificationUrl = process.env.API_URL + '/login_check';
 
     // below are Header from account service
     // private headers = new Headers({'Content-Type': 'application/json',
     //                                 'Accept': 'application/json'});
-    private AccountsUrl = 'http://' + process.env.API_URL + '/accounts';
+    private AccountsUrl = process.env.API_URL + '/accounts';
 
     constructor(private http: Http, private spaceService: SpaceService) { }
 

@@ -11,7 +11,7 @@ export class PersonService {
     'Accept': 'application/json'
   });
   private headersSearch = new Headers({ Accept: 'application/json' });
-  private personsUrl = 'http://' + process.env.API_URL + '/people';
+  private personsUrl = process.env.API_URL + '/people';
   private personApi: PersonApi;
 
   constructor(

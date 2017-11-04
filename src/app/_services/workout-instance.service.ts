@@ -13,7 +13,7 @@ export class WorkoutInstanceService {
     'Accept': 'application/json'
   });
   private headersSearch = new Headers({ Accept: 'application/json' });
-  private workoutInstancesUrl = 'http://' + process.env.API_URL + '/workout_instances';
+  private workoutInstancesUrl = process.env.API_URL + '/workout_instances';
   private searchDate: Date;
   private workoutInstanceApi: WorkoutInstanceApi;
 

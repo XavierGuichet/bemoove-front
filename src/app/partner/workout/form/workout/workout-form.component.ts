@@ -141,7 +141,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
 
   @ViewChild('cropper', undefined) public cropper: ImageCropperComponent;
 
-  private SportsUrl = 'http://' + process.env.API_URL + '/sports';
+  private SportsUrl = process.env.API_URL + '/sports';
 
   constructor(
     private fb: FormBuilder,

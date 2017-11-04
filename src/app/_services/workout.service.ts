@@ -13,7 +13,7 @@ export class WorkoutService {
     'Accept': 'application/json'
   });
   private headersSearch = new Headers({ Accept: 'application/json' });
-  private workoutsUrl = 'http://' + process.env.API_URL + '/workouts';
+  private workoutsUrl = process.env.API_URL + '/workouts';
   private searchDate: Date;
   private workoutApi: WorkoutApi;
 
@@ -56,7 +56,7 @@ export class WorkoutService {
 
   // Return workouts of the business assossiated with current connected account
   public getMyWorkouts(): Promise<Workout[]> {
-    let url = 'http://' + process.env.API_URL + '/getMyWorkouts';
+    let url = process.env.API_URL + '/getMyWorkouts';
     return this.http.get(url, this.jwt())
       .toPromise()
       .then((response) => response.json() as Workout[])

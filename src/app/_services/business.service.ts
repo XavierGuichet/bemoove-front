@@ -11,7 +11,7 @@ export class BusinessService {
     'Accept': 'application/json'
   });
   private headersSearch = new Headers({ Accept: 'application/json' });
-  private businessUrl = 'http://' + process.env.API_URL + '/businesses';
+  private businessUrl = process.env.API_URL + '/businesses';
   // private legalRepresentativeApi: LegalRepresentativeApi;
   private businessApi: BusinessApi;
 
@@ -29,7 +29,7 @@ export class BusinessService {
   }
 
   public getMyBusiness(): Promise<Business> {
-    let url = 'http://' + process.env.API_URL + '/getMyBusiness';
+    let url = process.env.API_URL + '/getMyBusiness';
     return this.http.get(url, this.jwt())
       .toPromise()
       .then((response) => response.json() as Business)
