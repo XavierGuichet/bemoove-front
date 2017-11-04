@@ -6,7 +6,9 @@ import { SpaceService } from '../_services/index';
   selector: 'workout-list',
   encapsulation: ViewEncapsulation.None,
   template: `
-    <router-outlet></router-outlet>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
   `
 })
 export class WorkoutListComponent implements OnInit {

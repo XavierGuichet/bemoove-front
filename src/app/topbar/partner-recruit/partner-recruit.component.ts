@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { SpaceService } from '../../_services/space.service';
 
 @Component({
     selector: 'top-bar-partner-recruit',
@@ -7,10 +8,19 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 
 export class TopBarPartnerRecruitComponent {
-    @Output()
-    private showbar: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public show: boolean = false;
+
+    constructor(
+        private spaceService: SpaceService
+    ) {
+        this.spaceService.setTopBarEmitter.subscribe( (mode) => {
+            if (mode !== null) {
+              this.show = mode;
+            }
+        });
+    }
 
     public removeBar() {
-        this.showbar.emit(false);
+        this.spaceService.toggleTopBar(false);
     }
 }

@@ -8,8 +8,10 @@ import { AlertComponent } from '../_directives/index';
   encapsulation: ViewEncapsulation.None,
   styleUrls: [ './member.component.scss' ],
   template: `
+  <main>
     <member-nav></member-nav>
     <router-outlet></router-outlet>
+  </main>
   `
 })
 export class MemberComponent implements OnInit {

@@ -48,6 +48,7 @@ export class SpaceService {
         }
         if (tokenpayload.roles.filter( (r) => r.indexOf('ROLE_PARTNER') !== -1).length > 0) {
             this.setZone('ROLE_PARTNER');
+            this.toggleTopBar(false);
         }
         this.setUserId(tokenpayload.id);
     }
@@ -69,6 +70,8 @@ export class SpaceService {
     }
 
     public toggleTopBar(show: boolean) {
+        // For connected partner, hide partner recruit bar
+        if (this.getLogged()) { show = false; }
         this.showTopBar.next(show);
     }
 

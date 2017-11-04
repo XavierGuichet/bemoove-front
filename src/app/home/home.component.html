@@ -1,58 +1,60 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <div class="col-xs-12 col-sm-10 offset-sm-1 col-mat-8 offset-mat-2">
-      <h1>Participez à un cours de<br class="hidden-sm-up" /> <span textChanger></span><br/> avec les meilleurs coachs de Nantes</h1>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-8 offset-sm-2 col-mat-6 offset-mat-3">
-        <input type="text" class="form-control" placeholder="Entrez un sport"/>
-        <button type="submit" mat-raised-button color="primary">Trouver des cours</button>
-        <button type="button" mat-raised-button color="primary" (click)="gotolist()">Aller à la liste</button>
+<main [ngClass]="{'withToolBarAbove':showTopBar,'withHeaderOver':withHeaderOver}">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <div class="col-xs-12 col-sm-10 offset-sm-1 col-mat-8 offset-mat-2">
+        <h1>Participez à un cours de<br class="hidden-sm-up" /> <span textChanger></span><br/> avec les meilleurs coachs de Nantes</h1>
       </div>
-    </div>
-  </div>
-</div>
-<div class="avantages">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-7 avantages__item">
-        <div class="avantages__item__header best-partners">
-          <h3>Meilleurs coachs</h3>
-        </div>
-        <p>Tous nos partenaires sont rigoureusement sélectionnés pour leur compétences, leurs qualités humaines et leur sérieux. Et nous sommes fiers de vous les recommander.</p>
-      </div>
-      <div class="col-sm-5 avantages__item">
-        <div class="avantages__item__header with-people">
-          <h3>Convivial & motivant</h3>
-        </div>
-        <p>Profitez de la convivialité et du dynamisme d’un cours collectif. L’occasion parfaite de rencontrer des sportifs avec qui partager vos futures séances.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 avantages__item">
-        <div class="avantages__item__header with-friends">
-          <h3>Venez avec des amis</h3>
-        </div>
-        <p>Profitez d’un moment de partage et de complicité entre amis. Plus on est de fous, plus on rit.</p>
-      </div>
-      <div class="col-sm-6 avantages__item">
-        <div class="avantages__item__header once-or-more">
-          <h3>Un peu, beaucoup, à la folie &hellip;</h3>
-        </div>
-        <p>Une multitude d’activités sportives à votre portée. Osez enfin les disciplines que vous n’avez jamais pu essayer. Une fois, deux fois, milles fois ! C’est à la carte et sans engagement.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-9 avantages__item">
-        <div class="avantages__item__header simplicity">
-          <h3>Choisissez, réservez, profitez</h3>
-        </div>
-      </div>
-      <div class="col-sm-3 avantages__item">
-        <div class="avantages__item__header bloc-next">
-          <mat-icon class="mat-36">feedback</mat-icon>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 offset-sm-2 col-mat-6 offset-mat-3">
+          <input type="text" class="form-control" placeholder="Entrez un sport" />
+          <button type="submit" mat-raised-button color="primary">Trouver des cours</button>
+          <button type="button" mat-raised-button color="primary" (click)="gotolist()">Aller à la liste</button>
         </div>
       </div>
     </div>
   </div>
-</div>
+  <div class="avantages">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-7 avantages__item">
+          <div class="avantages__item__header best-partners">
+            <h3>Meilleurs coachs</h3>
+          </div>
+          <p>Tous nos partenaires sont rigoureusement sélectionnés pour leur compétences, leurs qualités humaines et leur sérieux. Et nous sommes fiers de vous les recommander.</p>
+        </div>
+        <div class="col-sm-5 avantages__item">
+          <div class="avantages__item__header with-people">
+            <h3>Convivial & motivant</h3>
+          </div>
+          <p>Profitez de la convivialité et du dynamisme d’un cours collectif. L’occasion parfaite de rencontrer des sportifs avec qui partager vos futures séances.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 avantages__item">
+          <div class="avantages__item__header with-friends">
+            <h3>Venez avec des amis</h3>
+          </div>
+          <p>Profitez d’un moment de partage et de complicité entre amis. Plus on est de fous, plus on rit.</p>
+        </div>
+        <div class="col-sm-6 avantages__item">
+          <div class="avantages__item__header once-or-more">
+            <h3>Un peu, beaucoup, à la folie &hellip;</h3>
+          </div>
+          <p>Une multitude d’activités sportives à votre portée. Osez enfin les disciplines que vous n’avez jamais pu essayer. Une fois, deux fois, milles fois ! C’est à la carte et sans engagement.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-9 avantages__item">
+          <div class="avantages__item__header simplicity">
+            <h3>Choisissez, réservez, profitez</h3>
+          </div>
+        </div>
+        <div class="col-sm-3 avantages__item">
+          <div class="avantages__item__header bloc-next">
+            <mat-icon class="mat-36">feedback</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

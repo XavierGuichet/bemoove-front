@@ -1,6 +1,5 @@
-import { Component, ViewContainerRef, ViewEncapsulation, OnInit  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { SpaceService } from '../_services/space.service';
 
@@ -11,14 +10,29 @@ import { SpaceService } from '../_services/space.service';
 })
 
 export class HomeComponent implements OnInit {
+    public showTopBar: boolean = true;
+    public withHeaderOver: boolean = true;
+
     constructor(
-        public dialog: MatDialog,
         private router: Router,
         private spaceService: SpaceService
     ) {
     }
 
     public ngOnInit(): void {
+        this.spaceService.setTopBarEmitter.subscribe( (mode) => {
+            if (mode !== null) {
+                console.log(mode);
+              this.showTopBar = mode;
+            }
+        });
+
+        this.spaceService.setHeaderAboveEmitter.subscribe( (mode) => {
+            if (mode !== null) {
+              this.withHeaderOver = mode;
+            }
+        });
+
         this.spaceService.toggleTopBar(true);
         this.spaceService.setHeaderAbove(true);
     }

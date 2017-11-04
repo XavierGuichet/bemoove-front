@@ -17,37 +17,23 @@ import { SpaceService } from './_services/space.service';
     './app.various.tools.scss'
   ],
   template: `
-    <top-bar-partner-recruit  *ngIf="showTopBar"
-                        (showbar)="hideTopBar($event)"
-                        class="toptoolbar"></top-bar-partner-recruit>
+    <top-bar-partner-recruit class="toptoolbar"></top-bar-partner-recruit>
     <header-nav></header-nav>
-    <main [ngClass]="{'withToolBarAbove':showTopBar,'withHeaderAbove':withHeaderAbove}">
-        <router-outlet></router-outlet>
-    </main>
+    <router-outlet></router-outlet>
     <footer></footer>
   `
 })
 export class AppComponent {
-    public showTopBar: boolean = true;
-    public withHeaderAbove: boolean = true;
+    public withHeaderOver: boolean = true;
 
     constructor(
         public appState: AppState,
         private spaceService: SpaceService
     ) {
-        this.spaceService.setTopBarEmitter.subscribe( (mode) => {
-            if (mode !== null) {
-              this.showTopBar = mode;
-            }
-        });
-        this.spaceService.setHeaderAboveEmitter.subscribe( (value) => {
-            if (value !== null) {
-              this.withHeaderAbove = value;
-            }
-        });
-    }
-
-    public hideTopBar(event) {
-        this.spaceService.toggleTopBar(false);
+        // this.spaceService.setHeaderAboveEmitter.subscribe( (value) => {
+        //     if (value !== null) {
+        //       this.withHeaderOver = value;
+        //     }
+        // });
     }
 }
