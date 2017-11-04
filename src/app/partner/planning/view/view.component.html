@@ -14,10 +14,11 @@
       <div>
         <button type="button" mat-raised-button color="accent" (click)="backwardSelectedDay()"><mat-icon class="mat-24">keyboard_arrow_left</mat-icon></button>
         <button type="button" mat-raised-button color="accent" (click)="forwardSelectedDay()"><mat-icon class="mat-24">keyboard_arrow_right</mat-icon></button>
-
+        <div class="coachselect">
           <mat-select [(ngModel)]="selectedCoach" (change)="onCoachChange()">
             <mat-option *ngFor="let coach of coaches" [value]="coach">{{ coach.firstname }}</mat-option>
           </mat-select>
+      </div>
       </div>
       <span class="title-filler"><h4>{{firstDisplayedDay|date:'dd'}} - {{lastDisplayedDay|date:'dd MMMM y'}}</h4></span>
       <div>

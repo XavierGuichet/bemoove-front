@@ -22,7 +22,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button [disabled]="loading || !contactDetailsForm.valid" mat-raised-button color="accent"><mat-spinner *ngIf="loading" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+      <button [disabled]="loading || !contactDetailsForm.valid" mat-raised-button color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
     </mat-card-actions>
   </mat-card>
 </form>

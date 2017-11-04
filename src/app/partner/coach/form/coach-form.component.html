@@ -36,7 +36,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button [disabled]="loading || !coachForm.valid" mat-raised-button class="mr-3" color="accent"><mat-spinner *ngIf="loading" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+          <button [disabled]="loading || !coachForm.valid" mat-raised-button class="mr-3" color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -60,7 +60,7 @@
         <mat-card-actions align="end">
           <button type="button" *ngIf="coachPhotoPathBackup.length > 0" mat-raised-button color="secondary" (click)="resetPhoto()">Annuler</button>
           <button type="button" *ngIf="coachPhotoPathBackup.length == 0 && coach.photo.path" mat-raised-button color="secondary" (click)="changePhoto()">Changer</button>
-          <button [disabled]="loading || !coachForm.valid" mat-raised-button class="mr-3" color="accent"><mat-spinner *ngIf="loading" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+          <button [disabled]="loading || !coachForm.valid" mat-raised-button class="mr-3" color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
         </mat-card-actions>
       </mat-card>
     </div>

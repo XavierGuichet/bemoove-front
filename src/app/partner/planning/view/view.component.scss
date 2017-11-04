@@ -74,6 +74,10 @@ $bg-grey: #e0e0e0;
   flex-direction: row;
   margin: 1.5em 0;
   align-items: center;
+  .coachselect {
+      width: 100px;
+      display: inline-block;
+  }
 }
 
 .title-filler {
