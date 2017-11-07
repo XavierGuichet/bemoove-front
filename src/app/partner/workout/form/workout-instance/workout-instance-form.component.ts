@@ -10,15 +10,19 @@ import { Subject } from 'rxjs/Subject';
 
 import { BMReactFormComponent } from '../../../../form/bm-react-form/bm-react-form.component';
 
-import { Workout,
+import {
+  Workout,
   WorkoutInstance,
-  Coach } from '../../../../models/index';
+  Coach
+} from '../../../../models/index';
 
-import { SpaceService,
+import {
+  SpaceService,
   BusinessService,
   CoachService,
   WorkoutService,
-  WorkoutInstanceService } from '../../../../_services/index';
+  WorkoutInstanceService
+} from '../../../../_services/index';
 
 @Component({
   selector: 'workout-instance-form',
@@ -26,6 +30,7 @@ import { SpaceService,
 })
 
 export class WorkoutInstanceFormComponent extends BMReactFormComponent implements OnInit {
+  public alertNoCoach: any;
   public formResult: any;
   public loading: boolean;
   public formReady: boolean = false;
@@ -92,11 +97,11 @@ export class WorkoutInstanceFormComponent extends BMReactFormComponent implement
           .then((results) => {
             this.coaches = results[0];
             if (!this.coaches.length) {
-            //   this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: '.' };
+              this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: 'Avant de commencer à ajouter des séances, créez votre/vos profil(s) coach.' };
             }
-            this.workoutInstance.coach = this.coaches[0];
-            this.workoutInstances = results[1];
             if (this.coaches.length) {
+              this.workoutInstance.coach = this.coaches[0];
+              this.workoutInstances = results[1];
               this.buildForm();
               // Rappel
               // Pour qu'un select soit prechoisi, il faut bien donner au patch value l'objet present dans sa liste

@@ -1,6 +1,14 @@
 <div class="container">
   <h1 class="h2 alt-font mb-3">Ajouter des sessions à la séance : <span *ngIf="workoutInstance.workout">{{ workoutInstance.workout.title }}</span></h1>
-  <div class="row">
+      <div class="row">
+          <div class="col-12 mt-2 mb-3 container" *ngIf="alertNoCoach || alertInfo">
+          <div *ngIf="alertNoCoach" class="alert" [ngClass]="{ 'alert': alertNoCoach, 'alert-success': alertNoCoach.type === 'success', 'alert-danger': alertNoCoach.type === 'error', 'alert-info': alertNoCoach.type === 'info', 'alert-warning': alertNoCoach.type === 'warn' }">
+              <strong>{{alertNoCoach.title}}</strong><br/>
+              <div [innerHTML]="alertNoCoach.content"></div>
+          </div>
+      </div>
+      </div>
+      <div class="row" *ngIf="formReady">
     <div class="col-6">
       <mat-card class="form-card h-100">
         <form *ngIf="formReady" [formGroup]="workoutInstanceForm" (ngSubmit)="addWorkoutInstance()" novalidate>
