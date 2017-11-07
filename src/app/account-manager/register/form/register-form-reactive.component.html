@@ -3,18 +3,18 @@
     <div *ngSwitchCase="'material'">
         <div class="col-12 white">
           <mat-input-container class="full-width">
-            <input mdInput placeholder="Mail" value="" formControlName="email" required>
+            <input matInput placeholder="Mail" value="" formControlName="email" required>
           </mat-input-container>
         </div>
         <div class="col-12 white password-toggle">
             <mat-input-container class="full-width">
-                <input [type]="showpassword ? 'text' : 'password'" mdInput placeholder="Mot de passe" value="" formControlName="password" required>
+                <input [type]="showpassword ? 'text' : 'password'" matInput placeholder="Mot de passe" value="" formControlName="password" required>
             </mat-input-container>
             <a (click)="passwordToggle()" [ngClass]="showpassword ? 'pwd-toggler-show' : 'pwd-toggler-hide'">Voir le mot de passe</a>
         </div>
         <div class="col-12 white" *ngIf="registerAccountType === 'Partner'">
             <mat-input-container class="full-width">
-              <input mdInput placeholder="Code inscription" value="" formControlName="creationToken" required>
+              <input matInput placeholder="Code inscription" value="" formControlName="creationToken" required>
             </mat-input-container>
         </div>
         <div class="col-12">
