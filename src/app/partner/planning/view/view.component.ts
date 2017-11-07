@@ -21,7 +21,7 @@ import { CoachService,
 
 export class ViewComponent implements OnInit {
   public alertNoCoach: any;
-  public alertInfo: any = { type: 'info', title: 'Le planning', content: 'Le planning vous permets pour chaque coach, de definir la date a laquelle celui ci encadre des séances qui seront disponibles à la reservation sur Bemoove.' };
+  public alertInfo: any = { type: 'info', title: 'Le planning', content: 'Le planning vous permet d’avoir une vision sur vos séances pour chaque coachs de votre entreprise. Il vous permet d’ajouter ou supprimer des places disponibles à la réservation. Vous y retrouvez la liste des inscrits pour chaque séances.' };
 
   public selectedCoach: Coach;
   public coaches: Coach[];
@@ -53,7 +53,7 @@ export class ViewComponent implements OnInit {
       .then((coaches) => {
         this.coaches = coaches;
         if (this.coaches.length === 0) {
-          this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: 'Vous n\'avez pas encore crée de coach pour votre société.<br/>Pour pouvoir utiliser le planning, il vous faut dans un premier temps créer un coach.' };
+          this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: 'Avant de commencer à remplir votre planning, créez votre profil coach ICI.' };
         } else {
           this.route.params.subscribe((params: Params) => {
             this.selectedCoach = this.coaches.find(
