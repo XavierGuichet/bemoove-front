@@ -5,7 +5,7 @@
     </div>
     <div *ngIf="alertNoCoach" class="alert" [ngClass]="{ 'alert': alertNoCoach, 'alert-success': alertNoCoach.type === 'success', 'alert-danger': alertNoCoach.type === 'error', 'alert-info': alertNoCoach.type === 'info', 'alert-warning': alertNoCoach.type === 'warn' }">
         <strong>{{alertNoCoach.title}}</strong><br/>
-        <p>Vous n'avez pas encore crée de coach pour votre société.<br/>Pour pouvoir ajouter une session au planning, il vous faut dans un premier temps <a routerLink="/partner/coach/add">créer un coach</a>.</p>
+        <p>Avant de commencer à remplir votre planning, <a routerLink="/partner/coach/add">créez votre profil coach</a>.</p>
     </div>
 </div>
 <form *ngIf="formReady" [formGroup]="workoutInstanceForm" (ngSubmit)="onSubmit()" novalidate>

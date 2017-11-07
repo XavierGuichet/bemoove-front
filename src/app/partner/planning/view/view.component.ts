@@ -53,12 +53,12 @@ export class ViewComponent implements OnInit {
       .then((coaches) => {
         this.coaches = coaches;
         if (this.coaches.length === 0) {
-          this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: 'Avant de commencer à remplir votre planning, créez votre profil coach ICI.' };
+          this.alertNoCoach = { type: 'error', title: 'Aucun coach', content: 'Avant de commencer à remplir votre planning, <a routerLink="/partner/coach/add">créez votre profil coach</a>.' };
         } else {
           this.route.params.subscribe((params: Params) => {
             this.selectedCoach = this.coaches.find(
               (coach: Coach) => coach.id === parseInt(params['id'], 10));
-            if (!(this.selectedCoach instanceof Object)) {
+            if (!(this.selectedCoach instanceof Object) && this.coaches.length) {
               this.selectedCoach = this.coaches[0];
             }
           });
@@ -101,11 +101,13 @@ export class ViewComponent implements OnInit {
   }
 
   public refreshWorkouts(): void {
+    if (this.selectedCoach) {
     this.workoutInstanceService.getByCoachIdAndDateInterval(this.selectedCoach.id, this.firstDisplayedDay, this.lastDisplayedDay)
       .then((workoutInstances) => {
         this.displayedWorkouts = workoutInstances;
         this.displayWorkout();
       });
+    }
   }
 
   public delete(workout: Workout): void {
