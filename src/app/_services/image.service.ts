@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Image } from '../models/image';
+import { BMImage } from '../models/index';
 
 @Injectable()
 export class ImageService {
@@ -13,10 +13,10 @@ export class ImageService {
 
     constructor(private http: Http) { }
 
-    public getAll(): Promise<Image[]> {
+    public getAll(): Promise<BMImage[]> {
       return this.http.get(this.ImagesUrl, this.jwt())
                  .toPromise()
-                 .then((response) => response.json() as Image[]);
+                 .then((response) => response.json() as BMImage[]);
     }
 
     public getById(id: number) {
@@ -24,16 +24,16 @@ export class ImageService {
                         .map((response: Response) => response.json());
     }
 
-    public create(Image: Image): Promise<Image> {
+    public create(Image: BMImage): Promise<BMImage> {
         return this.http.post(this.ImagesUrl, Image, this.jwt())
         .toPromise()
-        .then((response) => response.json() as Image);
+        .then((response) => response.json() as BMImage);
     }
 
-    public update(Image: Image): Promise<Image> {
+    public update(Image: BMImage): Promise<BMImage> {
         return this.http.put(this.ImagesUrl + '/' + Image.id, Image, this.jwt())
         .toPromise()
-        .then((response) => response.json() as Image);
+        .then((response) => response.json() as BMImage);
     }
 
     public delete(id: number) {

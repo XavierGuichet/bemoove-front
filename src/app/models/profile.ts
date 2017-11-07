@@ -1,4 +1,4 @@
-import { User, Address, Image } from './index';
+import { User, Address, BMImage } from './index';
 
 export class Profile {
     public id: number;
@@ -11,5 +11,5 @@ export class Profile {
     public ismale: boolean;
     public presentation: string;
     public birthdate: Date;
-    public photo: Image;
+    public photo: BMImage;
 }

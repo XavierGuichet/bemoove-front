@@ -1,4 +1,4 @@
-import { User, Address, Business, Image } from './index';
+import { User, Address, Business, BMImage } from './index';
 
 export class Coach {
     public id: number;
@@ -12,9 +12,9 @@ export class Coach {
     public ismale: boolean;
     public description: string;
     public birthdate: Date;
-    public photo: Image;
+    public photo: BMImage;
 
-    constructor(photo = new Image() ) {
+    constructor(photo = new BMImage() ) {
         this.photo = photo;
     }
 }

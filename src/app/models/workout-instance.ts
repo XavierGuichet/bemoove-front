@@ -1,4 +1,4 @@
-import { Coach, Workout } from './index';
+import { BMImage, Coach, Workout } from './index';
 
 export class WorkoutInstance {
     public id: number;
@@ -11,7 +11,7 @@ export class WorkoutInstance {
     public styleTop: string;
     public styleHeight: string;
 
-    constructor(coach = new Coach(), startdate = new Date(), enddate = new Date(), tags = new Array(), photo = new Image()
+    constructor(coach = new Coach(), startdate = new Date(), enddate = new Date(), tags = new Array(), photo = new BMImage()
     ) {
         this.coach = coach;
         if (startdate instanceof Date) {

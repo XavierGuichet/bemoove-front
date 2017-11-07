@@ -1,4 +1,4 @@
-export class Image {
+export class BMImage {
   public id: number;
   public name: string;
   public path: string;

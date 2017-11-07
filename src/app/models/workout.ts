@@ -1,4 +1,4 @@
-import { Address, Image, Sport, Tag } from './index';
+import { Address, BMImage, Sport, Tag } from './index';
 
 export class Workout {
     public id: number;
@@ -18,7 +18,7 @@ export class Workout {
     public styleHeight: string;
     public editable: boolean = true;
 
-    constructor(sport = new Sport(), address = new Address(),  tags = new Array(), photoWide = new Image(), photoSquare = new Image()
+    constructor(sport = new Sport(), address = new Address(),  tags = new Array(), photoWide = new BMImage(), photoSquare = new BMImage()
     ) {
         this.sport = sport;
         this.address = address;

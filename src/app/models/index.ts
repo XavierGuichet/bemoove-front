@@ -5,7 +5,7 @@ export * from './account';
 ﻿export * from './booking';
 ﻿export * from './coach';
 ﻿export * from './day';
-﻿export * from './image';
+﻿export * from './bm-image';
 ﻿export * from './organization';
 ﻿export * from './person';
 ﻿export * from './profile';
