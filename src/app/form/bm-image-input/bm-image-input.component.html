@@ -1,0 +1,13 @@
+<div [hidden]="!showUpload" class="fileUpload btn btn-primary" [ngStyle]="btnshape">
+    <span>Upload</span>
+    <input type="file" class="upload h-100 w-100" (change)="fileChangeListener($event)"/>
+</div>
+<img-cropper #cropper [hidden]="!showCropper" [image]="data" [settings]="cropperSettings"></img-cropper>
+<span class="result rounded" *ngIf="showImage" >
+    <img [src]="(formImage.path || formImage.base64data)" class="max-w-100">
+</span>
+<div class="mt-2">
+    <button type="button" mat-raised-button color="secondary" (click)="resetCropper()" *ngIf="showCropper || (showUpload && formImage.path)">Annuler</button>
+    <button type="button" mat-raised-button color="secondary" (click)="cropNew()" *ngIf="showImage">Changer</button>
+    <button type="button" mat-raised-button color="primary" (click)="confirmCrop()" *ngIf="showCropper">Confirmer</button>
+</div>

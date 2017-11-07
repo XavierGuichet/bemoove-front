@@ -13,25 +13,37 @@ import { Subject } from 'rxjs/Subject';
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 import { CompleterService, RemoteData, CompleterData } from 'ng2-completer';
 
-import { ModalAddressFormComponent  } from '../../modal/modal-address-form.component';
+import { ModalAddressFormComponent } from '../../modal/modal-address-form.component';
 
-import { Workout,
+import {
+  Workout,
   Sport,
   Address,
   Tag,
-  Image } from '../../../../models/index';
+  BMImage
+} from '../../../../models/index';
 
 import {
   BusinessService,
   SportService,
   ImageService,
   AddressService,
-  WorkoutService } from '../../../../_services/index';
+  WorkoutService
+} from '../../../../_services/index';
 
 function validateCreatedObject(c: FormControl) {
   const value = c.value;
   if (isNaN(value.id)) {
     return { validateCreatedObject: true };
+  }
+
+  return null;
+}
+
+function validateImage(c: FormControl) {
+  const value = c.value;
+  if (!value.path && !value.base64data) {
+    return { validateImage: true };
   }
 
   return null;
@@ -63,20 +75,20 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   public workoutForm: FormGroup;
 
   public formEditReadOnly = {
-      main: {
-        title: false,
-        sport: true,
-        duration: true,
-        address: true,
-        price: true,
-      },
-      details: {
-        description: false,
-        outfit: false,
-        notice: false,
-        tag: false
-      }
-    };
+    main: {
+      title: false,
+      sport: true,
+      duration: true,
+      address: true,
+      price: true,
+    },
+    details: {
+      description: false,
+      outfit: false,
+      notice: false,
+      tag: false
+    }
+  };
 
   public formErrors = {
     main: {
@@ -91,11 +103,14 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
       outfit: '',
       notice: '',
       tag: ''
+    },
+    images: {
+      photoSquare: '',
+      photoWide: ''
     }
   };
 
   public validationMessages = {
-      'testimage': {},
     'main.title': {
       required: 'Un titre est nécessaire.',
     },
@@ -122,6 +137,12 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
       required: 'Veuillez entrez les informations complémentaire pour cette séance.',
     },
     'details.tag': {
+    },
+    'images.photoSquare': {
+      validateImage: 'Veuillez choisir une photo, la découper et confirmer.'
+    },
+    'images.photoWide': {
+      validateImage: 'Veuillez choisir une photo, la découper et confirmer.'
     }
   };
 
@@ -131,15 +152,7 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
 
   public sportDataService: RemoteData;
 
-  public cropperDataSquare: any;
-  public cropperSettingsSquare: CropperSettings;
-
-  public cropperDataWide: any;
-  public cropperSettingsWide: CropperSettings;
-
   public activeTab;
-
-  @ViewChild('cropper', undefined) public cropper: ImageCropperComponent;
 
   private SportsUrl = process.env.API_URL + '/sports';
 
@@ -155,7 +168,6 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     public dialog: MatDialog) {
     super();
     this.initAutoCompleters(completerService);
-    this.initCropper();
   }
 
   public initAutoCompleters(completerService: CompleterService): void {
@@ -168,31 +180,6 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }));
-  }
-
-  /** Init Cropper Settings for both cropper */
-  public initCropper(): void {
-    this.cropperSettingsSquare = new CropperSettings();
-    this.cropperSettingsSquare.width = 10;
-    this.cropperSettingsSquare.height = 10;
-    this.cropperSettingsSquare.croppedWidth = 300;
-    this.cropperSettingsSquare.croppedHeight = 300;
-    this.cropperSettingsSquare.canvasWidth = 600;
-    this.cropperSettingsSquare.canvasHeight = 337;
-    this.cropperSettingsSquare.keepAspect = true;
-
-    this.cropperDataSquare = {};
-
-    this.cropperSettingsWide = new CropperSettings();
-    this.cropperSettingsWide.width = 192;
-    this.cropperSettingsWide.height = 35;
-    this.cropperSettingsWide.croppedWidth = 1920;
-    this.cropperSettingsWide.croppedHeight = 350;
-    this.cropperSettingsWide.canvasWidth = 600;
-    this.cropperSettingsWide.canvasHeight = 337;
-    this.cropperSettingsWide.keepAspect = true;
-
-    this.cropperDataWide = {};
   }
 
   public ngOnInit(): void {
@@ -237,6 +224,22 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
 
   get addressControl() {
     return this.workoutForm.get('main.address');
+  }
+
+  get photoSquareControl() {
+    return this.workoutForm.get('images.photoSquare');
+  }
+
+  public confirmPhotoSquare(image: BMImage) {
+    this.photoSquareControl.setValue(image);
+  }
+
+  get photoWideControl() {
+    return this.workoutForm.get('images.photoWide');
+  }
+
+  public confirmPhotoWide(image: BMImage) {
+    this.photoWideControl.setValue(image);
   }
 
   get tagcontrol() {
@@ -301,6 +304,11 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
   }
 
   public onSubmit() {
+      if (!this.workoutForm.valid) {
+          const formErrors = this.formErrors;
+          this.formErrors = this.recursiveCheck(this.workoutForm, formErrors, '', true);
+          return;
+      }
     this.loading = true;
     let workout: Workout = this.createObjectFromModel();
 
@@ -327,7 +335,9 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     }
 
     workout.title = formModel.main.title;
-    workout.sport = this.selectedSport;
+    if (!!this.selectedSport) {
+        workout.sport = this.selectedSport;
+    }
     workout.duration = formModel.main.duration.hour * 60 + formModel.main.duration.minute;
     workout.address = formModel.main.address;
     workout.price = formModel.main.price;
@@ -337,9 +347,8 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
     workout.notice = formModel.details.notice;
     workout.tags = formModel.details.tags;
 
-    // Todo improve photo system
-    workout.photoSquare.base64data = this.cropperDataSquare.image;
-    workout.photoWide.base64data = this.cropperDataWide.image;
+    workout.photoSquare = formModel.images.photoSquare;
+    workout.photoWide = formModel.images.photoWide;
 
     return workout;
   }
@@ -381,6 +390,16 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
         ]
         ],
         tags: this.fb.array(this.workout.tags || []),
+      }),
+      images: this.fb.group({
+        photoSquare: [this.workout.photoSquare, [
+          validateImage
+        ]
+        ],
+        photoWide: [this.workout.photoWide, [
+          validateImage
+        ]
+        ]
       })
     });
 
@@ -416,15 +435,17 @@ export class WorkoutFormComponent extends BMReactFormComponent implements OnInit
 
     if (!workout.photoWide.id && workout.photoWide.base64data !== null) {
       Promises.push(this.imageService.create(workout.photoWide).then((image) => workout.photoWide = image));
-    } else if (workout.photoWide.base64data !== null) {
-      Promises.push(this.imageService.update(workout.photoWide).then((image) => workout.photoWide = image));
     }
+    //  else if (workout.photoWide.base64data !== null) {
+    //   Promises.push(this.imageService.update(workout.photoWide).then((image) => workout.photoWide = image));
+    // }
 
     if (!workout.photoSquare.id && workout.photoSquare.base64data !== null) {
       Promises.push(this.imageService.create(workout.photoSquare).then((image) => workout.photoSquare = image));
-    } else if (workout.photoSquare.base64data !== null) {
-      Promises.push(this.imageService.update(workout.photoSquare).then((image) => workout.photoSquare = image));
     }
+    //  else if (workout.photoSquare.base64data !== null) {
+    //   Promises.push(this.imageService.update(workout.photoSquare).then((image) => workout.photoSquare = image));
+    // }
 
     if (!workout.sport.id) {
       Promises.push(this.sportService.create(workout.sport).then((sport) => workout.sport = sport));
