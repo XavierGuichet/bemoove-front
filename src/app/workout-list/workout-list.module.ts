@@ -23,7 +23,7 @@ import { WorkoutService, SpaceService } from '../_services/index';
         WorkoutBlockComponent,
         WorkoutDetailsComponent
     ],
-  exports:      [ WorkoutListComponent ],
+  exports:      [ WorkoutListComponent, WorkoutBlockComponent ],
   entryComponents: [ ],
   providers:    [
         WorkoutService,

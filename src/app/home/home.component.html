@@ -1,5 +1,5 @@
 <main [ngClass]="{'withToolBarAbove':showTopBar,'withHeaderOver':withHeaderOver}">
-  <div class="jumbotron jumbotron-fluid">
+  <div class="jumbotron jumbotron-fluid mb-4">
     <div class="container">
       <div class="col-xs-12 col-sm-10 offset-sm-1 col-mat-8 offset-mat-2">
         <h1>Participez à un cours de<br class="hidden-sm-up" /> <span textChanger></span><br/> avec les meilleurs coachs de Nantes</h1>
@@ -9,6 +9,18 @@
           <input type="text" class="form-control" placeholder="Entrez un sport" />
           <button type="submit" mat-raised-button color="primary">Trouver des cours</button>
           <button type="button" mat-raised-button color="primary" (click)="gotolist()">Aller à la liste</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container someworkouts mb-4 pt-4">
+    <div class="row">
+      <h2 class="text-center w-100 mb-4 h3 alt-font">Les prochains cours</h2>
+    </div>
+    <div class="row mb-4">
+      <div class="offset-lg-2 col-lg-8 row pb-4">
+        <div *ngFor="let workoutinstance of workoutInstances" class="col-xs-12 col-sm-6 col-mat-4 col-lg-4 ">
+          <workout-block [workoutinstance]="workoutinstance"></workout-block>
         </div>
       </div>
     </div>
