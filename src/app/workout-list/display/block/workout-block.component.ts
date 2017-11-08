@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Booking, WorkoutInstance } from '../../../../models/index';
+import { Booking, WorkoutInstance } from '../../../models/index';
 
-import { BookingService, SpaceService } from '../../../../_services/index';
+import { BookingService, SpaceService } from '../../../_services/index';
 
 @Component({
   selector: 'workout-block',

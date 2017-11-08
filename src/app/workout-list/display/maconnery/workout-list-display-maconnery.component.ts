@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { WorkoutBlockComponent } from './workout-block/workout-block.component';
-
 import { WorkoutInstance } from '../../../models/index';
 
 import { SpaceService, WorkoutInstanceService } from '../../../_services/index';
