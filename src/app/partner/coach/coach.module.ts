@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { CoachComponent } from './coach.component';
 import { ListComponent } from './list/list.component';
 import { CoachFormComponent } from './form/coach-form.component';
@@ -27,7 +25,6 @@ import { CoachService,
   imports: [
         SharedModule,
         BmFormModule,
-        NgbModule.forRoot(),
         CoachRoutingModule,
         PartnerNavSecondaryModule
     ],

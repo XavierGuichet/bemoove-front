@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { WorkoutComponent } from './workout.component';
 import { WorkoutListComponent } from './list/workout-list.component';
 import { WorkoutFormComponent } from './form/workout/workout-form.component';
@@ -32,7 +30,6 @@ import { WorkoutService, WorkoutInstanceService,
   imports: [
         SharedModule,
         BmFormModule,
-        NgbModule.forRoot(),
         WorkoutRoutingModule
     ],
   declarations: [

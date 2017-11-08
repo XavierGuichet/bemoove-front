@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {
-    MatButtonModule,
-    MatDialogModule } from '@angular/material';
-
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RegisterFormReactiveModule } from './register/form/register-form-reactive.module';
@@ -22,9 +17,6 @@ import { LoginButtonComponent } from './login/button/login-button.component';
   imports: [
         SharedModule,
         ReactiveFormsModule,
-        NgbModule.forRoot(),
-        MatDialogModule,
-        MatButtonModule,
         RegisterFormReactiveModule,
         LoginFormReactiveModule
     ],

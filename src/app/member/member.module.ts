@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDatepickerI18n } from '../_helpers/custom-datepicker.component';
 
@@ -30,7 +29,6 @@ import { AlertService, ProfileService } from '../_services/index';
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
-        NgbModule.forRoot(),
         MemberRoutingModule
     ],
   declarations: [

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { PlanningComponent } from './planning.component';
 import { ViewComponent } from './view/view.component';
 import { PlanningRoutingModule } from './planning-routing.module';
@@ -22,7 +20,6 @@ import { AddSessionModalComponent } from './modal/add-session-modal.component';
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
-        NgbModule.forRoot(),
         PlanningRoutingModule
     ],
   declarations: [
