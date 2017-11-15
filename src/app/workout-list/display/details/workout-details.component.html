@@ -1,7 +1,8 @@
 <div *ngIf="workout">
-  <div class="header container-fluid" [style.background-image]="headerimage">
+  <div class="header container-fluid aspect-ratio--custom">
+      <img src="{{workout.photoWide.path}}" class="aspect-ratio--object"/>
   </div>
-  <div class="container">
+  <div class="container zi-10">
     <div class="row">
       <div class="col-8 pt-3">
         <h1 class="f-blue alt-font">{{ workout.title }}</h1>
