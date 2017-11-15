@@ -3,14 +3,14 @@
       <img *ngIf="transparent" src="assets/img/bemoove-logo.png" />
       <img *ngIf="!transparent" src="assets/img/bemoove-logo-grey.png" />
     </a>
-    <div class="quicksearch" *ngIf="!transparent">
+    <!-- <div class="quicksearch" *ngIf="!transparent">
         <div class="input-group">
         <input type="text" class="form-control" placeholder="Emplacement future recherche rapide" />
         <span class="input-group-btn">
             <button class="btn btn-default" type="button"><mat-icon class="mat-16">search</mat-icon></button>
           </span>
     </div>
-    </div>
+    </div> -->
     <span class="filler"></span>
     <div class="navbar-container" [ngSwitch]="headerType">
       <div class="navbar-links" *ngSwitchCase="'ROLE_PARTNER'">
