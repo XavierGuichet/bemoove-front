@@ -26,7 +26,7 @@ export class WorkoutBlockComponent {
     }
 
     public viewWorkout(): void {
-        this.router.navigate(['/workouts/view/' + this.workoutinstance.workout.id]);
+        this.router.navigate(['/workouts/' + this.workoutinstance.workout.id + '/' + this.workoutinstance.id]);
         return;
     }
 

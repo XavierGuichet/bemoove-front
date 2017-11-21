@@ -7,13 +7,18 @@ import {
     SafeStyle
 } from '@angular/platform-browser';
 
-import { Workout } from '../../../models/workout';
-import { Booking } from '../../../models/booking';
+import {
+    Booking,
+    Coach,
+    Workout,
+    WorkoutInstance } from '../../../models/index';
 
-import { SpaceService } from '../../../_services/space.service';
-import { BookingService } from '../../../_services/booking.service';
-import { WorkoutService } from '../../../_services/workout.service';
-import { ProfileService } from '../../../_services/profile.service';
+import {
+    BookingService,
+    ProfileService,
+    SpaceService,
+    WorkoutService,
+    WorkoutInstanceService } from '../../../_services/index';
 
 @Component({
   selector: 'workout-details',
@@ -24,6 +29,8 @@ import { ProfileService } from '../../../_services/profile.service';
 
 export class WorkoutDetailsComponent implements OnInit {
     public workout: Workout;
+    public coach: Coach;
+    public workoutInstances: WorkoutInstance[];
     public scrolled: boolean = false;
     public headerimage: any;
     private booking: Booking;
@@ -31,6 +38,7 @@ export class WorkoutDetailsComponent implements OnInit {
         private domSanitizer: DomSanitizer,
         private bookingService: BookingService,
         private workoutService: WorkoutService,
+        private workoutInstanceService: WorkoutInstanceService,
         private profileService: ProfileService,
         private router: Router,
         private route: ActivatedRoute,
@@ -41,11 +49,18 @@ export class WorkoutDetailsComponent implements OnInit {
 
     public ngOnInit(): void {
         this.route.params
-          .switchMap( (params: Params) => this.workoutService.getWorkout(+params['id']))
+          .switchMap( (params: Params) => {
+              return this.workoutService.getWorkout(+params['idworkout']);
+          })
           .subscribe( (workout) => {
               this.workout = workout;
               this.headerimage =  this.domSanitizer.bypassSecurityTrustStyle(`url(${this.workout.photoWide.path})`);
-            //  this.profileService.getByOwnerId(+params['id']);
+              this.workoutInstanceService.getBookableByWorkoutId(this.workout.id).then( (workoutInstances) => {
+                  this.workoutInstances = workoutInstances;
+                  if (this.workoutInstances[0].coach) {
+                      this.coach = this.workoutInstances[0].coach;
+                  }
+              });
           });
     }
 }

@@ -59,17 +59,15 @@
           <h2 class="h5 f-grey font-weight-bold  mb-4  alt-font">Détails pratiques</h2>
           <p class="f-darkgrey">{{ workout.notice }}</p>
         </div>
-        <div class="mb-3 bg-white px-4 pt-2 pb-4">
+        <div class="mb-3 bg-white px-4 pt-2 pb-4" *ngIf="coach">
           <h2 class="h5 f-grey font-weight-bold mb-4 alt-font">Votre coach</h2>
-          <div class="row alert alert-danger">
+          <div class="row">
             <div class="col-4">
-              <img src="http://api.bemoove.local/uploads/images/788c7491ffb86fe6c5d4aef7883c3d45.jpg" class="col-12 rounded-circle">
+              <img src="{{coach.photo.path}}" class="col-12 rounded-circle">
             </div>
             <div class="col-8">
-              <h3 class="f-blue">Ronan Luce</h3>
-              <p class="f-darkgrey">Renan Luce naît le 5 mars 1980 à Paris mais vit toute son enfance et son adolescence en Bretagne, à Plourin-lès-Morlaix (près de Morlaix, dans le Finistère). Il commence sa formation musicale en participant avec son frère Damien Luce et
-                avec sa sœur Claire à une chorale, puis commence l'étude du piano classique avec Damien. Il poursuit ensuite son apprentissage aux conservatoires de Brest puis de Saint-Brieuc. Il remplace alors le piano par le saxophone et apprend seul
-                la guitare en composant ses premières chansons.</p>
+              <h3 class="f-blue">{{coach.firstname}} {{coach.lastname}}</h3>
+              <p class="f-darkgrey">{{coach.description}}</p>
             </div>
           </div>
         </div>
@@ -92,10 +90,12 @@
           </div>
           <div class="booking__content px-3 pb-2 pt-4">
             <div class="col-12">
-              <div class="row mb-3 alert alert-danger">
+              <div class="row mb-3">
                 <label class="f-grey">Choisissez votre date</label>
                 <select class="form-control">
-                    <option>{{workout.startdate | date: 'EEEE d MMM'}} à {{workout.startdate | date: 'shortTime'}}</option>
+                    <option *ngFor="let workoutInstance of workoutInstances">
+                        {{workoutInstance.startdate | date: 'EEEE d MMM'}} à {{workoutInstance.startdate | date: 'shortTime'}}
+                    </option>
                 </select>
               </div>
               <div class="row mb-3">

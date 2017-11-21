@@ -16,7 +16,8 @@ import { SpaceService } from '../_services/space.service';
     children: [
         { path: '', redirectTo: 'view', pathMatch: 'full' },
         { path: 'view', component: WorkoutListMaconneryComponent },
-        { path: 'view/:id', component: WorkoutDetailsComponent },
+        { path: ':idworkout', component: WorkoutDetailsComponent },
+        { path: ':idworkout/:idsession', component: WorkoutDetailsComponent },
     ]
   }
   ])],
