@@ -29,6 +29,15 @@ export class WorkoutInstanceService {
       .catch(this.handleError);
   }
 
+  public getBookableByWorkoutId(id: number): Promise<WorkoutInstance[]> {
+      let url = process.env.API_URL + '/getBookableWorkoutInstance' + '?workout.id=' + id;
+      return this.http.get(url,
+        { headers: this.headersSearch })
+        .toPromise()
+        .then((response) => response.json() as WorkoutInstance[])
+        .catch(this.handleError);
+  }
+
   public getByWorkoutId(id: number): Promise<WorkoutInstance[]> {
     return this.http.get(this.workoutInstancesUrl + '?workout.id=' + id,
       { headers: this.headersSearch })
