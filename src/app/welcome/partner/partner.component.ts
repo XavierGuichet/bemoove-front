@@ -12,6 +12,9 @@ import { SpaceService } from '../../_services/space.service';
 })
 
 export class WelcomePartnerComponent implements OnInit {
+    public showTopBar: boolean = true;
+    public withHeaderOver: boolean = true;
+
     constructor(
         private router: Router,
         private spaceService: SpaceService
@@ -21,5 +24,6 @@ export class WelcomePartnerComponent implements OnInit {
     public ngOnInit() {
         this.spaceService.toggleTopBar(false);
         this.spaceService.setHeaderAbove(true);
+        console.log(this.withHeaderOver);
     }
 }
