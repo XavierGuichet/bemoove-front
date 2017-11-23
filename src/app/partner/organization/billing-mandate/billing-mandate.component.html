@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-6">
+  <mat-card class="form-card col-6 pt-4">
     <h1 class="h2 alt-font mb-3">Mandat de facturation</h1>
 
     <p>Le présent mandat de facturation est conclu entre :</p>
@@ -76,6 +76,21 @@
 
     <p>Le présent Mandat est soumis au droit français. Tout litige relatif à sa formation, conclusion, interprétation ou exécution relève de la compétence exclusive des juridictions dans le ressort de la Cour d’appel de Paris.</p>
 
-    <p>Signé électroniquement le : </p>
+    <p>Signé électroniquement le : <span *ngIf="hasSign">{{billingMandateSign.signOn | date: "medium"}}</span></p>
+  </mat-card>
+</div>
+<div class="row">
+  <div class="col-6">
+      <div class="row justify-content-end pb-4">
+    <form *ngIf="!hasSign && formReady" [formGroup]="billingMandateSignForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+        <mat-checkbox formControlName="approved" required>Lu et approuvé</mat-checkbox>
+        <div *ngIf="formErrors.description" class="form-error">
+          {{ formErrors.description }}
+        </div>
+      </div>
+      <button [disabled]="loading || !billingMandateSignForm.valid" type="submit" mat-raised-button color="primary">Signer</button>
+    </form>
+</div>
   </div>
 </div>

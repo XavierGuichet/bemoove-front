@@ -3,6 +3,7 @@
 export * from './authentication.service';
 export * from './bank-account.service';
 export * from './booking.service';
+export * from './billing-mandate.service';
 export * from './business.service';
 export * from './coach.service';
 export * from './image.service';

@@ -1,6 +1,7 @@
 export * from './account';
 ﻿export * from './address';
 ﻿export * from './bank-account';
+﻿export * from './billing-mandate-sign';
 ﻿export * from './business';
 ﻿export * from './booking';
 ﻿export * from './coach';
