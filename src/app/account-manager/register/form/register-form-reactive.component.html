@@ -12,10 +12,14 @@
             </mat-input-container>
             <a (click)="passwordToggle()" [ngClass]="showpassword ? 'pwd-toggler-show' : 'pwd-toggler-hide'">Voir le mot de passe</a>
         </div>
-        <div class="col-12 white" *ngIf="registerAccountType === 'Partner'">
+        <div class="col-12 white help-toggle" *ngIf="registerAccountType === 'Partner'">
             <mat-input-container class="full-width">
               <input matInput placeholder="Code inscription" value="" formControlName="creationToken" required>
             </mat-input-container>
+            <a (click)="partnerHelpToggle()" [ngClass]="showpartnerhelp ? 'partner-help-toggler-show' : 'partner-help-toggler-hide'">Aide</a>
+            <div *ngIf="showpartnerhelp" class="help-block">
+                Cool text should be here, but i don't have any idea ATM. <!-- TODO: do text  -->
+            </div>
         </div>
         <div class="col-12">
             <button type="submit" mat-raised-button color="primary" class="btn-full-width">S'inscrire</button>

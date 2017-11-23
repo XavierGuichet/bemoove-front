@@ -21,6 +21,7 @@ export class RegisterFormReactiveComponent implements OnInit {
   public registerAccountType: string = 'User';
   public account: Account = new Account();
   public showpassword: boolean = false;
+  public showpartnerhelp: boolean = false;
 
   // Reset the form with a new user AND restore 'pristine' class state
   // by toggling 'active' flag which causes the form
@@ -127,6 +128,10 @@ export class RegisterFormReactiveComponent implements OnInit {
 
   public passwordToggle() {
     this.showpassword = !this.showpassword;
+  }
+
+  public partnerHelpToggle() {
+      this.showpartnerhelp = !this.showpartnerhelp;
   }
 
   private buildForm(): void {
