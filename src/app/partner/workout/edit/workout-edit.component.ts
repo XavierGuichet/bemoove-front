@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { Workout } from '../../../models/workout';
 
-import { WorkoutService } from '../../../_services/workout.service';
+import { WorkoutService } from '../../../_services/index';
 
 @Component({
   selector: 'partner-workout-edit',
