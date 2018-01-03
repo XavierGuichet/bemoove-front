@@ -4,8 +4,6 @@ import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 
 import { LoginModalComponent  } from '../../login/modal/login-modal.component';
 
-import { AlertService } from '../../../_services/index';
-
 @Component({
     // moduleId: module.id,
     selector: 'register-modal',
@@ -17,8 +15,7 @@ export class RegisterModalComponent {
         public dialog: MatDialog,
         public dialogRef: MatDialogRef<RegisterModalComponent>,
         public snackBar: MatSnackBar,
-        private router: Router,
-        private alertService: AlertService) {
+        private router: Router) {
     }
 
     public showLoginModal() {
