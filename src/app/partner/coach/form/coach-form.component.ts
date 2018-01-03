@@ -16,8 +16,7 @@ import { CompleterService, RemoteData, CompleterData } from 'ng2-completer';
 import { Coach } from '../../../models/index';
 
 import { CoachService,
-  ImageService,
-  SpaceService } from '../../../_services/index';
+  ImageService } from '../../../_services/index';
 
 @Component({
   selector: 'coach-form',
@@ -60,8 +59,7 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private coachService: CoachService,
-    private imageService: ImageService,
-    private spaceService: SpaceService) {
+    private imageService: ImageService) {
     super();
     this.cropperSettings.rounded = true;
     this.cropperSettings.width = 100;

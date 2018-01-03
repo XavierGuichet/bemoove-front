@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
 
-import { BusinessService, SpaceService } from '../../../_services/index';
+import { BusinessService } from '../../../_services/index';
 
 import { Organization } from '../../../models/index';
 
@@ -90,8 +90,7 @@ export class InvoiceSettingsComponent extends BMReactFormComponent implements On
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private businessService: BusinessService,
-    private spaceService: SpaceService) {
+    private businessService: BusinessService) {
     super();
   }
 

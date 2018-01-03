@@ -17,7 +17,6 @@ import {
 } from '../../../../models/index';
 
 import {
-  SpaceService,
   BusinessService,
   CoachService,
   WorkoutService,
@@ -82,8 +81,7 @@ export class WorkoutInstanceFormComponent extends BMReactFormComponent implement
     private workoutService: WorkoutService,
     private workoutInstanceService: WorkoutInstanceService,
     private ngbDateParserFormatter: NgbDateParserFormatter,
-    private route: ActivatedRoute,
-    private spaceService: SpaceService) {
+    private route: ActivatedRoute) {
     super();
   }
 

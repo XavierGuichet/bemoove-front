@@ -9,7 +9,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { Address, BankAccount } from '../../../models/index';
 
-import { SpaceService, AddressService, BankAccountService } from '../../../_services/index';
+import { AddressService, BankAccountService } from '../../../_services/index';
 
 @Component({
   selector: 'bank-account',
@@ -59,7 +59,6 @@ export class BankAccountComponent extends BMReactFormComponent implements OnInit
     private fb: FormBuilder,
     private bankAccountService: BankAccountService,
     private router: Router,
-    private spaceService: SpaceService,
     private addressService: AddressService,
   ) {
     super();

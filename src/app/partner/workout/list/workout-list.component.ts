@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
-import { WorkoutService, SpaceService } from '../../../_services/index';
+import { WorkoutService } from '../../../_services/index';
 import { Workout } from '../../../models/workout';
 
 @Component({
@@ -10,8 +10,7 @@ import { Workout } from '../../../models/workout';
 export class WorkoutListComponent implements OnInit {
     public workouts: Workout[];
     public loading: boolean = false;
-    constructor(private workoutService: WorkoutService,
-                private spaceService: SpaceService) {
+    constructor(private workoutService: WorkoutService) {
 
     }
 

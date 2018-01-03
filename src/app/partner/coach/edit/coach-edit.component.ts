@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
-import { CoachService, SpaceService } from '../../../_services/index';
+import { CoachService } from '../../../_services/index';
 import { Coach } from '../../../models/index';
 
 @Component({
@@ -12,10 +12,8 @@ import { Coach } from '../../../models/index';
 export class CoachEditComponent {
     public coach: Coach;
     constructor(
-        private spaceService: SpaceService,
         private coachService: CoachService,
-        private route: ActivatedRoute,
-        private router: Router
+        private route: ActivatedRoute
     ) {
         this.route.params
           .switchMap( (params: Params) => this.coachService.getById(+params['id']))

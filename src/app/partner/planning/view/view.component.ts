@@ -10,8 +10,7 @@ import { AddSessionModalComponent } from '../modal/add-session-modal.component';
 import { WorkoutDateProvider } from '../../workoutdate.provider';
 import { CoachService,
   WorkoutService,
-  WorkoutInstanceService,
-  SpaceService } from '../../../_services/index';
+  WorkoutInstanceService } from '../../../_services/index';
 
 @Component({
   selector: 'planning-view',
@@ -34,7 +33,6 @@ export class ViewComponent implements OnInit {
   public quarters: any = [0, 15, 30, 45];
   public displayedWorkouts: WorkoutInstance[];
   constructor(
-    private spaceService: SpaceService,
     private route: ActivatedRoute,
     private router: Router,
     private coachService: CoachService,

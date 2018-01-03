@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
 
 import { BillingMandateSign } from '../../../models/index';
-import { BillingMandateSignService, SpaceService } from '../../../_services/index';
+import { BillingMandateSignService } from '../../../_services/index';
 
 @Component({
   selector: 'billing-mandate',
@@ -35,8 +35,7 @@ export class BillingMandateComponent extends BMReactFormComponent implements OnI
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private billingMandateSignService: BillingMandateSignService,
-    private spaceService: SpaceService ) {
+    private billingMandateSignService: BillingMandateSignService ) {
         super();
     }
 

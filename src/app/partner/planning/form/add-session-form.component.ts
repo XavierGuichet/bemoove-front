@@ -14,8 +14,7 @@ import { Coach,
 
 import { WorkoutInstanceService,
   CoachService,
-  WorkoutService,
-  SpaceService } from '../../../_services/index';
+  WorkoutService } from '../../../_services/index';
 
 @Component({
   selector: 'add-session-form',
@@ -73,8 +72,7 @@ export class AddSessionFormComponent extends BMReactFormComponent implements OnI
     private workoutInstanceService: WorkoutInstanceService,
     private coachService: CoachService,
     private ngbDateParserFormatter: NgbDateParserFormatter,
-    private router: Router,
-    private spaceService: SpaceService
+    private router: Router
   ) {
     super();
   }
