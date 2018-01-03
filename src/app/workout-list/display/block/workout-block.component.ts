@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Booking, WorkoutInstance } from '../../../models/index';
 
-import { BookingService, SpaceService } from '../../../_services/index';
+import { BookingService } from '../../../_services/index';
 
 @Component({
   selector: 'workout-block',
@@ -19,8 +19,7 @@ export class WorkoutBlockComponent {
     // private account: Account;
     constructor(
         private bookingService: BookingService,
-        private router: Router,
-        private spaceService: SpaceService,
+        private router: Router
     ) {
         // TODO
     }

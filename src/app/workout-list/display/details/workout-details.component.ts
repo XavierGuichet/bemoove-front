@@ -16,7 +16,6 @@ import {
 import {
     BookingService,
     ProfileService,
-    SpaceService,
     WorkoutService,
     WorkoutInstanceService } from '../../../_services/index';
 
@@ -41,8 +40,7 @@ export class WorkoutDetailsComponent implements OnInit {
         private workoutInstanceService: WorkoutInstanceService,
         private profileService: ProfileService,
         private router: Router,
-        private route: ActivatedRoute,
-        private spaceService: SpaceService,
+        private route: ActivatedRoute
     ) {
         // TODO
     }
