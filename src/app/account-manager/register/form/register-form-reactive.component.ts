@@ -71,17 +71,18 @@ export class RegisterFormReactiveComponent implements OnInit {
     this.loading = true;
     this.account = this.RegisterForm.value;
     this.authenticationService.register(this.account)
-      .subscribe(
+    .then(
       (data) => {
-        this.alertService.success('Registration successful', true);
-        this.snackBar.open('Inscription réussie', '', {
-          duration: 10000,
-        });
-        this.authenticate();
-      },
-      (error) => {
-        this.alertService.error(error);
+          this.alertService.success('Registration successful', true);
+          this.snackBar.open('Inscription réussie', '', {
+            duration: 10000,
+          });
+          this.authenticate();
       });
+    //   .catch(this.handleError);
+    //   (error) => {
+        // this.alertService.error(error);
+    //   });
   }
 
   public authenticate() {
