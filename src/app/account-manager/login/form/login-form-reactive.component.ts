@@ -61,7 +61,7 @@ export class LoginFormReactiveComponent implements OnInit {
         this.loading = true;
         this.account = this.LoginForm.value;
         this.authenticationService.login(this.account.username, this.account.password)
-            .subscribe(
+            .then(
                 (data) => {
                     this.dialogRef.close();
                     let zone = this.spaceService.getZone();
@@ -74,11 +74,13 @@ export class LoginFormReactiveComponent implements OnInit {
                         return;
                     }
                     this.router.navigate(['/workouts']);
-                },
-                (error) => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
+                }
+    //             ,
+    //             (error) => {
+    //                 this.alertService.error(error);
+    // this.loading = false;
+    //             }
+            );
     }
 
     public onValueChanged(data?: any) {

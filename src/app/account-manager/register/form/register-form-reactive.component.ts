@@ -87,7 +87,7 @@ export class RegisterFormReactiveComponent implements OnInit {
 
   public authenticate() {
       this.authenticationService.login(this.account.email, this.account.password)
-          .subscribe(
+          .then(
               (data) => {
                   let zone = this.spaceService.getZone();
                   if (zone === 'ROLE_PARTNER') {
@@ -99,10 +99,6 @@ export class RegisterFormReactiveComponent implements OnInit {
                       return;
                   }
                   this.router.navigate(['/workouts']);
-              },
-              (error) => {
-                  this.alertService.error(error);
-                  this.loading = false;
               });
   }
 
