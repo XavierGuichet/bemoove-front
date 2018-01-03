@@ -1,4 +1,4 @@
-import { Workout } from '../../models/workout';
+import { Workout } from '../../../models/workout';
 
 export class WorkoutApi {
   public title: string;

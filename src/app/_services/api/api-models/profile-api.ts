@@ -1,4 +1,4 @@
-import { Profile } from '../../models/index';
+import { Profile } from '../../../models/index';
 
 export class ProfileApi {
     public id: number;

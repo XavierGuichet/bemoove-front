@@ -1,4 +1,4 @@
-import { Coach } from '../../models/index';
+import { Coach } from '../../../models/index';
 
 export class CoachApi {
     public id: number;

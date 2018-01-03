@@ -1,42 +1,41 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions, Response } from '@angular/http';
+import { Injectable, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { Http, Response } from '@angular/http';
+import { ApiService } from './api.service';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Workout } from '../models/workout';
+import { Workout } from '../../models/workout';
 import { WorkoutApi } from './api-models/workout-api';
 
 @Injectable()
-export class WorkoutService {
-  private headers = new Headers({
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  });
-  private headersSearch = new Headers({ Accept: 'application/json' });
+export class WorkoutService extends ApiService {
   private workoutsUrl = process.env.API_URL + '/workouts';
   private searchDate: Date;
   private workoutApi: WorkoutApi;
 
-  constructor(private http: Http) { }
+  constructor(dialog: MatDialog, private http: Http) {
+    super(dialog);
+  }
 
   public create(workout: Workout): Promise<Workout> {
     this.workoutApi = new WorkoutApi(workout);
     return this.http.post(this.workoutsUrl,
       this.workoutApi,
-      this.jwt())
+      this.getRequestOptions())
       .toPromise()
       .then((response) => response.json() as Workout)
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   public update(workout: Workout): Promise<Workout> {
     this.workoutApi = new WorkoutApi(workout);
     return this.http.put(this.workoutsUrl + '/' + workout.id,
       this.workoutApi,
-      this.jwt())
+      this.getRequestOptions())
       .toPromise()
       .then((response) => response.json() as Workout)
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   public delete(id: number): Promise<void> {
@@ -44,23 +43,23 @@ export class WorkoutService {
     return this.http.delete(url, { headers: this.headers })
       .toPromise()
       .then(() => null)
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   public getWorkouts(): Promise<Workout[]> {
     return this.http.get(this.workoutsUrl, { headers: this.headers })
       .toPromise()
       .then((response) => response.json() as Workout[])
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   // Return workouts of the business assossiated with current connected account
   public getMyWorkouts(): Promise<Workout[]> {
     let url = process.env.API_URL + '/getMyWorkouts';
-    return this.http.get(url, this.jwt())
+    return this.http.get(url, this.getRequestOptions())
       .toPromise()
       .then((response) => response.json() as Workout[])
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   public getWorkout(id: number): Promise<Workout> {
@@ -68,31 +67,31 @@ export class WorkoutService {
     return this.http.get(url, { headers: this.headers })
       .toPromise()
       .then((response) => response.json() as Workout)
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   public getWorkoutsByCoachIdAndDateInterval(id: number, startdate: Date, lastdate: Date): Promise<Workout[]> {
     return this.http.get(this.workoutsUrl + '?coach.id=' + id + '&startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
-      { headers: this.headersSearch })
+      this.getRequestOptions())
       .toPromise()
       .then((response) => response.json() as Workout[])
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   public getWorkoutsByPartnerIdAndDateInterval(id: number, startdate: Date, lastdate: Date): Promise<Workout[]> {
     return this.http.get(this.workoutsUrl + '?owner.id=' + id + '&startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
-      { headers: this.headersSearch })
+      this.getRequestOptions())
       .toPromise()
       .then((response) => response.json() as Workout[])
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   public getWorkoutsByDateInterval(startdate: Date, lastdate: Date): Promise<Workout[]> {
     return this.http.get(this.workoutsUrl + '?startdate[after]=' + startdate.toISOString() + '&enddate[before]=' + lastdate.toISOString(),
-      { headers: this.headersSearch })
+      this.getRequestOptions())
       .toPromise()
       .then((response) => response.json() as Workout[])
-      .catch(this.handleError);
+      .catch((res) => this.handleError(res, this));
   }
 
   public getWorkoutByDay(date: Date): Promise<Workout[]> {
@@ -119,33 +118,5 @@ export class WorkoutService {
   private dateComparaison(workout, i, o): any {
     let workoutStartDate = new Date(workout.startdate);
     return this.searchDate.getDate() === workoutStartDate.getDate();
-  }
-
-  private extractData(res: Response) {
-    let body = res.json();
-    return body.data || {};
-  }
-
-  private jwt() {
-    // create authorization header with jwt token
-    let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
-    if (currentAccount && currentAccount.token) {
-      let headers = new Headers({
-        'Authorization': 'Bearer ' + currentAccount.token,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      });
-      return new RequestOptions({ headers });
-    }
-  }
-
-  private handleError(error: any): Promise<any> {
-    if (error.code === 401) {
-      alert(error.message);
-    } else {
-      console.error('An error occurred', error); // for demo purposes only
-    }
-
-    return Promise.reject(error.message || error);
   }
 }

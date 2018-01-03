@@ -1,4 +1,4 @@
-import { WorkoutInstance } from '../../models/index';
+import { WorkoutInstance } from '../../../models/index';
 
 export class WorkoutInstanceApi {
     public id: number;
@@ -8,6 +8,7 @@ export class WorkoutInstanceApi {
     public enddate: Date;
     public nbTicketAvailable: number;
     public nbTicketBooked: number;
+    public soldOut: boolean;
 
     constructor(workoutInstance: WorkoutInstance
     ) {
@@ -15,6 +16,7 @@ export class WorkoutInstanceApi {
         this.enddate = workoutInstance.enddate;
         this.nbTicketAvailable = workoutInstance.nbTicketAvailable;
         this.nbTicketBooked = 0;
+        this.soldOut = false;
 
         if ( workoutInstance.coach.id ) {
             this.coach = '/coaches/' + workoutInstance.coach.id;

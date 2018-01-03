@@ -1,4 +1,4 @@
-import { BankAccount } from '../../models/bank-account';
+import { BankAccount } from '../../../models/bank-account';
 
 export class BankAccountApi {
     public id: number;
