@@ -24,6 +24,5 @@ export class WelcomePartnerComponent implements OnInit {
     public ngOnInit() {
         this.spaceService.toggleTopBar(false);
         this.spaceService.setHeaderAbove(true);
-        console.log(this.withHeaderOver);
     }
 }
