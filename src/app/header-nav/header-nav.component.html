@@ -24,7 +24,7 @@
         <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><mat-icon class="mat-18">power_settings_new</mat-icon> Déconnexion</button>
       </div>
       <div class="navbar-links" *ngSwitchDefault>
-        <!-- <register-button [transparent]="transparent"></register-button> -->
+        <register-button *ngIf="!logged" [transparent]="transparent"></register-button>
         <login-button *ngIf="!logged" [transparent]="transparent"></login-button>
         <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><mat-icon class="mat-18">power_settings_new</mat-icon> Déconnexion</button>
       </div>
