@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AccountManagerModule  } from '../account-manager/account-manager.module';
-
 import { SpaceService } from '../../_services/space.service';
 
 @Component({
