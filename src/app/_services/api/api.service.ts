@@ -5,7 +5,7 @@ import { LoginModalComponent  } from '../../account-manager/login/modal/login-mo
 
 export abstract class ApiService {
   protected headers = new Headers({
-    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/json',
     'Accept': 'application/json'
   });
 
