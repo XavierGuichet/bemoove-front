@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ApiService } from './api/api.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Account } from '../models/account';
 import { SpaceService } from '../_services/space.service';
@@ -15,21 +16,32 @@ export class AuthenticationService extends ApiService {
     'Accept': 'application/json'
   });
 
-  constructor(@Inject(MatDialog) dialog: MatDialog, private http: Http, private spaceService: SpaceService) {
+  constructor(
+      @Inject(MatDialog) dialog: MatDialog,
+      private http: Http,
+      private spaceService: SpaceService,
+      private router: Router) {
     super(dialog);
   }
 
-  public register(account: Account): Promise<Account> {
+  /*
+   * Try to register user
+   * On succes, try to login and redirect
+   */
+  public register(account: Account): Promise<boolean> {
     return this.http.post(this.AccountsUrl, account, this.getRequestOptions())
       .toPromise()
-      .then((response) => response.json() as Account)
+      .then((response) => {
+          let user = response.json();
+          return this.login(account.email, account.password, true);
+      })
       .catch((res) => this.handleError(res, this));
   }
 
-  public login(username: string, password: string): Promise<boolean> {
+  public login(username: string, password: string, redirect: boolean = false): Promise<boolean> {
     return this.http.post(this.authentificationUrl,
       'email=' + username + '&password=' + password,
-      this.getRequestOptions())
+      this.requestOptions())
       .toPromise()
       .then((response: Response) => {
         // login successful if there's a jwt token in the response
@@ -40,6 +52,9 @@ export class AuthenticationService extends ApiService {
           localStorage.setItem('currentAccount', JSON.stringify(user));
         }
         this.spaceService.refreshSpace();
+        if (redirect === true) {
+            return this.redirectAfterLogin();
+        }
         return true;
       })
       .catch((res) => this.handleError(res, this));
@@ -54,4 +69,21 @@ export class AuthenticationService extends ApiService {
   private requestOptions() {
     return new RequestOptions({ headers: this.headersspec });
   }
+
+  private redirectAfterLogin(): boolean {
+      let zone = this.spaceService.getZone();
+      if (zone === 'ROLE_PARTNER') {
+          this.router.navigate(['/partner']);
+          return true;
+      }
+      if (zone === 'ROLE_USER') {
+          this.router.navigate(['/member/mon-profil']);
+          return true;
+      } else {
+          console.log('role not defined');
+          this.router.navigate(['/workouts/view']);
+          return true;
+      }
+  }
+
 }
