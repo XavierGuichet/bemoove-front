@@ -1,12 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
+
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar, MatButton, MatInput } from '@angular/material';
+import { MatSnackBar, MatButton, MatInput, MatDialogRef } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Account } from '../../../models/account';
 import { SocietyType } from '../../../models/society-type';
 import { RegexpValidator } from '../../../_directives/regexp.directive';
 
+import { RegisterModalComponent } from '../modal/register-modal.component';
 import { AlertService, AuthenticationService, SpaceService } from '../../../_services/index';
 
 @Component({
@@ -14,12 +17,11 @@ import { AlertService, AuthenticationService, SpaceService } from '../../../_ser
   templateUrl: 'register-form-reactive.component.html',
   styleUrls: ['../../form.component.scss', './register-form-reactive.component.scss']
 })
-export class RegisterFormReactiveComponent implements OnInit {
+export class RegisterFormReactiveComponent extends BMReactFormComponent implements OnInit {
   @Input()
   public theme: string = 'default';
   @Input()
   public registerAccountType: string = 'User';
-  public account: Account = new Account();
   public showpassword: boolean = false;
   public showpartnerhelp: boolean = false;
 
@@ -42,7 +44,7 @@ export class RegisterFormReactiveComponent implements OnInit {
   public validationMessages = {
     email: {
       required: 'Une adresse mail est requise.',
-      regexpvalidatorphrase: 'Une adresse mail valide est nécessaire.'
+      email: 'Une adresse mail valide est nécessaire.'
     },
     password: {
       required: 'Un mot de passe est requis.',
@@ -55,72 +57,25 @@ export class RegisterFormReactiveComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder,
-    public snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<RegisterModalComponent>,
     private authenticationService: AuthenticationService,
-    private router: Router,
-    private alertService: AlertService,
-    private spaceService: SpaceService
-    ) { }
+  ) {
+      super();
+  }
 
   public ngOnInit(): void {
     this.buildForm();
   }
 
   public onSubmit() {
-    this.submitted = true;
     this.loading = true;
-    this.account = this.RegisterForm.value;
-    this.authenticationService.register(this.account)
-    .then(
+    let account = this.createObjectFromModel();
+
+    this.authenticationService.register(account)
+      .then(
       (data) => {
-          this.alertService.success('Registration successful', true);
-          this.snackBar.open('Inscription réussie', '', {
-            duration: 10000,
-          });
-          this.authenticate();
+        this.dialogRef.close();
       });
-    //   .catch(this.handleError);
-    //   (error) => {
-        // this.alertService.error(error);
-    //   });
-  }
-
-  public authenticate() {
-      this.authenticationService.login(this.account.email, this.account.password)
-          .then(
-              (data) => {
-                  let zone = this.spaceService.getZone();
-                  if (zone === 'ROLE_PARTNER') {
-                      this.router.navigate(['/partner']);
-                      return;
-                  }
-                  if (zone === 'ROLE_USER') {
-                      this.router.navigate(['/workouts']);
-                      return;
-                  }
-                  this.router.navigate(['/workouts']);
-              });
-  }
-
-  public onValueChanged(data?: any) {
-    if (!this.RegisterForm) { return; }
-    const form = this.RegisterForm;
-
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
   }
 
   public passwordToggle() {
@@ -128,46 +83,41 @@ export class RegisterFormReactiveComponent implements OnInit {
   }
 
   public partnerHelpToggle() {
-      this.showpartnerhelp = !this.showpartnerhelp;
+    this.showpartnerhelp = !this.showpartnerhelp;
   }
 
-  private buildForm(): void {
-    // Todo: This shoulb be DRY
+  protected buildForm(): void {
+    this.RegisterForm = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]
+      ],
+      password: ['', [
+        Validators.required, Validators.minLength(8),
+        Validators.maxLength(36)
+      ]
+      ]
+    });
+
     if (this.registerAccountType === 'Partner') {
-      this.RegisterForm = this.fb.group({
-        email: [this.account.email, [
-          Validators.required,
-          RegexpValidator(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i)
-        ]
-        ],
-        password: ['', [
-          Validators.required, Validators.minLength(8),
-          Validators.maxLength(36)
-        ]
-        ],
-        creationToken: ['', [
-          Validators.required
-        ]
-        ],
-      });
-    } else if (this.registerAccountType === 'User') {
-      this.RegisterForm = this.fb.group({
-        email: [this.account.email, [
-          Validators.required,
-          RegexpValidator(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i)
-        ]
-        ],
-        password: ['', [
-          Validators.required, Validators.minLength(8),
-          Validators.maxLength(36)
-        ]
-        ]
-      });
+      this.RegisterForm.addControl('creationToken',
+        new FormControl('', Validators.required));
     }
 
     this.RegisterForm.valueChanges
-      .subscribe((data) => this.onValueChanged(data));
+      .subscribe((data) => this.onValueChanged(this.RegisterForm, data));
 
-    this.onValueChanged(); // (re)set validation messages now
+    this.onValueChanged(this.RegisterForm); // (re)set validation messages now
+
+    this.formReady = true;
+  }
+
+  protected createNestedEntities(model: any): Promise<void> {
+      return Promise.resolve(null);
+  }
+
+  protected createObjectFromModel() {
+      return this.RegisterForm.value;
   }
 }
