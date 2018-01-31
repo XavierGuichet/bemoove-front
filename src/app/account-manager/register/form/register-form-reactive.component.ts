@@ -2,14 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
 
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar, MatButton, MatInput, MatDialogRef } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
 
-import { Account } from '../../../models/account';
-import { SocietyType } from '../../../models/society-type';
+import { Account } from '../../../models/index';
 import { RegexpValidator } from '../../../_directives/regexp.directive';
 
-import { RegisterModalComponent } from '../modal/register-modal.component';
 import { AlertService, AuthenticationService, SpaceService } from '../../../_services/index';
 
 @Component({
@@ -24,11 +20,7 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
   public registerAccountType: string = 'User';
   public showpassword: boolean = false;
   public showpartnerhelp: boolean = false;
-
-  // Reset the form with a new user AND restore 'pristine' class state
-  // by toggling 'active' flag which causes the form
-  // to be removed/re-added in a tick via NgIf
-  // TODO: Workaround until NgForm has a reset method (#6822)
+  
   public active = true;
 
   public RegisterForm: FormGroup;
@@ -57,7 +49,6 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
   };
 
   constructor(private fb: FormBuilder,
-    public dialogRef: MatDialogRef<RegisterModalComponent>,
     private authenticationService: AuthenticationService,
   ) {
       super();
@@ -74,7 +65,6 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
     this.authenticationService.register(account)
       .then(
       (data) => {
-        this.dialogRef.close();
       });
   }
 

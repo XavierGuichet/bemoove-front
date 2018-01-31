@@ -2,15 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
 
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar, MatButtonModule, MatDialogRef } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { Account } from '../../../models/index';
-import { LoginModalComponent } from '../modal/login-modal.component';
 
-import { AlertService,
-  AuthenticationService,
-  SpaceService } from '../../../_services/index';
+import { AuthenticationService } from '../../../_services/index';
 
 @Component({
   selector: 'login-form-reactive',
@@ -36,7 +31,6 @@ export class LoginFormReactiveComponent extends BMReactFormComponent implements 
   };
 
   constructor(private fb: FormBuilder,
-    public dialogRef: MatDialogRef<LoginModalComponent>,
     private authenticationService: AuthenticationService) {
         super();
      }
@@ -51,7 +45,6 @@ export class LoginFormReactiveComponent extends BMReactFormComponent implements 
     this.authenticationService.login(account.username, account.password, true)
       .then(
       (data) => {
-        this.dialogRef.close();
       }
       );
   }
