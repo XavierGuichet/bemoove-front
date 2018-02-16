@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 
+import { SpaceService } from '../_services/index';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RegisterFormReactiveModule } from './register/form/register-form-reactive.module';
@@ -26,10 +27,10 @@ import { LoginButtonComponent } from './login/button/login-button.component';
       LoginModalComponent,
       LoginButtonComponent
     ],
-  exports: [ RegisterButtonComponent, LoginButtonComponent, RegisterFormReactiveModule, RegisterModalComponent ],
+  exports: [ RegisterButtonComponent, LoginButtonComponent, LoginFormReactiveModule, RegisterFormReactiveModule, RegisterModalComponent ],
   entryComponents: [ RegisterModalComponent, LoginModalComponent ],
   providers:    [
-
+      SpaceService
     ]
 })
 export class AccountManagerModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
 
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,6 +13,9 @@ import { AuthenticationService } from '../../../_services/index';
   styleUrls: ['../../form.component.scss']
 })
 export class LoginFormReactiveComponent extends BMReactFormComponent implements OnInit {
+  @Output()
+  public onSuccess = new EventEmitter<boolean>();
+
   public LoginForm: FormGroup;
 
   public formErrors = {
@@ -42,9 +45,10 @@ export class LoginFormReactiveComponent extends BMReactFormComponent implements 
   public onSubmit() {
     this.loading = true;
     let account = this.createObjectFromModel();
-    this.authenticationService.login(account.username, account.password, true)
+    this.authenticationService.login(account.username, account.password)
       .then(
       (data) => {
+          this.onSuccess.emit(true);
       }
       );
   }

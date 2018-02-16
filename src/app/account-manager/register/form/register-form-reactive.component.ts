@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
 
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,9 +18,11 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
   public theme: string = 'default';
   @Input()
   public registerAccountType: string = 'User';
+  @Output()
+  public onSuccess = new EventEmitter<boolean>();
+
   public showpassword: boolean = false;
-  public showpartnerhelp: boolean = false;
-  
+
   public active = true;
 
   public RegisterForm: FormGroup;
@@ -61,19 +63,15 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
   public onSubmit() {
     this.loading = true;
     let account = this.createObjectFromModel();
-
     this.authenticationService.register(account)
       .then(
       (data) => {
+          this.onSuccess.emit(true);
       });
   }
 
   public passwordToggle() {
     this.showpassword = !this.showpassword;
-  }
-
-  public partnerHelpToggle() {
-    this.showpartnerhelp = !this.showpartnerhelp;
   }
 
   protected buildForm(): void {
@@ -91,7 +89,7 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
     });
 
     if (this.registerAccountType === 'Partner') {
-      this.RegisterForm.addControl('creationToken',
+      this.RegisterForm.addControl('isCoach',
         new FormControl('', Validators.required));
     }
 

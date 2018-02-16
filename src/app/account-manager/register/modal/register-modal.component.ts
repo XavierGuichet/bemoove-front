@@ -18,6 +18,12 @@ export class RegisterModalComponent {
         private router: Router) {
     }
 
+    public closeModal(success) {
+        if (success) {
+            this.dialogRef.close();
+        }
+    }
+
     public showLoginModal() {
         this.dialogRef.close();
         let dialogRef = this.dialog.open(LoginModalComponent);

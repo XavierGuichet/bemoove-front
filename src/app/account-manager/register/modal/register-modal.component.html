@@ -1,5 +1,5 @@
 <div class="hollow-modal">
   <h2>S'inscrire</h2>
-  <register-form-reactive></register-form-reactive>
+  <register-form-reactive (success)="closeModal($event)"></register-form-reactive>
   <p class="noaccount">Vous avez déjà un compte ? <a (click)="showLoginModal()">Se connecter</a></p>
 </div>
