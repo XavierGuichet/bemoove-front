@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 
+import { OrderModule } from '../order/order.module';
+
 import { WorkoutListComponent } from './workout-list.component';
 import { WorkoutListRoutingModule } from './workout-list-routing.module';
 import { WorkoutListMaconneryComponent } from './display/maconnery/workout-list-display-maconnery.component';
@@ -9,19 +11,24 @@ import { WorkoutDetailsComponent } from './display/details/workout-details.compo
 
 import { WorkoutService, SpaceService } from '../_services/index';
 
+// Pipes
+import { MyTimePipe } from '../_pipes/time.pipe';
 @NgModule({
     bootstrap: [
         WorkoutListComponent
     ],
   imports:      [
         SharedModule,
-        WorkoutListRoutingModule
+        WorkoutListRoutingModule,
+        OrderModule
     ],
   declarations: [
         WorkoutListComponent,
         WorkoutListMaconneryComponent,
         WorkoutBlockComponent,
-        WorkoutDetailsComponent
+        WorkoutDetailsComponent,
+
+        MyTimePipe
     ],
   exports:      [ WorkoutListComponent, WorkoutBlockComponent ],
   entryComponents: [ ],

@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Booking, WorkoutInstance } from '../../../models/index';
+import { Cart, WorkoutInstance } from '../../../models/index';
 
-import { BookingService } from '../../../_services/index';
+import { CartService } from '../../../_services/index';
 
 @Component({
   selector: 'workout-block',
@@ -15,10 +15,10 @@ import { BookingService } from '../../../_services/index';
 export class WorkoutBlockComponent {
     @Input()
     public workoutinstance: WorkoutInstance;
-    private booking: Booking;
+    private cart: Cart;
     // private account: Account;
     constructor(
-        private bookingService: BookingService,
+        private cartService: CartService,
         private router: Router
     ) {
         // TODO

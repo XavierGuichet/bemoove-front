@@ -8,13 +8,13 @@ import {
 } from '@angular/platform-browser';
 
 import {
-    Booking,
+    Cart,
     Coach,
     Workout,
     WorkoutInstance } from '../../../models/index';
 
 import {
-    BookingService,
+    CartService,
     ProfileService,
     WorkoutService,
     WorkoutInstanceService } from '../../../_services/index';
@@ -32,10 +32,10 @@ export class WorkoutDetailsComponent implements OnInit {
     public workoutInstances: WorkoutInstance[];
     public scrolled: boolean = false;
     public headerimage: any;
-    private booking: Booking;
+    private cart: Cart;
     constructor(
         private domSanitizer: DomSanitizer,
-        private bookingService: BookingService,
+        private cartService: CartService,
         private workoutService: WorkoutService,
         private workoutInstanceService: WorkoutInstanceService,
         private profileService: ProfileService,
@@ -55,10 +55,49 @@ export class WorkoutDetailsComponent implements OnInit {
               this.headerimage =  this.domSanitizer.bypassSecurityTrustStyle(`url(${this.workout.photoWide.path})`);
               this.workoutInstanceService.getBookableByWorkoutId(this.workout.id).then( (workoutInstances) => {
                   this.workoutInstances = workoutInstances;
+                  console.log(this.workoutInstances);
                   if (this.workoutInstances[0].coach) {
                       this.coach = this.workoutInstances[0].coach;
                   }
               });
           });
     }
+
+    /**
+     * Ce serait bien de créer le compte mangopay des coachs à un moment
+     * Coach + mangopay + local et/ou test = comment ca se passe ?
+     */
+
+    /*
+    Au changement de workoutInstances
+    - modifie le prix affiché
+    - modifie le nombre place max reservable
+
+    Au clic sur le reservation
+    - Verifie que la personne est connecté
+    -- Non : fin a ce stade et affiche la popup de connexion sur la page en cours
+
+    Envoie une requete de préreservation / lock au serveur pour le nombre de place indiqué
+    - Si reponse n'est pas ok.
+    -- Il n'y a plus aucune place / Ce cours n'existe pas :
+    --- Affiche un message : IL ne reste malheuresement plus de places disponible pour ce cours.
+    -- Il n'y a pas assez de places disponible pour répondre à la demande
+    --- Affiche : Le nombre de place disponible a changé. Nous ne pouvons pas vous proposer X places. Mais vous pouvez déjà y aller à Y personnes.
+    - La requete de préreservation ajoute un token/ ligne de lock dans l'api et comme preuve de la validité, renvoie un token pour effectuer la réreservation. (A chaque fois qu'un utilisateur passe en préreservation d'un cours, toute ses préreservation précédentes deviennent caduques.)
+
+    Sinon, envoie sur la page de reservation
+    Celle ci affiche un formulaire de reservation pour Une séance de 1 à X personne prédéfini à l'avance
+
+    https://docs.mangopay.com/guide/marketplace
+    La commande se passe ainsi:
+    -> Verifier que le compte MangoPay de l'utilisateurs existe
+    --> Au besoin crée celui-ci
+    -> Avec les infos de payement fournit par l'utilisateurs crédité le compte/wallet mangopay de celui-ci du montant de la commande
+    --> Sauvegarder la commande dans la base de données en état 'en attente de réalisation'
+
+    --> envoyer un mail au client, résumant la commande
+
+    ---> La reservation doit desormais être visible par le coach.
+    ---> La reservation doit désormais être visible par l'utilisateurs
+    */
 }

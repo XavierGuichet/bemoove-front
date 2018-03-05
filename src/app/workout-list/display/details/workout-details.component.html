@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-8 pt-3">
         <h1 class="f-blue alt-font">{{ workout.title }}</h1>
-        <p class="h4 mb-3"><span class="badge badge-default mr-2">{{ workout.sport.name }}</span><span class="badge badge-default bg-yellow"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; {{ workout.duration }} min</span></p>
+        <p class="h4 mb-3"><span class="badge badge-default mr-2">{{ workout.sport.name }}</span><span class="badge badge-default bg-yellow"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; {{ workout.duration | myTime: 'hh:mm' }}</span></p>
         <p class="h5 mb-4">
           <span class="badge badge-default badge-pill bg-grey mr-2" *ngFor="let tag of workout.tags">
               {{ tag.name }}
@@ -84,53 +84,11 @@
         </div>
       </div>
       <div class="aside col-4">
+        <!-- Start of cart box -->
         <div class="booking bg-white" [ngClass]="{'fix-to-top': scrolled}">
-          <div class="booking__header bg-blue px-4">
-            <p class="h3 booking__header_price">{{workout.price}} € / personne</p>
-          </div>
-          <div class="booking__content px-3 pb-2 pt-4">
-            <div class="col-12">
-              <div class="row mb-3">
-                <label class="f-grey">Choisissez votre date</label>
-                <select class="form-control">
-                    <option *ngFor="let workoutInstance of workoutInstances">
-                        {{workoutInstance.startdate | date: 'EEEE d MMM'}} à {{workoutInstance.startdate | date: 'shortTime'}}
-                    </option>
-                </select>
-              </div>
-              <div class="row mb-3">
-                <div class="form-group mb-0">
-                  <div class="input-group">
-                    <span class="input-group-addon">Places : </span>
-                    <input type="text" class="form-control" name="INPUT_NAME" value="1">
-                    <div class="input-group-addon p-0">
-                        <button mat-raised-button color="accent" class="my-btn">-</button>
-                    </div>
-                    <div class="input-group-addon p-0">
-                      <button mat-raised-button color="accent" class="my-btn">+</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-1 clearfix">
-                  <label><input type="checkbox"> J'accepte les <a href="#">conditions générales</a>.</label>
-              </div>
-            </div>
-          </div>
-          <div class="booking__action clearfix px-3 py-2">
-            <button type="button" mat-raised-button color="accent" class="col-6">Reserver</button>
-          </div>
-          <div class="booking__notice bg- border-top-1 px-4 py-2">
-            <div class="row">
-              <div class="col-2 text-center">
-                <mat-icon class="mat-48 f-grey font-weight-bold">help_outline</mat-icon>
-              </div>
-              <div class="col-10">
-                <p class="h6 f-grey">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-          </div>
+          <order-block *ngIf="workoutInstances" [workout]="workout" [workoutInstances]="workoutInstances"></order-block>
         </div>
+        <!-- end of cart box -->
       </div>
     </div>
   </div>
