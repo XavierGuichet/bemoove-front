@@ -53,7 +53,7 @@ rules:
   # Name Formats
   class-name-format:
       convention:
-          - strictbem
+          - hyphenatedbem
   function-name-format: 1
   id-name-format: 0
   mixin-name-format: 1
