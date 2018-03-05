@@ -32,9 +32,9 @@ export class AuthenticationService extends ApiService {
     return this.http.post(this.AccountsUrl, account, this.getRequestOptions())
       .toPromise()
       .then((response) => {
-          let user = response.json();
-          return this.login(account.email, account.password);
+          return Promise.all([response, this.login(account.email, account.password)]);
       })
+      .then((results) => { return results[1]; })
       .catch((res) => this.handleError(res, this));
   }
 
