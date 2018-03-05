@@ -1,0 +1,63 @@
+<form *ngIf="formReady" [formGroup]="paymentForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="grey-form-card">
+    <div class="grey-form-card-title">
+      <h4><mat-icon class="mat-18">credit_card</mat-icon> Moyen de paiement : Carte bancaire</h4>
+    </div>
+    <div class="grey-form-card-content">
+      <div class="form-group row">
+        <label for="cardholder" class="col-sm-3 col-form-label">Titulaire de la carte</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="cardholder" name="cardholder">
+          <div *ngIf="formErrors.cardholder" class="form-error">
+            {{ formErrors.cardholder }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="cardNumber" class="col-sm-3 col-form-label">Numéro de la carte</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="cardNumber" name="cardNumber">
+          <div *ngIf="formErrors.cardNumber" class="form-error">
+            {{ formErrors.cardNumber }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="cardValidityMonth" class="col-sm-3 col-form-label">Mois d'expiration</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" formControlName="cardValidityMonth" name="cardValidityMonth" placeholder="mm / YY">
+          <div *ngIf="formErrors.cardValidityMonth" class="form-error">
+            {{ formErrors.cardValidityMonth }}
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" formControlName="cardvalidityYear" name="cardvalidityYear">
+          <div *ngIf="formErrors.cardvalidityYear" class="form-error">
+            {{ formErrors.cardvalidityYear }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="cardSecurityCode" class="col-sm-3 col-form-label">Code de sécurité</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" formControlName="cardSecurityCode" name="cardSecurityCode">
+          <div *ngIf="formErrors.cardSecurityCode" class="form-error">
+            {{ formErrors.cardSecurityCode }}
+          </div>
+        </div>
+        <div class="col-sm-3">
+          info code
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-9">
+          <p>Vos informations bancaires ne seront pas sauvegardé.</p>
+          <button class="btn-full-width" mat-raised-button color="accent"><mat-icon class="mat-18">lock</mat-icon>Payer 10 000€ !</button>
+        </div>
+      </div>
+      // NOTE : A ce stade, avant validation de ce formulaire, la commande est crée en status 'en attente de validation client'
+    </div>
+  </div>
+</form>

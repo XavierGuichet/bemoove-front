@@ -2,11 +2,11 @@ import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { Workout, Booking } from '../../../models/index';
+import { Reservation, Workout } from '../../../models/index';
 
 import { AlertService,
          WorkoutService,
-         BookingService } from '../../../_services/index';
+         ReservationService } from '../../../_services/index';
 
 @Component({
     selector: 'workout-modal',
@@ -16,7 +16,8 @@ import { AlertService,
 
 export class WorkoutModalComponent implements OnInit {
     public workout: Workout;
-    public bookings: Booking[];
+
+    public reservations: Reservation[];
     public editable: boolean = false;
 
     constructor(
@@ -26,7 +27,8 @@ export class WorkoutModalComponent implements OnInit {
         private router: Router,
         private workoutService: WorkoutService,
         private alertService: AlertService,
-        private bookingService: BookingService) {
+        private reservationService: ReservationService
+    ) {
     }
 
     public ngOnInit(): void {
@@ -36,11 +38,13 @@ export class WorkoutModalComponent implements OnInit {
                 // workout.enddate = new Date(workout.enddate);
                 // this.workout = workout;
                 // this.editable = (this.workout.startdate > new Date());
-                // this.bookingService.getAll()
+                // this.cartService.getAll()
                 //     .then( (bookings) => {
-                //         this.bookings = bookings;
+                //         this.bookings = cart;
                 //     });
             });
+        this.reservationService.getReservationsByWorkoutInstanceId(this.id)
+                .then( (reservations) => this.reservations = reservations );
     }
 
     public editWorkout() {

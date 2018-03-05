@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, Input } from '@angular/core';
 
-import { Workout } from '../../../models/workout';
+import { Workout } from '../../../models/index';
 
 @Component({
   selector: 'workout-information',
@@ -14,6 +14,7 @@ export class WorkoutInformationComponent {
     public workout: Workout;
     @Input()
     private id: number;
+
     constructor(
     ) {
         // TODO

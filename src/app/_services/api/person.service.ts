@@ -41,4 +41,12 @@ export class PersonService extends ApiService {
       .then((response) => response.json() as Person)
       .catch((res) => this.handleError(res, this));
   }
+
+  public getMyPerson(): Promise<Person> {
+      let url = process.env.API_URL + '/getMyPerson';
+      return this.http.get(url, this.getRequestOptions())
+        .toPromise()
+        .then((response) => response.json() as Person)
+        .catch((res) => this.handleError(res, this));
+  }
 }

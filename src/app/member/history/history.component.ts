@@ -6,11 +6,11 @@ import { Profile, Address } from '../../models/index';
 import { AlertService, ProfileService } from '../../_services/index';
 
 @Component({
-  selector: 'member-profile',
-  templateUrl: 'profile.component.html'
+  selector: 'member-history',
+  templateUrl: 'history.component.html'
 })
 
-export class MemberProfileComponent implements OnInit {
+export class MemberHistoryComponent implements OnInit {
   public profile: Profile;
   constructor(
     private router: Router,

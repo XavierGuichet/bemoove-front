@@ -1,0 +1,97 @@
+<form *ngIf="formReady" [formGroup]="userInformationForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="grey-form-card-content">
+    <div>
+      <h1 class="h2 alt-font mb-3">Identité</h1>
+      <div class="form-group row">
+        <label for="firstname" class="col-sm-3 col-form-label">Prénom</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="firstname" name="firstname">
+          <div *ngIf="formErrors.firstname" class="form-error">
+            {{ formErrors.firstname }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="lastname" class="col-sm-3 col-form-label">Nom</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="lastname" name="lastname">
+          <div *ngIf="formErrors.lastname" class="form-error">
+            {{ formErrors.lastname }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="nationality" class="col-sm-3 col-form-label">Nationnalité</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="nationality" name="nationality">
+          <div *ngIf="formErrors.nationality" class="form-error">
+            {{ formErrors.nationality }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="phoneNumber" class="col-sm-3 col-form-label">Téléphone</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="phoneNumber" name="phoneNumber">
+          <div *ngIf="formErrors.phoneNumber" class="form-error">
+            {{ formErrors.phoneNumber }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div formGroupName="address">
+      <h2 class="h3 alt-font mb-3">Adresse de facturation</h2>
+      <div class="form-group row">
+        <label for="firstline" class="col-sm-3 col-form-label">Adresse</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="firstline" name="firstline">
+          <div *ngIf="formErrors.address.firstline" class="form-error">
+            {{ formErrors.address.firstline }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="secondline" class="col-sm-3 col-form-label">Adresse</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="secondline" name="secondline">
+          <div *ngIf="formErrors.address.secondline" class="form-error">
+            {{ formErrors.address.secondline }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <div class="row">
+            <label for="postalCode" class="col-sm-6 col-form-label">Code postal</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" formControlName="postalCode" name="postalCode">
+              <div *ngIf="formErrors.address.postalCode" class="form-error">
+                {{ formErrors.address.postalCode }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <label for="city" class="col-sm-3 col-form-label">Ville</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" formControlName="city" name="city">
+              <div *ngIf="formErrors.address.city" class="form-error">
+                {{ formErrors.address.city }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-9">
+              <button class="btn-full-width" mat-raised-button color="accent">Enregistrer mes informations</button>
+          </div>
+      </div>
+      <div *ngIf="formResult" class="alert" class="mr-3" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+        <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
+      </div>
+    </div>
+  </div>
+</form>

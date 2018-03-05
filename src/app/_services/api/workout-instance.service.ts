@@ -27,6 +27,14 @@ export class WorkoutInstanceService extends ApiService {
       .catch((res) => this.handleError(res, this));
   }
 
+  public getWorkoutInstance(id: number): Promise<WorkoutInstance> {
+    let url = this.workoutInstancesUrl + '/' + id;
+    return this.http.get(url, { headers: this.headers })
+      .toPromise()
+      .then((response) => response.json() as WorkoutInstance)
+      .catch((res) => this.handleError(res, this));
+  }
+
   public getBookableByWorkoutId(id: number): Promise<WorkoutInstance[]> {
     let url = process.env.API_URL + '/getBookableWorkoutInstance' + '?workout.id=' + id;
     return this.http.get(url,

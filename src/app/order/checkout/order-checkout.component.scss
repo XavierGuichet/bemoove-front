@@ -1,0 +1,99 @@
+$grey: #dadada;
+$darkblue: #26afbc;
+$near-white: #fafafa;
+$white: #fff;
+$teal: #229ba7;
+$form-error: #a94442;
+
+.form-card {
+  margin-bottom: 2em;
+
+  & &__title {
+    color: $teal;
+    font-family: 'texgyreadventor';
+    font-size: 1.125rem;
+  }
+}
+
+.grey-form-card {
+  border: 1px solid $grey;
+  margin: 0 0 2em;
+
+  &-title {
+    padding: 0.5em 1em;
+    background: $darkblue;
+    border-bottom: 1px solid $grey;
+    color: $white;
+
+    h4 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 30px;
+    }
+  }
+
+  &-content {
+    padding: 1em;
+    background: $near-white;
+
+    label {
+      font-size: 0.875em;
+      line-height: 18px;
+
+      &.big {
+        margin: 0;
+        font-size: 21px;
+        line-height: 38px;
+      }
+    }
+  }
+
+  & > .form-group {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.col-form-label {
+  text-align: right;
+}
+
+.form-info {
+  font-size: 0.875rem;
+  color: $grey;
+}
+
+.form-control-inline-seamless {
+  border: 0;
+  border-bottom: 1px solid $grey;
+
+  &.small {
+    width: 80px;
+  }
+
+  &.medium {
+    width: 120px;
+  }
+
+  &.large {
+    width: 160px;
+  }
+}
+
+.form-error {
+  color: $form-error;
+  padding: 0.25rem 1.25rem 0 5px;
+  font-size: 0.875rem;
+}
+
+textarea {
+  &::placeholder {
+    font-size: 0.875rem;
+  }
+}
+
+.input-float {
+  width: 120px;
+  float: right;
+}

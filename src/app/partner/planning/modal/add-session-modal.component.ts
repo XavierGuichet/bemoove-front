@@ -2,11 +2,11 @@ import { Component, EventEmitter, Output,  OnInit, Inject, Optional } from '@ang
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { Workout, WorkoutInstance, Booking } from '../../../models/index';
+import { Workout, WorkoutInstance, Cart } from '../../../models/index';
 
 import { AlertService,
          WorkoutService,
-         BookingService } from '../../../_services/index';
+         CartService } from '../../../_services/index';
 
 @Component({
     selector: 'add-session-modal',

@@ -5,18 +5,20 @@
         <workout-information [workout]="workout" *ngIf="workout"></workout-information>
       </div>
       <div class="pull-right">
-          <button mat-raised-button color="warn"><mat-icon>delete</mat-icon>Supprimer</button>
+        <button mat-raised-button color="warn"><mat-icon>delete</mat-icon>Supprimer</button>
         <button mat-raised-button color="primary" (click)="editWorkout()" *ngIf="editable"><mat-icon>edit</mat-icon>Modifier</button>
-        </div>
+      </div>
     </mat-tab>
     <mat-tab label="Inscrit">
       <div class="tab-container">
-          <table>
-              <tr><th>Ici la liste de vos inscrits à ce cours</th></tr>
-              <tr *ngFor="let booking of bookings">
-                  <td>{{ booking.user.email }}</td>
-              </tr>
-          </table>
+        <table class="table">
+          <tr>
+            <th>Ici la liste de vos inscrits à ce cours</th>
+          </tr>
+          <tr *ngFor="let reservation of reservations">
+            <td>{{ reservation.person.firstname }} {{ reservation.person.lastname }}</td>
+          </tr>
+        </table>
       </div>
     </mat-tab>
   </mat-tab-group>

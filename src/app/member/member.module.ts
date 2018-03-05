@@ -7,8 +7,11 @@ import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDatepickerI18n } from '../_helpers/custom-datepicker.component';
 
 import { MemberComponent } from './member.component';
-import { MemberProfileComponent } from './profile/profile.component';
 import { MemberRoutingModule } from './member-routing.module';
+
+import { MemberProfileComponent } from './profile/profile.component';
+import { MemberReservationComponent } from './reservation/reservation.component';
+import { MemberHistoryComponent } from './history/history.component';
 
 import { MemberNavComponent } from './nav/nav.component';
 
@@ -34,6 +37,8 @@ import { AlertService, ProfileService } from '../_services/index';
   declarations: [
         MemberComponent,
         MemberProfileComponent,
+        MemberReservationComponent,
+        MemberHistoryComponent,
         MemberNavComponent,
         AddressFormReactiveComponent,
         ContactDetailsFormReactiveComponent,

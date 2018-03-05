@@ -25,8 +25,11 @@ import { NoContentComponent } from './no-content';
 import { AlertComponent } from './_directives/index';
 import { AuthMemberGuard, AuthPartnerGuard } from './_guards/index';
 import { AlertService, AuthenticationService,
-        WorkoutService, BookingService, SpaceService
+        WorkoutService, CartService, SpaceService
         } from './_services/index';
+
+// Pipes
+import { MyTimePipe } from './_pipes/time.pipe';
 
 // Forms
 import { AccountManagerModule } from './account-manager/account-manager.module';
@@ -42,6 +45,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PartnerModule } from './partner/partner.module';
 import { MemberModule } from './member/member.module';
 import { WorkoutListModule } from './workout-list/workout-list.module';
+import { OrderModule } from './order/order.module';
 
 import { TextChangerDirective, OnlyNumberDirective } from './_directives/index';
 // Application wide providers
@@ -53,7 +57,7 @@ const APP_PROVIDERS = [
   AlertService,
   AuthenticationService,
   SpaceService,
-  BookingService
+  CartService
 ];
 
 type StoreType = {
@@ -98,6 +102,7 @@ type StoreType = {
     PartnerModule,
     MemberModule,
     WorkoutListModule,
+    OrderModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

@@ -1,0 +1,19 @@
+<div class="container">
+    Welcome to your reservation
+    <table class="table">
+        <tr>
+            <th>Reservant</th>
+            <th>Date de reservations</th>
+            <th>Cours</th>
+            <th>Coach</th>
+            <th>Lieu</th>
+        </tr>
+        <tr *ngFor="let reservation of reservations">
+            <td>{{ reservation.person.firstname }} {{ reservation.person.lastname }}</td>
+            <td> {{ reservation.dateAdd | date: 'short'}}</td>
+            <td> {{ reservation.workoutInstance.workout.title }} ({{ reservation.workoutInstance.workout.sport.name }})</td>
+            <td> {{ reservation.workoutInstance.coach.firstname }} </td>
+            <td> {{ reservation.workoutInstance.workout.address.city }} </td>
+        </tr>
+    </table>
+</div>

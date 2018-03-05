@@ -1,0 +1,54 @@
+<div class="booking__header bg-blue px-4">
+  <p class="h3 booking__header_price">{{workout.price}} € / personne</p>
+</div>
+<form *ngIf="formReady" [formGroup]="orderForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="booking__content px-3 pb-2 pt-4">
+    <div class="col-12">
+      <div class="row mb-3">
+        <div class="form-group">
+          <label class="f-grey">Choisissez votre date</label>
+          <div class="">
+            <select *ngIf="workoutInstances.length" class="form-control" formControlName="workoutInstance" name="workoutInstance">
+                <option value="-1" disabled="" selected="">
+                  Sélectionnez un séance
+                </option>
+                <option *ngFor="let workoutInstance of workoutInstances" [ngValue]="workoutInstance">
+                    {{workoutInstance.startdate | date: 'EEEE d MMM'}} à {{workoutInstance.startdate | date: 'shortTime'}}
+                </option>
+            </select>
+            <div *ngIf="formErrors.workoutInstance" class="form-error">
+              {{ formErrors.workoutInstance }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="form-group mb-0">
+          <div class="input-group">
+            <span for="wantedPlace" class="input-group-addon">Places : </span>
+            <input type="text" class="form-control" formControlName="wantedPlace" name="wantedPlace">
+          </div>
+          <div *ngIf="formErrors.wantedPlace" class="form-error">
+              {{ formErrors.wantedPlace }}
+          </div>
+        </div>
+      </div>
+      <div class="row mb-1 clearfix">
+        <mat-checkbox class="example-margin" formControlName="hasAcceptCGV">J'accepte les <a href="#">conditions générales</a>.</mat-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="booking__action clearfix px-3 py-2">
+    <button type="submit" [disabled]="loading || !orderForm.valid" mat-raised-button color="primary" class="col-12">Reserver</button>
+  </div>
+  <div class="booking__notice bg- border-top-1 px-4 py-2">
+    <div class="row">
+      <div class="col-2 text-center">
+        <mat-icon class="mat-48 f-grey font-weight-bold">help_outline</mat-icon>
+      </div>
+      <div class="col-10">
+        <p class="h6 f-grey">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+      </div>
+    </div>
+  </div>
+</form>

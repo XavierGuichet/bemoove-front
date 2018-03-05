@@ -26,7 +26,7 @@ import { SportService,
   WorkoutService,
   TagService,
   SpaceService,
-  BookingService
+  CartService
 } from '../_services/index';
 
 import { WorkoutDateProvider } from './workoutdate.provider';
@@ -65,7 +65,7 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
     WorkoutService,
     ImageService,
     SpaceService,
-    BookingService,
+    CartService,
     WorkoutDateProvider,
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }]
 })
