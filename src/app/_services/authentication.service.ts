@@ -12,7 +12,7 @@ export class AuthenticationService extends ApiService {
   private authentificationUrl = process.env.API_URL + '/login_check';
   private AccountsUrl = process.env.API_URL + '/accounts';
   private headersspec = new Headers({
-    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/json',
     'Accept': 'application/json'
   });
 
@@ -26,22 +26,25 @@ export class AuthenticationService extends ApiService {
 
   /*
    * Try to register user
-   * On succes, try to login and redirect
+   * On succes, try to login
    */
   public register(account: Account): Promise<boolean> {
     return this.http.post(this.AccountsUrl, account, this.getRequestOptions())
       .toPromise()
       .then((response) => {
           let user = response.json();
-          return this.login(account.email, account.password, true);
+          return this.login(account.email, account.password);
       })
       .catch((res) => this.handleError(res, this));
   }
 
-  public login(username: string, password: string, redirect: boolean = false): Promise<boolean> {
+  public login(email: string, password: string): Promise<boolean> {
+      let account = new Account();
+      account.email = email;
+      account.password = password;
     return this.http.post(this.authentificationUrl,
-      'email=' + username + '&password=' + password,
-      this.requestOptions())
+      account,
+      this.getRequestOptions())
       .toPromise()
       .then((response: Response) => {
         // login successful if there's a jwt token in the response
@@ -52,12 +55,29 @@ export class AuthenticationService extends ApiService {
           localStorage.setItem('currentAccount', JSON.stringify(user));
         }
         this.spaceService.refreshSpace();
-        if (redirect === true) {
-            return this.redirectAfterLogin();
-        }
         return true;
       })
       .catch((res) => this.handleError(res, this));
+  }
+
+  public getResetPasswordToken(model: any): Promise<boolean> {
+      let url = process.env.API_URL + '/send_forgotten_password_token';
+      return this.http.post(url, model, this.getRequestOptions())
+        .toPromise()
+        .then((response: Response) => {
+            return true;
+        })
+        .catch((res) => this.handleError(res, this));
+  }
+
+  public changePassword(model: any): Promise<boolean> {
+      let url = process.env.API_URL + '/change_forgotten_password';
+      return this.http.post(url, model, this.getRequestOptions())
+        .toPromise()
+        .then((response: Response) => {
+            return true;
+        })
+        .catch((res) => this.handleError(res, this));
   }
 
   // remove user from local storage to log user out
@@ -69,21 +89,4 @@ export class AuthenticationService extends ApiService {
   private requestOptions() {
     return new RequestOptions({ headers: this.headersspec });
   }
-
-  private redirectAfterLogin(): boolean {
-      let zone = this.spaceService.getZone();
-      if (zone === 'ROLE_PARTNER') {
-          this.router.navigate(['/partner']);
-          return true;
-      }
-      if (zone === 'ROLE_USER') {
-          this.router.navigate(['/member/mon-profil']);
-          return true;
-      } else {
-          console.log('role not defined');
-          this.router.navigate(['/workouts/view']);
-          return true;
-      }
-  }
-
 }
