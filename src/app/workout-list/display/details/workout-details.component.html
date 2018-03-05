@@ -23,17 +23,17 @@
         </div> -->
         <div class="tab-navigation mb-0">
           <ul class="mb-0">
-            <li>La séance</li>
-            <li>Équipements</li>
-            <li>Détails Pratique</li>
-            <li>S'y rendre</li>
+            <li><a [ngx-scroll-to]="'#description'">La séance</a></li>
+            <li><a [ngx-scroll-to]="'#gears'">Équipements</a></li>
+            <li *ngIf="workout.notice"><a [ngx-scroll-to]="'#notice'">Détails Pratique</a></li>
+            <li><a [ngx-scroll-to]="'#mapBox'">S'y rendre</a></li>
           </ul>
         </div>
-        <div class="tab mb-4 bg-white px-4 pt-3 pb-4">
+        <div class="tab mb-4 bg-white px-4 pt-3 pb-4" id="description">
           <h2 class="h5 f-grey font-weight-bold mb-4 alt-font ">Détails de l'activité</h2>
           <p class="f-darkgrey">{{ workout.description }}</p>
         </div>
-        <div class="tab mb-4 bg-white px-4 pt-2 pb-4">
+        <div class="tab mb-4 bg-white px-4 pt-2 pb-4" id="gears">
           <h2 class="h5 f-grey alt-font mb-3 font-weight-bold">Équipements</h2>
           <div class="row">
             <div class="col-6">
@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="workout.notice" class="tab mb-4 bg-white px-4 pt-2 pb-4">
+        <div *ngIf="workout.notice" class="tab mb-4 bg-white px-4 pt-2 pb-4" id="notice">
           <h2 class="h5 f-grey font-weight-bold  mb-4  alt-font">Détails pratiques</h2>
           <p class="f-darkgrey">{{ workout.notice }}</p>
         </div>
@@ -71,7 +71,7 @@
             </div>
           </div>
         </div>
-        <div class="tab mt-3 bg-white px-4 pt-2 pb-4">
+        <div class="tab mt-3 bg-white px-4 pt-2 pb-4" id="mapBox">
           <h2 class="h5 f-grey font-weight-bold mb-3">Accès</h2>
           <div class="row">
             <div class="col-4 text-center">

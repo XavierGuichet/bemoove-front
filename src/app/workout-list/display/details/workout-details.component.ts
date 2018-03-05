@@ -1,5 +1,8 @@
 import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
+import { ScrollToAnimationEasing, ScrollToEvent, ScrollToOffsetMap } from '@nicky-lenaers/ngx-scroll-to';
+
 import {
     DomSanitizer,
     SafeHtml,

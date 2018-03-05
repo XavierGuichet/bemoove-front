@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { OrderModule } from '../order/order.module';
 
 import { WorkoutListComponent } from './workout-list.component';
@@ -20,7 +21,8 @@ import { MyTimePipe } from '../_pipes/time.pipe';
   imports:      [
         SharedModule,
         WorkoutListRoutingModule,
-        OrderModule
+        OrderModule,
+        ScrollToModule.forRoot()
     ],
   declarations: [
         WorkoutListComponent,
