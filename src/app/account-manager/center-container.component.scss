@@ -1,0 +1,54 @@
+.enterprise-login-form,
+.password-form,
+.toggle-auth-form {
+  position: absolute;
+  top: 63px;
+  width: 100%;
+  height: calc(100% - 63px);
+}
+
+.col-center {
+  margin: 0 auto;
+  float: none;
+}
+.small-form-container {
+  width: 640px;
+}
+.small-form-container form {
+  width: 360px;
+  margin: 0 auto;
+}
+
+.auth-form,
+.forgot-password,
+.trial {
+  position: relative;
+  top: 50%;
+  right: 50%;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+@media screen and (min-width:980px) {
+  .auth-form,
+  .forgot-password,
+  .trial {
+    -webkit-transform: translateX(50%) translateY(-50%);
+    -ms-transform: translateX(50%) translateY(-50%);
+    transform: translateX(50%) translateY(-50%);
+  }
+}
+
+.auth-form .container,
+.forgot-password .container,
+.trial .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  max-height: 100%;
+  width: 100%;
+}

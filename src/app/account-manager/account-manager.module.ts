@@ -4,30 +4,39 @@ import { SharedModule } from '../shared/shared.module';
 import { SpaceService } from '../_services/index';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { RegisterFormReactiveModule } from './register/form/register-form-reactive.module';
+import { AccountManagerComponent } from './account-manager.component';
+import { AccountManagerRoutingModule } from './account-manager-routing.module';
+
+import { ResetPasswordModule } from './reset-password/reset-password.module';
+
+import { RegisterFormReactiveComponent } from './register/form/register-form-reactive.component';
 import { RegisterModalComponent } from './register/modal/register-modal.component';
 import { RegisterButtonComponent } from './register/button/register-button.component';
-import { LoginFormReactiveModule } from './login/form/login-form-reactive.module';
+
+import { LoginFormReactiveComponent } from './login/form/login-form-reactive.component';
 import { LoginModalComponent } from './login/modal/login-modal.component';
 import { LoginButtonComponent } from './login/button/login-button.component';
 
 @NgModule({
     bootstrap: [
-
+        AccountManagerComponent
     ],
   imports: [
         SharedModule,
         ReactiveFormsModule,
-        RegisterFormReactiveModule,
-        LoginFormReactiveModule
+        AccountManagerRoutingModule,
+        ResetPasswordModule
     ],
   declarations: [
+      AccountManagerComponent,
+      RegisterFormReactiveComponent,
       RegisterModalComponent,
       RegisterButtonComponent,
       LoginModalComponent,
-      LoginButtonComponent
+      LoginButtonComponent,
+      LoginFormReactiveComponent
     ],
-  exports: [ RegisterButtonComponent, LoginButtonComponent, LoginFormReactiveModule, RegisterFormReactiveModule, RegisterModalComponent ],
+  exports: [ AccountManagerComponent, RegisterButtonComponent, LoginButtonComponent, LoginFormReactiveComponent, RegisterFormReactiveComponent, RegisterModalComponent ],
   entryComponents: [ RegisterModalComponent, LoginModalComponent ],
   providers:    [
       SpaceService

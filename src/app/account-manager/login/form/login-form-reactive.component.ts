@@ -3,8 +3,6 @@ import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.
 
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Account } from '../../../models/index';
-
 import { AuthenticationService } from '../../../_services/index';
 
 @Component({
