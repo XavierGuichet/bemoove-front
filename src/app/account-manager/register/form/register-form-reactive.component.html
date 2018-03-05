@@ -1,5 +1,4 @@
-<mat-spinner *ngIf="loading" class="block-center" color="accent"></mat-spinner>
-<form [formGroup]="RegisterForm" *ngIf="!loading" (ngSubmit)="onSubmit()" [ngSwitch]="theme">
+<form [formGroup]="RegisterForm" (ngSubmit)="onSubmit()" [ngSwitch]="theme">
     <div *ngSwitchCase="'material'">
         <div class="col-12 white">
           <mat-input-container class="full-width">
@@ -48,7 +47,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button [disabled]="loading" class="btn-full-width" mat-raised-button color="accent">S'inscrire</button>
+          <button [disabled]="loading || !RegisterForm.valid" class="btn-full-width" mat-raised-button color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">S'inscrire</span></button>
         </div>
     </div>
 </form>

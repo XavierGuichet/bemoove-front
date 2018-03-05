@@ -1,5 +1,4 @@
-<mat-spinner *ngIf="loading" class="block-center" color="accent"></mat-spinner>
-<form [formGroup]="LoginForm" *ngIf="!loading" (ngSubmit)="onSubmit()">
+<form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="username">Identifiant</label>
     <input type="text" class="form-control" formControlName="username" required  />
@@ -16,6 +15,6 @@
     <p class="forgottenpwd"><a routerLink="/account/recover/request">Mot de passe oublié ?</a></p>
   </div>
   <div class="form-group">
-    <button [disabled]="loading" class="btn-full-width" mat-raised-button color="accent">Se connecter</button>
+    <button [disabled]="loading || !LoginForm.valid" class="btn-full-width" mat-raised-button color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Se connecter</span></button>
   </div>
 </form>
