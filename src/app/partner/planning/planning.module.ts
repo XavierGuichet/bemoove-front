@@ -12,6 +12,8 @@ import { WorkoutInformationComponent } from './workout-information/workout-infor
 import { AddSessionFormComponent } from './form/add-session-form.component';
 import { AddSessionModalComponent } from './modal/add-session-modal.component';
 
+import { MyTruncatePipe } from '../../_pipes/index';
+
 @NgModule({
     bootstrap: [
         PlanningComponent,
@@ -28,7 +30,9 @@ import { AddSessionModalComponent } from './modal/add-session-modal.component';
       WorkoutModalComponent,
       WorkoutInformationComponent,
       AddSessionFormComponent,
-      AddSessionModalComponent
+      AddSessionModalComponent,
+
+      MyTruncatePipe
     ],
   exports: [ PlanningComponent ],
   entryComponents: [ WorkoutModalComponent, AddSessionModalComponent ],

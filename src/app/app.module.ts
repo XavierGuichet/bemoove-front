@@ -29,7 +29,7 @@ import { AlertService, AuthenticationService,
         } from './_services/index';
 
 // Pipes
-import { MyTimePipe } from './_pipes/time.pipe';
+import { MyTimePipe, MyTruncatePipe } from './_pipes/index';
 
 // Forms
 import { AccountManagerModule } from './account-manager/account-manager.module';

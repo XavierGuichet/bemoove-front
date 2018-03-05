@@ -13,7 +13,7 @@ import { WorkoutDetailsComponent } from './display/details/workout-details.compo
 import { WorkoutService, SpaceService } from '../_services/index';
 
 // Pipes
-import { MyTimePipe } from '../_pipes/time.pipe';
+import { MyTimePipe } from '../_pipes/index';
 @NgModule({
     bootstrap: [
         WorkoutListComponent

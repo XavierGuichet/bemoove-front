@@ -16,7 +16,7 @@
         <button type="button" mat-raised-button color="accent" (click)="forwardSelectedDay()"><mat-icon class="mat-24">keyboard_arrow_right</mat-icon></button>
         <div class="coachselect" *ngIf="selectedCoach">
           <mat-select [(ngModel)]="selectedCoach" (change)="onCoachChange()">
-            <mat-option *ngFor="let coach of coaches" [value]="coach">{{ coach.firstname }}</mat-option>
+            <mat-option *ngFor="let coach of coaches" [value]="coach">{{ coach.firstname }} {{ coach.lastname | myTruncate : '0' : '1' : '.' }}</mat-option>
           </mat-select>
       </div>
       </div>
