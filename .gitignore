@@ -46,6 +46,7 @@ npm-debug.log
 
 # Dist #
 /dist
+/dist-beta
 /public/__build__/
 /src/*/__build__/
 /__build__/**
