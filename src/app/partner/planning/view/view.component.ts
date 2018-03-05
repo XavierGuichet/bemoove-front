@@ -133,6 +133,7 @@ export class ViewComponent implements OnInit {
 
   public changeDisplayStyle(style: string) {
     this.displayStyle = style;
+    this.setDateBoundaries();
     this.refreshDisplayedDays();
   }
 
@@ -144,6 +145,7 @@ export class ViewComponent implements OnInit {
       nbDisplayedDay = -7;
     }
     this.translateDateBoundaries(nbDisplayedDay);
+    this.setDateBoundaries();
     this.refreshDisplayedDays();
   }
 
@@ -155,6 +157,7 @@ export class ViewComponent implements OnInit {
       nbDisplayedDay = 7;
     }
     this.translateDateBoundaries(nbDisplayedDay);
+    this.setDateBoundaries();
     this.refreshDisplayedDays();
   }
 
@@ -165,6 +168,7 @@ export class ViewComponent implements OnInit {
 
   private setDateBoundaries() {
     if (this.displayStyle === '3days') {
+      this.firstDisplayedDay = this.getRelativeDate(this.firstDisplayedDay, 0);
       this.lastDisplayedDay = this.getRelativeDate(this.firstDisplayedDay, 2);
     } else {
       this.firstDisplayedDay = this.getDayXOfWeekOf(this.firstDisplayedDay, 1);
