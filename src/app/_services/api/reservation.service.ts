@@ -25,9 +25,30 @@ export class ReservationService extends ApiService {
       .catch((res) => this.handleError(res, this));
   }
 
+  /**
+   * Get all reservation of the currently connected user (JWT)
+   */
   public getMyReservations(): Promise<Reservation[]> {
       let url = process.env.API_URL + '/getMyReservations';
       return this.http.get(url, this.getRequestOptions())
+            .toPromise()
+            .then((response) => response.json() as Reservation[])
+            .catch((res) => this.handleError(res, this));
+  }
+
+  public getMyFutureReservations(personId: number): Promise<Reservation[]> {
+      let today = new Date();
+      return this.http.get(this.reservationUrl + '?workoutInstance.startdate[after]=' + today.toISOString() + '&person.id=' + personId,
+                this.getRequestOptions())
+            .toPromise()
+            .then((response) => response.json() as Reservation[])
+            .catch((res) => this.handleError(res, this));
+  }
+
+  public getMyPastReservations(personId: number): Promise<Reservation[]> {
+      let today = new Date();
+      return this.http.get(this.reservationUrl + '?workoutInstance.startdate[before]=' + today.toISOString() + '&person.id=' + personId,
+                this.getRequestOptions())
             .toPromise()
             .then((response) => response.json() as Reservation[])
             .catch((res) => this.handleError(res, this));

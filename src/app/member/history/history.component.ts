@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { Profile, Address } from '../../models/index';
+import { Reservation } from '../../models/index';
 
-import { AlertService, ProfileService } from '../../_services/index';
+import { ReservationService, PersonService } from '../../_services/index';
 
 @Component({
   selector: 'member-history',
@@ -11,14 +10,19 @@ import { AlertService, ProfileService } from '../../_services/index';
 })
 
 export class MemberHistoryComponent implements OnInit {
-  public profile: Profile;
+  public reservations: Reservation[];
   constructor(
-    private router: Router,
-    private alertService: AlertService,
-    private profileService: ProfileService
+        private reservationService: ReservationService,
+        private personService: PersonService
   ) { }
 
   public ngOnInit(): void {
-      this.alertService.success('I\'m a cool success message');
+      this.personService.getMyPerson()
+        .then( (person) => {
+            return Promise.all([person, this.reservationService.getMyPastReservations(person.id)]);
+        })
+        .then( (results) => {
+            this.reservations = results[1];
+        });
   }
 }

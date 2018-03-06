@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Reservation } from '../../models/index';
 
-import { ReservationService } from '../../_services/index';
+import { ReservationService, PersonService } from '../../_services/index';
 
 @Component({
   selector: 'member-reservation',
@@ -12,13 +12,17 @@ import { ReservationService } from '../../_services/index';
 export class MemberReservationComponent implements OnInit {
   public reservations: Reservation[];
   constructor(
-    private reservationService: ReservationService
+    private reservationService: ReservationService,
+    private personService: PersonService
   ) { }
 
   public ngOnInit(): void {
-      this.reservationService.getMyReservations()
-        .then( (reservations) => {
-            this.reservations = reservations;
-        });
+    this.personService.getMyPerson()
+      .then((person) => {
+        return Promise.all([person, this.reservationService.getMyFutureReservations(person.id)]);
+      })
+      .then((results) => {
+        this.reservations = results[1];
+      });
   }
 }
