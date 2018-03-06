@@ -16,4 +16,3 @@ export class MyTruncatePipe implements PipeTransform {
         }
     }
 }
-}
