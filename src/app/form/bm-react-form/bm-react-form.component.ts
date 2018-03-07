@@ -55,9 +55,9 @@ export abstract class BMReactFormComponent  {
       return errorMessages;
     }
 
-    public handleError(error: any): Promise<any> {
-      console.error('An error occurred', error); // for demo purposes only
-      return Promise.reject(error.message || error);
+    public handleError(error: any): void {
+      console.error('An error occurred', error);
+      return;
     }
 
     public createOrUpdate(service: any, model: any): Promise<any> {
