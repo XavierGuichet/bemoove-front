@@ -14,6 +14,9 @@
     </div>
     <p class="forgottenpwd"><a routerLink="/account/recover/request">Mot de passe oublié ?</a></p>
   </div>
+  <div *ngIf="formResult" class="alert" class="mr-3" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+    <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
+  </div>
   <div class="form-group">
     <button [disabled]="loading || !LoginForm.valid" class="btn-full-width" mat-raised-button color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Se connecter</span></button>
   </div>

@@ -13,6 +13,7 @@ import { AuthenticationService } from '../../../_services/index';
 export class LoginFormReactiveComponent extends BMReactFormComponent implements OnInit {
   @Output()
   public onSuccess = new EventEmitter<boolean>();
+  public formResult: any;
 
   public LoginForm: FormGroup;
 
@@ -41,14 +42,23 @@ export class LoginFormReactiveComponent extends BMReactFormComponent implements 
   }
 
   public onSubmit() {
+    this.hideFormResult();
     this.loading = true;
     let account = this.createObjectFromModel();
     this.authenticationService.login(account.username, account.password)
       .then(
       (data) => {
+          this.loading = true;
+          this.showFormResult('success', 'Connexion réussie');
           this.onSuccess.emit(true);
       }
-      );
+      )
+      .catch((errmsg) => this.handleError(errmsg));
+  }
+
+  public handleError(message: any): void {
+      this.showFormResult('error', message);
+      return;
   }
 
   protected buildForm(): void {
