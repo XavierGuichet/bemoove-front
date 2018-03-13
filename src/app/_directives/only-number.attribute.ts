@@ -11,7 +11,6 @@ export class OnlyNumberDirective {
 
     @HostListener('keydown', ['$event'])
     public onKeyDown(event) {
-        console.log('hello');
     let e = event as KeyboardEvent;
     if (this.OnlyNumber) {
       if ([46, 8, 9, 27, 13, 110, 190].indexOf(e.keyCode) !== -1 ||

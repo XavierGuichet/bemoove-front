@@ -58,7 +58,6 @@ export class WorkoutDetailsComponent implements OnInit {
               this.headerimage =  this.domSanitizer.bypassSecurityTrustStyle(`url(${this.workout.photoWide.path})`);
               this.workoutInstanceService.getBookableByWorkoutId(this.workout.id).then( (workoutInstances) => {
                   this.workoutInstances = workoutInstances;
-                  console.log(this.workoutInstances);
                   if (this.workoutInstances[0].coach) {
                       this.coach = this.workoutInstances[0].coach;
                   }
