@@ -13,7 +13,7 @@ export class MyTimePipe implements PipeTransform {
         return format.replace(/hh/, hh).replace(/mm/, mm);
     }
 
-    private pad(width, string, padding) {
-        return (width <= string.length) ? string : this.pad(width, padding + string, padding)
+    private pad(width, str, padding) {
+        return (width <= str.length) ? str : this.pad(width, padding + str, padding);
     }
 }
