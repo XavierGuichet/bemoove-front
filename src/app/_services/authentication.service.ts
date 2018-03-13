@@ -86,6 +86,8 @@ export class AuthenticationService {
     let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
     if (currentAccount && currentAccount.token) {
       this.headers.set('Authorization', 'Bearer ' + currentAccount.token);
+    } else {
+        this.headers.delete('Authorization');
     }
     return new RequestOptions({ headers: this.headers });
   }
