@@ -5,15 +5,16 @@ import { Headers } from '@angular/http';
 import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
+import { BMImageInputComponent } from '../../../../form/bm-image-input/bm-image-input.component';
 
 import { Observable } from 'rxjs/Observable';
 import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 import { Subject } from 'rxjs/Subject';
 
-import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
+// import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
 import { CompleterService, RemoteData, CompleterData } from 'ng2-completer';
 
-import { Coach } from '../../../models/index';
+import { BMImage, Coach } from '../../../models/index';
 
 import { CoachService,
   ImageService } from '../../../_services/index';
@@ -32,15 +33,11 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
   public coach: Coach;
   public coachForm: FormGroup;
 
-  public coachPhotoPathBackup: string = '';
-  public cropperData: any;
-  public cropperSettings: CropperSettings = new CropperSettings();
-  @ViewChild('cropper', undefined) public cropper: ImageCropperComponent;
-
   public formErrors = {
     firstname: '',
     lastname: '',
     description: '',
+    photo: ''
   };
 
   public validationMessages = {
@@ -52,6 +49,9 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
     },
     description: {
         required: 'Ce champs est obligatoire',
+    },
+    photo: {
+
     }
   };
 
@@ -61,29 +61,18 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
     private coachService: CoachService,
     private imageService: ImageService) {
     super();
-    this.cropperSettings.rounded = true;
-    this.cropperSettings.width = 100;
-    this.cropperSettings.height = 100;
-    this.cropperSettings.croppedWidth = 400;
-    this.cropperSettings.croppedHeight = 400;
-    this.cropperSettings.canvasWidth = 175;
-    this.cropperSettings.canvasHeight = 175;
-    this.cropperSettings.keepAspect = true;
-
-    this.cropperData = {};
   }
 
   public ngOnInit(): void {
     this.buildForm();
   }
 
-  public changePhoto(): void {
-    this.coachPhotoPathBackup = this.coach.photo.path;
+  get photoCoachControl() {
+    return this.coachForm.get('photo');
   }
 
-  public resetPhoto(): void {
-    this.coachPhotoPathBackup = '';
-    this.cropperData = {};
+  public confirmPhotoCoach(image: BMImage) {
+    this.photoCoachControl.setValue(image);
   }
 
   public onSubmit(): void {
@@ -91,7 +80,6 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
     this.hideFormResult();
 
     let coach = this.createObjectFromModel();
-
     this.createNestedEntities(coach).then(
       (coachWithCreatedNestedEntities) => {
         return Promise.all([
@@ -128,6 +116,9 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
         Validators.required
       ]
       ],
+      photo: [this.coach.photo, [
+
+      ]]
     });
     //
     this.coachForm.valueChanges
@@ -142,13 +133,11 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
     if (!coach.photo.id && coach.photo.base64data !== null) {
       Promises.push(this.imageService.create(coach.photo).then((image) => coach.photo = image));
     } else if (coach.photo.base64data !== null) {
-      Promises.push(this.imageService.update(coach.photo).then((image) => { coach.photo = image; this.resetPhoto(); }));
+      Promises.push(this.imageService.update(coach.photo).then((image) => { coach.photo = image; }));
     }
 
     if (Promises.length > 0) {
-      return Promise.all(Promises).then(() => {
-        return coach;
-      });
+      return Promise.all(Promises).then(() => coach);
     } else {
       return Promise.resolve(coach);
     }
@@ -173,10 +162,7 @@ export class CoachFormComponent extends BMReactFormComponent implements OnInit {
     if (form.get('description').dirty) {
       coach.description = formModel.description;
     }
-
-    if (this.cropperData.image) {
-        coach.photo.base64data = this.cropperData.image;
-    }
+    coach.photo = formModel.photo;
 
     return coach;
   }

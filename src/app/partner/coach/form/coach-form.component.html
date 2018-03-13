@@ -44,24 +44,15 @@
       <mat-card class="form-card h-100">
         <mat-card-title color="primary" class="form-card__title">Photo</mat-card-title>
         <mat-card-content>
-          <div class="form-group row">
-            <label for="photo" class="col-sm-3 col-form-label">Photo</label>
-            <div class="col-sm-9" *ngIf="!coach.photo || !coach.photo.path || coachPhotoPathBackup.length > 0">
-              <img-cropper [image]="cropperData" [settings]="cropperSettings"></img-cropper>
-            </div>
-            <div class="col-sm-9" *ngIf="coach.photo.path && coachPhotoPathBackup.length == 0">
-              <img src="{{coach.photo.path}}" class="col-12 rounded-circle" />
-            </div>
+          <bm-image-input [parent]="coachForm" [formImage]="photoCoachControl.value" (onConfirm)="confirmPhotoCoach($event)" [width]="300" [height]="300"></bm-image-input>
+          <div *ngIf="formErrors.photo" class="form-error">
+              {{ formErrors.photo }}
           </div>
           <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
             <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
           </div>
         </mat-card-content>
-        <mat-card-actions align="end">
-          <button type="button" *ngIf="coachPhotoPathBackup.length > 0" mat-raised-button color="secondary" (click)="resetPhoto()">Annuler</button>
-          <button type="button" *ngIf="coachPhotoPathBackup.length == 0 && coach.photo.path" mat-raised-button color="secondary" (click)="changePhoto()">Changer</button>
-          <button [disabled]="loading || !coachForm.valid" mat-raised-button class="mr-3" color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
-        </mat-card-actions>
+        <mat-card-actions align="end"></mat-card-actions>
       </mat-card>
     </div>
   </div>
