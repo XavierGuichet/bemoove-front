@@ -10,7 +10,6 @@ import { WorkoutPreviewComponent } from './preview/workout-preview.component';
 import { WorkoutInstanceFormComponent } from './form/workout-instance/workout-instance-form.component';
 
 import { TagsSelectorComponent } from './tags-selector/tags-selector.component';
-import { BMImageInputComponent } from '../../form/bm-image-input/bm-image-input.component';
 
 import { AddressFormComponent } from './form/address/address-form.component';
 import { ModalAddressFormComponent } from './modal/modal-address-form.component';
@@ -42,8 +41,7 @@ import { WorkoutService, WorkoutInstanceService,
       WorkoutPreviewComponent,
       AddressFormComponent,
       ModalAddressFormComponent,
-      TagsSelectorComponent,
-      BMImageInputComponent
+      TagsSelectorComponent
     ],
   exports: [ WorkoutComponent ],
   entryComponents: [ ModalAddressFormComponent ],
