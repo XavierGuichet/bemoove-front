@@ -49,7 +49,8 @@ export class HomeComponent implements OnInit {
     private getCommingWorkout() {
         let today = new Date();
         let in7day = new Date();
-        in7day.setDate(today.getDate() - 7);
-        this.workoutInstanceService.getWorkoutInstancesByDateInterval(today, in7day).then( (workoutInstances) => this.workoutInstances = workoutInstances.slice(0, 3));
+        in7day.setDate(today.getDate() + 7);
+        this.workoutInstanceService.getWorkoutInstancesByDateInterval(today, in7day)
+                .then( (workoutInstances) => this.workoutInstances = workoutInstances.slice(0, 3));
     }
 }
