@@ -124,7 +124,7 @@ export class WorkoutInstanceFormComponent extends BMReactFormComponent implement
   }
 
   public removeWorkoutInstance(workoutInstance: WorkoutInstance): void {
-    this.workoutInstances = this.workoutInstances.filter(
+    this.newWorkoutInstances = this.newWorkoutInstances.filter(
       (object) =>
         object !== workoutInstance
     );

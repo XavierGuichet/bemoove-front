@@ -69,7 +69,7 @@
         </tr>
         <tr *ngFor="let workoutInstance of newWorkoutInstances">
           <td>{{workoutInstance.startdate | date: 'short'}}</td>
-          <td>{{workoutInstance.coach.firstname}} - {{workoutInstance.coach.lastname}}</td>
+          <td>{{workoutInstance.coach.firstname}} {{workoutInstance.coach.lastname}}</td>
           <td>{{workoutInstance.nbTicketAvailable}}</td>
           <td><button mat-button color="primary" class="mat-18" (click)="removeWorkoutInstance(workoutInstance)"><mat-icon class="mat-18 valign">remove_circle</mat-icon></button></td>
         </tr>
@@ -87,7 +87,7 @@
         </tr>
         <tr *ngFor="let workoutInstance of workoutInstances">
           <td>{{workoutInstance.startdate | date: 'short'}}</td>
-          <td>{{workoutInstance.coach.firstname}} - {{workoutInstance.coach.lastname}}</td>
+          <td>{{workoutInstance.coach.firstname}} {{workoutInstance.coach.lastname}}</td>
           <td>{{workoutInstance.nbTicketAvailable}}</td>
           <td></td>
         </tr>
