@@ -1,0 +1,26 @@
+<form *ngIf="formReady" [formGroup]="tvaRateForm" (ngSubmit)="onSubmit()" novalidate>
+  <mat-card-title color="primary" class="form-card__title">TVA</mat-card-title>
+  <mat-card-content>
+    <div class="form-group row">
+      <label for="TvaRate" class="col-sm-3 col-form-label">Taux de TVA</label>
+      <div class="col-sm-9">
+        <div class="input-group input-float">
+          <input type="number" class="form-control" formControlName="TvaRate" name="TvaRate">
+          <div class="input-group-addon">%</div>
+        </div>
+        <div *ngIf="formErrors.TvaRate" class="form-error">
+          {{ formErrors.TvaRate }}
+        </div>
+        <div class="form-info">
+          Taux de TVA (Ex: 20%). Inscrivez 0 si vous en êtes exempté.
+        </div>
+      </div>
+    </div>
+    <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+      <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button [disabled]="loading || !tvaRateForm.valid" class="mr-3" mat-raised-button color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+  </mat-card-actions>
+</form>

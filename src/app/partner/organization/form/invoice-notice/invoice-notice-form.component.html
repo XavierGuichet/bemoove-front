@@ -1,0 +1,162 @@
+<form *ngIf="formReady" [formGroup]="invoiceNoticeForm" (ngSubmit)="onSubmit()" novalidate>
+  <mat-card-title color="primary" class="form-card__title">Mentions légales</mat-card-title>
+  <mat-card-content>
+    <div class="form-group row">
+      <label for="companyType" class="col-sm-12 form-label">Forme juridique</label>
+      <div class="col-sm-12">
+        <select class="form-control" id="companyType" name="companyType" title="" formControlName="LegalStatus" name="LegalStatus">
+              <option value="-1" disabled="" selected="">
+                Sélectionnez un type d'entreprise
+              </option>
+              <option value="NonProfit">Association loi 1901</option>
+              <option value="AE" selected="selected">Auto-entreprise</option>
+              <option value="EI">EI (entreprise individuelle)</option>
+              <option value="EIRLnoTVA">EIRL non soumise à la TVA</option>
+              <option value="EIRL">EIRL soumise à TVA</option>
+              <option value="Micro">Micro-entreprise et franchise en base de TVA</option>
+              <option value="SARLvariable">SARL à capital variable</option>
+              <option value="SARLEURL">SARL/EURL</option>
+              <option value="SAS">SAS/SASU</option>
+              <option value="SA">Société anonyme</option>
+            </select>
+        <div *ngIf="formErrors.LegalStatus" class="form-error">
+          {{ formErrors.LegalStatus }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-info">
+        Ces mentions seront affichées en bas de vos factures
+      </div>
+    </div>
+    <div class="form-group row" [ngSwitch]="selectedLegalStatus">
+      <div class="col-sm-12" *ngSwitchCase="'NonProfit'">
+        <div class="legalstatus">
+          <h1>Association loi 1901</h1>
+          <p>
+            Association Loi 1901 enregistrée sous le N° (numéro de l'association) à la préfecture de (préfecture) - N° Siret <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> (si
+            applicable).<br/>
+            TVA non applicable, article 293B du CGI
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'AE'">
+        <div class="legalstatus">
+          <h1>Auto-entreprise</h1>
+          <p>
+            SIRET : <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"><br/>
+            Dispensé d’immatriculation au registre du commerce et des sociétés (RCS) en application de l'article L.123-1-1 du Code du Commerce.<br/>
+            TVA non applicable, art. 293 B du CGI
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'EI'">
+        <div class="legalstatus">
+          <h1>EI (entreprise individuelle)</h1>
+          <p>
+            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"><br/>
+            APE : <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
+            TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'EIRLnoTVA'">
+        <div class="legalstatus">
+          <h1>EIRL non soumise à la TVA</h1>
+          <p>
+            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret">
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'EIRL'">
+        <div class="legalstatus">
+          <h1>EIRL soumise à TVA</h1>
+          <p>
+            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"><br/>
+            APE : <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
+            TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'Micro'">
+        <div class="legalstatus">
+          <h1>Micro-entreprise et franchise en base de TVA</h1>
+          <p>
+            SIRET : <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret">
+            <br/>Dispensé d’immatriculation au registre du commerce et des sociétés (RCS) en application de l'article L.123-1-1 du Code du Commerce
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'SARLvariable'">
+        <div class="legalstatus">
+          <h1>SARL à capital variable</h1>
+          <p>
+            S.A.R.L au capital variable<br/>
+            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> RCS de
+            <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
+            <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
+            TVA Intracommunautaire :  <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'SARLEURL'">
+        <div class="legalstatus">
+          <h1>SARL/EURL</h1>
+          <p>
+            S.A.R.L au capital de <input type="text" class="form-control-inline-seamless small" formControlName="ShareCapital" name="ShareCapital"> €<br/>
+            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> RCS de <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
+            <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
+            TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'SAS'">
+        <div class="legalstatus">
+          <h1>SAS/SASU</h1>
+          <p>
+            SAS au capital de <input type="text" class="form-control-inline-seamless small" formControlName="ShareCapital" name="ShareCapital"> €<br/>
+            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> RCS de <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
+            <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
+            TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12" *ngSwitchCase="'SA'">
+        <div class="legalstatus">
+          <h1>Société anonyme</h1>
+          <p>
+            S.A au capital variable
+            <br/>SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> RCS de
+            <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
+            <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
+            TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
+          </p>
+        </div>
+      </div>
+      <div *ngIf="formErrors.LegalStatus" class="col-sm-12 form-error">
+        {{ formErrors.LegalStatus }}
+      </div>
+      <div *ngIf="formErrors.Siret" class="col-sm-12 form-error">
+        {{ formErrors.Siret }}
+      </div>
+      <div *ngIf="formErrors.ShareCapital" class="col-sm-12 form-error">
+        {{ formErrors.ShareCapital }}
+      </div>
+      <div *ngIf="formErrors.RcsNumber" class="col-sm-12 form-error">
+        {{ formErrors.RcsNumber }}
+      </div>
+      <div *ngIf="formErrors.ApeNumber" class="col-sm-12 form-error">
+        {{ formErrors.ApeNumber }}
+      </div>
+      <div *ngIf="formErrors.VatNumber" class="col-sm-12 form-error">
+        {{ formErrors.VatNumber }}
+      </div>
+    </div>
+    <div *ngIf="formResult" class="alert" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+      <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button [disabled]="loading || !invoiceNoticeForm.valid" class="mr-3" mat-raised-button color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
+  </mat-card-actions>
+</form>

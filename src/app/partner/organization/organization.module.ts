@@ -11,6 +11,8 @@ import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.co
 import { AddressFormComponent } from './form/address/address-form.component';
 import { BusinessInfoFormComponent } from './form/business-info/business-info-form.component';
 import { LegalRepresentativeFormComponent } from './form/legalrepresentative/legalrepresentative-form.component';
+import { InvoiceNoticeFormComponent } from './form/invoice-notice/invoice-notice-form.component';
+import { TvaRateFormComponent } from './form/tva-rate/tva-rate-form.component';
 
 import { OrganizationRoutingModule } from './organization-routing.module';
 import { PartnerNavSecondaryModule } from '../nav/secondary/nav-secondary.module';
@@ -34,7 +36,9 @@ import { PartnerNavSecondaryModule } from '../nav/secondary/nav-secondary.module
       BillingMandateComponent,
       AddressFormComponent,
       BusinessInfoFormComponent,
-      LegalRepresentativeFormComponent
+      LegalRepresentativeFormComponent,
+      TvaRateFormComponent,
+      InvoiceNoticeFormComponent
     ],
   exports: [ OrganizationComponent ],
   entryComponents: [ ],
