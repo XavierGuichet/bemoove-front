@@ -59,13 +59,13 @@
           <div class="row">
             <div class="col-sm-12">
               <order-summary [cart]="cart"></order-summary>
-              <order-payment-form></order-payment-form>
+              <order-payment-form [cart]="cart"></order-payment-form>
             </div>
           </div>
         </div>
       </div>
       <div class="col-sm-3">
-        Résumé
+        <!-- <workout-summary [workoutInstance]="cart.workoutInstance"></workout-summary> -->
       </div>
     </div>
   </div>

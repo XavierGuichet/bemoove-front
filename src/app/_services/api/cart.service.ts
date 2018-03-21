@@ -32,4 +32,12 @@ export class CartService extends ApiService {
       .then((response) => response.json() as Cart)
       .catch((res) => this.handleError(res, this));
   }
+
+  public getMyCurrentCart(): Promise<Cart> {
+      let url = process.env.API_URL + '/getMyCurrentCart';
+      return this.http.get(url, this.getRequestOptions())
+            .toPromise()
+            .then((response) => response.json() as Cart)
+            .catch((res) => this.handleError(res, this));
+  }
 }

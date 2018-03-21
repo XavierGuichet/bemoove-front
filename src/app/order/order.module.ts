@@ -12,7 +12,7 @@ import { OrderPaymentFormComponent } from './form/payment/payment.component';
 import { OrderSummaryComponent } from './summary/summary.component';
 import { OrderSuccessComponent } from './success/success.component';
 
-import { WorkoutService, ReservationService, SpaceService } from '../_services/index';
+import { OrderService, ReservationService, SpaceService, WorkoutService } from '../_services/index';
 
 @NgModule({
     bootstrap: [
@@ -37,6 +37,7 @@ import { WorkoutService, ReservationService, SpaceService } from '../_services/i
   entryComponents: [ ],
   providers:    [
         WorkoutService,
+        OrderService,
         ReservationService,
         SpaceService
     ]

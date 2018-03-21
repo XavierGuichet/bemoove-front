@@ -1,25 +1,31 @@
+$mat-main-blue: #52d0dc;
+$lightgrey: #d3d3d3;
+
 .header {
   height: 350px;
   background-size: cover;
   background-attachment: fixed;
 }
+
 .aspect-ratio--custom {
-    height: 0;
-    position: relative;
-    padding-bottom: 18.23%;
+  height: 0;
+  position: relative;
+  padding-bottom: 18.23%;
 }
+
 .aspect-ratio--object {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
 }
+
 .zi-10 {
-    z-index: 10;
+  z-index: 10;
 }
 
 .tab-navigation {
@@ -27,9 +33,8 @@
     list-style: none;
     display: flex;
     margin: 0;
-    padding: 0;
     justify-content: center;
-    border-bottom: 1px solid lightgrey;
+    border-bottom: 1px solid $lightgrey;
     padding: 0 12px;
     margin-bottom: 24px;
 
@@ -41,27 +46,29 @@
       transition: all 500ms;
 
       &:first-child {
-        border-bottom: 2px solid #52d0dc;
+        border-bottom: 2px solid $mat-main-blue;
       }
 
       &:hover {
-        background: lightgrey;
+        background: $lightgrey;
       }
     }
   }
 }
 
 .coach {
-  border: 1px solid lightgrey;
+  border: 1px solid $lightgrey;
 }
+
 .list-check {
-    list-style: none outside;
-    margin: 0;
-    padding: 0;
+  list-style: none outside;
+  margin: 0;
+  padding: 0;
 }
+
 .booking {
   margin-top: -64px;
-  border: 1px solid lightgrey;
+  border: 1px solid $lightgrey;
 
   &__header {
     height: 64px;
@@ -73,20 +80,27 @@
     }
   }
 
-  &__content {
-
-  }
+  &__content {}
 
   &__action {
-
     & button {
       float: right;
     }
   }
+
   &__notice {
-      border-top: 1px solid lightgrey;
+    border-top: 1px solid $lightgrey;
   }
 }
+
 .my-btn {
-    min-width: auto;
+  min-width: auto;
+}
+
+.fix-to-top {
+  position: fixed;
+  top: 0;
+  left: auto;
+  right: auto;
+  margin-top: 0;
 }

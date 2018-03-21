@@ -17,3 +17,5 @@ export * from './account';
 ﻿export * from './user';
 ﻿export * from './workout';
 ﻿export * from './workout-instance';
+
+export * from './mangopay/payment.ts';

@@ -54,10 +54,9 @@
         </div>
         <div class="col-sm-9">
           <p>Vos informations bancaires ne seront pas sauvegardé.</p>
-          <button class="btn-full-width" mat-raised-button color="accent"><mat-icon class="mat-18">lock</mat-icon>Payer 10 000€ !</button>
+          <button class="btn-full-width" mat-raised-button color="accent"><mat-icon class="mat-18">lock</mat-icon>Payer {{ cartTotalAmountTaxIncl }}€ !</button>
         </div>
       </div>
-      // NOTE : A ce stade, avant validation de ce formulaire, la commande est crée en status 'en attente de validation client'
     </div>
   </div>
 </form>

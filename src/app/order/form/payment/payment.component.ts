@@ -14,6 +14,8 @@ import {
   Address,
   Cart,
   Coach,
+  Order,
+  Payment,
   Person,
   Reservation,
   Workout,
@@ -25,6 +27,7 @@ import {
   CartService,
   ProfileService,
   WorkoutService,
+  OrderService,
   ReservationService,
   PersonService,
   SpaceService,
@@ -38,8 +41,11 @@ import {
 })
 
 export class OrderPaymentFormComponent extends BMReactFormComponent implements OnInit {
+  @Input()
+  public cart: Cart;
   @Output()
   public onSuccess = new EventEmitter<boolean>();
+  public cartTotalAmountTaxIncl: number;
   public paymentForm: FormGroup;
   public formReady: boolean = false;
 
@@ -74,6 +80,7 @@ export class OrderPaymentFormComponent extends BMReactFormComponent implements O
     private personService: PersonService,
     private workoutInstanceService: WorkoutInstanceService,
     private addressService: AddressService,
+    private orderService: OrderService,
     private spaceService: SpaceService,
     private reservationService: ReservationService,
     private router: Router,
@@ -85,33 +92,33 @@ export class OrderPaymentFormComponent extends BMReactFormComponent implements O
   public ngOnInit() {
     // TODO : ngOnInit
     this.buildForm();
+    this.calcCartTotalAmountTaxIncl();
+  }
+
+  public calcCartTotalAmountTaxIncl() {
+      let taxRate = this.cart.workoutInstance.coach.business.vatRate;
+      let productPriceTaxExcl = this.cart.workoutInstance.workout.price;
+      let totalAmountTaxExcl = productPriceTaxExcl * this.cart.nbBooking;
+      let totalAmountTaxIncl = totalAmountTaxExcl * (1 + taxRate / 100);
+
+      this.cartTotalAmountTaxIncl = totalAmountTaxIncl;
   }
 
   public onSubmit(): void {
     // FIXME : it's a quick tmp solution only made for testing
     this.loading = true;
     this.hideFormResult();
+    let payment = new Payment();
+    payment.status = "SUCCEEDED";
 
-    this.route.params
-      .switchMap((params: Params) => {
-        return this.workoutInstanceService.getWorkoutInstance(+params['idsession']);
-      })
-      .subscribe((workoutInstance) => {
-        let reservation = new Reservation();
-        reservation.order = 'idorderr';
-        reservation.workoutInstance = workoutInstance;
-        reservation.dateadd = new Date();
-        reservation.nbBooking = 1;
+    this.orderService.createOrderFromCart(this.cart, payment)
+          .then((order) => {
+              console.log(order);
+          });
 
-        this.personService.getMyPerson().then( (person) => {
-            reservation.person = person;
-            this.reservationService.create(reservation)
-              .then( (reservation) => {
-              this.loading = false;
-              this.router.navigate(['/order/success/' + reservation.id]);
-            });
-        });
-      });
+    // this.orderService.payOrder(this.order)
+    //         .then((order) => this.order = order);
+
   }
 
   public createNestedEntities(person: Person): Promise<Person> {

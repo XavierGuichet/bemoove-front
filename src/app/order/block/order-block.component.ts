@@ -84,9 +84,9 @@ export class OrderBlockComponent extends BMReactFormComponent implements OnInit 
 
     public onSubmit() {
       this.loading = true;
-      let cart = this.createObjectFromModel();
+      let cartObj = this.createObjectFromModel();
 
-      this.cartService.create(cart)
+      this.cartService.create(cartObj)
         .then( (cart) => {
             this.router.navigate(['order/' + this.orderForm.value.workoutInstance.workout.id + '/' + this.orderForm.value.workoutInstance.id]);
         });
@@ -115,7 +115,7 @@ export class OrderBlockComponent extends BMReactFormComponent implements OnInit 
         let cart = new Cart();
 
         cart.workoutInstance = this.orderForm.value.workoutInstance;
-        cart.nbBooking = this.orderForm.value.wantedPlace;
+        cart.nbBooking = parseInt(this.orderForm.value.wantedPlace, 10);
 
         return cart;
     }
