@@ -15,7 +15,7 @@ import { InvoiceNoticeFormComponent } from './form/invoice-notice/invoice-notice
 import { TvaRateFormComponent } from './form/tva-rate/tva-rate-form.component';
 
 import { OrganizationRoutingModule } from './organization-routing.module';
-import { PartnerNavSecondaryModule } from '../nav/secondary/nav-secondary.module';
+import { NavModule } from '../../nav/nav.module';
 
 @NgModule({
     bootstrap: [
@@ -26,7 +26,7 @@ import { PartnerNavSecondaryModule } from '../nav/secondary/nav-secondary.module
         FormsModule,
         ReactiveFormsModule,
         OrganizationRoutingModule,
-        PartnerNavSecondaryModule
+        NavModule
     ],
   declarations: [
       OrganizationComponent,

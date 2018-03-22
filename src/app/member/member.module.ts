@@ -8,12 +8,11 @@ import { CustomDatepickerI18n } from '../_helpers/custom-datepicker.component';
 
 import { MemberComponent } from './member.component';
 import { MemberRoutingModule } from './member-routing.module';
+import { NavModule } from '../nav/nav.module';
 
 import { MemberProfileComponent } from './profile/profile.component';
 import { MemberReservationComponent } from './reservation/reservation.component';
 import { MemberHistoryComponent } from './history/history.component';
-
-import { MemberNavComponent } from './nav/nav.component';
 
 import { AddressFormReactiveComponent } from './form/address/address-form-reactive.component';
 import { ContactDetailsFormReactiveComponent } from './form/contact-details/contact-details-form-reactive.component';
@@ -31,6 +30,7 @@ import { AlertService, ProfileService } from '../_services/index';
   imports:      [
         SharedModule,
         FormsModule,
+        NavModule,
         ReactiveFormsModule,
         MemberRoutingModule
     ],
@@ -39,7 +39,6 @@ import { AlertService, ProfileService } from '../_services/index';
         MemberProfileComponent,
         MemberReservationComponent,
         MemberHistoryComponent,
-        MemberNavComponent,
         AddressFormReactiveComponent,
         ContactDetailsFormReactiveComponent,
         EmailChangeFormReactiveComponent,

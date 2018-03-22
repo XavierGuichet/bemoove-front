@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
-import { Link } from '../nav/link.model.ts';
+import { Link } from '../../nav/nav.module';
 
 @Component({
   selector: 'organization',

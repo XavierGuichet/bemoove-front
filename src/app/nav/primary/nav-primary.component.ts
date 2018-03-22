@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { Link } from '../link.model.ts';
 
 @Component({
     selector: 'nav-primary',
@@ -7,7 +9,9 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ['nav-primary.component.scss']
 })
 
-export class PartnerNavPrimaryComponent implements OnInit {
+export class NavPrimaryComponent implements OnInit {
+    @Input()
+    public links: any;
     constructor(
         private router: Router,
         private route: ActivatedRoute

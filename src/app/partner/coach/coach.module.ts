@@ -12,7 +12,7 @@ import { CoachDashBoardComponent } from './dashboard/coach-dashboard.component';
 import { CoachRoutingModule } from './coach-routing.module';
 
 import { BmFormModule } from '../../shared/form.module';
-import { PartnerNavSecondaryModule } from '../nav/secondary/nav-secondary.module';
+import { NavModule } from '../../nav/nav.module';
 
 import { CoachService,
     ImageService,
@@ -26,7 +26,7 @@ import { CoachService,
         SharedModule,
         BmFormModule,
         CoachRoutingModule,
-        PartnerNavSecondaryModule
+        NavModule
     ],
   declarations: [
       CoachComponent,

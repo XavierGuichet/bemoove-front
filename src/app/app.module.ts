@@ -39,7 +39,10 @@ import { PartnerRegistrationComponent } from './welcome/partner-registration/par
 import { HomeComponent } from './home/home.component';
 
 import { TopBarPartnerRecruitComponent } from './topbar/partner-recruit/partner-recruit.component';
+
 import { HeaderNavComponent } from './header-nav/header-nav.component';
+import { NavModule } from './nav/nav.module';
+
 import { FooterComponent } from './footer/footer.component';
 
 import { PartnerModule } from './partner/partner.module';
@@ -101,6 +104,7 @@ type StoreType = {
     Angular2FontawesomeModule,
     PartnerModule,
     MemberModule,
+    NavModule,
     WorkoutListModule,
     OrderModule
   ],

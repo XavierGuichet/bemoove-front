@@ -13,8 +13,7 @@ import { PlanningModule } from './planning/planning.module';
 import { CoachModule } from './coach/coach.module';
 import { WorkoutModule } from './workout/workout.module';
 
-import { PartnerNavPrimaryComponent } from './nav/primary/nav-primary.component';
-import { PartnerNavSecondaryModule } from './nav/secondary/nav-secondary.module';
+import { NavModule } from '../nav/nav.module';
 
 import { SportService,
   AddressService,
@@ -40,15 +39,14 @@ import { ImageToBase64Directive } from '../_directives/image-to-base64.attribute
   imports: [
     SharedModule,
     BmFormModule,
+    NavModule,
     PlanningModule,
     CoachModule,
     WorkoutModule,
-    PartnerNavSecondaryModule,
     PartnerRoutingModule
   ],
   declarations: [
     PartnerComponent,
-    PartnerNavPrimaryComponent,
     ImageToBase64Directive
   ],
   exports: [PartnerComponent],

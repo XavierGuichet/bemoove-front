@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { Coach } from '../../../models/index';
-import { Link } from '../nav/link.model.ts';
+import { Link } from '../../nav/nav.module';
 
 import { CoachService } from '../../_services/index';
 

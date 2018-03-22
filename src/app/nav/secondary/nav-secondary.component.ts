@@ -9,7 +9,7 @@ import { Link } from '../link.model.ts';
     styleUrls: ['nav-secondary.component.scss']
 })
 
-export class PartnerNavSecondaryComponent implements OnInit {
+export class NavSecondaryComponent implements OnInit {
     @Input()
     public links: any;
     constructor(
