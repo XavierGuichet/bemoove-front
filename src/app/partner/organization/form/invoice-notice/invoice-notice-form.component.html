@@ -34,7 +34,7 @@
         <div class="legalstatus">
           <h1>Association loi 1901</h1>
           <p>
-            Association Loi 1901 enregistrée sous le N° (numéro de l'association) à la préfecture de (préfecture) - N° Siret <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> (si
+            Association Loi 1901 enregistrée sous le N° (numéro de l'association) à la préfecture de (préfecture) - N° Siret <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true"> (si
             applicable).<br/>
             TVA non applicable, article 293B du CGI
           </p>
@@ -44,7 +44,7 @@
         <div class="legalstatus">
           <h1>Auto-entreprise</h1>
           <p>
-            SIRET : <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"><br/>
+            SIRET : <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true"><br/>
             Dispensé d’immatriculation au registre du commerce et des sociétés (RCS) en application de l'article L.123-1-1 du Code du Commerce.<br/>
             TVA non applicable, art. 293 B du CGI
           </p>
@@ -54,7 +54,7 @@
         <div class="legalstatus">
           <h1>EI (entreprise individuelle)</h1>
           <p>
-            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"><br/>
+            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true"><br/>
             APE : <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
             TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
           </p>
@@ -64,7 +64,7 @@
         <div class="legalstatus">
           <h1>EIRL non soumise à la TVA</h1>
           <p>
-            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret">
+            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true">
           </p>
         </div>
       </div>
@@ -72,7 +72,7 @@
         <div class="legalstatus">
           <h1>EIRL soumise à TVA</h1>
           <p>
-            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"><br/>
+            SIRET: <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true"><br/>
             APE : <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
             TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
           </p>
@@ -82,7 +82,7 @@
         <div class="legalstatus">
           <h1>Micro-entreprise et franchise en base de TVA</h1>
           <p>
-            SIRET : <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret">
+            SIRET : <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true">
             <br/>Dispensé d’immatriculation au registre du commerce et des sociétés (RCS) en application de l'article L.123-1-1 du Code du Commerce
           </p>
         </div>
@@ -92,7 +92,7 @@
           <h1>SARL à capital variable</h1>
           <p>
             S.A.R.L au capital variable<br/>
-            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> RCS de
+            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true"> RCS de
             <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
             <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
             TVA Intracommunautaire :  <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
@@ -104,7 +104,7 @@
           <h1>SARL/EURL</h1>
           <p>
             S.A.R.L au capital de <input type="text" class="form-control-inline-seamless small" formControlName="ShareCapital" name="ShareCapital"> €<br/>
-            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> RCS de <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
+            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true"> RCS de <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
             <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
             TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
           </p>
@@ -115,7 +115,7 @@
           <h1>SAS/SASU</h1>
           <p>
             SAS au capital de <input type="text" class="form-control-inline-seamless small" formControlName="ShareCapital" name="ShareCapital"> €<br/>
-            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> RCS de <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
+            SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true"> RCS de <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
             <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
             TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">
           </p>
@@ -126,7 +126,7 @@
           <h1>Société anonyme</h1>
           <p>
             S.A au capital variable
-            <br/>SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret"> RCS de
+            <br/>SIRET <input type="text" class="form-control-inline-seamless" formControlName="Siret" name="Siret" [OnlyNumber]="true"> RCS de
             <input type="text" class="form-control-inline-seamless medium" formControlName="RcsNumber" name="RcsNumber"> - NAF
             <input type="text" class="form-control-inline-seamless small" formControlName="ApeNumber" name="ApeNumber"><br/>
             TVA Intracommunautaire : <input type="text" class="form-control-inline-seamless large" formControlName="VatNumber" name="VatNumber">

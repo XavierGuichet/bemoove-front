@@ -17,6 +17,8 @@ import { TvaRateFormComponent } from './form/tva-rate/tva-rate-form.component';
 import { OrganizationRoutingModule } from './organization-routing.module';
 import { NavModule } from '../../nav/nav.module';
 
+import { OnlyNumberDirective } from '../../_directives/index';
+
 @NgModule({
     bootstrap: [
         OrganizationComponent,
@@ -38,7 +40,8 @@ import { NavModule } from '../../nav/nav.module';
       BusinessInfoFormComponent,
       LegalRepresentativeFormComponent,
       TvaRateFormComponent,
-      InvoiceNoticeFormComponent
+      InvoiceNoticeFormComponent,
+      OnlyNumberDirective
     ],
   exports: [ OrganizationComponent ],
   entryComponents: [ ],
