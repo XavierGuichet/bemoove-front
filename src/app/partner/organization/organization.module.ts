@@ -19,6 +19,22 @@ import { NavModule } from '../../nav/nav.module';
 
 import { OnlyNumberDirective } from '../../_directives/index';
 
+const ORGANIZATION_COMPONENTS = [
+    OrganizationComponent,
+    OrganizationInformationsComponent,
+    InvoiceSettingsComponent,
+    BankAccountComponent,
+    BillingMandateComponent
+];
+
+const ORGANIZATION_FORMS = [
+    AddressFormComponent,
+    BusinessInfoFormComponent,
+    LegalRepresentativeFormComponent,
+    InvoiceNoticeFormComponent,
+    TvaRateFormComponent
+];
+
 @NgModule({
     bootstrap: [
         OrganizationComponent,
@@ -31,16 +47,8 @@ import { OnlyNumberDirective } from '../../_directives/index';
         NavModule
     ],
   declarations: [
-      OrganizationComponent,
-      OrganizationInformationsComponent,
-      InvoiceSettingsComponent,
-      BankAccountComponent,
-      BillingMandateComponent,
-      AddressFormComponent,
-      BusinessInfoFormComponent,
-      LegalRepresentativeFormComponent,
-      TvaRateFormComponent,
-      InvoiceNoticeFormComponent,
+      ORGANIZATION_COMPONENTS,
+      ORGANIZATION_FORMS,
       OnlyNumberDirective
     ],
   exports: [ OrganizationComponent ],
