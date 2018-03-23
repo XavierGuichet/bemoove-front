@@ -9,4 +9,5 @@ export class Person {
   public address: Address;
   public phoneNumber: string;
   public nationality: string;
+  public countryOfResidence: string;
 }

@@ -7,6 +7,7 @@ export class PersonApi {
   public email: string;
   public birthdate: Date;
   public nationality: string;
+  public countryOfResidence: string;
   public phoneNumber: string;
 
   constructor(person: Person) {
@@ -17,5 +18,6 @@ export class PersonApi {
       this.birthdate = person.birthdate;
       this.phoneNumber = person.phoneNumber;
       this.nationality = person.nationality;
+      this.countryOfResidence = person.countryOfResidence;
   }
 }
