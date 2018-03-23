@@ -21,7 +21,7 @@ export class MemberComponent implements OnInit {
     public primaryMenuLinks: any = [
         new Link('Mes séances à venir', '/member/mes-seances', 'fitness_center'),
         new Link('Mon historique', '/member/mon-historique', 'view_list'),
-        new Link('Mon profil', '/member/mon-profil', 'person')
+        new Link('Mon profil', '/member/profile', 'person')
     ];
 
     constructor(private spaceService: SpaceService) {

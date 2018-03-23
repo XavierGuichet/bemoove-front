@@ -20,7 +20,7 @@
       </div>
       <div class="navbar-links" *ngSwitchCase="'ROLE_USER'">
           <login-button *ngIf="!logged" [transparent]="transparent"></login-button>
-        <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" routerLink="/member/mon-profil">Mon profil</button>
+        <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" routerLink="/member">Mon profil</button>
         <button *ngIf="logged" type="button" mat-button class="button-primary" [class.transparent]="transparent" (click)="logout()"><mat-icon class="mat-18">power_settings_new</mat-icon> Déconnexion</button>
       </div>
       <div class="navbar-links" *ngSwitchDefault>

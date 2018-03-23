@@ -6,11 +6,13 @@
         <mat-tab label="Coordonées">
           <div class="tab-container row">
             <div class="col-12 col-mat-6">
-              <personnal-informations-form-reactive *ngIf="profile" [profile]="profile"></personnal-informations-form-reactive>
+              <mat-card class="form-card">
+                <personnal-informations-form-reactive *ngIf="person" [person]="person"></personnal-informations-form-reactive>
+              </mat-card>
             </div>
             <div class="col-12 col-mat-6">
-              <contact-details-form-reactive *ngIf="profile" [profile]="profile"></contact-details-form-reactive>
-              <address-form-reactive *ngIf="profile" [profile]="profile"></address-form-reactive>
+              <contact-details-form-reactive *ngIf="person" [person]="person"></contact-details-form-reactive>
+              <address-form-reactive *ngIf="person" [person]="person"></address-form-reactive>
             </div>
           </div>
         </mat-tab>

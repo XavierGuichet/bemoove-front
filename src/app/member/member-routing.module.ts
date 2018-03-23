@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { MemberComponent } from './member.component';
-import { MemberProfileComponent } from './profile/profile.component';
+import { ProfileModule } from './profile/profile.module';
 import { MemberReservationComponent } from './reservation/reservation.component';
 import { MemberHistoryComponent } from './history/history.component';
 
@@ -17,10 +17,10 @@ import { AuthMemberGuard } from '../_guards/index';
     component: MemberComponent,
     canActivate: [ AuthMemberGuard ],
     children: [
-        { path: '', redirectTo: 'mon-profil', pathMatch: 'full' },
-        { path: 'mon-profil', component: MemberProfileComponent },
+        { path: '', redirectTo: 'mes-seances', pathMatch: 'full' },
         { path: 'mes-seances', component: MemberReservationComponent },
         { path: 'mon-historique', component: MemberHistoryComponent },
+        { path: '', loadChildren : () => ProfileModule },
     ]
   }
   ])],

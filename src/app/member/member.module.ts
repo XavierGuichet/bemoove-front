@@ -10,15 +10,10 @@ import { MemberComponent } from './member.component';
 import { MemberRoutingModule } from './member-routing.module';
 import { NavModule } from '../nav/nav.module';
 
-import { MemberProfileComponent } from './profile/profile.component';
+import { ProfileModule } from './profile/profile.module';
+
 import { MemberReservationComponent } from './reservation/reservation.component';
 import { MemberHistoryComponent } from './history/history.component';
-
-import { AddressFormReactiveComponent } from './form/address/address-form-reactive.component';
-import { ContactDetailsFormReactiveComponent } from './form/contact-details/contact-details-form-reactive.component';
-import { EmailChangeFormReactiveComponent } from './form/email-change/email-change-form-reactive.component';
-import { PasswordChangeFormReactiveComponent } from './form/password-change/password-change-form-reactive.component';
-import { PersonnalInformationsFormReactiveComponent } from './form/personnal-informations/personnal-informations-form-reactive.component';
 
 import { AlertComponent } from '../_directives/index';
 import { AlertService, ProfileService } from '../_services/index';
@@ -32,18 +27,13 @@ import { AlertService, ProfileService } from '../_services/index';
         FormsModule,
         NavModule,
         ReactiveFormsModule,
-        MemberRoutingModule
+        MemberRoutingModule,
+        ProfileModule
     ],
   declarations: [
         MemberComponent,
-        MemberProfileComponent,
         MemberReservationComponent,
-        MemberHistoryComponent,
-        AddressFormReactiveComponent,
-        ContactDetailsFormReactiveComponent,
-        EmailChangeFormReactiveComponent,
-        PasswordChangeFormReactiveComponent,
-        PersonnalInformationsFormReactiveComponent
+        MemberHistoryComponent
     ],
   exports:      [ MemberComponent ],
   entryComponents: [  ],
