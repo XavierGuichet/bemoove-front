@@ -1,3 +1,5 @@
+$basic-grey: #808080;
+
 .btn-full-width {
   display: block;
   width: 100%;
@@ -10,10 +12,10 @@
 
 .forgottenpwd {
   font-size: 0.875rem;
-  color: #808080;
+  color: $basic-grey;
 }
-//Toggle PasswordToggleDirective
 
+//Toggle PasswordToggleDirective
 .password-toggle {
   position: relative;
   display: block;
@@ -41,9 +43,11 @@ a.pwd-toggler-show {
   -webkit-tap-highlight-color: transparent;
 }
 
-.password-toggle a.pwd-toggler-hide,
-.password-toggle a.pwd-toggler-show {
-  height: 52px;
+.password-toggle {
+  a.pwd-toggler-hide,
+  a.pwd-toggler-show {
+    height: 52px;
+  }
 }
 
 .password-toggle [type="text"] + a,
@@ -83,9 +87,11 @@ a.partner-help-toggler-show {
   -webkit-tap-highlight-color: transparent;
 }
 
-.help-toggle a.partner-help-toggler-hide,
-.help-toggle a.partner-help-toggler-show {
-  height: 52px;
+.help-toggle {
+  a.partner-help-toggler-hide,
+  a.partner-help-toggler-show {
+    height: 52px;
+  }
 }
 
 .help-toggle [type="text"] + a,

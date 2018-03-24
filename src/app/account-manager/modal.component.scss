@@ -1,15 +1,19 @@
+$white: #fefefe;
+$grey: #424242;
+$basic-grey: #808080;
+
 .hollow-modal {
   width: 360px;
-  padding: 1.5em 1.5em;
-  color: #424242;
-  background: #fefefe;
+  padding: 1.5em;
+  color: $grey;
+  background: $white;
 }
 
 h2 {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   text-align: center;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid $basic-grey;
   font-size: 1.125rem;
   font-weight: lighter;
   text-transform: uppercase;
