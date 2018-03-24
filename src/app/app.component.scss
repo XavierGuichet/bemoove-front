@@ -177,3 +177,7 @@ table.table-valign td {
 .relative {
   position: relative;
 }
+
+a, textarea:focus, input:focus{
+    outline: none;
+}
