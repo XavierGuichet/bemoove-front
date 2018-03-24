@@ -35,6 +35,12 @@
         vertical-align: middle;
     }
   }
+
+  &:hover li  {
+    & a:not(:hover).active {
+      border-bottom: 6px solid transparent;
+    }
+  }
 }
 
 

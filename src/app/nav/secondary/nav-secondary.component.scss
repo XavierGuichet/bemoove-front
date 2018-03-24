@@ -3,7 +3,7 @@
   border-radius: 0;
 }
 
-.top-menu {
+.side-menu {
   display: block;
   list-style: none;
   margin: 0;
@@ -11,30 +11,41 @@
 
   li {
     box-sizing: border-box;
+
     & a {
-        display: block;
-        line-height: 2.25em;
-        font-size: 0.875rem;
-        padding: 0.5em 1em 0.5em;
-        margin: 0 0.125em;
+      display: block;
+      line-height: 2.25em;
+      font-size: 0.875rem;
+      padding: 0.5em 1em;
+      margin: 0 0.125em;
+      color: #363636;
+      border-bottom: 1px dotted #b5b5b5;
+
+      &:link,
+      &:visited {
         color: #363636;
-        border-bottom: 1px dotted #b5b5b5;
-        &:visited, &:link {
-            color: #363636;
-        }
-        &:hover, &.active {
-            color: #e73e60;
-            text-decoration: none;
-        }
+      }
+
+      &.active,
+      &:hover {
+        color: #e73e60;
+        font-weight: 700;
+        text-decoration: none;
+      }
     }
+
     .valign {
-        vertical-align: middle;
+      vertical-align: middle;
+    }
+  }
+
+  &:hover li {
+    & a:not(:hover).active {
+      color: #363636;
     }
   }
 }
 
-
-.top-menu li a, .top-menu li a:visited, .top-menu li a:link
-
-.top-menu li a:hover {
-}
+.top-menu li a,
+.top-menu li a:link .top-menu li a:hover,
+.top-menu li a:visited {}
