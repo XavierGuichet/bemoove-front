@@ -41,6 +41,10 @@
       display: inline-block;
     }
   }
+
+  & button:focus {
+    outline: none;
+  }
 }
 .quicksearch {
     margin-left: 2em;
