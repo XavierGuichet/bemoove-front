@@ -23,6 +23,14 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
   @Input()
   public person: Person;
 
+  public minBirthDate: { year: number, month: number, day: number } = {
+    year: 1900,
+    month: 1,
+    day: 1
+  };
+  public maxBirthDate: { year: number, month: number, day: number };
+  public nbgBirthdate: { year: number, month: number};
+
   public formErrors = {
     firstname: '',
     lastname: '',
@@ -55,6 +63,11 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
   }
 
   public ngOnInit(): void {
+    let now = new Date();
+    let maxbirthDate = new Date(now.getTime() - 18 * 365 * 24 * 60 * 60 * 1000);
+    this.maxBirthDate = this.ngbDateParserFormatter.parse(new Date(maxbirthDate).toISOString());
+    this.nbgBirthdate = this.ngbDateParserFormatter.parse(new Date(this.person.birthdate).toISOString());
+
     this.buildForm();
   }
 

@@ -31,7 +31,7 @@
     <div class="form-group row">
       <label for="birthdate" class="col-sm-3 col-form-label">Date de naissance</label>
       <div class="col-sm-9">
-        <ngb-datepicker #dp formControlName="birthdate" name="birthdate"></ngb-datepicker>
+        <ngb-datepicker #dp formControlName="birthdate" name="birthdate" [minDate]="minBirthDate" [maxDate]="maxBirthDate" [startDate]="nbgBirthdate"></ngb-datepicker>
         <div *ngIf="formErrors.birthdate" class="form-error">
           {{ formErrors.birthdate }}
         </div>
