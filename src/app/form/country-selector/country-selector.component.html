@@ -1,0 +1,7 @@
+<div [formGroup]="parent">
+  <select *ngIf="countries.length" class="form-control" [formControl]="getParentFormControl">
+    <option *ngFor="let country of countries" [ngValue]="country.codeIso">
+        {{country.name}}
+    </option>
+</select>
+</div>
