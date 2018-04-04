@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <div class="container someworkouts mb-4 pt-4">
+  <div class="container someworkouts mb-4 pt-4" *ngIf="workoutInstances && workoutInstances.length">
     <div class="row">
       <h2 class="text-center w-100 mb-4 h3 alt-font">Les prochains cours</h2>
     </div>
@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <div class="avantages">
+  <div class="avantages pt-4">
     <div class="container">
       <div class="row">
         <div class="col-sm-7 avantages__item">
