@@ -16,7 +16,7 @@ export class CoachDashBoardComponent {
   constructor(
     private coachService: CoachService
   ) {
-    // todo
+    this.coachService.getMyCoaches().then((coaches) => this.coaches = coaches );
   }
 
 }

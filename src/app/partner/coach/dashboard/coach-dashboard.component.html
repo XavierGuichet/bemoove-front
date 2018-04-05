@@ -1,11 +1,35 @@
 <div class="row">
-  <div class="col-4">
-    <h1 class="h2 alt-font mb-3">Bienvenue dans votre espace coach</h1>
-    <div class="alert alert-danger row">
-      <strong>Salut Jenna</strong><br/> On met quoi içi en attendant un dashboard réel ? une introduction au fonctionnement des pages coach ?
+  <div class="col-6">
+    <h1 class="h3 alt-font mb-3">Bienvenue dans votre espace coach</h1>
+    <div class="alert alert-info">
+      <strong>Gestion des coachs</strong><br/> Sur cette page que vous allez pouvoir lister l'ensemble des coachs de votre organization.<br/> Vous pourrez ensuite définir le planning de chaque coach en leur associant les séances qu'ils encadrent.
     </div>
   </div>
 </div>
 <div class="row">
-  <button mat-raised-button color="primary" routerLink="../add">AJOUTER UN COACH</button>
+  <div class="col-6">
+    <mat-accordion *ngIf="coaches">
+      <mat-expansion-panel *ngFor="let coach of coaches" [disabled]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <img src="{{coach.photo.path}}" class="square-32 rounded-circle mr-4">
+            <h3 class="h4 f-blue">{{coach.firstname}} {{coach.lastname}}</h3>
+          </mat-panel-title>
+          <mat-panel-description class="justify-content-end">
+            <button mat-raised-button color="accent" routerLink="../{{coach.id}}/edit" class="mr-3"><mat-icon>edit</mat-icon>MODIFIER</button>
+            <button mat-raised-button color="accent" routerLink="../../planning/view/coach/{{coach.id}}"><mat-icon>today</mat-icon>VOIR LE PLANNING</button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+      <mat-expansion-panel [disabled]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+          </mat-panel-title>
+          <mat-panel-description class="justify-content-end">
+            <button mat-raised-button color="primary" routerLink="../add">AJOUTER UN COACH</button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
