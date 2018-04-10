@@ -22,6 +22,7 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
 
   public formErrors = {
     legalName: '',
+    email: '',
     siret: '',
     vatNumber: '',
   };
@@ -29,6 +30,10 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
   public validationMessages = {
     legalName: {
       required: 'Veuillez indiquer le nom de votre société',
+    },
+    email: {
+      required: 'Une adresse mail est requise.',
+      regexpvalidatorphrase: 'Une adresse mail valide est nécessaire.'
     },
     siret: {
 
@@ -80,6 +85,10 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
         Validators.required
       ]
       ],
+      email: [this.business.mail, [
+        Validators.required
+      ]
+      ],
       siret: [this.business.siret, [
         Validators.required
       ]
@@ -112,6 +121,9 @@ export class BusinessInfoFormComponent extends BMReactFormComponent implements O
     }
     if (form.get('siret').dirty) {
       business.siret = formModel.siret;
+    }
+    if (form.get('email').dirty) {
+      business.mail = formModel.email;
     }
     if (form.get('vatNumber').dirty) {
       business.vatNumber = formModel.vatNumber;
