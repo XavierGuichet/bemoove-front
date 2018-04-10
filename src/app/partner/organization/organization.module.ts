@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
+import { BmFormModule } from '../../shared/form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { OrganizationComponent } from './organization.component';
@@ -42,6 +43,7 @@ const ORGANIZATION_FORMS = [
   imports: [
         SharedModule,
         FormsModule,
+        BmFormModule,
         ReactiveFormsModule,
         OrganizationRoutingModule,
         NavModule

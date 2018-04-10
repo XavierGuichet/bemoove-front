@@ -35,7 +35,9 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
     firstname: '',
     lastname: '',
     email: '',
-    birthdate: '',
+    countryOfResidence: '',
+    nationality: '',
+    birthdate: ''
   };
 
   public validationMessages = {
@@ -49,6 +51,8 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
       required: 'Une adresse mail est requise.',
       regexpvalidatorphrase: 'Une adresse mail valide est nécessaire.'
     },
+    countryOfResidence: '',
+    nationality: '',
     birthdate: {
       required: 'Veuillez indiquer la date de naissance du representant légal.',
     }
@@ -106,6 +110,14 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
         Validators.required
       ]
       ],
+      countryOfResidence: [this.person.countryOfResidence, [
+        Validators.required
+      ]
+      ],
+      nationality: [this.person.nationality, [
+        Validators.required
+      ]
+    ],
       birthdate: [this.ngbDateParserFormatter.parse(new Date(this.person.birthdate).toISOString()), [
         Validators.required
       ]
@@ -141,6 +153,12 @@ export class LegalRepresentativeFormComponent extends BMReactFormComponent imple
     }
     if (form.get('email').dirty) {
       person.email = formModel.email;
+    }
+    if (form.get('nationality').dirty) {
+        person.nationality = formModel.nationality;
+    }
+    if (form.get('countryOfResidence').dirty) {
+        person.countryOfResidence = formModel.countryOfResidence;
     }
     if (form.get('birthdate').dirty) {
       person.birthdate = new Date(this.ngbDateParserFormatter.format(formModel.birthdate));
