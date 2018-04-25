@@ -24,8 +24,7 @@ import { NoContentComponent } from './no-content';
 
 import { AlertComponent } from './_directives/index';
 import { AuthMemberGuard, AuthPartnerGuard } from './_guards/index';
-import { AlertService, AuthenticationService,
-        WorkoutService, CartService, SpaceService
+import { AlertService, AuthenticationService, SpaceService
         } from './_services/index';
 
 // Pipes
@@ -55,12 +54,10 @@ import { TextChangerDirective } from './_directives/index';
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  // WorkoutService,
   AuthMemberGuard, AuthPartnerGuard,
   AlertService,
   AuthenticationService,
-  SpaceService,
-  CartService
+  SpaceService
 ];
 
 type StoreType = {
