@@ -14,8 +14,7 @@ export * from './account';
 ﻿export * from './reservation';
 ﻿export * from './sport';
 ﻿export * from './tag';
-﻿export * from './user';
 ﻿export * from './workout';
 ﻿export * from './workout-instance';
 
-export * from './mangopay/payment.ts';
+export * from './payment';

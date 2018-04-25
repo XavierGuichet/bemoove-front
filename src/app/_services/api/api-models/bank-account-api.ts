@@ -2,7 +2,6 @@ import { BankAccount } from '../../../models/bank-account';
 
 export class BankAccountApi {
     public id: number;
-    public user: string;
     public ownerName: string;
     public address: string;
     public iban: string;

@@ -7,7 +7,6 @@ export * from './coach.service';
 export * from './image.service';
 export * from './order.service';
 export * from './person.service';
-export * from './profile.service';
 export * from './reservation.service';
 export * from './sport.service';
 export * from './tag.service';

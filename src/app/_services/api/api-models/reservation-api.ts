@@ -1,4 +1,4 @@
-import { User, Reservation, WorkoutInstance } from '../../../models/index';
+import { Reservation, WorkoutInstance } from '../../../models/index';
 
 export class ReservationApi {
     public id: number;

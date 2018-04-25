@@ -18,7 +18,6 @@ import {
 
 import {
     CartService,
-    ProfileService,
     WorkoutService,
     WorkoutInstanceService } from '../../../_services/index';
 
@@ -41,7 +40,6 @@ export class WorkoutDetailsComponent implements OnInit {
         private cartService: CartService,
         private workoutService: WorkoutService,
         private workoutInstanceService: WorkoutInstanceService,
-        private profileService: ProfileService,
         private router: Router,
         private route: ActivatedRoute
     ) {

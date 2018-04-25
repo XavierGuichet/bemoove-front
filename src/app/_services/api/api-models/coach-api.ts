@@ -7,7 +7,6 @@ export class CoachApi {
     public lastname: string;
     public telHome: string;
     public telMobile: string;
-    public user: string;
     public address: string;
     public ismale: boolean;
     public description: string;
