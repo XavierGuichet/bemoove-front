@@ -20,6 +20,9 @@ export class BusinessApi {
         if ( organization.legalName ) {
             this.legalName = organization.legalName;
         }
+        if ( organization.mail ) {
+            this.mail = organization.mail;
+        }
         if ( organization.vatRate ) {
             this.vatRate = organization.vatRate;
         }
