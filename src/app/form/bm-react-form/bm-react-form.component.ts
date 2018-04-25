@@ -66,7 +66,7 @@ export abstract class BMReactFormComponent  {
                 .then( (newModel) => newModel )
                 .catch( this.handleError );
         } else {
-          service.update(model)
+          return service.update(model)
                 .then( (updatedModel) => updatedModel )
                 .catch( this.handleError );
         }
