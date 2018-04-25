@@ -1,0 +1,48 @@
+<table class="table">
+  <tr class="table_header">
+    <th>Reservant</th>
+    <th>Date de reservations</th>
+    <th>Cours</th>
+    <th>Place</th>
+    <th>Lieu</th>
+  </tr>
+  <tr *ngFor="let reservation of reservations">
+    <td>{{ reservation.person.firstname }} {{ reservation.person.lastname }}</td>
+    <td>{{ reservation.dateAdd | date: 'short'}}</td>
+    <td>{{ reservation.workoutInstance.workout.title }} ({{ reservation.workoutInstance.workout.sport.name }})</td>
+    <td>{{ reservation.nbBooking }} </td>
+    <td>{{ reservation.workoutInstance.workout.address.city }} </td>
+  </tr>
+  <tr>
+    <td colspan="5">
+      <div class="row">
+        <div class="col-sm-6">
+          <div>
+              <img src="#" width="32px" height="32px"/> Nom du coach
+              <button mat-button color="primary">Voir la fiche du cours</button>
+          </div>
+          <div>
+              <h2>Info pratique</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+          <div>
+              <button mat-button color="primary">Lien facture : 15€ / Annulation</button>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>
+                Salle des Nations Unis<br/> 5 rue du dragon<br/> 44400 Rezé
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <img src="#" class="w-100" />
+              <a href="#">Lien google map</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

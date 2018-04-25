@@ -1,0 +1,42 @@
+$violet-dark: #3a3b51;
+$white: #fff;
+
+.accordion-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 24px;
+  height: 48px;
+  background-color: $violet-dark;
+  color: $white;
+  font-weight: 700;
+
+  &-content {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  &-header {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 16px;
+  }
+
+  &-description {
+    display: flex;
+    flex-grow: 2;
+    margin-right: 16px;
+  }
+
+  &-action {
+    width: 8px;
+  }
+}
+
+h3 {
+  color: #229ba7;
+  font-family: 'texgyreadventor';
+  font-size: 1.125rem;
+}

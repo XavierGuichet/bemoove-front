@@ -1,5 +1,4 @@
 <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" novalidate>
-  <mat-card class="form-card">
     <mat-card-title color="primary" class="form-card__title">Mon adresse</mat-card-title>
     <mat-card-content>
       <div class="form-group row">
@@ -21,7 +20,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="secondline" class="col-sm-3 col-form-label">Adresse</label>
+        <label for="secondline" class="col-sm-3 col-form-label">Complément d'adresse (facultatif)</label>
         <div class="col-sm-9">
           <input type="text" class="form-control" formControlName="secondline" name="secondline">
           <div *ngIf="formErrors.secondline" class="form-error">
@@ -54,5 +53,4 @@
     <mat-card-actions align="end">
       <button [disabled]="loading || !addressForm.valid" mat-raised-button color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">Enregistrer</span></button>
     </mat-card-actions>
-  </mat-card>
 </form>

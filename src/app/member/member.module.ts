@@ -12,11 +12,11 @@ import { NavModule } from '../nav/nav.module';
 
 import { ProfileModule } from './profile/profile.module';
 
-import { MemberReservationComponent } from './reservation/reservation.component';
-import { MemberHistoryComponent } from './history/history.component';
+import { MyReservationComponent } from './my-reservation/my-reservation.component';
+import { ReservationsListComponent } from './my-reservation/reservations-list/reservations-list.component';
 
 import { AlertComponent } from '../_directives/index';
-import { AlertService, ProfileService } from '../_services/index';
+import { AlertService } from '../_services/index';
 
 @NgModule({
     bootstrap: [
@@ -32,14 +32,13 @@ import { AlertService, ProfileService } from '../_services/index';
     ],
   declarations: [
         MemberComponent,
-        MemberReservationComponent,
-        MemberHistoryComponent
+        MyReservationComponent,
+        ReservationsListComponent
     ],
   exports:      [ MemberComponent ],
   entryComponents: [  ],
   providers:    [
       AlertService,
-      ProfileService,
-        {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n} ]
+      {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n} ]
 })
 export class MemberModule { }

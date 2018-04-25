@@ -1,15 +1,8 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { BMReactFormComponent } from '../../../../form/bm-react-form/bm-react-form.component';
-
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-
-import { Headers } from '@angular/http';
-import { MatDialog, MatDialogRef } from '@angular/material';
-
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 
 import { Person } from '../../../../models/index';
 import { PersonService } from '../../../../_services/index';
@@ -33,7 +26,7 @@ export class IdentityFormComponent extends BMReactFormComponent implements OnIni
     day: 1
   };
   public maxBirthDate: { year: number, month: number, day: number };
-  public nbgBirthdate: { year: number, month: number, day: number };
+  public nbgBirthdate: { year: number, month: number};
 
   public formErrors = {
     firstname: '',
@@ -57,9 +50,9 @@ export class IdentityFormComponent extends BMReactFormComponent implements OnIni
     },
     birthdate: {
       required: 'Veuillez indiquer votre date de naissance.',
-      },
-      countryOfResidence: '',
-      nationality: ''
+    },
+    countryOfResidence: '',
+    nationality: ''
   };
 
   constructor(
@@ -73,12 +66,18 @@ export class IdentityFormComponent extends BMReactFormComponent implements OnIni
   public ngOnInit(): void {
     let now = new Date();
     let maxbirthDate = new Date(now.getTime() - 18 * 365 * 24 * 60 * 60 * 1000);
-    this.maxBirthDate = {
-      year: maxbirthDate.getFullYear(),
-      month: maxbirthDate.getMonth() + 1,
-      day: maxbirthDate.getDate()
-    };
+    this.maxBirthDate = this.ngbDateParserFormatter.parse(new Date(maxbirthDate).toISOString());
+    this.nbgBirthdate = this.ngbDateParserFormatter.parse(new Date(this.person.birthdate).toISOString());
+
     this.buildForm();
+  }
+
+  get countryOfResidenceControl() {
+      return this.personForm.get('countryOfResidence') as FormArray;
+    }
+
+  public selectCountryOfResidence(countryCodeIso: string) {
+      this.personForm.value.countryOfResidence = countryCodeIso;
   }
 
   public buildForm(): void {
@@ -99,8 +98,14 @@ export class IdentityFormComponent extends BMReactFormComponent implements OnIni
           Validators.required
         ]
         ],
-        countryOfResidence: [this.person.countryOfResidence],
-        nationality: [this.person.nationality]
+        countryOfResidence: [this.person.countryOfResidence, [
+          Validators.required
+        ]
+        ],
+        nationality: [this.person.nationality, [
+          Validators.required
+        ]
+        ]
       });
 
       this.personForm.valueChanges
@@ -128,7 +133,6 @@ export class IdentityFormComponent extends BMReactFormComponent implements OnIni
       .then((resPerson) => {
         this.loading = false;
         this.showFormResult('success', 'Sauvegarde réussie');
-        let coachId;
         if (resPerson[0].hasOwnProperty('id')) {
             this.person = resPerson[0];
         } else {
@@ -172,6 +176,5 @@ export class IdentityFormComponent extends BMReactFormComponent implements OnIni
 
     return person;
   }
-
 
 }

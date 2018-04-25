@@ -25,8 +25,7 @@ import { Link } from '../../nav/nav.module';
 export class ProfileComponent implements OnInit {
     public secondaryMenuLinks: any = [
         new Link('Identité', '/member/profile/identity', 'person'),
-        new Link('Mes Coordonnées', '/member/profile/contact-information', 'domain'),
-        new Link('Contact', '/member/profile/', 'person')
+        new Link('Mes Coordonnées', '/member/profile/contact-information', 'domain')
     ];
   public person: Person;
   constructor(

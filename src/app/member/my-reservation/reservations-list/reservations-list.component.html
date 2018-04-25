@@ -1,0 +1,66 @@
+<div class="accordion-header">
+  <div class="accordion-header-content">
+    <div class="accordion-header-header">
+      Cours
+    </div>
+    <div class="accordion-header-description">
+      Quand / Où / Qui
+    </div>
+  </div>
+  <div class="accordion-header-action">
+
+  </div>
+</div>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let reservation of reservations">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ reservation.workoutInstance.workout.title }} ({{ reservation.workoutInstance.workout.sport.name }})
+      </mat-panel-title>
+      <mat-panel-description>
+        Le {{ reservation.dateAdd | date: 'short'}} à {{ reservation.workoutInstance.workout.address.city }} pour {{ reservation.nbBooking }} personne(s)
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+      <div class="row no-gutters">
+        <div class="col-sm-6">
+          <div>
+            <img src="{{reservation.workoutInstance.coach.photo.path}}" width="64px" height="64px" /> {{reservation.workoutInstance.coach.firstname}} {{reservation.workoutInstance.coach.lastname}}
+          </div>
+          <div>
+            <div class="row no-gutters">
+              <div class="col-sm-6">
+                <h3>Info pratique</h3>
+                <p>{{ reservation.workoutInstance.workout.notice }}</p>
+              </div>
+              <div class="col-sm-6">
+                <h3>Info tenue</h3>
+                <p>{{ reservation.workoutInstance.workout.outfit }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row no-gutters">
+            <div class="col-sm-6">
+              <p class="text-center">
+                {{reservation.workoutInstance.workout.address.name}}<br/> {{reservation.workoutInstance.workout.address.firstline}}
+                <br/> {{reservation.workoutInstance.workout.address.secondline}}
+                <br/> {{reservation.workoutInstance.workout.address.postalCode}} - {{reservation.workoutInstance.workout.address.city}}
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <img src="/assets/img/wide-map-placeholder.jpg" class="w-100" />
+              <a href="#">Lien google map</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-action-row>
+        <button mat-button color="primary">Annulation</button>
+        <button mat-button color="accent">Ma facture</button>
+        <a routerLink="/workouts/{{reservation.workoutInstance.workout.id}}/{{reservation.workoutInstance.id}}" mat-raised-button color="accent">Voir la fiche du cours</a>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

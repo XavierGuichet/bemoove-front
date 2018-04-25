@@ -3,8 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { MemberComponent } from './member.component';
 import { ProfileModule } from './profile/profile.module';
-import { MemberReservationComponent } from './reservation/reservation.component';
-import { MemberHistoryComponent } from './history/history.component';
+import { MyReservationComponent } from './my-reservation/my-reservation.component';
 
 import { SpaceService } from '../_services/space.service';
 
@@ -18,8 +17,7 @@ import { AuthMemberGuard } from '../_guards/index';
     canActivate: [ AuthMemberGuard ],
     children: [
         { path: '', redirectTo: 'mes-seances', pathMatch: 'full' },
-        { path: 'mes-seances', component: MemberReservationComponent },
-        { path: 'mon-historique', component: MemberHistoryComponent },
+        { path: 'mes-seances', component: MyReservationComponent },
         { path: '', loadChildren : () => ProfileModule },
     ]
   }
