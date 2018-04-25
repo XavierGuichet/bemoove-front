@@ -18,9 +18,10 @@ import {
 
 import {
     CartService,
-    ProfileService,
     WorkoutService,
     WorkoutInstanceService } from '../../_services/index';
+
+import { CheckoutService } from '../_services/checkout.service';
 
 @Component({
   selector: 'order-block',
@@ -64,9 +65,9 @@ export class OrderBlockComponent extends BMReactFormComponent implements OnInit 
         private fb: FormBuilder,
         private domSanitizer: DomSanitizer,
         private cartService: CartService,
+        private checkoutService: CheckoutService,
         private workoutService: WorkoutService,
         private workoutInstanceService: WorkoutInstanceService,
-        private profileService: ProfileService,
         private router: Router,
         private route: ActivatedRoute
     ) {
@@ -86,10 +87,10 @@ export class OrderBlockComponent extends BMReactFormComponent implements OnInit 
       this.loading = true;
       let cartObj = this.createObjectFromModel();
 
-      this.cartService.create(cartObj)
-        .then( (cart) => {
-            this.router.navigate(['order/' + this.orderForm.value.workoutInstance.workout.id + '/' + this.orderForm.value.workoutInstance.id]);
-        });
+      let workoutInstance = this.orderForm.value.workoutInstance;
+      let nbPlace = parseInt(this.orderForm.value.wantedPlace, 10);
+
+      this.checkoutService.addToCart(workoutInstance, nbPlace);
     }
 
     protected buildForm() {
@@ -111,12 +112,7 @@ export class OrderBlockComponent extends BMReactFormComponent implements OnInit 
         return Promise.resolve(null);
     }
 
-    protected createObjectFromModel(): Cart {
-        let cart = new Cart();
-
-        cart.workoutInstance = this.orderForm.value.workoutInstance;
-        cart.nbBooking = parseInt(this.orderForm.value.wantedPlace, 10);
-
-        return cart;
+    protected createObjectFromModel(): any {
+        return null;
     }
 }

@@ -10,7 +10,6 @@ export * from './account';
 ﻿export * from './order';
 ﻿export * from './organization';
 ﻿export * from './person';
-﻿export * from './profile';
 ﻿export * from './reservation';
 ﻿export * from './sport';
 ﻿export * from './tag';

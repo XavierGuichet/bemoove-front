@@ -1,50 +1,41 @@
 import { Component, ViewEncapsulation, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import {
-    DomSanitizer,
-    SafeHtml,
-    SafeUrl,
-    SafeStyle
-} from '@angular/platform-browser';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { BMReactFormComponent } from '../../../form/bm-react-form/bm-react-form.component';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
-import {
-    Address,
-    Cart,
-    Coach,
-    Person,
-    Workout,
-    WorkoutInstance } from '../../../models/index';
-
-import {
-    AddressService,
-    CartService,
-    ProfileService,
-    WorkoutService,
-    PersonService,
-    WorkoutInstanceService } from '../../../_services/index';
+import { Address, Person } from '../../../models/index';
+import { AddressService, PersonService } from '../../../_services/index';
 
 @Component({
   selector: 'user-information-form',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './user-information-form.component.html',
-  // styleUrls: [ './workout-details.component.scss']
+  templateUrl: './user-information-form.component.html'
 })
 
 export class UserInformationFormComponent extends BMReactFormComponent implements OnInit {
     @Output()
     public onSuccess = new EventEmitter<boolean>();
+    @Input()
+    public person: Person;
+
     public userInformationForm: FormGroup;
     public formReady: boolean = false;
-    public person: Person;
+
+    public minBirthDate: { year: number, month: number, day: number } = {
+      year: 1900,
+      month: 1,
+      day: 1
+    };
+    public maxBirthDate: { year: number, month: number, day: number };
+    public nbgBirthdate: { year: number, month: number};
 
     public formErrors = {
         firstname: '',
         lastname: '',
+        countryOfResidence: '',
         nationality: '',
         phoneNumber: '',
+        birthdate: '',
         address: {
             firstline: '',
             secondline: '',
@@ -57,7 +48,11 @@ export class UserInformationFormComponent extends BMReactFormComponent implement
       'firstname': '',
       'lastname': '',
       'nationality': '',
+      'countryOfResidence': '',
       'phoneNumber': '',
+      'birthdate': {
+        required: 'Veuillez indiquer votre date de naissance.',
+      },
       'address.firstline': '',
       'address.secondline': '',
       'address.postalCode': '',
@@ -69,20 +64,14 @@ export class UserInformationFormComponent extends BMReactFormComponent implement
     constructor(
         private fb: FormBuilder,
         private personService: PersonService,
-        private addressService: AddressService
+        private addressService: AddressService,
+        private ngbDateParserFormatter: NgbDateParserFormatter
     ) {
         super();
     }
 
     public ngOnInit() {
-        this.personService.getMyPerson().then((person) => {
-          this.person = person;
-          if (this.missingUserInformation()) {
-              this.buildForm();
-          } else {
-              this.onSuccess.emit(true);
-          }
-        });
+        this.buildForm();
     }
 
     public onSubmit(): void {
@@ -98,14 +87,15 @@ export class UserInformationFormComponent extends BMReactFormComponent implement
             this.createOrUpdate(this.personService, personWithCreatedNestedEntities)
           ]);
         })
-        .then((result) => {
+        .then((resPerson) => {
           this.loading = false;
-            this.person = person;
-              if (this.missingUserInformation()) {
-                  this.showFormResult('warning', 'Missing informations');
-              } else {
-                  this.onSuccess.emit(true);
-              }
+          this.showFormResult('success', 'Sauvegarde réussie');
+          if (resPerson[0].hasOwnProperty('id')) {
+              this.person = resPerson[0];
+          } else {
+              this.person = resPerson[1];
+          }
+          this.onSuccess.emit(true);
         })
         .catch(this.handleError);
     }
@@ -128,9 +118,26 @@ export class UserInformationFormComponent extends BMReactFormComponent implement
 
     protected buildForm() {
         this.userInformationForm = this.fb.group({
-            firstname: [this.person.firstname],
-            lastname: [this.person.lastname],
-            nationality: [this.person.nationality],
+            firstname: [this.person.firstname, [
+              Validators.required
+            ]
+            ],
+            lastname: [this.person.lastname, [
+              Validators.required
+            ]
+            ],
+            countryOfResidence: [this.person.countryOfResidence, [
+              Validators.required
+            ]
+            ],
+            nationality: [this.person.nationality, [
+              Validators.required
+            ]
+            ],
+            birthdate: [this.ngbDateParserFormatter.parse(new Date(this.person.birthdate).toISOString()), [
+              Validators.required
+            ]
+            ],
             phoneNumber: [this.person.phoneNumber],
             address: this.fb.group({
                 firstline: [this.person.address.firstline],
@@ -163,8 +170,14 @@ export class UserInformationFormComponent extends BMReactFormComponent implement
         if (form.get('lastname').dirty) {
             person.lastname = formModel.lastname;
         }
+        if (form.get('birthdate').dirty) {
+            person.birthdate = new Date(this.ngbDateParserFormatter.format(formModel.birthdate));
+        }
         if (form.get('nationality').dirty) {
             person.nationality = formModel.nationality;
+        }
+        if (form.get('countryOfResidence').dirty) {
+            person.countryOfResidence = formModel.countryOfResidence;
         }
         if (form.get('phoneNumber').dirty) {
             person.phoneNumber = formModel.phoneNumber;

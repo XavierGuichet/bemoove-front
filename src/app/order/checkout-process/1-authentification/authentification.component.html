@@ -1,0 +1,25 @@
+<div>
+  <h1 class="h2 alt-font mb-3">Connexion</h1>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="grey-form-card">
+        <div class="grey-form-card-title">
+          <h4>Déjà un compte ?</h4>
+        </div>
+        <div class="grey-form-card-content">
+          <login-form-reactive (onSuccess)="goToNextStep($event)"></login-form-reactive>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="grey-form-card">
+        <div class="grey-form-card-title">
+          <h4>Nouveau compte</h4>
+        </div>
+        <div class="grey-form-card-content">
+          <register-form-reactive (onSuccess)="goToNextStep($event)"></register-form-reactive>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

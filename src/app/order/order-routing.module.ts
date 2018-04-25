@@ -1,25 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { OrderCheckOutComponent } from './checkout/order-checkout.component';
+import { CheckoutProcessModule } from './checkout-process/checkout-process.module';
 import { OrderSuccessComponent } from './success/success.component';
 
 import { SpaceService } from '../_services/space.service';
 
 @NgModule({
   imports: [RouterModule.forChild([
-      {
-          path: 'order/success/:idreservation',
-          component: OrderSuccessComponent,
-          canActivate: []
-      },
     {
-    path: 'order/:idworkout/:idsession',
-    component: OrderCheckOutComponent,
-    canActivate: []
+      path: 'order',
+      children: [
+          { path: 'checkout', loadChildren : () => CheckoutProcessModule },
+        ]
     }
   ])],
   providers: [SpaceService],
   exports: [RouterModule]
 })
-export class OrderRoutingModule {}
+export class OrderRoutingModule { }

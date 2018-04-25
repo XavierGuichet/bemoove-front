@@ -23,9 +23,18 @@
       <div class="form-group row">
         <label for="nationality" class="col-sm-3 col-form-label">Nationnalité</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" formControlName="nationality" name="nationality">
+          <country-selector [parent]="userInformationForm" [parentFormControlName]="'nationality'"></country-selector>
           <div *ngIf="formErrors.nationality" class="form-error">
             {{ formErrors.nationality }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="countryOfResidence" class="col-sm-3 col-form-label">countryOfResidence</label>
+        <div class="col-sm-9">
+          <country-selector [parent]="userInformationForm" [parentFormControlName]="'countryOfResidence'"></country-selector>
+          <div *ngIf="formErrors.countryOfResidence" class="form-error">
+            {{ formErrors.countryOfResidence }}
           </div>
         </div>
       </div>
@@ -36,6 +45,15 @@
           <div *ngIf="formErrors.phoneNumber" class="form-error">
             {{ formErrors.phoneNumber }}
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="birthdate" class="col-sm-3 col-form-label">Date de naissance</label>
+      <div class="col-sm-9">
+        <ngb-datepicker #dp formControlName="birthdate" name="birthdate" [minDate]="minBirthDate" [maxDate]="maxBirthDate" [startDate]="nbgBirthdate"></ngb-datepicker>
+        <div *ngIf="formErrors.birthdate" class="form-error">
+          {{ formErrors.birthdate }}
         </div>
       </div>
     </div>
@@ -51,7 +69,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="secondline" class="col-sm-3 col-form-label">Adresse</label>
+        <label for="secondline" class="col-sm-3 col-form-label">Complément d'adresse (facultatif)</label>
         <div class="col-sm-9">
           <input type="text" class="form-control" formControlName="secondline" name="secondline">
           <div *ngIf="formErrors.address.secondline" class="form-error">

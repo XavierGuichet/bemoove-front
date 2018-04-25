@@ -4,15 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AccountManagerModule } from '../account-manager/account-manager.module';
 import { OrderBlockComponent } from './block/order-block.component';
-import { OrderCheckOutComponent } from './checkout/order-checkout.component';
+import { CheckoutProcessModule } from './checkout-process/checkout-process.module';
 import { OrderRoutingModule } from './order-routing.module';
 
-import { UserInformationFormComponent } from './form/user-information/user-information-form.component';
-import { OrderPaymentFormComponent } from './form/payment/payment.component';
-import { OrderSummaryComponent } from './summary/summary.component';
-import { OrderSuccessComponent } from './success/success.component';
-
 import { OrderService, ReservationService, SpaceService, WorkoutService } from '../_services/index';
+import { CheckoutService } from './_services/checkout.service';
 
 @NgModule({
     bootstrap: [
@@ -23,15 +19,11 @@ import { OrderService, ReservationService, SpaceService, WorkoutService } from '
         FormsModule,
         ReactiveFormsModule,
         AccountManagerModule,
+        CheckoutProcessModule,
         OrderRoutingModule
     ],
   declarations: [
-        OrderBlockComponent,
-        OrderCheckOutComponent,
-        UserInformationFormComponent,
-        OrderPaymentFormComponent,
-        OrderSummaryComponent,
-        OrderSuccessComponent
+        OrderBlockComponent
     ],
   exports:      [ OrderBlockComponent ],
   entryComponents: [ ],
@@ -39,7 +31,8 @@ import { OrderService, ReservationService, SpaceService, WorkoutService } from '
         WorkoutService,
         OrderService,
         ReservationService,
+        CheckoutService,
         SpaceService
     ]
 })
-export class OrderModule { }
+export class OrderModule {}

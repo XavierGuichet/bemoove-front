@@ -21,7 +21,7 @@ export class OrderService extends ApiService {
      *
      * @returns Order
      */
-    public createOrderFromCart(cart: Cart, payment: Payment): Promise<Order> {
+    public createOrderFromCart(cart: Cart): Promise<Order> {
         this.orderApi = new OrderApi(cart);
         let url = process.env.API_URL + '/createOrderFromCart';
         return this.http.post(url, this.orderApi,  this.getRequestOptions())
@@ -33,18 +33,9 @@ export class OrderService extends ApiService {
     public payOrder(order: Order): Promise<Order> {
         let puttedOrder = new Order();
         puttedOrder.id = order.id;
-        puttedOrder.payment = 'done';
         return this.http.put(this.orderUrl + '/' + puttedOrder.id, puttedOrder, this.getRequestOptions())
             .toPromise()
             .then( (response) => response.json() as Order)
             .catch( (res) => this.handleError(res, this));
     }
-
-    /**
-     * Retrieve last Order of connected User
-     * @returns Order
-     */
-    // public getMyCurrentOrder(): Promise<Order> {
-    //
-    // }
 }

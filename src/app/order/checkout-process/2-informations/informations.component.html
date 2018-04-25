@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="grey-form-card">
+      <div class="grey-form-card-title">
+        <h4>Informations</h4>
+      </div>
+      <user-information-form *ngIf="person" [person]="person" (onSuccess)="goToNextStep($event)"></user-information-form>
+    </div>
+  </div>
+</div>

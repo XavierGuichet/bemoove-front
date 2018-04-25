@@ -1,0 +1,70 @@
+<div *ngIf="cart">
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-card class="form-card">
+        <h4>{{ cart.member.firstname }} Nom</h4>
+        <p>address</p>
+        <p>Tel</p>
+        <button class="btn-full-width" mat-raised-button color="accent" (click)="editMyInformations()">Modifier</button>
+      </mat-card>
+    </div>
+    <div class="col-sm-6">
+      <mat-card class="form-card">
+        <h4>{{ cart.workoutInstance.coach.business.legalName}}</h4>
+        <p>address</p>
+        <p>Tel</p>
+      </mat-card>
+    </div>
+  </div>
+  <div class="grey-form-card">
+    <div class="grey-form-card-title">
+      <h4>Résumé commandes</h4>
+    </div>
+    <div class="grey-form-card-content">
+      <table class="col-sm-12">
+        <tr>
+          <th></th>
+          <th>Désignation Cours </th>
+          <th></th>
+          <th>Quantité </th>
+          <th>Prix Total HT</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            {{ cart.workoutInstance.workout.title }}<br/> {{ cart.workoutInstance.startdate | date: 'medium' }}
+          </td>
+          <td></td>
+          <td>
+            {{ cart.nbBooking }}
+          </td>
+          <td>
+            {{ cart.workoutInstance.workout.price }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+          <td>Total (HT)</td>
+          <td>
+            {{ cartTotalAmountTaxExcl }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+          <td>TVA</td>
+          <td>
+            {{ cart.workoutInstance.coach.business.vatRate }} %
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+          <td>Total (TTC)</td>
+          <td>
+            {{ cartTotalAmountTaxIncl }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <button class="btn-full-width right" mat-raised-button color="primary" (click)="makeOrder();">Reserver et payer {{ cartTotalAmountTaxIncl }} €</button>
+</div>
