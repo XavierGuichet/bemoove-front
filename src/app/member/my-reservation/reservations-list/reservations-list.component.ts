@@ -11,5 +11,7 @@ export class ReservationsListComponent {
     @Input()
     public reservations: Reservation[];
 
-    constructor() {  }
+    constructor() {
+      // placeholder
+    }
 }
