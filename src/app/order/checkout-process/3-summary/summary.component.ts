@@ -34,6 +34,9 @@ export class SummaryComponent implements OnInit {
   }
 
   public calcCartTotalAmountTaxIncl() {
+      if (this.cart === null) {
+        return 0;
+      }
       let taxRate = this.cart.workoutInstance.coach.business.vatRate;
       let productPriceTaxExcl = this.cart.workoutInstance.workout.price;
       this.cartTotalAmountTaxExcl = productPriceTaxExcl * this.cart.nbBooking;

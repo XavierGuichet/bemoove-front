@@ -58,7 +58,7 @@ export class CheckoutService {
       this.getCurrentCart().then( (cart) => {
         console.log(cart);
         console.log(this.cart);
-        if(this.missingMemberInformation()) { // not enough user information => user information
+        if (this.missingMemberInformation()) { // not enough user information => user information
           this.router.navigate(['order/checkout/step/my-information']);
         } else { // Cart ready for summary & to make order
           this.router.navigate(['order/checkout/step/summary']);

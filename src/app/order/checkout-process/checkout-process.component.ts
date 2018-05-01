@@ -4,6 +4,8 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 //
 // import { AccountManagerModule } from '../../account-manager/account-manager.module';
 
+import { Cart } from '../../models/index';
+import { CheckoutService } from '../_services/checkout.service';
 import { SpaceService } from '../../_services/index';
 
 @Component({
@@ -33,7 +35,7 @@ import { SpaceService } from '../../_services/index';
           <router-outlet class="row"></router-outlet>
         </div>
         <div class="col-sm-3">
-          workout-summary
+          <workout-summary *ngIf="cart" [workoutInstance]="cart.workoutInstance"></workout-summary>
         </div>
       </div>
     </div>
@@ -43,7 +45,9 @@ import { SpaceService } from '../../_services/index';
 })
 
 export class CheckoutProcesComponent implements OnInit {
+  public cart: Cart;
   constructor(
+    private checkoutService: CheckoutService,
     private spaceService: SpaceService
   ) {
   }
@@ -51,5 +55,6 @@ export class CheckoutProcesComponent implements OnInit {
   public ngOnInit(): void {
     this.spaceService.toggleTopBar(false);
     this.spaceService.setHeaderAbove(false);
+    this.checkoutService.getCurrentCart().then((cart) => this.cart = cart);
   }
 }

@@ -12,6 +12,10 @@ import { AuthentificationComponent } from './1-authentification/authentification
 import { InformationsComponent } from './2-informations/informations.component';
 import { SummaryComponent } from './3-summary/summary.component';
 import { ValidationComponent } from './4-validation/validation.component';
+import { SuccessComponent } from './5-success/success.component';
+import { RetryComponent } from './5-retry/retry.component';
+
+import { WorkoutSummaryComponent } from './workout-summary/workout-summary.component';
 
 @NgModule({
     bootstrap: [
@@ -31,7 +35,10 @@ import { ValidationComponent } from './4-validation/validation.component';
         InformationsComponent,
         UserInformationFormComponent,
         SummaryComponent,
-        ValidationComponent
+        ValidationComponent,
+        SuccessComponent,
+        RetryComponent,
+        WorkoutSummaryComponent
     ],
   exports:      [ ],
   entryComponents: [ ],

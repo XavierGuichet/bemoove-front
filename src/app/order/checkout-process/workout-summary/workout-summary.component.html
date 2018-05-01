@@ -1,0 +1,21 @@
+<h3>Votre panier</h3>
+<div *ngIf="workoutInstance" class="workout-card" [ngStyle]="{'background-image': 'url(' + workoutInstance.workout.photoSquare.path + ')'}">
+  <div class="workout-container">
+    <div class="workout-sport">
+      {{workoutInstance.workout.sport.name}}
+    </div>
+
+    <div class="workout-content w-100">
+      <h3>{{workoutInstance.startdate | date: 'EEEE d MMMM'}}<br/><span class="time">{{workoutInstance.startdate | date: 'hh:mm'}} &#8674; {{workoutInstance.enddate | date: 'hh:mm'}}</span></h3>
+      <p class="subtitle">{{workoutInstance.workout.title}} avec {{ workoutInstance.coach.firstname }} {{ workoutInstance.coach.lastname }}</p>
+    </div>
+
+    <div class="footer">
+        <p class="address">
+          <span *ngIf="workoutInstance.workout.address.name">{{workoutInstance.workout.address.name}}<br/></span> {{workoutInstance.workout.address.firstline}}
+          <br/>
+          <span *ngIf="workoutInstance.workout.address.secondline">{{workoutInstance.workout.address.secondline}}<br/></span> {{workoutInstance.workout.address.postalCode}} - {{workoutInstance.workout.address.city}}
+        </p>
+    </div>
+  </div>
+</div>

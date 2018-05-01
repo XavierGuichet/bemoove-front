@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'validation',
-  templateUrl: 'validation.component.html',
+  selector: 'retry',
+  templateUrl: 'retry.component.html',
 })
-export class ValidationComponent implements OnInit {
+export class RetryComponent implements OnInit {
   constructor() {
     //
   }

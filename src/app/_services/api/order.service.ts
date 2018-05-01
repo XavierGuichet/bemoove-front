@@ -30,6 +30,14 @@ export class OrderService extends ApiService {
             .catch( (res) => this.handleError(res, this));
     }
 
+    public checkOrderPayment(id: number): Promise<Order> {
+        let url = process.env.API_URL + '/checkOrderPayment';
+        return this.http.get(url + '/' + id, this.getRequestOptions())
+            .toPromise()
+            .then( (response) => response.json() as Order)
+            .catch( (res) => this.handleError(res, this));
+    }
+
     public payOrder(order: Order): Promise<Order> {
         let puttedOrder = new Order();
         puttedOrder.id = order.id;
@@ -37,5 +45,12 @@ export class OrderService extends ApiService {
             .toPromise()
             .then( (response) => response.json() as Order)
             .catch( (res) => this.handleError(res, this));
+    }
+
+    public getById(id: number): Promise<Order> {
+      return this.http.get(this.orderUrl + '/' + id, this.getRequestOptions())
+        .toPromise()
+        .then((response) => response.json() as Order)
+        .catch((res) => this.handleError(res, this));
     }
 }

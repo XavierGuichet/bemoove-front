@@ -20,8 +20,7 @@ export class InformationsComponent implements OnInit {
     this.checkoutService.getCurrentCart()
       .then((cart) => {
         this.person = cart.member;
-      })
-      .catch(() => {});
+      });
   }
 
   public goToNextStep(event) {
