@@ -27,7 +27,7 @@ export abstract class ApiService {
     if (error.code === 401) {
         that.openRegisterModal();
     } else {
-      console.error('An error occurred', error); // for demo purposes only
+      console.error('[Api Service] An error occurred', error);
     }
 
     return Promise.reject(error.message || data);

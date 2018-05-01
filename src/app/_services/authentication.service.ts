@@ -94,13 +94,14 @@ export class AuthenticationService {
 
   protected handleError(data: any, that: any): Promise<any> {
     let error = data.json();
-    that.loading = false;
     if (error.code === 401) {
       return Promise.reject('Echec de l\'identification');
     } else {
-      console.error('An error occurred', error); // for demo purposes only
+      // Could handle other specific error code. Ex:  500
     }
-
+    console.error('[Auth Service] An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || data);
+    // throw error;
+    // return;
   }
 }

@@ -14,6 +14,9 @@
         <div class="col-12 white" *ngIf="registerAccountType === 'Partner'">
             <mat-checkbox formControlName="isCoach" required>Je suis un coach sportif</mat-checkbox>
         </div>
+        <div *ngIf="formResult" class="alert" class="mr-3" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+          <strong>{{formResult.title}}</strong><br/> {{formResult.content}}
+        </div>
         <div class="col-12">
             <button type="submit" mat-raised-button color="primary" class="btn-full-width">S'inscrire</button>
         </div>
@@ -45,6 +48,9 @@
           <div *ngIf="formErrors.registrationToken" class="alert alert-danger">
               {{ formErrors.email }}
           </div>
+        </div>
+        <div *ngIf="formResult" class="alert" class="mr-3" [ngClass]="{ 'alert': formResult, 'alert-success': formResult.type === 'success', 'alert-danger': formResult.type === 'error', 'alert-info': formResult.type === 'info', 'alert-warning': formResult.type === 'warn' }">
+          <strong>{{formResult.title}}</strong><br *ngIf="formResult.title.length"/> {{formResult.content}}
         </div>
         <div class="form-group">
           <button [disabled]="loading || !RegisterForm.valid" class="btn-full-width" mat-raised-button color="accent"><mat-spinner *ngIf="loading" diameter="20" class="loading-spinner" color="accent"></mat-spinner> <span *ngIf="!loading">S'inscrire</span></button>

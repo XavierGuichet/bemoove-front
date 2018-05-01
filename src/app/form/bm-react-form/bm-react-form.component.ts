@@ -56,7 +56,7 @@ export abstract class BMReactFormComponent  {
     }
 
     public handleError(error: any): void {
-      console.error('An error occurred', error);
+      console.error('[BM React Form] An error occurred', error);
       return;
     }
 

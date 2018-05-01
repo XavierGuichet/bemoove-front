@@ -20,6 +20,7 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
   public registerAccountType: string = 'User';
   @Output()
   public onSuccess = new EventEmitter<boolean>();
+  public formResult: any;
 
   public showpassword: boolean = false;
 
@@ -66,8 +67,11 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
     this.authenticationService.register(account)
       .then(
       (data) => {
+          this.loading = false;
+          this.showFormResult('success', 'Inscription réussie');
           this.onSuccess.emit(true);
-      });
+      })
+      .catch((res)  => this.displayError(res, this));
   }
 
   public passwordToggle() {
@@ -107,5 +111,11 @@ export class RegisterFormReactiveComponent extends BMReactFormComponent implemen
 
   protected createObjectFromModel() {
       return this.RegisterForm.value;
+  }
+
+  protected displayError(data: any, that: any) {
+    that.loading = false;
+    data = data.json();
+    that.showFormResult('error', '', data.detail);
   }
 }
